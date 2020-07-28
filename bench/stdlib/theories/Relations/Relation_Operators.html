@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html><head><title>Relation_Operators.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span>
+
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">Some operators on relations</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Initial authors: Bruno Barras, Cristina Cornes</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab3"></a><h1 class="section"> </h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab4"></a><h1 class="section">Some of the initial definitions were taken from :</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab5"></a><h1 class="section">Constructing Recursion Operators in Type Theory</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab6"></a><h1 class="section">L. Paulson  JSC (1986) 2, 325-355</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab7"></a><h1 class="section"> </h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab8"></a><h1 class="section">Further extensions by Pierre Castéran</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Relation_Definitions.</span></span></span></pre><div class="doc">
+<a name="lab9"></a><h2 class="section">Transitive closure</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Transitive_Closure</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">R</span> : relation A.</span></span></span></pre><div class="doc">
+Definition by direct transitive closure 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_trans</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | t_step (y:A) : R x y -&gt; clos_trans x y
+    | t_trans (y z:A) : clos_trans x y -&gt; clos_trans y z -&gt; clos_trans x z.</span></span></span></pre><div class="doc">
+Alternative definition by transitive extension on the left 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_trans_1n</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | t1n_step (y:A) : R x y -&gt; clos_trans_1n x y
+    | t1n_trans (y z:A) : R x y -&gt; clos_trans_1n y z -&gt; clos_trans_1n x z.</span></span></span></pre><div class="doc">
+Alternative definition by transitive extension on the right 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_trans_n1</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | tn1_step (y:A) : R x y -&gt; clos_trans_n1 x y
+    | tn1_trans (y z:A) : R y z -&gt; clos_trans_n1 x y -&gt; clos_trans_n1 x z.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Transitive_Closure</span>.</span></span></span></pre><div class="doc">
+<a name="lab10"></a><h2 class="section">Reflexive closure</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Reflexive_Closure</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">R</span> : relation A.</span></span></span></pre><div class="doc">
+Definition by direct transitive closure 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_refl</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | r_step (y:A) : R x y -&gt; clos_refl x y
+    | r_refl : clos_refl x x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Reflexive_Closure</span>.</span></span></span></pre><div class="doc">
+<a name="lab11"></a><h2 class="section">Reflexive-transitive closure</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Reflexive_Transitive_Closure</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">R</span> : relation A.</span></span></span></pre><div class="doc">
+Definition by direct reflexive-transitive closure 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_refl_trans</span> (<span class="nv">x</span>:A) : A -&gt; <span class="kt">Prop</span> :=
+    | rt_step (y:A) : R x y -&gt; clos_refl_trans x y
+    | rt_refl : clos_refl_trans x x
+    | rt_trans (y z:A) :
+          clos_refl_trans x y -&gt; clos_refl_trans y z -&gt; clos_refl_trans x z.</span></span></span></pre><div class="doc">
+Alternative definition by transitive extension on the left 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_refl_trans_1n</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | rt1n_refl : clos_refl_trans_1n x x
+    | rt1n_trans (y z:A) :
+         R x y -&gt; clos_refl_trans_1n y z -&gt; clos_refl_trans_1n x z.</span></span></span></pre><div class="doc">
+Alternative definition by transitive extension on the right 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_refl_trans_n1</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | rtn1_refl : clos_refl_trans_n1 x x
+    | rtn1_trans (y z:A) :
+        R y z -&gt; clos_refl_trans_n1 x y -&gt; clos_refl_trans_n1 x z.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Reflexive_Transitive_Closure</span>.</span></span></span></pre><div class="doc">
+<a name="lab12"></a><h2 class="section">Reflexive-symmetric-transitive closure</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Reflexive_Symmetric_Transitive_Closure</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">R</span> : relation A.</span></span></span></pre><div class="doc">
+Definition by direct reflexive-symmetric-transitive closure 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_refl_sym_trans</span> : relation A :=
+    | rst_step (x y:A) : R x y -&gt; clos_refl_sym_trans x y
+    | rst_refl (x:A) : clos_refl_sym_trans x x
+    | rst_sym (x y:A) : clos_refl_sym_trans x y -&gt; clos_refl_sym_trans y x
+    | rst_trans (x y z:A) :
+        clos_refl_sym_trans x y -&gt;
+        clos_refl_sym_trans y z -&gt; clos_refl_sym_trans x z.</span></span></span></pre><div class="doc">
+Alternative definition by symmetric-transitive extension on the left 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_refl_sym_trans_1n</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | rst1n_refl : clos_refl_sym_trans_1n x x
+    | rst1n_trans (y z:A) : R x y \/ R y x -&gt;
+         clos_refl_sym_trans_1n y z -&gt; clos_refl_sym_trans_1n x z.</span></span></span></pre><div class="doc">
+Alternative definition by symmetric-transitive extension on the right 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">clos_refl_sym_trans_n1</span> (<span class="nv">x</span>: A) : A -&gt; <span class="kt">Prop</span> :=
+    | rstn1_refl : clos_refl_sym_trans_n1 x x
+    | rstn1_trans (y z:A) : R y z \/ R z y -&gt;
+         clos_refl_sym_trans_n1 x y -&gt; clos_refl_sym_trans_n1 x z.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Reflexive_Symmetric_Transitive_Closure</span>.</span></span></span></pre><div class="doc">
+<a name="lab13"></a><h2 class="section">Converse of a relation</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Converse</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">R</span> : relation A.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">transp</span> (<span class="nv">x</span> <span class="nv">y</span>:A) := R y x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Converse</span>.</span></span></span></pre><div class="doc">
+<a name="lab14"></a><h2 class="section">Union of relations</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Union</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variables</span> <span class="nv">R1</span> <span class="nv">R2</span> : relation A.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">union</span> (<span class="nv">x</span> <span class="nv">y</span>:A) := R1 x y \/ R2 x y.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Union</span>.</span></span></span></pre><div class="doc">
+<a name="lab15"></a><h2 class="section">Disjoint union of relations</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Disjoint_Union</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variables</span> <span class="nv">A</span> <span class="nv">B</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">leA</span> : A -&gt; A -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">leB</span> : B -&gt; B -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">le_AsB</span> : A + B -&gt; A + B -&gt; <span class="kt">Prop</span> :=
+  | le_aa (x y:A) : leA x y -&gt; le_AsB (inl _ x) (inl _ y)
+  | le_ab (x:A) (y:B) : le_AsB (inl _ x) (inr _ y)
+  | le_bb (x y:B) : leB x y -&gt; le_AsB (inr _ x) (inr _ y).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Disjoint_Union</span>.</span></span></span></pre><div class="doc">
+<a name="lab16"></a><h2 class="section">Lexicographic order on dependent pairs</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Lexicographic_Product</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">B</span> : A -&gt; <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">leA</span> : A -&gt; A -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">leB</span> : <span class="kr">forall</span> <span class="nv">x</span>:A, B x -&gt; B x -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">lexprod</span> : sigT B -&gt; sigT B -&gt; <span class="kt">Prop</span> :=
+    | left_lex :
+      <span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">x&#39;</span>:A) (<span class="nv">y</span>:B x) (<span class="nv">y&#39;</span>:B x&#39;),
+        leA x x&#39; -&gt; lexprod (existT B x y) (existT B x&#39; y&#39;)
+    | right_lex :
+      <span class="kr">forall</span> (<span class="nv">x</span>:A) (<span class="nv">y</span> <span class="nv">y&#39;</span>:B x),
+        leB x y y&#39; -&gt; lexprod (existT B x y) (existT B x y&#39;).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Lexicographic_Product</span>.</span></span></span></pre><div class="doc">
+<a name="lab17"></a><h2 class="section">Product of relations</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Symmetric_Product</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">B</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">leA</span> : A -&gt; A -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">leB</span> : B -&gt; B -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">symprod</span> : A * B -&gt; A * B -&gt; <span class="kt">Prop</span> :=
+    | left_sym :
+      <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">x&#39;</span>:A, leA x x&#39; -&gt; <span class="kr">forall</span> <span class="nv">y</span>:B, symprod (x, y) (x&#39;, y)
+    | right_sym :
+      <span class="kr">forall</span> <span class="nv">y</span> <span class="nv">y&#39;</span>:B, leB y y&#39; -&gt; <span class="kr">forall</span> <span class="nv">x</span>:A, symprod (x, y) (x, y&#39;).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Symmetric_Product</span>.</span></span></span></pre><div class="doc">
+<a name="lab18"></a><h2 class="section">Multiset of two relations</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Swap</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">R</span> : A -&gt; A -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">swapprod</span> : A * A -&gt; A * A -&gt; <span class="kt">Prop</span> :=
+    | sp_noswap x y (p:A * A) : symprod A A R R (x, y) p -&gt; swapprod (x, y) p
+    | sp_swap x y (p:A * A) : symprod A A R R (x, y) p -&gt; swapprod (y, x) p.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Swap</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> list_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Lexicographic_Exponentiation</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Set</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">leA</span> : A -&gt; A -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Let</span> <span class="nf">Nil</span> := nil (A:=A).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Let</span> <span class="nf">List</span> := list A.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Ltl</span> : List -&gt; List -&gt; <span class="kt">Prop</span> :=
+    | Lt_nil (a:A) (x:List) : Ltl Nil (a :: x)
+    | Lt_hd (a b:A) : leA a b -&gt; <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>:list A, Ltl (a :: x) (b :: y)
+    | Lt_tl (a:A) (x y:List) : Ltl x y -&gt; Ltl (a :: x) (a :: y).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Desc</span> : List -&gt; <span class="kt">Prop</span> :=
+    | d_nil : Desc Nil
+    | d_one (x:A) : Desc (x :: Nil)
+    | d_conc (x y:A) (l:List) :
+        clos_refl A leA x y -&gt; Desc (l ++ y :: Nil) -&gt; Desc ((l ++ y :: Nil) ++ x :: Nil).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Pow</span> : <span class="kt">Set</span> := sig Desc.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">lex_exp</span> (<span class="nv">a</span> <span class="nv">b</span>:Pow) : <span class="kt">Prop</span> := Ltl (proj1_sig a) (proj1_sig b).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Lexicographic_Exponentiation</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Unfold</span> transp union: sets.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> t_step rt_step rt_refl rst_step rst_refl: sets.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Immediate</span> rst_sym: sets.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* begin hide *)</span>
+<span class="c">(* Compatibility *)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">rts1n_refl</span> := rst1n_refl (<span class="kn">only parsing</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">rts1n_trans</span> := rst1n_trans (<span class="kn">only parsing</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">rtsn1_refl</span> := rstn1_refl (<span class="kn">only parsing</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">rtsn1_trans</span> := rstn1_trans (<span class="kn">only parsing</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight"><span class="c">(* end hide *)</span></span></span></pre></article></body></html>

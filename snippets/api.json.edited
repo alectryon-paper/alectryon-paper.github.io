@@ -1,0 +1,12 @@
+[{"sentence": "Let inv b: negb (negb b) = b.",
+  "goals": [{"conclusion": "negb (negb b) = b",
+             "hypotheses": [{"names": ["b" ],
+                           "type": "bool" }]}]}, "\n  ",
+ {"sentence": "destruct b.",
+  "goals": [
+      {"conclusion": "negb (negb true) = true" },
+      {"conclusion": "negb (negb false) = false" }]}, " ",
+ {"sentence": "all: reflexivity." }, "\n",
+ {"sentence": "Qed." }, "\n",
+ {"sentence": "Print Assumptions inv.",
+  "responses": ["Closed under the global context" ]}]

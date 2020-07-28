@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html><head><title>ProofObjects.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="doc">
+<a name="lab1"></a><h1 class="section">ProofObjects: The Curry-Howard Correspondence</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Warnings</span> <span class="s2">&quot;-notation-overridden,-parsing&quot;</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> LF <span class="kn">Require Export</span> IndProp.</span></span></span></pre><div class="doc">
+"<i>Algorithms are the computational content of proofs</i>."  --Robert Harper 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+We have seen that Coq has mechanisms both for <i>programming</i>,
+    using inductive data types like <span class="inlinecode"><span class="id" title="var">nat</span></span> or <span class="inlinecode"><span class="id" title="var">list</span></span> and functions over
+    these types, and for <i>proving</i> properties of these programs, using
+    inductive propositions (like <span class="inlinecode"><span class="id" title="var">even</span></span>), implication, universal
+    quantification, and the like.  So far, we have mostly treated
+    these mechanisms as if they were quite separate, and for many
+    purposes this is a good way to think.  But we have also seen hints
+    that Coq's programming and proving facilities are closely related.
+    For example, the keyword <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> is used to declare both data
+    types and propositions, and <span class="inlinecode">→</span> is used both to describe the type
+    of functions on data and logical implication.  This is not just a
+    syntactic accident!  In fact, programs and proofs in Coq are
+    almost the same thing.  In this chapter we will study how this
+    works.
+
+<div class="paragraph"> </div>
+
+    We have already seen the fundamental idea: provability in Coq is
+    represented by concrete <i>evidence</i>.  When we construct the proof
+    of a basic proposition, we are actually building a tree of
+    evidence, which can be thought of as a data structure.
+
+<div class="paragraph"> </div>
+
+    If the proposition is an implication like <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">B</span></span>, then its proof
+    will be an evidence <i>transformer</i>: a recipe for converting
+    evidence for A into evidence for B.  So at a fundamental level,
+    proofs are simply programs that manipulate evidence. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Question: If evidence is data, what are propositions themselves?
+
+<div class="paragraph"> </div>
+
+    Answer: They are types! 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Look again at the formal definition of the <span class="inlinecode"><span class="id" title="var">even</span></span> property.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk0"><span class="highlight"><span class="kn">Print</span> even.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">even</span> : nat -&gt; <span class="kt">Prop</span> :=
+    ev_0 : even <span class="mi">0</span>
+  | ev_SS : <span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even (S (S n))
+
+For even: Argument scope <span class="kr">is</span> [nat_scope]
+For ev_SS: Argument scopes are [nat_scope _]</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight"><span class="c">(* ==&gt;</span>
+<span class="c">  Inductive even : nat -&gt; Prop :=</span>
+<span class="c">    | ev_0 : even 0</span>
+<span class="c">    | ev_SS : forall n, even n -&gt; even (S (S n)).</span>
+<span class="c">*)</span></span></span></pre><div class="doc">
+Suppose we introduce an alternative pronunciation of "<span class="inlinecode">:</span>".
+    Instead of "has type," we can say "is a proof of."  For example,
+    the second line in the definition of <span class="inlinecode"><span class="id" title="var">even</span></span> declares that <span class="inlinecode"><span class="id" title="var">ev_0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">even</span></span>
+<span class="inlinecode">0</span>.  Instead of "<span class="inlinecode"><span class="id" title="var">ev_0</span></span> has type <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">0</span>," we can say that "<span class="inlinecode"><span class="id" title="var">ev_0</span></span>
+    is a proof of <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">0</span>." 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+This pun between types and propositions -- between <span class="inlinecode">:</span> as "has type"
+    and <span class="inlinecode">:</span> as "is a proof of" or "is evidence for" -- is called the
+    <i>Curry-Howard correspondence</i>.  It proposes a deep connection
+    between the world of logic and the world of computation:
+
+<div class="paragraph"> </div>
+
+                 propositions  ~  types
+                 proofs        ~  data values
+
+<div class="paragraph"> </div>
+
+    See <span class="inlinecode"><span class="id" title="var">Wadler</span></span> <span class="inlinecode">2015</span> (in Bib.v) for a brief history and up-to-date exposition. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Many useful insights follow from this connection.  To begin with,
+    it gives us a natural interpretation of the type of the <span class="inlinecode"><span class="id" title="var">ev_SS</span></span>
+    constructor: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk1"><span class="highlight"><span class="kn">Check</span> ev_SS.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_SS
+     : <span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even (S (S n))</span></blockquote></div></div></small></span></pre><div class="doc">
+This can be read "<span class="inlinecode"><span class="id" title="var">ev_SS</span></span> is a constructor that takes two
+    arguments -- a number <span class="inlinecode"><span class="id" title="var">n</span></span> and evidence for the proposition <span class="inlinecode"><span class="id" title="var">even</span></span>
+<span class="inlinecode"><span class="id" title="var">n</span></span> -- and yields evidence for the proposition <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>))</span>." 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Now let's look again at a previous proof involving <span class="inlinecode"><span class="id" title="var">even</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk2"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">ev_4</span> : even <span class="mi">4</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">4</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk3"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">4</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk4"><span class="highlight"><span class="nb">apply</span> ev_SS.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">2</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk5"><span class="highlight"><span class="nb">apply</span> ev_SS.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> ev_0.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+As with ordinary data values and functions, we can use the <span class="inlinecode"><span class="id" title="keyword">Print</span></span>
+    command to see the <i>proof object</i> that results from this proof
+    script. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk6"><span class="highlight"><span class="kn">Print</span> ev_4.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_4 = ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)
+     : even <span class="mi">4</span></span></blockquote></div></div></small></span></pre><div class="doc">
+Indeed, we can also write down this proof object <i>directly</i>,
+    without the need for a separate proof script: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk7"><span class="highlight"><span class="kn">Check</span> (ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)
+     : even <span class="mi">4</span></span></blockquote></div></div></small></span></pre><div class="doc">
+The expression <span class="inlinecode"><span class="id" title="var">ev_SS</span></span> <span class="inlinecode">2</span> <span class="inlinecode">(<span class="id" title="var">ev_SS</span></span> <span class="inlinecode">0</span> <span class="inlinecode"><span class="id" title="var">ev_0</span>)</span> can be thought of as
+    instantiating the parameterized constructor <span class="inlinecode"><span class="id" title="var">ev_SS</span></span> with the
+    specific arguments <span class="inlinecode">2</span> and <span class="inlinecode">0</span> plus the corresponding proof
+    objects for its premises <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">2</span> and <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">0</span>.  Alternatively, we can
+    think of <span class="inlinecode"><span class="id" title="var">ev_SS</span></span> as a primitive "evidence constructor" that, when
+    applied to a particular number, wants to be further applied to
+    evidence that that number is even; its type,
+
+<div class="paragraph"> </div>
+
+      forall n, even n -&gt; even (S (S n)),
+
+<div class="paragraph"> </div>
+
+    expresses this functionality, in the same way that the polymorphic
+    type <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">X</span>,</span> <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> expresses the fact that the constructor
+    <span class="inlinecode"><span class="id" title="var">nil</span></span> can be thought of as a function from types to empty lists
+    with elements of that type. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+We saw in the <span class="inlinecode"><span class="id" title="var">Logic</span></span> chapter that we can use function
+    application syntax to instantiate universally quantified variables
+    in lemmas, as well as to supply evidence for assumptions that
+    these lemmas impose.  For instance: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk8"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">ev_4&#39;</span>: even <span class="mi">4</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">4</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk9"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">4</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> (ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Proof Scripts</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The <i>proof objects</i> we've been discussing lie at the core of how
+    Coq operates.  When Coq is following a proof script, what is
+    happening internally is that it is gradually constructing a proof
+    object -- a term whose type is the proposition being proved.  The
+    tactics between <span class="inlinecode"><span class="id" title="keyword">Proof</span></span> and <span class="inlinecode"><span class="id" title="keyword">Qed</span></span> tell it how to build up a term
+    of the required type.  To see this process in action, let's use
+    the <span class="inlinecode"><span class="id" title="keyword">Show</span></span> <span class="inlinecode"><span class="id" title="keyword">Proof</span></span> command to display the current state of the proof
+    tree at various points in the following tactic proof. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chka"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">ev_4&#39;&#39;</span> : even <span class="mi">4</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">4</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chkb" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chkb"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">4</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chkc" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chkc"><span class="highlight"><span class="kn">Show Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">?<span class="kn">Goal</span></span></blockquote></div><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">4</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chkd" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chkd"><span class="highlight"><span class="nb">apply</span> ev_SS.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">2</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chke" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chke"><span class="highlight"><span class="kn">Show Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">(ev_SS <span class="mi">2</span> ?<span class="kn">Goal</span>)</span></blockquote></div><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">2</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chkf" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chkf"><span class="highlight"><span class="nb">apply</span> ev_SS.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk10"><span class="highlight"><span class="kn">Show Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">(ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ?<span class="kn">Goal</span>))</span></blockquote></div><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> ev_0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk11" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk11"><span class="highlight"><span class="kn">Show Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">(ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0))</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+At any given moment, Coq has constructed a term with a
+    "hole" (indicated by <span class="inlinecode">?<span class="id" title="keyword">Goal</span></span> here, and so on), and it knows what
+    type of evidence is needed to fill this hole. 
+
+<div class="paragraph"> </div>
+
+    Each hole corresponds to a subgoal, and the proof is
+    finished when there are no more subgoals.  At this point, the
+    evidence we've built stored in the global context under the name
+    given in the <span class="inlinecode"><span class="id" title="keyword">Theorem</span></span> command. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Tactic proofs are useful and convenient, but they are not
+    essential: in principle, we can always construct the required
+    evidence by hand, as shown above. Then we can use <span class="inlinecode"><span class="id" title="keyword">Definition</span></span>
+    (rather than <span class="inlinecode"><span class="id" title="keyword">Theorem</span></span>) to give a global name directly to this
+    evidence. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ev_4&#39;&#39;&#39;</span> : even <span class="mi">4</span> :=
+  ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0).</span></span></span></pre><div class="doc">
+All these different ways of building the proof lead to exactly the
+    same evidence being saved in the global environment. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk12" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk12"><span class="highlight"><span class="kn">Print</span> ev_4.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_4 = ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)
+     : even <span class="mi">4</span></span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk13" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk13"><span class="highlight"><span class="kn">Print</span> ev_4&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_4&#39; = ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)
+     : even <span class="mi">4</span></span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk14" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk14"><span class="highlight"><span class="kn">Print</span> ev_4&#39;&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_4&#39;&#39; = ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)
+     : even <span class="mi">4</span></span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk15" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk15"><span class="highlight"><span class="kn">Print</span> ev_4&#39;&#39;&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_4&#39;&#39;&#39; = ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)
+     : even <span class="mi">4</span></span></blockquote></div></div></small></span></pre><div class="doc">
+<a name="lab3"></a><h4 class="section">Exercise: 2 stars, standard (eight_is_even)</h4>
+<div class="paragraph"> </div>
+
+    Give a tactic proof and a proof object showing that <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">8</span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk16" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk16"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">ev_8</span> : even <span class="mi">8</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">8</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk17" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk17"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">8</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">  <span class="c">(* FILL IN HERE *)</span></span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk18" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk18"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ev_8&#39;</span> : even <span class="mi">8</span>
+  <span class="c">(* REPLACE THIS LINE WITH &quot;:= _your_definition_ .&quot; *)</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even <span class="mi">8</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab4"></a><h1 class="section">Quantifiers, Implications, Functions</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+In Coq's computational universe (where data structures and
+    programs live), there are two sorts of values with arrows in their
+    types: <i>constructors</i> introduced by <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>ly defined data
+    types, and <i>functions</i>.
+
+<div class="paragraph"> </div>
+
+    Similarly, in Coq's logical universe (where we carry out proofs),
+    there are two ways of giving evidence for an implication:
+    constructors introduced by <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>ly defined propositions,
+    and... functions! 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+For example, consider this statement: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk19" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk19"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">ev_plus4</span> : <span class="kr">forall</span> <span class="nv">n</span>, even n -&gt; even (<span class="mi">4</span> + n).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even (<span class="mi">4</span> + n)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk1a" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk1a"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even (<span class="mi">4</span> + n)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk1b" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk1b"><span class="highlight"><span class="nb">intros</span> n H.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even (<span class="mi">4</span> + n)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk1c" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk1c"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even (S (S (S (S n))))</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk1d" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk1d"><span class="highlight"><span class="nb">apply</span> ev_SS.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even (S (S n))</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk1e" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk1e"><span class="highlight"><span class="nb">apply</span> ev_SS.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> H.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+What is the proof object corresponding to <span class="inlinecode"><span class="id" title="var">ev_plus4</span></span>?
+
+<div class="paragraph"> </div>
+
+    We're looking for an expression whose <i>type</i> is <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">n</span>,</span> <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">→</span>
+<span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode">(4</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> -- that is, a <i>function</i> that takes two arguments (one
+    number and a piece of evidence) and returns a piece of evidence!
+
+<div class="paragraph"> </div>
+
+    Here it is: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ev_plus4&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span>, even n -&gt; even (<span class="mi">4</span> + n) :=
+  <span class="kr">fun</span> (<span class="nv">n</span> : nat) =&gt; <span class="kr">fun</span> (<span class="nv">H</span> : even n) =&gt;
+    ev_SS (S (S n)) (ev_SS n H).</span></span></span></pre><div class="doc">
+Recall that <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">blah</span></span> means "the function that, given <span class="inlinecode"><span class="id" title="var">n</span></span>,
+    yields <span class="inlinecode"><span class="id" title="var">blah</span></span>," and that Coq treats <span class="inlinecode">4</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span></span> and <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)))</span>
+    as synonyms. Another equivalent way to write this definition is: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ev_plus4&#39;&#39;</span> (<span class="nv">n</span> : nat) (<span class="nv">H</span> : even n)
+                    : even (<span class="mi">4</span> + n) :=
+  ev_SS (S (S n)) (ev_SS n H).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk1f" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk1f"><span class="highlight"><span class="kn">Check</span> ev_plus4&#39;&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">ev_plus4&#39;&#39;
+     : <span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even (<span class="mi">4</span> + n)</span></blockquote></div></div></small></span></pre><div class="doc">
+When we view the proposition being proved by <span class="inlinecode"><span class="id" title="var">ev_plus4</span></span> as a
+    function type, one interesting point becomes apparent: The second
+    argument's type, <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, mentions the <i>value</i> of the first
+    argument, <span class="inlinecode"><span class="id" title="var">n</span></span>.
+
+<div class="paragraph"> </div>
+
+    While such <i>dependent types</i> are not found in conventional
+    programming languages, they can be useful in programming too, as
+    the recent flurry of activity in the functional programming
+    community demonstrates. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Notice that both implication (<span class="inlinecode">→</span>) and quantification (<span class="inlinecode"><span class="id" title="keyword">∀</span></span>)
+    correspond to functions on evidence.  In fact, they are really the
+    same thing: <span class="inlinecode">→</span> is just a shorthand for a degenerate use of
+    <span class="inlinecode"><span class="id" title="keyword">∀</span></span> where there is no dependency, i.e., no need to give a
+    name to the type on the left-hand side of the arrow:
+
+<div class="paragraph"> </div>
+
+           forall (x:nat), nat 
+        =  forall (_:nat), nat 
+        =  nat -&gt; nat
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+For example, consider this proposition: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ev_plus2</span> : <span class="kt">Prop</span> :=
+  <span class="kr">forall</span> <span class="nv">n</span>, <span class="kr">forall</span> (<span class="nv">E</span> : even n), even (n + <span class="mi">2</span>).</span></span></span></pre><div class="doc">
+A proof term inhabiting this proposition would be a function
+    with two arguments: a number <span class="inlinecode"><span class="id" title="var">n</span></span> and some evidence <span class="inlinecode"><span class="id" title="var">E</span></span> that <span class="inlinecode"><span class="id" title="var">n</span></span> is
+    even.  But the name <span class="inlinecode"><span class="id" title="var">E</span></span> for this evidence is not used in the rest
+    of the statement of <span class="inlinecode"><span class="id" title="var">ev_plus2</span></span>, so it's a bit silly to bother
+    making up a name for it.  We could write it like this instead,
+    using the dummy identifier <span class="inlinecode"><span class="id" title="var">_</span></span> in place of a real name: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ev_plus2&#39;</span> : <span class="kt">Prop</span> :=
+  <span class="kr">forall</span> <span class="nv">n</span>, <span class="kr">forall</span> (<span class="nv">_</span> : even n), even (n + <span class="mi">2</span>).</span></span></span></pre><div class="doc">
+Or, equivalently, we can write it in more familiar notation: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ev_plus2&#39;&#39;</span> : <span class="kt">Prop</span> :=
+  <span class="kr">forall</span> <span class="nv">n</span>, even n -&gt; even (n + <span class="mi">2</span>).</span></span></span></pre><div class="doc">
+In general, "<span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>" is just syntactic sugar for
+    "<span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode">(<span class="id" title="var">_</span>:<span class="id" title="var">P</span>),</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>". 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab5"></a><h1 class="section">Programming with Tactics</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+If we can build proofs by giving explicit terms rather than
+    executing tactic scripts, you may be wondering whether we can
+    build <i>programs</i> using <i>tactics</i> rather than explicit terms.
+    Naturally, the answer is yes! 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk20" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk20"><span class="highlight"><span class="kn">Definition</span> <span class="nf">add1</span> : nat -&gt; nat.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">nat -&gt; nat</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk21" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk21"><span class="highlight"><span class="nb">intro</span> n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">nat</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk22" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk22"><span class="highlight"><span class="kn">Show Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">(<span class="kr">fun</span> <span class="nv">n</span> : nat =&gt; ?<span class="kn">Goal</span>)</span></blockquote></div><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">nat</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk23" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk23"><span class="highlight"><span class="nb">apply</span> S.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">nat</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk24" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk24"><span class="highlight"><span class="kn">Show Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">(<span class="kr">fun</span> <span class="nv">n</span> : nat =&gt; S ?<span class="kn">Goal</span>)</span></blockquote></div><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">nat</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> n.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Defined</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk25" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk25"><span class="highlight"><span class="kn">Print</span> add1.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">add1 = <span class="kr">fun</span> <span class="nv">n</span> : nat =&gt; S n
+     : nat -&gt; nat
+
+Argument scope <span class="kr">is</span> [nat_scope]</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight"><span class="c">(* ==&gt;</span>
+<span class="c">    add1 = fun n : nat =&gt; S n</span>
+<span class="c">         : nat -&gt; nat</span>
+<span class="c">*)</span>
+
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk26" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk26"><span class="highlight"><span class="kn">Compute</span> add1 <span class="mi">2</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">= <span class="mi">3</span>
+: nat</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight"><span class="c">(* ==&gt; 3 : nat *)</span></span></span></pre><div class="doc">
+Notice that we terminate the <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> with a <span class="inlinecode">.</span> rather than
+    with <span class="inlinecode">:=</span> followed by a term.  This tells Coq to enter <i>proof
+    scripting mode</i> to build an object of type <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">nat</span></span>.  Also, we
+    terminate the proof with <span class="inlinecode"><span class="id" title="keyword">Defined</span></span> rather than <span class="inlinecode"><span class="id" title="keyword">Qed</span></span>; this makes
+    the definition <i>transparent</i> so that it can be used in computation
+    like a normally-defined function.  (<span class="inlinecode"><span class="id" title="keyword">Qed</span></span>-defined objects are
+    opaque during computation.)
+
+<div class="paragraph"> </div>
+
+    This feature is mainly useful for writing functions with dependent
+    types, which we won't explore much further in this book.  But it
+    does illustrate the uniformity and orthogonality of the basic
+    ideas in Coq. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab6"></a><h1 class="section">Logical Connectives as Inductive Types</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Inductive definitions are powerful enough to express most of the
+    connectives we have seen so far.  Indeed, only universal
+    quantification (with implication as a special case) is built into
+    Coq; all the others are defined inductively.  We'll see these
+    definitions in this section. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">Props</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab7"></a><h2 class="section">Conjunction</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+To prove that <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> holds, we must present evidence for both
+    <span class="inlinecode"><span class="id" title="var">P</span></span> and <span class="inlinecode"><span class="id" title="var">Q</span></span>.  Thus, it makes sense to define a proof object for <span class="inlinecode"><span class="id" title="var">P</span></span>
+<span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> as consisting of a pair of two proofs: one for <span class="inlinecode"><span class="id" title="var">P</span></span> and
+    another one for <span class="inlinecode"><span class="id" title="var">Q</span></span>. This leads to the following definition. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">And</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">and</span> (<span class="nv">P</span> <span class="nv">Q</span> : <span class="kt">Prop</span>) : <span class="kt">Prop</span> :=
+| conj : P -&gt; Q -&gt; <span class="kn">and</span> P Q.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">And</span>.</span></span></span></pre><div class="doc">
+Notice the similarity with the definition of the <span class="inlinecode"><span class="id" title="var">prod</span></span> type,
+    given in chapter <span class="inlinecode"><span class="id" title="var">Poly</span></span>; the only difference is that <span class="inlinecode"><span class="id" title="var">prod</span></span> takes
+    <span class="inlinecode"><span class="id" title="keyword">Type</span></span> arguments, whereas <span class="inlinecode"><span class="id" title="var">and</span></span> takes <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> arguments. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk27" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk27"><span class="highlight"><span class="kn">Print</span> prod.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">prod</span> (<span class="nv">X</span> <span class="nv">Y</span> : <span class="kt">Type</span>) : <span class="kt">Type</span> :=
+    pair : X -&gt; Y -&gt; X * Y
+
+For pair: <span class="kn">Arguments</span> X, Y are implicit <span class="kn">and</span> maximally
+          inserted
+For prod: Argument scopes are [type_scope type_scope]
+For pair: Argument scopes are [type_scope type_scope _
+            _]</span></blockquote></div></div></small></span></pre><div class="doc">
+This similarity should clarify why <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and <span class="inlinecode"><span class="id" title="tactic">intros</span></span>
+    patterns can be used on a conjunctive hypothesis.  Case analysis
+    allows us to consider all possible ways in which <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> was
+    proved -- here just one (the <span class="inlinecode"><span class="id" title="var">conj</span></span> constructor).
+
+<div class="paragraph"> </div>
+
+    Similarly, the <span class="inlinecode"><span class="id" title="tactic">split</span></span> tactic actually works for any inductively
+    defined proposition with exactly one constructor.  In particular,
+    it works for <span class="inlinecode"><span class="id" title="var">and</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk28" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk28"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">and_comm</span> : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> : <span class="kt">Prop</span>, P /\ Q &lt;-&gt; Q /\ P.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> : <span class="kt">Prop</span>, P /\ Q &lt;-&gt; Q /\ P</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk29" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk29"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> : <span class="kt">Prop</span>, P /\ Q &lt;-&gt; Q /\ P</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk2a" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk2a"><span class="highlight"><span class="nb">intros</span> P Q.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P /\ Q &lt;-&gt; Q /\ P</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk2b" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk2b"><span class="highlight"><span class="nb">split</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P /\ Q -&gt; Q /\ P</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="ProofObjects-v-chk2c" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="ProofObjects-v-chk2c"><hr></label><div class="goal-conclusion"><span class="highlight">Q /\ P -&gt; P /\ Q</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk2d" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk2d"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P /\ Q -&gt; Q /\ P</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk2e" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk2e"><span class="highlight"><span class="nb">intros</span> [HP HQ].</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Q /\ P</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk2f" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk2f"><span class="highlight"><span class="nb">split</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Q</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="ProofObjects-v-chk30" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="ProofObjects-v-chk30"><hr></label><div class="goal-conclusion"><span class="highlight">P</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk31" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk31"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Q</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> HQ.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk32" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk32"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> HP.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk33" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk33"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Q /\ P -&gt; P /\ Q</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk34" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk34"><span class="highlight"><span class="nb">intros</span> [HP HQ].</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P /\ Q</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk35" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk35"><span class="highlight"><span class="nb">split</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="ProofObjects-v-chk36" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="ProofObjects-v-chk36"><hr></label><div class="goal-conclusion"><span class="highlight">Q</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk37" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk37"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> HQ.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk38" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk38"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">HP</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">HQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Q</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> HP.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+This shows why the inductive definition of <span class="inlinecode"><span class="id" title="var">and</span></span> can be
+    manipulated by tactics as we've been doing.  We can also use it to
+    build proofs directly, using pattern-matching.  For instance: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">and_comm&#39;_aux</span> <span class="nv">P</span> <span class="nv">Q</span> (<span class="nv">H</span> : P /\ Q) : Q /\ P :=
+  <span class="kr">match</span> H <span class="kr">with</span>
+  | conj HP HQ =&gt; conj HQ HP
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">and_comm&#39;</span> <span class="nv">P</span> <span class="nv">Q</span> : P /\ Q &lt;-&gt; Q /\ P :=
+  conj (and_comm&#39;_aux P Q) (and_comm&#39;_aux Q P).</span></span></span></pre><div class="doc">
+<a name="lab8"></a><h4 class="section">Exercise: 2 stars, standard, optional (conj_fact)</h4>
+<div class="paragraph"> </div>
+
+    Construct a proof object demonstrating the following proposition. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk39" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk39"><span class="highlight"><span class="kn">Definition</span> <span class="nf">conj_fact</span> : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span>, P /\ Q -&gt; Q /\ R -&gt; P /\ R
+  <span class="c">(* REPLACE THIS LINE WITH &quot;:= _your_definition_ .&quot; *)</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span> : <span class="kt">Prop</span>, P /\ Q -&gt; Q /\ R -&gt; P /\ R</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab9"></a><h2 class="section">Disjunction</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The inductive definition of disjunction uses two constructors, one
+    for each side of the disjunct: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">Or</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">or</span> (<span class="nv">P</span> <span class="nv">Q</span> : <span class="kt">Prop</span>) : <span class="kt">Prop</span> :=
+| or_introl : P -&gt; or P Q
+| or_intror : Q -&gt; or P Q.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Or</span>.</span></span></span></pre><div class="doc">
+This declaration explains the behavior of the <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> tactic on
+    a disjunctive hypothesis, since the generated subgoals match the
+    shape of the <span class="inlinecode"><span class="id" title="var">or_introl</span></span> and <span class="inlinecode"><span class="id" title="var">or_intror</span></span> constructors.
+
+<div class="paragraph"> </div>
+
+    Once again, we can also directly write proof objects for theorems
+    involving <span class="inlinecode"><span class="id" title="var">or</span></span>, without resorting to tactics. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab10"></a><h4 class="section">Exercise: 2 stars, standard, optional (or_commut'')</h4>
+<div class="paragraph"> </div>
+
+    Try to write down an explicit proof object for <span class="inlinecode"><span class="id" title="var">or_commut</span></span> (without
+    using <span class="inlinecode"><span class="id" title="keyword">Print</span></span> to peek at the ones we already defined!). 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk3a" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk3a"><span class="highlight"><span class="kn">Definition</span> <span class="nf">or_comm</span> : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span>, P \/ Q -&gt; Q \/ P
+  <span class="c">(* REPLACE THIS LINE WITH &quot;:= _your_definition_ .&quot; *)</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> : <span class="kt">Prop</span>, P \/ Q -&gt; Q \/ P</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab11"></a><h2 class="section">Existential Quantification</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+To give evidence for an existential quantifier, we package a
+    witness <span class="inlinecode"><span class="id" title="var">x</span></span> together with a proof that <span class="inlinecode"><span class="id" title="var">x</span></span> satisfies the property
+    <span class="inlinecode"><span class="id" title="var">P</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">Ex</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">ex</span> {<span class="nv">A</span> : <span class="kt">Type</span>} (<span class="nv">P</span> : A -&gt; <span class="kt">Prop</span>) : <span class="kt">Prop</span> :=
+| ex_intro : <span class="kr">forall</span> <span class="nv">x</span> : A, P x -&gt; ex P.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Ex</span>.</span></span></span></pre><div class="doc">
+This may benefit from a little unpacking.  The core definition is
+    for a type former <span class="inlinecode"><span class="id" title="var">ex</span></span> that can be used to build propositions of
+    the form <span class="inlinecode"><span class="id" title="var">ex</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span>, where <span class="inlinecode"><span class="id" title="var">P</span></span> itself is a <i>function</i> from witness
+    values in the type <span class="inlinecode"><span class="id" title="var">A</span></span> to propositions.  The <span class="inlinecode"><span class="id" title="var">ex_intro</span></span>
+    constructor then offers a way of constructing evidence for <span class="inlinecode"><span class="id" title="var">ex</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span>,
+    given a witness <span class="inlinecode"><span class="id" title="var">x</span></span> and a proof of <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The more familiar form <span class="inlinecode"><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> desugars to an expression
+    involving <span class="inlinecode"><span class="id" title="var">ex</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ProofObjects-v-chk3b" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk3b"><span class="highlight"><span class="kn">Check</span> ex (<span class="kr">fun</span> <span class="nv">n</span> =&gt; even n).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight"><span class="kr">exists</span> <span class="nv">n</span> : nat, even n
+     : <span class="kt">Prop</span></span></blockquote></div></div></small></span></pre><div class="doc">
+Here's how to define an explicit proof object involving <span class="inlinecode"><span class="id" title="var">ex</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">some_nat_is_even</span> : <span class="kr">exists</span> <span class="nv">n</span>, even n :=
+  ex_intro even <span class="mi">4</span> (ev_SS <span class="mi">2</span> (ev_SS <span class="mi">0</span> ev_0)).</span></span></span></pre><div class="doc">
+<a name="lab12"></a><h4 class="section">Exercise: 2 stars, standard, optional (ex_ev_Sn)</h4>
+<div class="paragraph"> </div>
+
+    Complete the definition of the following proof object: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk3c" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk3c"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ex_ev_Sn</span> : ex (<span class="kr">fun</span> <span class="nv">n</span> =&gt; even (S n))
+  <span class="c">(* REPLACE THIS LINE WITH &quot;:= _your_definition_ .&quot; *)</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">exists</span> <span class="nv">n</span> : nat, even (S n)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab13"></a><h2 class="section"><span class="inlinecode"><span class="id" title="var">True</span></span> and <span class="inlinecode"><span class="id" title="var">False</span></span></h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The inductive definition of the <span class="inlinecode"><span class="id" title="var">True</span></span> proposition is simple: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">True</span> : <span class="kt">Prop</span> :=
+  | I : <span class="kt">True</span>.</span></span></span></pre><div class="doc">
+It has one constructor (so every proof of <span class="inlinecode"><span class="id" title="var">True</span></span> is the same, so
+    being given a proof of <span class="inlinecode"><span class="id" title="var">True</span></span> is not informative.) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">False</span></span> is equally simple -- indeed, so simple it may look
+    syntactically wrong at first glance! 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">False</span> : <span class="kt">Prop</span> := .</span></span></span></pre><div class="doc">
+That is, <span class="inlinecode"><span class="id" title="var">False</span></span> is an inductive type with <i>no</i> constructors --
+    i.e., no way to build evidence for it. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Props</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab14"></a><h1 class="section">Equality</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Even Coq's equality relation is not built in.  It has the
+    following inductive definition.  (Actually, the definition in the
+    standard library is a slight variant of this, which gives an
+    induction principle that is slightly easier to use.) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">MyEquality</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">eq</span> {<span class="nv">X</span>:<span class="kt">Type</span>} : X -&gt; X -&gt; <span class="kt">Prop</span> :=
+| eq_refl : <span class="kr">forall</span> <span class="nv">x</span>, eq x x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;x == y&quot;</span> := (eq x y)
+                    (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>)
+                    : type_scope.</span></span></span></pre><div class="doc">
+The way to think about this definition is that, given a set <span class="inlinecode"><span class="id" title="var">X</span></span>,
+    it defines a <i>family</i> of propositions "<span class="inlinecode"><span class="id" title="var">x</span></span> is equal to <span class="inlinecode"><span class="id" title="var">y</span></span>,"
+    indexed by pairs of values (<span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span>) from <span class="inlinecode"><span class="id" title="var">X</span></span>.  There is just
+    one way of constructing evidence for members of this family:
+    applying the constructor <span class="inlinecode"><span class="id" title="var">eq_refl</span></span> to a type <span class="inlinecode"><span class="id" title="var">X</span></span> and a single
+    value <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">X</span></span>, which yields evidence that <span class="inlinecode"><span class="id" title="var">x</span></span> is equal to <span class="inlinecode"><span class="id" title="var">x</span></span>.
+
+<div class="paragraph"> </div>
+
+    Other types of the form <span class="inlinecode"><span class="id" title="var">eq</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> where <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span> are not the
+    same are thus uninhabited. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+We can use <span class="inlinecode"><span class="id" title="var">eq_refl</span></span> to construct evidence that, for example, <span class="inlinecode">2</span> <span class="inlinecode">=</span>
+<span class="inlinecode">2</span>.  Can we also use it to construct evidence that <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> <span class="inlinecode">=</span> <span class="inlinecode">2</span>?
+    Yes, we can.  Indeed, it is the very same piece of evidence!
+
+<div class="paragraph"> </div>
+
+    The reason is that Coq treats as "the same" any two terms that are
+    <i>convertible</i> according to a simple set of computation rules.
+
+<div class="paragraph"> </div>
+
+    These rules, which are similar to those used by <span class="inlinecode"><span class="id" title="keyword">Compute</span></span>, include
+    evaluation of function application, inlining of definitions, and
+    simplification of <span class="inlinecode"><span class="id" title="keyword">match</span></span>es.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk3d" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk3d"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">four</span>: <span class="mi">2</span> + <span class="mi">2</span> == <span class="mi">1</span> + <span class="mi">3</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> + <span class="mi">2</span> == <span class="mi">1</span> + <span class="mi">3</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk3e" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk3e"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> + <span class="mi">2</span> == <span class="mi">1</span> + <span class="mi">3</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> eq_refl.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+The <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> tactic that we have used to prove equalities up
+    to now is essentially just shorthand for <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">eq_refl</span></span>.
+
+<div class="paragraph"> </div>
+
+    In tactic-based proofs of equality, the conversion rules are
+    normally hidden in uses of <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> (either explicit or implicit in
+    other tactics such as <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>).
+
+<div class="paragraph"> </div>
+
+    But you can see them directly at work in the following explicit
+    proof objects: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">four&#39;</span> : <span class="mi">2</span> + <span class="mi">2</span> == <span class="mi">1</span> + <span class="mi">3</span> :=
+  eq_refl <span class="mi">4</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">singleton</span> : <span class="kr">forall</span> (<span class="nv">X</span>:<span class="kt">Type</span>) (<span class="nv">x</span>:X), []++[x] == x::[]  :=
+  <span class="kr">fun</span> (<span class="nv">X</span>:<span class="kt">Type</span>) (<span class="nv">x</span>:X) =&gt; eq_refl [x].</span></span></span></pre><div class="doc">
+<a name="lab15"></a><h4 class="section">Exercise: 2 stars, standard (equality__leibniz_equality)</h4>
+<div class="paragraph"> </div>
+
+    The inductive definition of equality implies <i>Leibniz equality</i>:
+    what we mean when we say "<span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span> are equal" is that every
+    property on <span class="inlinecode"><span class="id" title="var">P</span></span> that is true of <span class="inlinecode"><span class="id" title="var">x</span></span> is also true of <span class="inlinecode"><span class="id" title="var">y</span></span>.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk3f" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk3f"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">equality__leibniz_equality</span> : <span class="kr">forall</span> (<span class="nv">X</span> : <span class="kt">Type</span>) (<span class="nv">x</span> <span class="nv">y</span>: X),
+  x == y -&gt; <span class="kr">forall</span> <span class="nv">P</span>:X-&gt;<span class="kt">Prop</span>, P x -&gt; P y.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : <span class="kt">Type</span>) (<span class="nv">x</span> <span class="nv">y</span> : X),
+x == y -&gt; <span class="kr">forall</span> <span class="nv">P</span> : X -&gt; <span class="kt">Prop</span>, P x -&gt; P y</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk40" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk40"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : <span class="kt">Type</span>) (<span class="nv">x</span> <span class="nv">y</span> : X),
+x == y -&gt; <span class="kr">forall</span> <span class="nv">P</span> : X -&gt; <span class="kt">Prop</span>, P x -&gt; P y</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight"><span class="c">(* FILL IN HERE *)</span></span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab16"></a><h4 class="section">Exercise: 5 stars, standard, optional (leibniz_equality__equality)</h4>
+<div class="paragraph"> </div>
+
+    Show that, in fact, the inductive definition of equality is
+    <i>equivalent</i> to Leibniz equality: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk41" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk41"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">leibniz_equality__equality</span> : <span class="kr">forall</span> (<span class="nv">X</span> : <span class="kt">Type</span>) (<span class="nv">x</span> <span class="nv">y</span>: X),
+  (<span class="kr">forall</span> <span class="nv">P</span>:X-&gt;<span class="kt">Prop</span>, P x -&gt; P y) -&gt; x == y.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : <span class="kt">Type</span>) (<span class="nv">x</span> <span class="nv">y</span> : X),
+(<span class="kr">forall</span> <span class="nv">P</span> : X -&gt; <span class="kt">Prop</span>, P x -&gt; P y) -&gt; x == y</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ProofObjects-v-chk42" style="display: none" type="checkbox"><label class="coq-input" for="ProofObjects-v-chk42"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : <span class="kt">Type</span>) (<span class="nv">x</span> <span class="nv">y</span> : X),
+(<span class="kr">forall</span> <span class="nv">P</span> : X -&gt; <span class="kt">Prop</span>, P x -&gt; P y) -&gt; x == y</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight"><span class="c">(* FILL IN HERE *)</span></span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">MyEquality</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab17"></a><h2 class="section">Inversion, Again</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+We've seen <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> used with both equality hypotheses and
+    hypotheses about inductively defined propositions.  Now that we've
+    seen that these are actually the same thing, we're in a position
+    to take a closer look at how <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> behaves.
+
+<div class="paragraph"> </div>
+
+    In general, the <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> tactic...
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> takes a hypothesis <span class="inlinecode"><span class="id" title="var">H</span></span> whose type <span class="inlinecode"><span class="id" title="var">P</span></span> is inductively defined,
+      and
+
+<div class="paragraph"> </div>
+</li>
+<li> for each constructor <span class="inlinecode"><span class="id" title="var">C</span></span> in <span class="inlinecode"><span class="id" title="var">P</span></span>'s definition,
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> generates a new subgoal in which we assume <span class="inlinecode"><span class="id" title="var">H</span></span> was
+        built with <span class="inlinecode"><span class="id" title="var">C</span></span>,
+
+<div class="paragraph"> </div>
+</li>
+<li> adds the arguments (premises) of <span class="inlinecode"><span class="id" title="var">C</span></span> to the context of
+        the subgoal as extra hypotheses,
+
+<div class="paragraph"> </div>
+</li>
+<li> matches the conclusion (result type) of <span class="inlinecode"><span class="id" title="var">C</span></span> against the
+        current goal and calculates a set of equalities that must
+        hold in order for <span class="inlinecode"><span class="id" title="var">C</span></span> to be applicable,
+
+<div class="paragraph"> </div>
+</li>
+<li> adds these equalities to the context (and, for convenience,
+        rewrites them in the goal), and
+
+<div class="paragraph"> </div>
+</li>
+<li> if the equalities are not satisfiable (e.g., they involve
+        things like <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">O</span></span>), immediately solves the subgoal. 
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<i>Example</i>: If we invert a hypothesis built with <span class="inlinecode"><span class="id" title="var">or</span></span>, there are
+    two constructors, so two subgoals get generated.  The
+    conclusion (result type) of the constructor (<span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">∨</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>) doesn't
+    place any restrictions on the form of <span class="inlinecode"><span class="id" title="var">P</span></span> or <span class="inlinecode"><span class="id" title="var">Q</span></span>, so we don't get
+    any extra equalities in the context of the subgoal. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<i>Example</i>: If we invert a hypothesis built with <span class="inlinecode"><span class="id" title="var">and</span></span>, there is
+    only one constructor, so only one subgoal gets generated.  Again,
+    the conclusion (result type) of the constructor (<span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>) doesn't
+    place any restrictions on the form of <span class="inlinecode"><span class="id" title="var">P</span></span> or <span class="inlinecode"><span class="id" title="var">Q</span></span>, so we don't get
+    any extra equalities in the context of the subgoal.  The
+    constructor does have two arguments, though, and these can be seen
+    in the context in the subgoal. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<i>Example</i>: If we invert a hypothesis built with <span class="inlinecode"><span class="id" title="var">eq</span></span>, there is
+    again only one constructor, so only one subgoal gets generated.
+    Now, though, the form of the <span class="inlinecode"><span class="id" title="var">eq_refl</span></span> constructor does give us
+    some extra information: it tells us that the two arguments to <span class="inlinecode"><span class="id" title="var">eq</span></span>
+    must be the same!  The <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> tactic adds this fact to the
+    context. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* Wed Jan 9 12:02:45 EST 2019 *)</span></span></span></pre></article></body></html>

@@ -1,0 +1,6 @@
+from alectryon.core import SerAPI
+with SerAPI() as api:
+    api.run("Let inv b: negb (negb b) = b.\n" +
+            "  destruct b. all: reflexivity.\n" +
+            "Qed.\n" +
+            "Print Assumptions inv."))

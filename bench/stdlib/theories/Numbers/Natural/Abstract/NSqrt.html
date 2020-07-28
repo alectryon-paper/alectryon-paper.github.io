@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html><head><title>NSqrt.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+Properties of Square Root Function 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> NAxioms NSub NZSqrt.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">NSqrtProp</span> (<span class="kn">Import</span> A : NAxiomsSig&#39;)(<span class="kn">Import</span> B : NSubProp A).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">Import</span> Private_NZSqrt := Nop &lt;+ NZSqrtProp A A B.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">auto&#39;</span> := <span class="nb">trivial</span>; <span class="kp">try</span> <span class="nb">rewrite</span> &lt;- neq_0_lt_0; <span class="nb">auto using</span> le_0_l.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">wrap</span> l := <span class="nb">intros</span>; <span class="nb">apply</span> l; auto&#39;.</span></span></span></pre><div class="doc">
+We redefine NZSqrt's results, without the non-negative hyps 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_spec&#39;</span> : <span class="kr">forall</span> <span class="nv">a</span>, √a*√a &lt;= a &lt; S (√a) * S (√a).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ a * √ a &lt;= a &lt; S √ a * S √ a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ a * √ a &lt;= a &lt; S √ a * S √ a</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_spec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_unique</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, b*b&lt;=a&lt;(S b)*(S b) -&gt; √a == b
+ := sqrt_unique.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk2"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_square</span> : <span class="kr">forall</span> <span class="nv">a</span>, √(a*a) == a.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ (a * a) == a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk3"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ (a * a) == a</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_square.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_le_mono</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, a&lt;=b -&gt; √a &lt;= √b
+ := sqrt_le_mono.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_lt_cancel</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, √a &lt; √b -&gt; a &lt; b
+ := sqrt_lt_cancel.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk4"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_le_square</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, b*b&lt;=a &lt;-&gt; b &lt;= √a.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, b * b &lt;= a &lt;-&gt; b &lt;= √ a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk5"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, b * b &lt;= a &lt;-&gt; b &lt;= √ a</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_le_square.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk6"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_lt_square</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, a&lt;b*b &lt;-&gt; √a &lt; b.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, a &lt; b * b &lt;-&gt; √ a &lt; b</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk7"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, a &lt; b * b &lt;-&gt; √ a &lt; b</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_lt_square.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_0</span> := sqrt_0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_1</span> := sqrt_1.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_2</span> := sqrt_2.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_lt_lin</span> : <span class="kr">forall</span> <span class="nv">a</span>, <span class="mi">1</span>&lt;a -&gt; √a&lt;a
+ := sqrt_lt_lin.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk8"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_le_lin</span> : <span class="kr">forall</span> <span class="nv">a</span>, √a&lt;=a.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ a &lt;= a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk9"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ a &lt;= a</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_le_lin.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_mul_below</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, √a * √b &lt;= √(a*b)
+ := sqrt_mul_below.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chka"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_mul_above</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, √(a*b) &lt; S (√a) * S (√b).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, √ (a * b) &lt; S √ a * S √ b</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chkb" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chkb"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, √ (a * b) &lt; S √ a * S √ b</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_mul_above.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chkc" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chkc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_succ_le</span> : <span class="kr">forall</span> <span class="nv">a</span>, √(S a) &lt;= S (√a).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ (S a) &lt;= S √ a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chkd" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chkd"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ (S a) &lt;= S √ a</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_succ_le.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chke" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chke"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">sqrt_succ_or</span> : <span class="kr">forall</span> <span class="nv">a</span>, √(S a) == S (√a) \/ √(S a) == √a.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ (S a) == S √ a \/ √ (S a) == √ a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chkf" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chkf"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> : t, √ (S a) == S √ a \/ √ (S a) == √ a</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap sqrt_succ_or.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt_add_le</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, √(a+b) &lt;= √a + √b
+ := sqrt_add_le.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk10"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">add_sqrt_le</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span>, √a + √b &lt;= √(<span class="mi">2</span>*(a+b)).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, √ a + √ b &lt;= √ (<span class="mi">2</span> * (a + b))</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="NSqrt-v-chk11" style="display: none" type="checkbox"><label class="coq-input" for="NSqrt-v-chk11"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> : t, √ a + √ b &lt;= √ (<span class="mi">2</span> * (a + b))</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">wrap add_sqrt_le.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+For the moment, we include stuff about <span class="inlinecode"><span class="id" title="var">sqrt_up</span></span> with patching them. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Include</span> NZSqrtUpProp A A B Private_NZSqrt.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">NSqrtProp</span>.</span></span></span></pre></article></body></html>

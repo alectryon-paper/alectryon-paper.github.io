@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html><head><title>ImpParser.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="doc">
+<a name="lab1"></a><h1 class="section">ImpParser: Lexing and Parsing in Coq</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The development of the Imp language in <span class="inlinecode"><span class="id" title="var">Imp.v</span></span> completely ignores
+    issues of concrete syntax -- how an ascii string that a programmer
+    might write gets translated into abstract syntax trees defined by
+    the datatypes <span class="inlinecode"><span class="id" title="var">aexp</span></span>, <span class="inlinecode"><span class="id" title="var">bexp</span></span>, and <span class="inlinecode"><span class="id" title="var">com</span></span>.  In this chapter, we
+    illustrate how the rest of the story can be filled in by building
+    a simple lexical analyzer and parser using Coq's functional
+    programming facilities. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+It is not important to understand all the details here (and
+    accordingly, the explanations are fairly terse and there are no
+    exercises).  The main point is simply to demonstrate that it can
+    be done.  You are invited to look through the code -- most of it
+    is not very complicated, though the parser relies on some
+    "monadic" programming idioms that may require a little work to
+    make out -- but most readers will probably want to just skim down
+    to the Examples section at the very end to get the punchline. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Warnings</span> <span class="s2">&quot;-notation-overridden,-parsing&quot;</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> Coq <span class="kn">Require Import</span> Strings.String.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> Coq <span class="kn">Require Import</span> Strings.Ascii.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> Coq <span class="kn">Require Import</span> Arith.Arith.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> Coq <span class="kn">Require Import</span> Init.Nat.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> Coq <span class="kn">Require Import</span> Arith.EqNat.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> Coq <span class="kn">Require Import</span> Lists.List.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> ListNotations.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> LF <span class="kn">Require Import</span> Maps Imp.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Internals</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab3"></a><h2 class="section">Lexical Analysis</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">isWhite</span> (<span class="nv">c</span> : ascii) : bool :=
+  <span class="kr">let</span> <span class="nv">n</span> := nat_of_ascii c <span class="kr">in</span>
+  orb (orb (n =? <span class="mi">32</span>)   <span class="c">(* space *)</span>
+           (n =? <span class="mi">9</span>))   <span class="c">(* tab *)</span>
+      (orb (n =? <span class="mi">10</span>)   <span class="c">(* linefeed *)</span>
+           (n =? <span class="mi">13</span>)). <span class="c">(* Carriage return. *)</span></span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;x &#39;&lt;=?&#39; y&quot;</span> := (x &lt;=? y)
+  (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : nat_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">isLowerAlpha</span> (<span class="nv">c</span> : ascii) : bool :=
+  <span class="kr">let</span> <span class="nv">n</span> := nat_of_ascii c <span class="kr">in</span>
+    andb (<span class="mi">97</span> &lt;=? n) (n &lt;=? <span class="mi">122</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">isAlpha</span> (<span class="nv">c</span> : ascii) : bool :=
+  <span class="kr">let</span> <span class="nv">n</span> := nat_of_ascii c <span class="kr">in</span>
+    orb (andb (<span class="mi">65</span> &lt;=? n) (n &lt;=? <span class="mi">90</span>))
+        (andb (<span class="mi">97</span> &lt;=? n) (n &lt;=? <span class="mi">122</span>)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">isDigit</span> (<span class="nv">c</span> : ascii) : bool :=
+  <span class="kr">let</span> <span class="nv">n</span> := nat_of_ascii c <span class="kr">in</span>
+     andb (<span class="mi">48</span> &lt;=? n) (n &lt;=? <span class="mi">57</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">chartype</span> := white | alpha | digit | other.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">classifyChar</span> (<span class="nv">c</span> : ascii) : chartype :=
+  <span class="kr">if</span> isWhite c <span class="kr">then</span>
+    white
+  <span class="kr">else</span> <span class="kr">if</span> isAlpha c <span class="kr">then</span>
+    alpha
+  <span class="kr">else</span> <span class="kr">if</span> isDigit c <span class="kr">then</span>
+    digit
+  <span class="kr">else</span>
+    other.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">list_of_string</span> (<span class="nv">s</span> : string) : list ascii :=
+  <span class="kr">match</span> s <span class="kr">with</span>
+  | EmptyString =&gt; []
+  | String c s =&gt; c :: (list_of_string s)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">string_of_list</span> (<span class="nv">xs</span> : list ascii) : string :=
+  fold_right String EmptyString xs.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">token</span> := string.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">tokenize_helper</span> (<span class="nv">cls</span> : chartype) (<span class="nv">acc</span> <span class="nv">xs</span> : list ascii)
+                       : list (list ascii) :=
+  <span class="kr">let</span> <span class="nv">tk</span> := <span class="kr">match</span> acc <span class="kr">with</span> [] =&gt; [] | _::_ =&gt; [rev acc] <span class="kr">end</span> <span class="kr">in</span>
+  <span class="kr">match</span> xs <span class="kr">with</span>
+  | [] =&gt; tk
+  | (x::xs&#39;) =&gt;
+    <span class="kr">match</span> cls, classifyChar x, x <span class="kr">with</span>
+    | _, _, <span class="s2">&quot;(&quot;</span>      =&gt;
+      tk ++ [<span class="s2">&quot;(&quot;</span>]::(tokenize_helper other [] xs&#39;)
+    | _, _, <span class="s2">&quot;)&quot;</span>      =&gt;
+      tk ++ [<span class="s2">&quot;)&quot;</span>]::(tokenize_helper other [] xs&#39;)
+    | _, white, _    =&gt;
+      tk ++ (tokenize_helper white [] xs&#39;)
+    | alpha,alpha,x  =&gt;
+      tokenize_helper alpha (x::acc) xs&#39;
+    | digit,digit,x  =&gt;
+      tokenize_helper digit (x::acc) xs&#39;
+    | other,other,x  =&gt;
+      tokenize_helper other (x::acc) xs&#39;
+    | _,tp,x         =&gt;
+      tk ++ (tokenize_helper tp [x] xs&#39;)
+    <span class="kr">end</span>
+  <span class="kr">end</span> %char.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">tokenize</span> (<span class="nv">s</span> : string) : list string :=
+  map string_of_list (tokenize_helper white [] (list_of_string s)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk0"><span class="highlight"><span class="kn">Example</span> <span class="nf">tokenize_ex1</span> :
+    tokenize <span class="s2">&quot;abc12=3  223*(3+(a+c))&quot;</span> %string
+  = [<span class="s2">&quot;abc&quot;</span>; <span class="s2">&quot;12&quot;</span>; <span class="s2">&quot;=&quot;</span>; <span class="s2">&quot;3&quot;</span>; <span class="s2">&quot;223&quot;</span>;
+       <span class="s2">&quot;*&quot;</span>; <span class="s2">&quot;(&quot;</span>; <span class="s2">&quot;3&quot;</span>; <span class="s2">&quot;+&quot;</span>; <span class="s2">&quot;(&quot;</span>;
+       <span class="s2">&quot;a&quot;</span>; <span class="s2">&quot;+&quot;</span>; <span class="s2">&quot;c&quot;</span>; <span class="s2">&quot;)&quot;</span>; <span class="s2">&quot;)&quot;</span>]%string.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">tokenize <span class="s2">&quot;abc12=3  223*(3+(a+c))&quot;</span> =
+[<span class="s2">&quot;abc&quot;</span>%string; <span class="s2">&quot;12&quot;</span>%string; <span class="s2">&quot;=&quot;</span>%string; <span class="s2">&quot;3&quot;</span>%string;
+<span class="s2">&quot;223&quot;</span>%string; <span class="s2">&quot;*&quot;</span>%string; <span class="s2">&quot;(&quot;</span>%string; <span class="s2">&quot;3&quot;</span>%string;
+<span class="s2">&quot;+&quot;</span>%string; <span class="s2">&quot;(&quot;</span>%string; <span class="s2">&quot;a&quot;</span>%string; <span class="s2">&quot;+&quot;</span>%string;
+<span class="s2">&quot;c&quot;</span>%string; <span class="s2">&quot;)&quot;</span>%string; <span class="s2">&quot;)&quot;</span>%string]</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">tokenize <span class="s2">&quot;abc12=3  223*(3+(a+c))&quot;</span> =
+[<span class="s2">&quot;abc&quot;</span>%string; <span class="s2">&quot;12&quot;</span>%string; <span class="s2">&quot;=&quot;</span>%string; <span class="s2">&quot;3&quot;</span>%string;
+<span class="s2">&quot;223&quot;</span>%string; <span class="s2">&quot;*&quot;</span>%string; <span class="s2">&quot;(&quot;</span>%string; <span class="s2">&quot;3&quot;</span>%string;
+<span class="s2">&quot;+&quot;</span>%string; <span class="s2">&quot;(&quot;</span>%string; <span class="s2">&quot;a&quot;</span>%string; <span class="s2">&quot;+&quot;</span>%string;
+<span class="s2">&quot;c&quot;</span>%string; <span class="s2">&quot;)&quot;</span>%string; <span class="s2">&quot;)&quot;</span>%string]</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab4"></a><h2 class="section">Parsing</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ----------------------------------------------------------------- *)</span></span></span></pre><div class="doc">
+<a name="lab5"></a><h3 class="section">Options With Errors</h3>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+An <span class="inlinecode"><span class="id" title="var">option</span></span> type with error messages: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">optionE</span> (<span class="nv">X</span>:<span class="kt">Type</span>) : <span class="kt">Type</span> :=
+  | SomeE (x : X)
+  | NoneE (s : string).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> SomeE {X}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> NoneE {X}.</span></span></span></pre><div class="doc">
+Some syntactic sugar to make writing nested match-expressions on
+    optionE more convenient. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;&#39; p &lt;- e1 ;; e2&quot;</span>
+   := (<span class="kr">match</span> e1 <span class="kr">with</span>
+       | SomeE p =&gt; e2
+       | NoneE err =&gt; NoneE err
+       <span class="kr">end</span>)
+   (<span class="kn">right associativity</span>, p <span class="nb">pattern</span>, <span class="kn">at level</span> <span class="mi">60</span>, e1 <span class="kn">at next level</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;&#39;TRY&#39; &#39; p &lt;- e1 ;; e2 &#39;OR&#39; e3&quot;</span>
+   := (<span class="kr">match</span> e1 <span class="kr">with</span>
+       | SomeE p =&gt; e2
+       | NoneE _ =&gt; e3
+       <span class="kr">end</span>)
+   (<span class="kn">right associativity</span>, p <span class="nb">pattern</span>,
+    <span class="kn">at level</span> <span class="mi">60</span>, e1 <span class="kn">at next level</span>, e2 <span class="kn">at next level</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ----------------------------------------------------------------- *)</span></span></span></pre><div class="doc">
+<a name="lab6"></a><h3 class="section">Generic Combinators for Building Parsers</h3>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Open Scope</span> string_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">parser</span> (<span class="nv">T</span> : <span class="kt">Type</span>) :=
+  list token -&gt; optionE (T * list token).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">many_helper</span> {<span class="nv">T</span>} (<span class="nv">p</span> : parser T) <span class="nv">acc</span> <span class="nv">steps</span> <span class="nv">xs</span> :=
+  <span class="kr">match</span> steps, p xs <span class="kr">with</span>
+  | <span class="mi">0</span>, _ =&gt;
+      NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | _, NoneE _ =&gt;
+      SomeE ((rev acc), xs)
+  | S steps&#39;, SomeE (t, xs&#39;) =&gt;
+      many_helper p (t :: acc) steps&#39; xs&#39;
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+A (step-indexed) parser that expects zero or more <span class="inlinecode"><span class="id" title="var">p</span></span>s: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">many</span> {<span class="nv">T</span>} (<span class="nv">p</span> : parser T) (<span class="nv">steps</span> : nat) : parser (list T) :=
+  many_helper p [] steps.</span></span></span></pre><div class="doc">
+A parser that expects a given token, followed by <span class="inlinecode"><span class="id" title="var">p</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">firstExpect</span> {<span class="nv">T</span>} (<span class="nv">t</span> : token) (<span class="nv">p</span> : parser T)
+                     : parser T :=
+  <span class="kr">fun</span> <span class="nv">xs</span> =&gt; <span class="kr">match</span> xs <span class="kr">with</span>
+            | x::xs&#39; =&gt;
+              <span class="kr">if</span> string_dec x t
+              <span class="kr">then</span> p xs&#39;
+              <span class="kr">else</span> NoneE (<span class="s2">&quot;expected &#39;&quot;</span> ++ t ++ <span class="s2">&quot;&#39;.&quot;</span>)
+            | [] =&gt;
+              NoneE (<span class="s2">&quot;expected &#39;&quot;</span> ++ t ++ <span class="s2">&quot;&#39;.&quot;</span>)
+            <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+A parser that expects a particular token: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">expect</span> (<span class="nv">t</span> : token) : parser unit :=
+  firstExpect t (<span class="kr">fun</span> <span class="nv">xs</span> =&gt; SomeE (tt, xs)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ----------------------------------------------------------------- *)</span></span></span></pre><div class="doc">
+<a name="lab7"></a><h3 class="section">A Recursive-Descent Parser for Imp</h3>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Identifiers: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">parseIdentifier</span> (<span class="nv">xs</span> : list token)
+                         : optionE (string * list token) :=
+<span class="kr">match</span> xs <span class="kr">with</span>
+| [] =&gt; NoneE <span class="s2">&quot;Expected identifier&quot;</span>
+| x::xs&#39; =&gt;
+    <span class="kr">if</span> forallb isLowerAlpha (list_of_string x) <span class="kr">then</span>
+      SomeE (x, xs&#39;)
+    <span class="kr">else</span>
+      NoneE (<span class="s2">&quot;Illegal identifier:&#39;&quot;</span> ++ x ++ <span class="s2">&quot;&#39;&quot;</span>)
+<span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Numbers: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">parseNumber</span> (<span class="nv">xs</span> : list token)
+                     : optionE (nat * list token) :=
+<span class="kr">match</span> xs <span class="kr">with</span>
+| [] =&gt; NoneE <span class="s2">&quot;Expected number&quot;</span>
+| x::xs&#39; =&gt;
+    <span class="kr">if</span> forallb isDigit (list_of_string x) <span class="kr">then</span>
+      SomeE (fold_left
+               (<span class="kr">fun</span> <span class="nv">n</span> <span class="nv">d</span> =&gt;
+                  <span class="mi">10</span> * n + (nat_of_ascii d -
+                            nat_of_ascii <span class="s2">&quot;0&quot;</span>%char))
+               (list_of_string x)
+               <span class="mi">0</span>,
+             xs&#39;)
+    <span class="kr">else</span>
+      NoneE <span class="s2">&quot;Expected number&quot;</span>
+<span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Parse arithmetic expressions 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">parsePrimaryExp</span> (<span class="nv">steps</span>:nat)
+                         (<span class="nv">xs</span> : list token)
+                       : optionE (aexp * list token) :=
+  <span class="kr">match</span> steps <span class="kr">with</span>
+  | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | S steps&#39; =&gt;
+      TRY <span class="err">&#39;</span> (i, rest) &lt;- parseIdentifier xs ;;
+          SomeE (AId i, rest)
+      OR
+      TRY <span class="err">&#39;</span> (n, rest) &lt;- parseNumber xs ;;
+          SomeE (ANum n, rest)
+      OR
+      <span class="err">&#39;</span> (e, rest) &lt;- firstExpect <span class="s2">&quot;(&quot;</span> (parseSumExp steps&#39;) xs ;;
+      <span class="err">&#39;</span> (u, rest&#39;) &lt;- expect <span class="s2">&quot;)&quot;</span> rest ;;
+      SomeE (e,rest&#39;)
+  <span class="kr">end</span>
+
+<span class="kr">with</span> parseProductExp (steps:nat)
+                     (xs : list token) :=
+  <span class="kr">match</span> steps <span class="kr">with</span>
+  | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | S steps&#39; =&gt;
+    <span class="err">&#39;</span> (e, rest) &lt;- parsePrimaryExp steps&#39; xs ;;
+    <span class="err">&#39;</span> (es, rest&#39;) &lt;- many (firstExpect <span class="s2">&quot;*&quot;</span> (parsePrimaryExp steps&#39;))
+                          steps&#39; rest ;;
+    SomeE (fold_left AMult es e, rest&#39;)
+  <span class="kr">end</span>
+
+<span class="kr">with</span> parseSumExp (steps:nat) (xs : list token)  :=
+  <span class="kr">match</span> steps <span class="kr">with</span>
+  | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | S steps&#39; =&gt;
+    <span class="err">&#39;</span> (e, rest) &lt;- parseProductExp steps&#39; xs ;;
+    <span class="err">&#39;</span> (es, rest&#39;) &lt;-
+        many (<span class="kr">fun</span> <span class="nv">xs</span> =&gt;
+                TRY <span class="err">&#39;</span> (e,rest&#39;) &lt;-
+                    firstExpect <span class="s2">&quot;+&quot;</span>
+                                (parseProductExp steps&#39;) xs ;;
+                    SomeE ( (true, e), rest&#39;)
+                OR
+                <span class="err">&#39;</span> (e, rest&#39;) &lt;-
+                    firstExpect <span class="s2">&quot;-&quot;</span>
+                                (parseProductExp steps&#39;) xs ;;
+                SomeE ( (false, e), rest&#39;))
+        steps&#39; rest ;;
+      SomeE (fold_left (<span class="kr">fun</span> <span class="nv">e0</span> <span class="nv">term</span> =&gt;
+                          <span class="kr">match</span> term <span class="kr">with</span>
+                          | (true,  e) =&gt; APlus e0 e
+                          | (false, e) =&gt; AMinus e0 e
+                          <span class="kr">end</span>)
+                       es e,
+             rest&#39;)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">parseAExp</span> := parseSumExp.</span></span></span></pre><div class="doc">
+Parsing boolean expressions: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">parseAtomicExp</span> (<span class="nv">steps</span>:nat)
+                        (<span class="nv">xs</span> : list token)  :=
+<span class="kr">match</span> steps <span class="kr">with</span>
+  | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | S steps&#39; =&gt;
+     TRY <span class="err">&#39;</span> (u,rest) &lt;- expect <span class="s2">&quot;true&quot;</span> xs ;;
+         SomeE (BTrue,rest)
+     OR
+     TRY <span class="err">&#39;</span> (u,rest) &lt;- expect <span class="s2">&quot;false&quot;</span> xs ;;
+         SomeE (BFalse,rest)
+     OR
+     TRY <span class="err">&#39;</span> (e,rest) &lt;- firstExpect <span class="s2">&quot;~&quot;</span>
+                                   (parseAtomicExp steps&#39;)
+                                   xs ;;
+         SomeE (BNot e, rest)
+     OR
+     TRY <span class="err">&#39;</span> (e,rest) &lt;- firstExpect <span class="s2">&quot;(&quot;</span>
+                                   (parseConjunctionExp steps&#39;)
+                                   xs ;;
+         <span class="err">&#39;</span> (u,rest&#39;) &lt;- expect <span class="s2">&quot;)&quot;</span> rest ;;
+         SomeE (e, rest&#39;)
+     OR
+     <span class="err">&#39;</span> (e, rest) &lt;- parseProductExp steps&#39; xs ;;
+     TRY <span class="err">&#39;</span> (e&#39;, rest&#39;) &lt;- firstExpect <span class="s2">&quot;=&quot;</span>
+                                  (parseAExp steps&#39;) rest ;;
+         SomeE (BEq e e&#39;, rest&#39;)
+     OR
+     TRY <span class="err">&#39;</span> (e&#39;, rest&#39;) &lt;- firstExpect <span class="s2">&quot;&lt;=&quot;</span>
+                                      (parseAExp steps&#39;) rest ;;
+         SomeE (BLe e e&#39;, rest&#39;)
+     OR
+     NoneE <span class="s2">&quot;Expected &#39;=&#39; or &#39;&lt;=&#39; after arithmetic expression&quot;</span>
+<span class="kr">end</span>
+
+<span class="kr">with</span> parseConjunctionExp (steps:nat)
+                         (xs : list token) :=
+  <span class="kr">match</span> steps <span class="kr">with</span>
+  | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | S steps&#39; =&gt;
+    <span class="err">&#39;</span> (e, rest) &lt;- parseAtomicExp steps&#39; xs ;;
+    <span class="err">&#39;</span> (es, rest&#39;) &lt;- many (firstExpect <span class="s2">&quot;&amp;&amp;&quot;</span>
+               (parseAtomicExp steps&#39;))
+            steps&#39; rest ;;
+    SomeE (fold_left BAnd es e, rest&#39;)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">parseBExp</span> := parseConjunctionExp.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ImpParser-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk2"><span class="highlight"><span class="kn">Check</span> parseConjunctionExp.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">parseConjunctionExp
+     : nat -&gt;
+       list token -&gt; optionE (bexp * list token)</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">testParsing</span> {<span class="nv">X</span> : <span class="kt">Type</span>}
+           (<span class="nv">p</span> : nat -&gt;
+                list token -&gt;
+                optionE (X * list token))
+           (<span class="nv">s</span> : string) :=
+  <span class="kr">let</span> <span class="nv">t</span> := tokenize s <span class="kr">in</span>
+  p <span class="mi">100</span> t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ImpParser-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk3"><span class="highlight"><span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+  testParsing parseProductExp <span class="s2">&quot;x.y.(x.x).x&quot;</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">= SomeE
+    (<span class="s2">&quot;x&quot;</span>,
+    [<span class="s2">&quot;.&quot;</span>; <span class="s2">&quot;y&quot;</span>; <span class="s2">&quot;.&quot;</span>; <span class="s2">&quot;(&quot;</span>; <span class="s2">&quot;x&quot;</span>; <span class="s2">&quot;.&quot;</span>; <span class="s2">&quot;x&quot;</span>; <span class="s2">&quot;)&quot;</span>; <span class="s2">&quot;.&quot;</span>;
+    <span class="s2">&quot;x&quot;</span>])
+: optionE (aexp * list token)</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="ImpParser-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk4"><span class="highlight"><span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+  testParsing parseConjunctionExp <span class="s2">&quot;~(x=x&amp;&amp;x*x&lt;=(x*x)*x)&amp;&amp;x=x&quot;</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">= SomeE
+    (((~
+       (<span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;x&quot;</span>) &amp;&amp;
+       (<span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span> &lt;= <span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span>)) &amp;&amp;
+      (<span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;x&quot;</span>))%imp, [])
+: optionE (bexp * list token)</span></blockquote></div></div></small></span></pre><div class="doc">
+Parsing commands: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">parseSimpleCommand</span> (<span class="nv">steps</span>:nat)
+                            (<span class="nv">xs</span> : list token) :=
+  <span class="kr">match</span> steps <span class="kr">with</span>
+  | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | S steps&#39; =&gt;
+    TRY <span class="err">&#39;</span> (u, rest) &lt;- expect <span class="s2">&quot;SKIP&quot;</span> xs ;;
+        SomeE (SKIP%imp, rest)
+    OR
+    TRY <span class="err">&#39;</span> (e,rest) &lt;-
+            firstExpect <span class="s2">&quot;TEST&quot;</span>
+                        (parseBExp steps&#39;) xs ;;
+        <span class="err">&#39;</span> (c,rest&#39;) &lt;-
+            firstExpect <span class="s2">&quot;THEN&quot;</span>
+                        (parseSequencedCommand steps&#39;) rest ;;
+        <span class="err">&#39;</span> (c&#39;,rest&#39;&#39;) &lt;-
+            firstExpect <span class="s2">&quot;ELSE&quot;</span>
+                        (parseSequencedCommand steps&#39;) rest&#39; ;;
+        <span class="err">&#39;</span> (tt,rest&#39;&#39;&#39;) &lt;-
+            expect <span class="s2">&quot;END&quot;</span> rest&#39;&#39; ;;
+       SomeE(TEST e THEN c ELSE c&#39; FI%imp, rest&#39;&#39;&#39;)
+    OR
+    TRY <span class="err">&#39;</span> (e,rest) &lt;-
+            firstExpect <span class="s2">&quot;WHILE&quot;</span>
+                        (parseBExp steps&#39;) xs ;;
+        <span class="err">&#39;</span> (c,rest&#39;) &lt;-
+            firstExpect <span class="s2">&quot;DO&quot;</span>
+                        (parseSequencedCommand steps&#39;) rest ;;
+        <span class="err">&#39;</span> (u,rest&#39;&#39;) &lt;-
+            expect <span class="s2">&quot;END&quot;</span> rest&#39; ;;
+        SomeE(WHILE e DO c END%imp, rest&#39;&#39;)
+    OR
+    TRY <span class="err">&#39;</span> (i, rest) &lt;- parseIdentifier xs ;;
+        <span class="err">&#39;</span> (e, rest&#39;) &lt;- firstExpect <span class="s2">&quot;::=&quot;</span> (parseAExp steps&#39;) rest ;;
+        SomeE ((i ::= e)%imp, rest&#39;)
+    OR
+        NoneE <span class="s2">&quot;Expecting a command&quot;</span>
+<span class="kr">end</span>
+
+<span class="kr">with</span> parseSequencedCommand (steps:nat)
+                           (xs : list token) :=
+  <span class="kr">match</span> steps <span class="kr">with</span>
+  | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
+  | S steps&#39; =&gt;
+    <span class="err">&#39;</span> (c, rest) &lt;- parseSimpleCommand steps&#39; xs ;;
+    TRY <span class="err">&#39;</span> (c&#39;, rest&#39;) &lt;-
+            firstExpect <span class="s2">&quot;;;&quot;</span>
+                        (parseSequencedCommand steps&#39;) rest ;;
+        SomeE ((c ;; c&#39;)%imp, rest&#39;)
+    OR
+    SomeE (c, rest)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">bignumber</span> := <span class="mi">1000</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">parse</span> (<span class="nv">str</span> : string) : optionE com :=
+  <span class="kr">let</span> <span class="nv">tokens</span> := tokenize str <span class="kr">in</span>
+  <span class="kr">match</span> parseSequencedCommand bignumber tokens <span class="kr">with</span>
+  | SomeE (c, []) =&gt; SomeE c
+  | SomeE (_, t::_) =&gt; NoneE (<span class="s2">&quot;Trailing tokens remaining: &quot;</span> ++ t)
+  | NoneE err =&gt; NoneE err
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab8"></a><h1 class="section">Examples</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk5"><span class="highlight"><span class="kn">Example</span> <span class="nf">eg1</span> : parse <span class="s2">&quot;</span>
+<span class="s2">  TEST x = y + 1 + 2 - y * 6 + 3 THEN</span>
+<span class="s2">    x ::= x * 1;;</span>
+<span class="s2">    y ::= 0</span>
+<span class="s2">  ELSE</span>
+<span class="s2">    SKIP</span>
+<span class="s2">  END  &quot;</span>
+=
+  SomeE (
+      TEST <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;y&quot;</span> + <span class="mi">1</span> + <span class="mi">2</span> - <span class="s2">&quot;y&quot;</span> * <span class="mi">6</span> + <span class="mi">3</span> THEN
+        <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="mi">1</span>;;
+        <span class="s2">&quot;y&quot;</span> ::= <span class="mi">0</span>
+      ELSE
+        SKIP
+      FI)%imp.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">parse
+  <span class="s2">&quot;</span>
+<span class="s2">  TEST x = y + 1 + 2 - y * 6 + 3 THEN</span>
+<span class="s2">    x ::= x * 1;;</span>
+<span class="s2">    y ::= 0</span>
+<span class="s2">  ELSE</span>
+<span class="s2">    SKIP</span>
+<span class="s2">  END  &quot;</span> =
+SomeE
+  (TEST <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;y&quot;</span> + <span class="mi">1</span> + <span class="mi">2</span> - <span class="s2">&quot;y&quot;</span> * <span class="mi">6</span> + <span class="mi">3</span>
+   THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="mi">1</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="mi">0</span> ELSE SKIP FI)%imp</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk6"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">parse
+  <span class="s2">&quot;</span>
+<span class="s2">  TEST x = y + 1 + 2 - y * 6 + 3 THEN</span>
+<span class="s2">    x ::= x * 1;;</span>
+<span class="s2">    y ::= 0</span>
+<span class="s2">  ELSE</span>
+<span class="s2">    SKIP</span>
+<span class="s2">  END  &quot;</span> =
+SomeE
+  (TEST <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;y&quot;</span> + <span class="mi">1</span> + <span class="mi">2</span> - <span class="s2">&quot;y&quot;</span> * <span class="mi">6</span> + <span class="mi">3</span>
+   THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="mi">1</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="mi">0</span> ELSE SKIP FI)%imp</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk7"><span class="highlight"><span class="nb">cbv</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">SomeE
+  (TEST <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;y&quot;</span> + <span class="mi">1</span> + <span class="mi">2</span> - <span class="s2">&quot;y&quot;</span> * <span class="mi">6</span> + <span class="mi">3</span>
+   THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="mi">1</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="mi">0</span> ELSE SKIP FI)%imp =
+SomeE
+  (TEST <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;y&quot;</span> + <span class="mi">1</span> + <span class="mi">2</span> - <span class="s2">&quot;y&quot;</span> * <span class="mi">6</span> + <span class="mi">3</span>
+   THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="mi">1</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="mi">0</span> ELSE SKIP FI)%imp</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk8"><span class="highlight"><span class="kn">Example</span> <span class="nf">eg2</span> : parse <span class="s2">&quot;</span>
+<span class="s2">  SKIP;;</span>
+<span class="s2">  z::=x*y*(x*x);;</span>
+<span class="s2">  WHILE x=x DO</span>
+<span class="s2">    TEST (z &lt;= z*z) &amp;&amp; ~(x = 2) THEN</span>
+<span class="s2">      x ::= z;;</span>
+<span class="s2">      y ::= z</span>
+<span class="s2">    ELSE</span>
+<span class="s2">      SKIP</span>
+<span class="s2">    END;;</span>
+<span class="s2">    SKIP</span>
+<span class="s2">  END;;</span>
+<span class="s2">  x::=z  &quot;</span>
+=
+  SomeE (
+      SKIP;;
+      <span class="s2">&quot;z&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;y&quot;</span> * (<span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span>);;
+      WHILE <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;x&quot;</span> DO
+        TEST (<span class="s2">&quot;z&quot;</span> &lt;= <span class="s2">&quot;z&quot;</span> * <span class="s2">&quot;z&quot;</span>) &amp;&amp; ~(<span class="s2">&quot;x&quot;</span> = <span class="mi">2</span>) THEN
+          <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>;;
+          <span class="s2">&quot;y&quot;</span> ::= <span class="s2">&quot;z&quot;</span>
+        ELSE
+          SKIP
+        FI;;
+        SKIP
+      END;;
+      <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>)%imp.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">parse
+  <span class="s2">&quot;</span>
+<span class="s2">  SKIP;;</span>
+<span class="s2">  z::=x*y*(x*x);;</span>
+<span class="s2">  WHILE x=x DO</span>
+<span class="s2">    TEST (z &lt;= z*z) &amp;&amp; ~(x = 2) THEN</span>
+<span class="s2">      x ::= z;;</span>
+<span class="s2">      y ::= z</span>
+<span class="s2">    ELSE</span>
+<span class="s2">      SKIP</span>
+<span class="s2">    END;;</span>
+<span class="s2">    SKIP</span>
+<span class="s2">  END;;</span>
+<span class="s2">  x::=z  &quot;</span> =
+SomeE
+  (SKIP;;
+   <span class="s2">&quot;z&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;y&quot;</span> * (<span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span>);;
+   (WHILE <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;x&quot;</span>
+    DO (TEST (<span class="s2">&quot;z&quot;</span> &lt;= <span class="s2">&quot;z&quot;</span> * <span class="s2">&quot;z&quot;</span>) &amp;&amp; (~ <span class="s2">&quot;x&quot;</span> = <span class="mi">2</span>)
+        THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="s2">&quot;z&quot;</span> ELSE SKIP FI);;
+       SKIP END);; <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>)%imp</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chk9"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">parse
+  <span class="s2">&quot;</span>
+<span class="s2">  SKIP;;</span>
+<span class="s2">  z::=x*y*(x*x);;</span>
+<span class="s2">  WHILE x=x DO</span>
+<span class="s2">    TEST (z &lt;= z*z) &amp;&amp; ~(x = 2) THEN</span>
+<span class="s2">      x ::= z;;</span>
+<span class="s2">      y ::= z</span>
+<span class="s2">    ELSE</span>
+<span class="s2">      SKIP</span>
+<span class="s2">    END;;</span>
+<span class="s2">    SKIP</span>
+<span class="s2">  END;;</span>
+<span class="s2">  x::=z  &quot;</span> =
+SomeE
+  (SKIP;;
+   <span class="s2">&quot;z&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;y&quot;</span> * (<span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span>);;
+   (WHILE <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;x&quot;</span>
+    DO (TEST (<span class="s2">&quot;z&quot;</span> &lt;= <span class="s2">&quot;z&quot;</span> * <span class="s2">&quot;z&quot;</span>) &amp;&amp; (~ <span class="s2">&quot;x&quot;</span> = <span class="mi">2</span>)
+        THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="s2">&quot;z&quot;</span> ELSE SKIP FI);;
+       SKIP END);; <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>)%imp</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="ImpParser-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="ImpParser-v-chka"><span class="highlight"><span class="nb">cbv</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">SomeE
+  (SKIP;;
+   <span class="s2">&quot;z&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;y&quot;</span> * (<span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span>);;
+   (WHILE <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;x&quot;</span>
+    DO (TEST (<span class="s2">&quot;z&quot;</span> &lt;= <span class="s2">&quot;z&quot;</span> * <span class="s2">&quot;z&quot;</span>) &amp;&amp; (~ <span class="s2">&quot;x&quot;</span> = <span class="mi">2</span>)
+        THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="s2">&quot;z&quot;</span> ELSE SKIP FI);;
+       SKIP END);; <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>)%imp =
+SomeE
+  (SKIP;;
+   <span class="s2">&quot;z&quot;</span> ::= <span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;y&quot;</span> * (<span class="s2">&quot;x&quot;</span> * <span class="s2">&quot;x&quot;</span>);;
+   (WHILE <span class="s2">&quot;x&quot;</span> = <span class="s2">&quot;x&quot;</span>
+    DO (TEST (<span class="s2">&quot;z&quot;</span> &lt;= <span class="s2">&quot;z&quot;</span> * <span class="s2">&quot;z&quot;</span>) &amp;&amp; (~ <span class="s2">&quot;x&quot;</span> = <span class="mi">2</span>)
+        THEN <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>;; <span class="s2">&quot;y&quot;</span> ::= <span class="s2">&quot;z&quot;</span> ELSE SKIP FI);;
+       SKIP END);; <span class="s2">&quot;x&quot;</span> ::= <span class="s2">&quot;z&quot;</span>)%imp</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* Wed Jan 9 12:02:46 EST 2019 *)</span></span></span></pre></article></body></html>

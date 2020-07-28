@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>Booleans</title>
+<link rel="stylesheet" href="alectryon.css" type="text/css" />
+<link rel="stylesheet" href="docutils_basic.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.min.css" type="text/css" />
+<script type="text/javascript" src="alectryon.js"></script>
+</head>
+<body>
+<div class="alectryon-root alectryon-standalone alectryon-centered"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="document" id="booleans">
+<h1 class="title">Booleans</h1>
+
+<p>The built-in <a class="reference external" href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">Boolean</a>
+type has two constructors:</p>
+<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="doc-v-chk0" style="display: none" type="checkbox"><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">bool</span> : <span class="kt">Set</span> :=
+    true : bool | false : bool</span></blockquote></div></div></small></span></pre><div class="topic">
+<p class="topic-title">Induction principles</p>
+<p>Coq automatically defines an induction principle:</p>
+<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="doc-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="doc-v-chk1"><span class="highlight"><span class="kn">Search</span> (<span class="kr">∀</span> <span class="nv">b</span>: bool, _ b) <span class="s2">&quot;_ind&quot;</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">bool_ind:
+  <span class="kr">∀</span> <span class="nv">P</span> : bool → <span class="kt">Prop</span>,
+    P true → P false → <span class="kr">∀</span> <span class="nv">b</span> : bool, P b</span></blockquote></div></div></small></span></pre></div>
+</div>
+</div></body>
+</html>

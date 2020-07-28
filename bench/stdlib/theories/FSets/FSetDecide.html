@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html><head><title>FSetDecide.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span>
+
+<span class="sd">(**************************************************************)</span>
+<span class="c">(* FSetDecide.v                                               *)</span>
+<span class="c">(*                                                            *)</span>
+<span class="c">(* Author: Aaron Bohannon                                     *)</span>
+<span class="sd">(**************************************************************)</span></span></span></pre><div class="doc">
+This file implements a decision procedure for a certain
+    class of propositions involving finite sets.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Decidable Setoid DecidableTypeEx FSetFacts.</span></span></span></pre><div class="doc">
+First, a version for Weak Sets in functorial presentation 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">WDecide_fun</span> (E : DecidableType)(<span class="kn">Import</span> M : WSfun E).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">F</span> := FSetFacts.WFacts_fun E M.</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">Overview</h1>
+
+    This functor defines the tactic <span class="inlinecode"><span class="id" title="var">fsetdec</span></span>, which will
+    solve any valid goal of the form
+<pre>
+    forall s1 ... sn,
+    forall x1 ... xm,
+    P1 -&gt; ... -&gt; Pk -&gt; P
+</pre>
+    where <span class="inlinecode"><span class="id" title="var">P</span></span>'s are defined by the grammar:
+<pre>
+
+P ::=
+| Q
+| Empty F
+| Subset F F'
+| Equal F F'
+
+Q ::=
+| E.eq X X'
+| In X F
+| Q /\ Q'
+| Q \/ Q'
+| Q -&gt; Q'
+| Q &lt;-&gt; Q'
+| ~ Q
+| True
+| False
+
+F ::=
+| S
+| empty
+| singleton X
+| add X F
+| remove X F
+| union F F'
+| inter F F'
+| diff F F'
+
+X ::= x1 | ... | xm
+S ::= s1 | ... | sn
+
+</pre>
+<div class="paragraph"> </div>
+
+The tactic will also work on some goals that vary slightly from
+the above form:
+<ul class="doclist">
+<li> The variables and hypotheses may be mixed in any order and may
+  have already been introduced into the context.  Moreover,
+  there may be additional, unrelated hypotheses mixed in (these
+  will be ignored).
+
+</li>
+<li> A conjunction of hypotheses will be handled as easily as
+  separate hypotheses, i.e., <span class="inlinecode"><span class="id" title="var">P1</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">P2</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">P</span></span> can be solved iff
+  <span class="inlinecode"><span class="id" title="var">P1</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">P2</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">P</span></span> can be solved.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">fsetdec</span></span> should solve any goal if the FSet-related hypotheses
+  are contradictory.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">fsetdec</span></span> will first perform any necessary zeta and beta
+  reductions and will invoke <span class="inlinecode"><span class="id" title="tactic">subst</span></span> to eliminate any Coq
+  equalities between finite sets or their elements.
+
+</li>
+<li> If <span class="inlinecode"><span class="id" title="var">E.eq</span></span> is convertible with Coq's equality, it will not
+  matter which one is used in the hypotheses or conclusion.
+
+</li>
+<li> The tactic can solve goals where the finite sets or set
+  elements are expressed by Coq terms that are more complicated
+  than variables.  However, non-local definitions are not
+  expanded, and Coq equalities between non-variable terms are
+  not used.  For example, this goal will be solved:
+<pre>
+    forall (f : t -&gt; t),
+    forall (g : elt -&gt; elt),
+    forall (s1 s2 : t),
+    forall (x1 x2 : elt),
+    Equal s1 (f s2) -&gt;
+    E.eq x1 (g (g x2)) -&gt;
+    In x1 s1 -&gt;
+    In (g (g x2)) (f s2)
+</pre>
+  This one will not be solved:
+<pre>
+    forall (f : t -&gt; t),
+    forall (g : elt -&gt; elt),
+    forall (s1 s2 : t),
+    forall (x1 x2 : elt),
+    Equal s1 (f s2) -&gt;
+    E.eq x1 (g x2) -&gt;
+    In x1 s1 -&gt;
+    g x2 = g (g x2) -&gt;
+    In (g (g x2)) (f s2)
+</pre>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Facts and Tactics for Propositional Logic</h1>
+
+      These lemmas and tactics are in a module so that they do
+      not affect the namespace if you import the enclosing
+      module <span class="inlinecode"><span class="id" title="var">Decide</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">FSetLogicalFacts</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Export</span> Decidable.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Export</span> Setoid.</span></span></span></pre><div class="doc">
+<a name="lab3"></a><h2 class="section">Lemmas and Tactics About Decidable Propositions</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span></pre><div class="doc">
+<a name="lab4"></a><h2 class="section">Propositional Equivalences Involving Negation</h2>
+
+        These are all written with the unfolded form of
+        negation, since I am not sure if setoid rewriting will
+        always perform conversion. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span></pre><div class="doc">
+<a name="lab5"></a><h2 class="section">Tactics for Negations</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;fold&quot;</span> <span class="s2">&quot;any&quot;</span> <span class="s2">&quot;not&quot;</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: <span class="kp">context</span> [?P -&gt; <span class="kt">False</span>] |- _ =&gt;
+          <span class="nb">fold</span> (~ P) <span class="kr">in</span> H
+        | |- <span class="kp">context</span> [?P -&gt; <span class="kt">False</span>] =&gt;
+          <span class="nb">fold</span> (~ P)
+        <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">push</span></span> <span class="inlinecode"><span class="id" title="var">not</span></span> <span class="inlinecode"><span class="id" title="keyword">using</span></span> <span class="inlinecode"><span class="id" title="var">db</span></span> will pushes all negations to the
+        leaves of propositions in the goal, using the lemmas in
+        <span class="inlinecode"><span class="id" title="var">db</span></span> to assist in checking the decidability of the
+        propositions involved.  If <span class="inlinecode"><span class="id" title="keyword">using</span></span> <span class="inlinecode"><span class="id" title="var">db</span></span> is omitted, then
+        <span class="inlinecode"><span class="id" title="var">core</span></span> will be used.  Additional versions are provided
+        to manipulate the hypotheses or the hypotheses and goal
+        together.
+
+<div class="paragraph"> </div>
+
+        XXX: This tactic and the similar subsequent ones should
+        have been defined using <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span>. However, dealing
+        with multiples rewrite sites and side-conditions is
+        done more cleverly with the following explicit
+        analysis of goals. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">or_not_l_iff</span> P Q tac :=
+      (<span class="nb">rewrite</span> (or_not_l_iff_1 P Q) <span class="bp">by</span> tac) ||
+      (<span class="nb">rewrite</span> (or_not_l_iff_2 P Q) <span class="bp">by</span> tac).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">or_not_r_iff</span> P Q tac :=
+      (<span class="nb">rewrite</span> (or_not_r_iff_1 P Q) <span class="bp">by</span> tac) ||
+      (<span class="nb">rewrite</span> (or_not_r_iff_2 P Q) <span class="bp">by</span> tac).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">or_not_l_iff_in</span> P Q H tac :=
+      (<span class="nb">rewrite</span> (or_not_l_iff_1 P Q) <span class="kr">in</span> H <span class="bp">by</span> tac) ||
+      (<span class="nb">rewrite</span> (or_not_l_iff_2 P Q) <span class="kr">in</span> H <span class="bp">by</span> tac).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">or_not_r_iff_in</span> P Q H tac :=
+      (<span class="nb">rewrite</span> (or_not_r_iff_1 P Q) <span class="kr">in</span> H <span class="bp">by</span> tac) ||
+      (<span class="nb">rewrite</span> (or_not_r_iff_2 P Q) <span class="kr">in</span> H <span class="bp">by</span> tac).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;push&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;using&quot;</span> <span class="kn">ident</span>(db) :=
+      <span class="kr">let</span> <span class="nv">dec</span> := solve_decidable <span class="nb">using</span> db <span class="kr">in</span>
+      <span class="nb">unfold</span> not, iff;
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | |- <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_true_iff
+        | |- <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_false_iff
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_not_iff P) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] =&gt;
+            <span class="nb">rewrite</span> (contrapositive P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] =&gt; or_not_l_iff P Q dec
+        | |- <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] =&gt; or_not_r_iff P Q dec
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] =&gt; <span class="nb">rewrite</span> (imp_not_l P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [?P \/ ?Q -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_or_iff P Q)
+        | |- <span class="kp">context</span> [?P /\ ?Q -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_and_iff P Q)
+        | |- <span class="kp">context</span> [(?P -&gt; ?Q) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_imp_iff P Q) <span class="bp">by</span> dec
+        <span class="kr">end</span>);
+      <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;push&quot;</span> <span class="s2">&quot;not&quot;</span> :=
+      push not <span class="nb">using</span> core.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span>
+      <span class="s2">&quot;push&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> <span class="s2">&quot;|-&quot;</span> <span class="s2">&quot;using&quot;</span> <span class="kn">ident</span>(db) :=
+      <span class="kr">let</span> <span class="nv">dec</span> := solve_decidable <span class="nb">using</span> db <span class="kr">in</span>
+      <span class="nb">unfold</span> not, iff <span class="kr">in</span> * |-;
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_true_iff <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_false_iff <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] |- _ =&gt;
+          <span class="nb">rewrite</span> (not_not_iff P) <span class="kr">in</span> H <span class="bp">by</span> dec
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+          <span class="nb">rewrite</span> (contrapositive P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] |- _ =&gt; or_not_l_iff_in P Q H dec
+        | H: <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt; or_not_r_iff_in P Q H dec
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] |- _ =&gt;
+          <span class="nb">rewrite</span> (imp_not_l P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
+        | H: <span class="kp">context</span> [?P \/ ?Q -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> (not_or_iff P Q) <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [?P /\ ?Q -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> (not_and_iff P Q) <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [(?P -&gt; ?Q) -&gt; <span class="kt">False</span>] |- _ =&gt;
+          <span class="nb">rewrite</span> (not_imp_iff P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
+        <span class="kr">end</span>);
+      <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;push&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> <span class="s2">&quot;|-&quot;</span>  :=
+      push not <span class="kr">in</span> * |- <span class="nb">using</span> core.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;push&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> <span class="s2">&quot;using&quot;</span> <span class="kn">ident</span>(db) :=
+      push not <span class="nb">using</span> db; push not <span class="kr">in</span> * |- <span class="nb">using</span> db.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;push&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> :=
+      push not <span class="kr">in</span> * <span class="nb">using</span> core.</span></span></span></pre><div class="doc">
+A simple test case to see how this works.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_push</span> : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span> : <span class="kt">Prop</span>,
+      decidable P -&gt;
+      decidable Q -&gt;
+      (~ <span class="kt">True</span>) -&gt;
+      (~ <span class="kt">False</span>) -&gt;
+      (~ ~ P) -&gt;
+      (~ (P /\ Q) -&gt; ~ R) -&gt;
+      ((P /\ Q) \/ ~ R) -&gt;
+      (~ (P /\ Q) \/ R) -&gt;
+      (R \/ ~ (P /\ Q)) -&gt;
+      (~ R \/ (P /\ Q)) -&gt;
+      (~ P -&gt; R) -&gt;
+      (~ ((R -&gt; P) \/ (Q -&gt; R))) -&gt;
+      (~ (P /\ R)) -&gt;
+      (~ (P -&gt; R)) -&gt;
+      <span class="kt">True</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span> : <span class="kt">Prop</span>,
+decidable P -&gt;
+decidable Q -&gt;
+~ <span class="kt">True</span> -&gt;
+~ <span class="kt">False</span> -&gt;
+~ ~ P -&gt;
+(~ (P /\ Q) -&gt; ~ R) -&gt;
+P /\ Q \/ ~ R -&gt;
+~ (P /\ Q) \/ R -&gt;
+R \/ ~ (P /\ Q) -&gt;
+~ R \/ P /\ Q -&gt;
+(~ P -&gt; R) -&gt;
+~ ((R -&gt; P) \/ (Q -&gt; R)) -&gt;
+~ (P /\ R) -&gt; ~ (P -&gt; R) -&gt; <span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span> : <span class="kt">Prop</span>,
+decidable P -&gt;
+decidable Q -&gt;
+~ <span class="kt">True</span> -&gt;
+~ <span class="kt">False</span> -&gt;
+~ ~ P -&gt;
+(~ (P /\ Q) -&gt; ~ R) -&gt;
+P /\ Q \/ ~ R -&gt;
+~ (P /\ Q) \/ R -&gt;
+R \/ ~ (P /\ Q) -&gt;
+~ R \/ P /\ Q -&gt;
+(~ P -&gt; R) -&gt;
+~ ((R -&gt; P) \/ (Q -&gt; R)) -&gt;
+~ (P /\ R) -&gt; ~ (P -&gt; R) -&gt; <span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">      </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk2"><span class="highlight"><span class="nb">intros</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H1</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ <span class="kt">True</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ <span class="kt">False</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H3</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ ~ P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H4</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P /\ Q) -&gt; ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H5</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P /\ Q \/ ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H6</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P /\ Q) \/ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H7</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">R \/ ~ (P /\ Q)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H8</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ R \/ P /\ Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H9</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ P -&gt; R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H10</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ ((R -&gt; P) \/ (Q -&gt; R))</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H11</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P /\ R)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H12</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P -&gt; R)</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk3"><span class="highlight">push not <span class="kr">in</span> *.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H1</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">False</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">True</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H3</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H4, H5</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">R -&gt; P /\ Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H6, H7</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P /\ Q -&gt; R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H8</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">R -&gt; P /\ Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H9</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P \/ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H10</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (R -&gt; P) /\ Q /\ ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H11</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P -&gt; ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H12</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P /\ ~ R</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">       <span class="c">(* note that ~(R-&gt;P) remains (since R isn&#39;t decidable) *)</span>
+</span></span><span class="coq-wsp">      </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">tauto</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">pull</span></span> <span class="inlinecode"><span class="id" title="var">not</span></span> <span class="inlinecode"><span class="id" title="keyword">using</span></span> <span class="inlinecode"><span class="id" title="var">db</span></span> will pull as many negations as
+        possible toward the top of the propositions in the goal,
+        using the lemmas in <span class="inlinecode"><span class="id" title="var">db</span></span> to assist in checking the
+        decidability of the propositions involved.  If <span class="inlinecode"><span class="id" title="keyword">using</span></span>
+<span class="inlinecode"><span class="id" title="var">db</span></span> is omitted, then <span class="inlinecode"><span class="id" title="var">core</span></span> will be used.  Additional
+        versions are provided to manipulate the hypotheses or
+        the hypotheses and goal together. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;pull&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;using&quot;</span> <span class="kn">ident</span>(db) :=
+      <span class="kr">let</span> <span class="nv">dec</span> := solve_decidable <span class="nb">using</span> db <span class="kr">in</span>
+      <span class="nb">unfold</span> not, iff;
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | |- <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_true_iff
+        | |- <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_false_iff
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_not_iff P) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] =&gt;
+          <span class="nb">rewrite</span> (contrapositive P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] =&gt; or_not_l_iff P Q dec
+        | |- <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] =&gt; or_not_r_iff P Q dec
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] =&gt; <span class="nb">rewrite</span> (imp_not_l P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) /\ (?Q -&gt; <span class="kt">False</span>)] =&gt;
+          <span class="nb">rewrite</span> &lt;- (not_or_iff P Q)
+        | |- <span class="kp">context</span> [?P -&gt; ?Q -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> &lt;- (not_and_iff P Q)
+        | |- <span class="kp">context</span> [?P /\ (?Q -&gt; <span class="kt">False</span>)] =&gt; <span class="nb">rewrite</span> &lt;- (not_imp_iff P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(?Q -&gt; <span class="kt">False</span>) /\ ?P] =&gt;
+          <span class="nb">rewrite</span> &lt;- (not_imp_rev_iff P Q) <span class="bp">by</span> dec
+        <span class="kr">end</span>);
+      <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;pull&quot;</span> <span class="s2">&quot;not&quot;</span> :=
+      pull not <span class="nb">using</span> core.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span>
+      <span class="s2">&quot;pull&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> <span class="s2">&quot;|-&quot;</span> <span class="s2">&quot;using&quot;</span> <span class="kn">ident</span>(db) :=
+      <span class="kr">let</span> <span class="nv">dec</span> := solve_decidable <span class="nb">using</span> db <span class="kr">in</span>
+      <span class="nb">unfold</span> not, iff <span class="kr">in</span> * |-;
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_true_iff <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_false_iff <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] |- _ =&gt;
+          <span class="nb">rewrite</span> (not_not_iff P) <span class="kr">in</span> H <span class="bp">by</span> dec
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+          <span class="nb">rewrite</span> (contrapositive P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] |- _ =&gt; or_not_l_iff_in P Q H dec
+        | H: <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt; or_not_r_iff_in P Q H dec
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] |- _ =&gt;
+          <span class="nb">rewrite</span> (imp_not_l P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
+        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) /\ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+          <span class="nb">rewrite</span> &lt;- (not_or_iff P Q) <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [?P -&gt; ?Q -&gt; <span class="kt">False</span>] |- _ =&gt;
+          <span class="nb">rewrite</span> &lt;- (not_and_iff P Q) <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [?P /\ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+          <span class="nb">rewrite</span> &lt;- (not_imp_iff P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
+        | H: <span class="kp">context</span> [(?Q -&gt; <span class="kt">False</span>) /\ ?P] |- _ =&gt;
+          <span class="nb">rewrite</span> &lt;- (not_imp_rev_iff P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
+        <span class="kr">end</span>);
+      <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;pull&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> <span class="s2">&quot;|-&quot;</span>  :=
+      pull not <span class="kr">in</span> * |- <span class="nb">using</span> core.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;pull&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> <span class="s2">&quot;using&quot;</span> <span class="kn">ident</span>(db) :=
+      pull not <span class="nb">using</span> db; pull not <span class="kr">in</span> * |- <span class="nb">using</span> db.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;pull&quot;</span> <span class="s2">&quot;not&quot;</span> <span class="s2">&quot;in&quot;</span> <span class="s2">&quot;*&quot;</span> :=
+      pull not <span class="kr">in</span> * <span class="nb">using</span> core.</span></span></span></pre><div class="doc">
+A simple test case to see how this works.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk4"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_pull</span> : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span> : <span class="kt">Prop</span>,
+      decidable P -&gt;
+      decidable Q -&gt;
+      (~ <span class="kt">True</span>) -&gt;
+      (~ <span class="kt">False</span>) -&gt;
+      (~ ~ P) -&gt;
+      (~ (P /\ Q) -&gt; ~ R) -&gt;
+      ((P /\ Q) \/ ~ R) -&gt;
+      (~ (P /\ Q) \/ R) -&gt;
+      (R \/ ~ (P /\ Q)) -&gt;
+      (~ R \/ (P /\ Q)) -&gt;
+      (~ P -&gt; R) -&gt;
+      (~ (R -&gt; P) /\ ~ (Q -&gt; R)) -&gt;
+      (~ P \/ ~ R) -&gt;
+      (P /\ ~ R) -&gt;
+      (~ R /\ P) -&gt;
+      <span class="kt">True</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span> : <span class="kt">Prop</span>,
+decidable P -&gt;
+decidable Q -&gt;
+~ <span class="kt">True</span> -&gt;
+~ <span class="kt">False</span> -&gt;
+~ ~ P -&gt;
+(~ (P /\ Q) -&gt; ~ R) -&gt;
+P /\ Q \/ ~ R -&gt;
+~ (P /\ Q) \/ R -&gt;
+R \/ ~ (P /\ Q) -&gt;
+~ R \/ P /\ Q -&gt;
+(~ P -&gt; R) -&gt;
+~ (R -&gt; P) /\ ~ (Q -&gt; R) -&gt;
+~ P \/ ~ R -&gt; P /\ ~ R -&gt; ~ R /\ P -&gt; <span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk5"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span> <span class="nv">R</span> : <span class="kt">Prop</span>,
+decidable P -&gt;
+decidable Q -&gt;
+~ <span class="kt">True</span> -&gt;
+~ <span class="kt">False</span> -&gt;
+~ ~ P -&gt;
+(~ (P /\ Q) -&gt; ~ R) -&gt;
+P /\ Q \/ ~ R -&gt;
+~ (P /\ Q) \/ R -&gt;
+R \/ ~ (P /\ Q) -&gt;
+~ R \/ P /\ Q -&gt;
+(~ P -&gt; R) -&gt;
+~ (R -&gt; P) /\ ~ (Q -&gt; R) -&gt;
+~ P \/ ~ R -&gt; P /\ ~ R -&gt; ~ R /\ P -&gt; <span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">      </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk6"><span class="highlight"><span class="nb">intros</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H1</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ <span class="kt">True</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ <span class="kt">False</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H3</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ ~ P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H4</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P /\ Q) -&gt; ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H5</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P /\ Q \/ ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H6</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P /\ Q) \/ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H7</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">R \/ ~ (P /\ Q)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H8</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ R \/ P /\ Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H9</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ P -&gt; R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H10</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (R -&gt; P) /\ ~ (Q -&gt; R)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H11</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ P \/ ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H12</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P /\ ~ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H13</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ R /\ P</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk7"><span class="highlight">pull not <span class="kr">in</span> *.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">P, Q, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">decidable Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H1</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">False</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">True</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H3</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H4, H5</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">R -&gt; P /\ Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H6, H7</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P /\ Q -&gt; R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H8</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">R -&gt; P /\ Q</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H9</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P \/ R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H10</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ ((R -&gt; P) \/ (Q -&gt; R))</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H11</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P /\ R)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H12, H13</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">~ (P -&gt; R)</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">tauto</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">FSetLogicalFacts</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> FSetLogicalFacts.</span></span></span></pre><div class="doc">
+<a name="lab6"></a><h1 class="section">Auxiliary Tactics</h1>
+
+      Again, these lemmas and tactics are in a module so that
+      they do not affect the namespace if you import the
+      enclosing module <span class="inlinecode"><span class="id" title="var">Decide</span></span>.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">FSetDecideAuxiliary</span>.</span></span></span></pre><div class="doc">
+<a name="lab7"></a><h2 class="section">Generic Tactics</h2>
+
+        We begin by defining a few generic, useful tactics. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span></pre><div class="doc">
+remove logical hypothesis inter-dependencies (fix 2136). 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">no_logical_interdep</span> :=
+      <span class="kr">match goal with</span>
+        | H : ?P |- _ =&gt;
+          <span class="kr">match</span> <span class="kp">type of</span> P <span class="kr">with</span>
+            | <span class="kt">Prop</span> =&gt;
+              <span class="kr">match goal with</span> H&#39; : <span class="kp">context</span> [ H ] |- _ =&gt; <span class="nb">clear dependent</span> H&#39; <span class="kr">end</span>
+            | _ =&gt; <span class="kp">fail</span>
+          <span class="kr">end</span>; no_logical_interdep
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">abstract_term</span> t :=
+      <span class="kr">tryif</span> (<span class="nb">is_var</span> t) <span class="kr">then</span> <span class="kp">fail</span> <span class="s2">&quot;no need to abstract a variable&quot;</span>
+      <span class="kr">else</span> (<span class="kr">let</span> <span class="nv">x</span> := <span class="kp">fresh</span> <span class="s2">&quot;x&quot;</span> <span class="kr">in</span> <span class="nb">set</span> (x := t) <span class="kr">in</span> *; <span class="kp">try</span> <span class="nb">clearbody</span> x).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">abstract_elements</span> :=
+      <span class="kp">repeat</span>
+        (<span class="kr">match goal with</span>
+           | |- <span class="kp">context</span> [ singleton ?t ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ singleton ?t ] |- _ =&gt; abstract_term t
+           | |- <span class="kp">context</span> [ add ?t _ ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ add ?t _ ] |- _ =&gt; abstract_term t
+           | |- <span class="kp">context</span> [ remove ?t _ ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ remove ?t _ ] |- _ =&gt; abstract_term t
+           | |- <span class="kp">context</span> [ In ?t _ ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ In ?t _ ] |- _ =&gt; abstract_term t
+         <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">prop</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">holds</span></span> <span class="inlinecode"><span class="id" title="tactic">by</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> succeeds (but does not modify the
+        goal or context) if the proposition <span class="inlinecode"><span class="id" title="var">P</span></span> can be proved by
+        <span class="inlinecode"><span class="id" title="var">t</span></span> in the current context.  Otherwise, the tactic
+        fails. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;prop&quot;</span> <span class="kp">constr</span>(P) <span class="s2">&quot;holds&quot;</span> <span class="s2">&quot;by&quot;</span> tactic(t) :=
+      <span class="kr">let</span> <span class="nv">H</span> := <span class="kp">fresh</span> <span class="kr">in</span>
+      <span class="nb">assert</span> P <span class="kr">as</span> H <span class="bp">by</span> t;
+      <span class="nb">clear</span> H.</span></span></span></pre><div class="doc">
+This tactic acts just like <span class="inlinecode"><span class="id" title="tactic">assert</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="tactic">by</span></span> <span class="inlinecode">...</span> but will
+        fail if the context already contains the proposition. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;assert&quot;</span> <span class="s2">&quot;new&quot;</span> <span class="kp">constr</span>(e) <span class="s2">&quot;by&quot;</span> tactic(t) :=
+      <span class="kr">match goal with</span>
+      | H: e |- _ =&gt; <span class="kp">fail</span> <span class="mi">1</span>
+      | _ =&gt; <span class="nb">assert</span> e <span class="bp">by</span> t
+      <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">subst</span>++</span> is similar to <span class="inlinecode"><span class="id" title="tactic">subst</span></span> except that
+<ul class="doclist">
+<li> it never fails (as <span class="inlinecode"><span class="id" title="tactic">subst</span></span> does on recursive
+          equations),
+
+</li>
+<li> it substitutes locally defined variable for their
+          definitions,
+
+</li>
+<li> it performs beta reductions everywhere, which may
+          arise after substituting a locally defined function
+          for its definition.
+
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;subst&quot;</span> <span class="s2">&quot;++&quot;</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | x : _ |- _ =&gt; <span class="nb">subst</span> x
+        <span class="kr">end</span>);
+      <span class="nb">cbv</span> zeta beta <span class="kr">in</span> *.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">decompose</span></span> <span class="inlinecode"><span class="id" title="var">records</span></span> calls <span class="inlinecode"><span class="id" title="var">decompose</span></span> <span class="inlinecode"><span class="id" title="var">record</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> on every
+        relevant hypothesis <span class="inlinecode"><span class="id" title="var">H</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;decompose&quot;</span> <span class="s2">&quot;records&quot;</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: _ |- _ =&gt; <span class="kp">progress</span> (<span class="nb">decompose record</span> H); <span class="nb">clear</span> H
+        <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+<a name="lab8"></a><h2 class="section">Discarding Irrelevant Hypotheses</h2>
+
+        We will want to clear the context of any
+        non-FSet-related hypotheses in order to increase the
+        speed of the tactic.  To do this, we will need to be
+        able to decide which are relevant.  We do this by making
+        a simple inductive definition classifying the
+        propositions of interest. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">FSet_elt_Prop</span> : <span class="kt">Prop</span> -&gt; <span class="kt">Prop</span> :=
+    | eq_Prop : <span class="kr">forall</span> (<span class="nv">S</span> : <span class="kt">Type</span>) (<span class="nv">x</span> <span class="nv">y</span> : S),
+        FSet_elt_Prop (x = y)
+    | eq_elt_prop : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>,
+        FSet_elt_Prop (E.eq x y)
+    | In_elt_prop : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">s</span>,
+        FSet_elt_Prop (In x s)
+    | True_elt_prop :
+        FSet_elt_Prop <span class="kt">True</span>
+    | False_elt_prop :
+        FSet_elt_Prop <span class="kt">False</span>
+    | conj_elt_prop : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span>,
+        FSet_elt_Prop P -&gt;
+        FSet_elt_Prop Q -&gt;
+        FSet_elt_Prop (P /\ Q)
+    | disj_elt_prop : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span>,
+        FSet_elt_Prop P -&gt;
+        FSet_elt_Prop Q -&gt;
+        FSet_elt_Prop (P \/ Q)
+    | impl_elt_prop : <span class="kr">forall</span> <span class="nv">P</span> <span class="nv">Q</span>,
+        FSet_elt_Prop P -&gt;
+        FSet_elt_Prop Q -&gt;
+        FSet_elt_Prop (P -&gt; Q)
+    | not_elt_prop : <span class="kr">forall</span> <span class="nv">P</span>,
+        FSet_elt_Prop P -&gt;
+        FSet_elt_Prop (~ P).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">FSet_Prop</span> : <span class="kt">Prop</span> -&gt; <span class="kt">Prop</span> :=
+    | elt_FSet_Prop : <span class="kr">forall</span> <span class="nv">P</span>,
+        FSet_elt_Prop P -&gt;
+        FSet_Prop P
+    | Empty_FSet_Prop : <span class="kr">forall</span> <span class="nv">s</span>,
+        FSet_Prop (Empty s)
+    | Subset_FSet_Prop : <span class="kr">forall</span> <span class="nv">s1</span> <span class="nv">s2</span>,
+        FSet_Prop (Subset s1 s2)
+    | Equal_FSet_Prop : <span class="kr">forall</span> <span class="nv">s1</span> <span class="nv">s2</span>,
+        FSet_Prop (Equal s1 s2).</span></span></span></pre><div class="doc">
+Here is the tactic that will throw away hypotheses that
+        are not useful (for the intended scope of the <span class="inlinecode"><span class="id" title="var">fsetdec</span></span>
+        tactic). 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Constructors</span> FSet_elt_Prop FSet_Prop : FSet_Prop.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">discard_nonFSet</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H : <span class="kp">context</span> [ @Logic.eq ?T ?x ?y ] |- _ =&gt;
+          <span class="kr">tryif</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> H) <span class="kr">then</span> <span class="kp">fail</span>
+          <span class="kr">else</span> <span class="kr">tryif</span> (<span class="nb">change</span> T <span class="kr">with</span> t <span class="kr">in</span> H) <span class="kr">then</span> <span class="kp">fail</span>
+          <span class="kr">else</span> <span class="nb">clear</span> H
+        | H : ?P |- _ =&gt;
+          <span class="kr">tryif</span> prop (FSet_Prop P) holds <span class="bp">by</span>
+            (<span class="nb">auto</span> <span class="mi">100</span> <span class="kr">with</span> FSet_Prop)
+          <span class="kr">then</span> <span class="kp">fail</span>
+          <span class="kr">else</span> <span class="nb">clear</span> H
+        <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+<a name="lab9"></a><h2 class="section">Turning Set Operators into Propositional Connectives</h2>
+
+        The lemmas from <span class="inlinecode"><span class="id" title="var">FSetFacts</span></span> will be used to break down
+        set operations into propositional formulas built over
+        the predicates <span class="inlinecode"><span class="id" title="var">In</span></span> and <span class="inlinecode"><span class="id" title="var">E.eq</span></span> applied only to
+        variables.  We are going to use them with <span class="inlinecode"><span class="id" title="tactic">autorewrite</span></span>.
+        
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Rewrite</span>
+      F.empty_iff F.singleton_iff F.add_iff F.remove_iff
+      F.union_iff F.inter_iff F.diff_iff
+    : set_simpl.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk8"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">eq_refl_iff</span> (<span class="nv">x</span> : E.t) : E.eq x x &lt;-&gt; <span class="kt">True</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">x</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">E.t</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">E.eq x x &lt;-&gt; <span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk9"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">x</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">E.t</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">E.eq x x &lt;-&gt; <span class="kt">True</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">     </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">split</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Rewrite</span> eq_refl_iff : set_eq_simpl.</span></span></span></pre><div class="doc">
+<a name="lab10"></a><h2 class="section">Decidability of FSet Propositions</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">In</span></span> is decidable. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chka"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">dec_In</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">s</span>,
+      decidable (In x s).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">s</span> : t), decidable (In x s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chkb" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chkb"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">s</span> : t), decidable (In x s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">      </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">red</span>; <span class="nb">intros</span>; <span class="nb">generalize</span> (F.mem_iff s x); <span class="nb">case</span> (mem x s); <span class="nb">intuition</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">E.eq</span></span> is decidable. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chkc" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chkc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">dec_eq</span> : <span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : E.t),
+      decidable (E.eq x y).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> : E.t, decidable (E.eq x y)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chkd" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chkd"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> : E.t, decidable (E.eq x y)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">      </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">red</span>; <span class="nb">intros</span> x y; <span class="nb">destruct</span> (E.eq_dec x y); <span class="nb">auto</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+The hint database <span class="inlinecode"><span class="id" title="var">FSet_decidability</span></span> will be given to
+        the <span class="inlinecode"><span class="id" title="var">push_neg</span></span> tactic from the module <span class="inlinecode"><span class="id" title="var">Negation</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> dec_In dec_eq : FSet_decidability.</span></span></span></pre><div class="doc">
+<a name="lab11"></a><h2 class="section">Normalizing Propositions About Equality</h2>
+
+        We have to deal with the fact that <span class="inlinecode"><span class="id" title="var">E.eq</span></span> may be
+        convertible with Coq's equality.  Thus, we will find the
+        following tactics useful to replace one form with the
+        other everywhere. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span></pre><div class="doc">
+The next tactic, <span class="inlinecode"><span class="id" title="var">Logic_eq_to_E_eq</span></span>, mentions the term
+        <span class="inlinecode"><span class="id" title="var">E.t</span></span>; thus, we must ensure that <span class="inlinecode"><span class="id" title="var">E.t</span></span> is used in favor
+        of any other convertible but syntactically distinct
+        term. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">change_to_E_t</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H : ?T |- _ =&gt;
+          <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> H);
+          <span class="kp">repeat</span> (
+            <span class="kr">match goal with</span>
+            | J : _ |- _ =&gt; <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> J)
+            | |- _ =&gt; <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t)
+            <span class="kr">end</span> )
+        | H : <span class="kr">forall</span> <span class="nv">x</span> : ?T, _ |- _ =&gt;
+          <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> H);
+          <span class="kp">repeat</span> (
+            <span class="kr">match goal with</span>
+            | J : _ |- _ =&gt; <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> J)
+            | |- _ =&gt; <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t)
+            <span class="kr">end</span> )
+       <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+These two tactics take us from Coq's built-in equality
+        to <span class="inlinecode"><span class="id" title="var">E.eq</span></span> (and vice versa) when possible. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">Logic_eq_to_E_eq</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: _ |- _ =&gt;
+          <span class="kp">progress</span> (<span class="nb">change</span> (@Logic.eq E.t) <span class="kr">with</span> E.eq <span class="kr">in</span> H)
+        | |- _ =&gt;
+          <span class="kp">progress</span> (<span class="nb">change</span> (@Logic.eq E.t) <span class="kr">with</span> E.eq)
+        <span class="kr">end</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">E_eq_to_Logic_eq</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: _ |- _ =&gt;
+          <span class="kp">progress</span> (<span class="nb">change</span> E.eq <span class="kr">with</span> (@Logic.eq E.t) <span class="kr">in</span> H)
+        | |- _ =&gt;
+          <span class="kp">progress</span> (<span class="nb">change</span> E.eq <span class="kr">with</span> (@Logic.eq E.t))
+        <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+This tactic works like the built-in tactic <span class="inlinecode"><span class="id" title="tactic">subst</span></span>, but
+        at the level of set element equality (which may not be
+        the convertible with Coq's equality). 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">substFSet</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: E.eq ?x ?x |- _ =&gt; <span class="nb">clear</span> H
+        | H: E.eq ?x ?y |- _ =&gt; <span class="nb">rewrite</span> H <span class="kr">in</span> *; <span class="nb">clear</span> H
+        <span class="kr">end</span>);
+      <span class="nb">autorewrite with</span> set_eq_simpl <span class="kr">in</span> *.</span></span></span></pre><div class="doc">
+<a name="lab12"></a><h2 class="section">Considering Decidability of Base Propositions</h2>
+
+        This tactic adds assertions about the decidability of
+        <span class="inlinecode"><span class="id" title="var">E.eq</span></span> and <span class="inlinecode"><span class="id" title="var">In</span></span> to the context.  This is necessary for
+        the completeness of the <span class="inlinecode"><span class="id" title="var">fsetdec</span></span> tactic.  However, in
+        order to minimize the cost of proof search, we should be
+        careful to not add more than we need.  Once negations
+        have been pushed to the leaves of the propositions, we
+        only need to worry about decidability for those base
+        propositions that appear in a negated form. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">assert_decidability</span> :=
+      <span class="sd">(** We actually don&#39;t want these rules to fire if the</span>
+<span class="sd">          syntactic context in the patterns below is trivially</span>
+<span class="sd">          empty, but we&#39;ll just do some clean-up at the</span>
+<span class="sd">          afterward.  *)</span>
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H: <span class="kp">context</span> [~ E.eq ?x ?y] |- _ =&gt;
+          <span class="nb">assert</span> new (E.eq x y \/ ~ E.eq x y) <span class="bp">by</span> (<span class="nb">apply</span> dec_eq)
+        | H: <span class="kp">context</span> [~ In ?x ?s] |- _ =&gt;
+          <span class="nb">assert</span> new (In x s \/ ~ In x s) <span class="bp">by</span> (<span class="nb">apply</span> dec_In)
+        | |- <span class="kp">context</span> [~ E.eq ?x ?y] =&gt;
+          <span class="nb">assert</span> new (E.eq x y \/ ~ E.eq x y) <span class="bp">by</span> (<span class="nb">apply</span> dec_eq)
+        | |- <span class="kp">context</span> [~ In ?x ?s] =&gt;
+          <span class="nb">assert</span> new (In x s \/ ~ In x s) <span class="bp">by</span> (<span class="nb">apply</span> dec_In)
+        <span class="kr">end</span>);
+      <span class="sd">(** Now we eliminate the useless facts we added (because</span>
+<span class="sd">          they would likely be very harmful to performance). *)</span>
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | _: ~ ?P, H : ?P \/ ~ ?P |- _ =&gt; <span class="nb">clear</span> H
+        <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+<a name="lab13"></a><h2 class="section">Handling <span class="inlinecode"><span class="id" title="var">Empty</span></span>, <span class="inlinecode"><span class="id" title="var">Subset</span></span>, and <span class="inlinecode"><span class="id" title="var">Equal</span></span></h2>
+
+        This tactic instantiates universally quantified
+        hypotheses (which arise from the unfolding of <span class="inlinecode"><span class="id" title="var">Empty</span></span>,
+        <span class="inlinecode"><span class="id" title="var">Subset</span></span>, and <span class="inlinecode"><span class="id" title="var">Equal</span></span>) for each of the set element
+        expressions that is involved in some membership or
+        equality fact.  Then it throws away those hypotheses,
+        which should no longer be needed. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">inst_FSet_hypotheses</span> :=
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _,
+          _ : <span class="kp">context</span> [ In ?x _ ] |- _ =&gt;
+          <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
+          <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
+        | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _
+          |- <span class="kp">context</span> [ In ?x _ ] =&gt;
+          <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
+          <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
+        | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _,
+          _ : <span class="kp">context</span> [ E.eq ?x _ ] |- _ =&gt;
+          <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
+          <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
+        | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _
+          |- <span class="kp">context</span> [ E.eq ?x _ ] =&gt;
+          <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
+          <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
+        | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _,
+          _ : <span class="kp">context</span> [ E.eq _ ?x ] |- _ =&gt;
+          <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
+          <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
+        | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _
+          |- <span class="kp">context</span> [ E.eq _ ?x ] =&gt;
+          <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
+          <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
+        <span class="kr">end</span>);
+      <span class="kp">repeat</span> (
+        <span class="kr">match goal with</span>
+        | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _ |- _ =&gt;
+          <span class="nb">clear</span> H
+        <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+<a name="lab14"></a><h2 class="section">The Core <span class="inlinecode"><span class="id" title="var">fsetdec</span></span> Auxiliary Tactics</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span></pre><div class="doc">
+Here is the crux of the proof search.  Recursion through
+        <span class="inlinecode"><span class="id" title="tactic">intuition</span></span>!  (This will terminate if I correctly
+        understand the behavior of <span class="inlinecode"><span class="id" title="tactic">intuition</span></span>.) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">fsetdec_rec</span> := <span class="kp">progress</span> substFSet; <span class="nb">intuition</span> fsetdec_rec.</span></span></span></pre><div class="doc">
+If we add <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> <span class="inlinecode"><span class="id" title="var">Empty</span>,</span> <span class="inlinecode"><span class="id" title="var">Subset</span>,</span> <span class="inlinecode"><span class="id" title="var">Equal</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode">*;</span> <span class="inlinecode"><span class="id" title="tactic">intros</span>;</span> to
+        the beginning of this tactic, it will satisfy the same
+        specification as the <span class="inlinecode"><span class="id" title="var">fsetdec</span></span> tactic; however, it will
+        be much slower than necessary without the pre-processing
+        done by the wrapper tactic <span class="inlinecode"><span class="id" title="var">fsetdec</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">fsetdec_body</span> :=
+      <span class="nb">autorewrite with</span> set_eq_simpl <span class="kr">in</span> *;
+      inst_FSet_hypotheses;
+      <span class="nb">autorewrite with</span> set_simpl set_eq_simpl <span class="kr">in</span> *;
+      push not <span class="kr">in</span> * <span class="nb">using</span> FSet_decidability;
+      substFSet;
+      assert_decidability;
+      <span class="nb">auto</span>;
+      (<span class="nb">intuition</span> fsetdec_rec) ||
+      <span class="kp">fail</span> <span class="mi">1</span>
+        <span class="s2">&quot;because the goal is beyond the scope of this tactic&quot;</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">FSetDecideAuxiliary</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> FSetDecideAuxiliary.</span></span></span></pre><div class="doc">
+<a name="lab15"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="var">fsetdec</span></span> Tactic</h1>
+
+      Here is the top-level tactic (the only one intended for
+      clients of this library).  It's specification is given at
+      the top of the file. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">fsetdec</span> :=
+    <span class="sd">(** We first unfold any occurrences of [iff]. *)</span>
+    <span class="nb">unfold</span> iff <span class="kr">in</span> *;
+    <span class="sd">(** We fold occurrences of [not] because it is better for</span>
+<span class="sd">        [intros] to leave us with a goal of [~ P] than a goal of</span>
+<span class="sd">        [False]. *)</span>
+    <span class="nb">fold</span> any not; <span class="nb">intros</span>;
+    <span class="sd">(** We don&#39;t care about the value of elements : complex ones are</span>
+<span class="sd">        abstracted as new variables (avoiding potential dependencies,</span>
+<span class="sd">        see bug #2464) *)</span>
+    abstract_elements;
+    <span class="sd">(** We remove dependencies to logical hypothesis. This way,</span>
+<span class="sd">        later &quot;clear&quot; will work nicely (see bug #2136) *)</span>
+    no_logical_interdep;
+    <span class="sd">(** Now we decompose conjunctions, which will allow the</span>
+<span class="sd">        [discard_nonFSet] and [assert_decidability] tactics to</span>
+<span class="sd">        do a much better job. *)</span>
+    <span class="nb">decompose</span> records;
+    discard_nonFSet;
+    <span class="sd">(** We unfold these defined propositions on finite sets.  If</span>
+<span class="sd">        our goal was one of them, then have one more item to</span>
+<span class="sd">        introduce now. *)</span>
+    <span class="nb">unfold</span> Empty, Subset, Equal <span class="kr">in</span> *; <span class="nb">intros</span>;
+    <span class="sd">(** We now want to get rid of all uses of [=] in favor of</span>
+<span class="sd">        [E.eq].  However, the best way to eliminate a [=] is in</span>
+<span class="sd">        the context is with [subst], so we will try that first.</span>
+<span class="sd">        In fact, we may as well convert uses of [E.eq] into [=]</span>
+<span class="sd">        when possible before we do [subst] so that we can even</span>
+<span class="sd">        more mileage out of it.  Then we will convert all</span>
+<span class="sd">        remaining uses of [=] back to [E.eq] when possible.  We</span>
+<span class="sd">        use [change_to_E_t] to ensure that we have a canonical</span>
+<span class="sd">        name for set elements, so that [Logic_eq_to_E_eq] will</span>
+<span class="sd">        work properly.  *)</span>
+    change_to_E_t; E_eq_to_Logic_eq; <span class="nb">subst</span>++; Logic_eq_to_E_eq;
+    <span class="sd">(** The next optimization is to swap a negated goal with a</span>
+<span class="sd">        negated hypothesis when possible.  Any swap will improve</span>
+<span class="sd">        performance by eliminating the total number of</span>
+<span class="sd">        negations, but we will get the maximum benefit if we</span>
+<span class="sd">        swap the goal with a hypotheses mentioning the same set</span>
+<span class="sd">        element, so we try that first.  If we reach the fourth</span>
+<span class="sd">        branch below, we attempt any swap.  However, to maintain</span>
+<span class="sd">        completeness of this tactic, we can only perform such a</span>
+<span class="sd">        swap with a decidable proposition; hence, we first test</span>
+<span class="sd">        whether the hypothesis is an [FSet_elt_Prop], noting</span>
+<span class="sd">        that any [FSet_elt_Prop] is decidable. *)</span>
+    pull not <span class="nb">using</span> FSet_decidability;
+    <span class="nb">unfold</span> not <span class="kr">in</span> *;
+    <span class="kr">match goal with</span>
+    | H: (In ?x ?r) -&gt; <span class="kt">False</span> |- (In ?x ?s) -&gt; <span class="kt">False</span> =&gt;
+      <span class="bp">contradict</span> H; fsetdec_body
+    | H: (In ?x ?r) -&gt; <span class="kt">False</span> |- (E.eq ?x ?y) -&gt; <span class="kt">False</span> =&gt;
+      <span class="bp">contradict</span> H; fsetdec_body
+    | H: (In ?x ?r) -&gt; <span class="kt">False</span> |- (E.eq ?y ?x) -&gt; <span class="kt">False</span> =&gt;
+      <span class="bp">contradict</span> H; fsetdec_body
+    | H: ?P -&gt; <span class="kt">False</span> |- ?Q -&gt; <span class="kt">False</span> =&gt;
+      <span class="kr">tryif</span> prop (FSet_elt_Prop P) holds <span class="bp">by</span>
+        (<span class="nb">auto</span> <span class="mi">100</span> <span class="kr">with</span> FSet_Prop)
+      <span class="kr">then</span> (<span class="bp">contradict</span> H; fsetdec_body)
+      <span class="kr">else</span> fsetdec_body
+    | |- _ =&gt;
+      fsetdec_body
+    <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab16"></a><h1 class="section">Examples</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">FSetDecideTestCases</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chke" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chke"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_eq_trans_1</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> <span class="nv">s</span>,
+      E.eq x y -&gt;
+      ~ ~ E.eq z y -&gt;
+      In x s -&gt;
+      In z s.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : E.t) (<span class="nv">s</span> : t),
+E.eq x y -&gt; ~ ~ E.eq z y -&gt; In x s -&gt; In z s</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chkf" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chkf"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : E.t) (<span class="nv">s</span> : t),
+E.eq x y -&gt; ~ ~ E.eq z y -&gt; In x s -&gt; In z s</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk10"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_eq_trans_2</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> <span class="nv">r</span> <span class="nv">s</span>,
+      In x (singleton y) -&gt;
+      ~ In z r -&gt;
+      ~ ~ In z (add y r) -&gt;
+      In x s -&gt;
+      In z s.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : elt) (<span class="nv">r</span> <span class="nv">s</span> : t),
+In x (singleton y) -&gt;
+~ In z r -&gt; ~ ~ In z (add y r) -&gt; In x s -&gt; In z s</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk11" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk11"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : elt) (<span class="nv">r</span> <span class="nv">s</span> : t),
+In x (singleton y) -&gt;
+~ In z r -&gt; ~ ~ In z (add y r) -&gt; In x s -&gt; In z s</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk12" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk12"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_eq_neq_trans_1</span> : <span class="kr">forall</span> <span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> <span class="nv">s</span>,
+      E.eq x w -&gt;
+      ~ ~ E.eq x y -&gt;
+      ~ E.eq y z -&gt;
+      In w s -&gt;
+      In w (remove z s).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : E.t) (<span class="nv">s</span> : t),
+E.eq x w -&gt;
+~ ~ E.eq x y -&gt;
+~ E.eq y z -&gt; In w s -&gt; In w (remove z s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk13" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk13"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : E.t) (<span class="nv">s</span> : t),
+E.eq x w -&gt;
+~ ~ E.eq x y -&gt;
+~ E.eq y z -&gt; In w s -&gt; In w (remove z s)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk14" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk14"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_eq_neq_trans_2</span> : <span class="kr">forall</span> <span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> <span class="nv">r1</span> <span class="nv">r2</span> <span class="nv">s</span>,
+      In x (singleton w) -&gt;
+      ~ In x r1 -&gt;
+      In x (add y r1) -&gt;
+      In y r2 -&gt;
+      In y (remove z r2) -&gt;
+      In w s -&gt;
+      In w (remove z s).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : elt) (<span class="nv">r1</span> <span class="nv">r2</span> <span class="nv">s</span> : t),
+In x (singleton w) -&gt;
+~ In x r1 -&gt;
+In x (add y r1) -&gt;
+In y r2 -&gt;
+In y (remove z r2) -&gt; In w s -&gt; In w (remove z s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk15" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk15"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : elt) (<span class="nv">r1</span> <span class="nv">r2</span> <span class="nv">s</span> : t),
+In x (singleton w) -&gt;
+~ In x r1 -&gt;
+In x (add y r1) -&gt;
+In y r2 -&gt;
+In y (remove z r2) -&gt; In w s -&gt; In w (remove z s)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk16" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk16"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_In_singleton</span> : <span class="kr">forall</span> <span class="nv">x</span>,
+      In x (singleton x).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : elt, In x (singleton x)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk17" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk17"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : elt, In x (singleton x)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk18" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk18"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_add_In</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">s</span>,
+      In x (add y s) -&gt;
+      ~ E.eq x y -&gt;
+      In x s.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : elt) (<span class="nv">s</span> : t),
+In x (add y s) -&gt; ~ E.eq x y -&gt; In x s</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk19" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk19"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : elt) (<span class="nv">s</span> : t),
+In x (add y s) -&gt; ~ E.eq x y -&gt; In x s</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk1a" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk1a"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_Subset_add_remove</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">s</span>,
+      s [&lt;=] (add x (remove x s)).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">s</span> : t), s [&lt;=] add x (remove x s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk1b" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk1b"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">s</span> : t), s [&lt;=] add x (remove x s)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk1c" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk1c"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_eq_disjunction</span> : <span class="kr">forall</span> <span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span>,
+      In w (add x (add y (singleton z))) -&gt;
+      E.eq w x \/ E.eq w y \/ E.eq w z.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : elt,
+In w (add x (add y (singleton z))) -&gt;
+E.eq w x \/ E.eq w y \/ E.eq w z</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk1d" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk1d"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">w</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : elt,
+In w (add x (add y (singleton z))) -&gt;
+E.eq w x \/ E.eq w y \/ E.eq w z</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk1e" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk1e"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_not_In_disj</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span>,
+      ~ In x (union s1 (union s2 (union s3 (add y s4)))) -&gt;
+      ~ (In x s1 \/ In x s4 \/ E.eq y x).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : elt) (<span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span> : t),
+~ In x (union s1 (union s2 (union s3 (add y s4)))) -&gt;
+~ (In x s1 \/ In x s4 \/ E.eq y x)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk1f" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk1f"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : elt) (<span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span> : t),
+~ In x (union s1 (union s2 (union s3 (add y s4)))) -&gt;
+~ (In x s1 \/ In x s4 \/ E.eq y x)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk20" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk20"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_not_In_conj</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span>,
+      ~ In x (union s1 (union s2 (union s3 (add y s4)))) -&gt;
+      ~ In x s1 /\ ~ In x s4 /\ ~ E.eq y x.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : elt) (<span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span> : t),
+~ In x (union s1 (union s2 (union s3 (add y s4)))) -&gt;
+~ In x s1 /\ ~ In x s4 /\ ~ E.eq y x</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk21" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk21"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : elt) (<span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span> : t),
+~ In x (union s1 (union s2 (union s3 (add y s4)))) -&gt;
+~ In x s1 /\ ~ In x s4 /\ ~ E.eq y x</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk22" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk22"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_iff_conj</span> : <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">x</span> <span class="nv">s</span> <span class="nv">s&#39;</span>,
+    (In a s&#39; &lt;-&gt; E.eq x a \/ In a s) -&gt;
+    (In a s&#39; &lt;-&gt; In a (add x s)).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">a</span> : elt) (<span class="nv">x</span> : E.t) (<span class="nv">s</span> <span class="nv">s&#39;</span> : t),
+In a s&#39; &lt;-&gt; E.eq x a \/ In a s -&gt;
+In a s&#39; &lt;-&gt; In a (add x s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk23" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk23"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">a</span> : elt) (<span class="nv">x</span> : E.t) (<span class="nv">s</span> <span class="nv">s&#39;</span> : t),
+In a s&#39; &lt;-&gt; E.eq x a \/ In a s -&gt;
+In a s&#39; &lt;-&gt; In a (add x s)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk24" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk24"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_set_ops_1</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">q</span> <span class="nv">r</span> <span class="nv">s</span>,
+      (singleton x) [&lt;=] s -&gt;
+      Empty (union q r) -&gt;
+      Empty (inter (diff s q) (diff s r)) -&gt;
+      ~ In x s.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">q</span> <span class="nv">r</span> <span class="nv">s</span> : t),
+singleton x [&lt;=] s -&gt;
+Empty (union q r) -&gt;
+Empty (inter (diff s q) (diff s r)) -&gt; ~ In x s</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk25" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk25"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">q</span> <span class="nv">r</span> <span class="nv">s</span> : t),
+singleton x [&lt;=] s -&gt;
+Empty (union q r) -&gt;
+Empty (inter (diff s q) (diff s r)) -&gt; ~ In x s</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk26" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk26"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">eq_chain_test</span> : <span class="kr">forall</span> <span class="nv">x1</span> <span class="nv">x2</span> <span class="nv">x3</span> <span class="nv">x4</span> <span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span>,
+      Empty s1 -&gt;
+      In x2 (add x1 s1) -&gt;
+      In x3 s2 -&gt;
+      ~ In x3 (remove x2 s2) -&gt;
+      ~ In x4 s3 -&gt;
+      In x4 (add x3 s3) -&gt;
+      In x1 s4 -&gt;
+      Subset (add x4 s4) s4.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x1</span> <span class="nv">x2</span> <span class="nv">x3</span> <span class="nv">x4</span> : elt) (<span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span> : t),
+Empty s1 -&gt;
+In x2 (add x1 s1) -&gt;
+In x3 s2 -&gt;
+~ In x3 (remove x2 s2) -&gt;
+~ In x4 s3 -&gt;
+In x4 (add x3 s3) -&gt; In x1 s4 -&gt; add x4 s4 [&lt;=] s4</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk27" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk27"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x1</span> <span class="nv">x2</span> <span class="nv">x3</span> <span class="nv">x4</span> : elt) (<span class="nv">s1</span> <span class="nv">s2</span> <span class="nv">s3</span> <span class="nv">s4</span> : t),
+Empty s1 -&gt;
+In x2 (add x1 s1) -&gt;
+In x3 s2 -&gt;
+~ In x3 (remove x2 s2) -&gt;
+~ In x4 s3 -&gt;
+In x4 (add x3 s3) -&gt; In x1 s4 -&gt; add x4 s4 [&lt;=] s4</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk28" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk28"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_too_complex</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> <span class="nv">r</span> <span class="nv">s</span>,
+      E.eq x y -&gt;
+      (In x (singleton y) -&gt; r [&lt;=] s) -&gt;
+      In z r -&gt;
+      In z s.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : E.t) (<span class="nv">z</span> : elt) (<span class="nv">r</span> <span class="nv">s</span> : t),
+E.eq x y -&gt;
+(In x (singleton y) -&gt; r [&lt;=] s) -&gt; In z r -&gt; In z s</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk29" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk29"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : E.t) (<span class="nv">z</span> : elt) (<span class="nv">r</span> <span class="nv">s</span> : t),
+E.eq x y -&gt;
+(In x (singleton y) -&gt; r [&lt;=] s) -&gt; In z r -&gt; In z s</span></div></blockquote></div></div></small></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">fsetdec</span></span> is not intended to solve this directly. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">      </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">intros until</span> s; <span class="nb">intros</span> Heq H Hr; <span class="nb">lapply</span> H; fsetdec.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk2a" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk2a"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">function_test_1</span> :
+      <span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t),
+      <span class="kr">forall</span> (<span class="nv">g</span> : elt -&gt; elt),
+      <span class="kr">forall</span> (<span class="nv">s1</span> <span class="nv">s2</span> : t),
+      <span class="kr">forall</span> (<span class="nv">x1</span> <span class="nv">x2</span> : elt),
+      Equal s1 (f s2) -&gt;
+      E.eq x1 (g (g x2)) -&gt;
+      In x1 s1 -&gt;
+      In (g (g x2)) (f s2).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t) (<span class="nv">g</span> : elt -&gt; elt) (<span class="nv">s1</span> <span class="nv">s2</span> : t)
+  (<span class="nv">x1</span> <span class="nv">x2</span> : elt),
+s1 [=] f s2 -&gt;
+E.eq x1 (g (g x2)) -&gt; In x1 s1 -&gt; In (g (g x2)) (f s2)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk2b" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk2b"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t) (<span class="nv">g</span> : elt -&gt; elt) (<span class="nv">s1</span> <span class="nv">s2</span> : t)
+  (<span class="nv">x1</span> <span class="nv">x2</span> : elt),
+s1 [=] f s2 -&gt;
+E.eq x1 (g (g x2)) -&gt; In x1 s1 -&gt; In (g (g x2)) (f s2)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk2c" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk2c"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">function_test_2</span> :
+      <span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t),
+      <span class="kr">forall</span> (<span class="nv">g</span> : elt -&gt; elt),
+      <span class="kr">forall</span> (<span class="nv">s1</span> <span class="nv">s2</span> : t),
+      <span class="kr">forall</span> (<span class="nv">x1</span> <span class="nv">x2</span> : elt),
+      Equal s1 (f s2) -&gt;
+      E.eq x1 (g x2) -&gt;
+      In x1 s1 -&gt;
+      g x2 = g (g x2) -&gt;
+      In (g (g x2)) (f s2).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t) (<span class="nv">g</span> : elt -&gt; elt) (<span class="nv">s1</span> <span class="nv">s2</span> : t)
+  (<span class="nv">x1</span> <span class="nv">x2</span> : elt),
+s1 [=] f s2 -&gt;
+E.eq x1 (g x2) -&gt;
+In x1 s1 -&gt; g x2 = g (g x2) -&gt; In (g (g x2)) (f s2)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk2d" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk2d"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t) (<span class="nv">g</span> : elt -&gt; elt) (<span class="nv">s1</span> <span class="nv">s2</span> : t)
+  (<span class="nv">x1</span> <span class="nv">x2</span> : elt),
+s1 [=] f s2 -&gt;
+E.eq x1 (g x2) -&gt;
+In x1 s1 -&gt; g x2 = g (g x2) -&gt; In (g (g x2)) (f s2)</span></div></blockquote></div></div></small></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">fsetdec</span></span> is not intended to solve this directly. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">      </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk2e" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk2e"><span class="highlight"><span class="nb">intros until</span> <span class="mi">3</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">f</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">t -&gt; t</span></span></span></div><div class="goal-hyp"><span class="hyp-names">g</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">elt -&gt; elt</span></span></span></div><div class="goal-hyp"><span class="hyp-names">s1, s2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">t</span></span></span></div><div class="goal-hyp"><span class="hyp-names">x1, x2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">elt</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">s1 [=] f s2</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">E.eq x1 (g x2)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H1</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">In x1 s1</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">g x2 = g (g x2) -&gt; In (g (g x2)) (f s2)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk2f" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk2f"><span class="highlight"><span class="nb">intros</span> g_eq.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">f</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">t -&gt; t</span></span></span></div><div class="goal-hyp"><span class="hyp-names">g</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">elt -&gt; elt</span></span></span></div><div class="goal-hyp"><span class="hyp-names">s1, s2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">t</span></span></span></div><div class="goal-hyp"><span class="hyp-names">x1, x2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">elt</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">s1 [=] f s2</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">E.eq x1 (g x2)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H1</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">In x1 s1</span></span></span></div><div class="goal-hyp"><span class="hyp-names">g_eq</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">g x2 = g (g x2)</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">In (g (g x2)) (f s2)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk30" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk30"><span class="highlight"><span class="nb">rewrite</span> &lt;- g_eq.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">f</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">t -&gt; t</span></span></span></div><div class="goal-hyp"><span class="hyp-names">g</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">elt -&gt; elt</span></span></span></div><div class="goal-hyp"><span class="hyp-names">s1, s2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">t</span></span></span></div><div class="goal-hyp"><span class="hyp-names">x1, x2</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">elt</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">s1 [=] f s2</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">E.eq x1 (g x2)</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H1</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">In x1 s1</span></span></span></div><div class="goal-hyp"><span class="hyp-names">g_eq</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">g x2 = g (g x2)</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">In (g x2) (f s2)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk31" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk31"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">test_baydemir</span> :
+      <span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t),
+      <span class="kr">forall</span> (<span class="nv">s</span> : t),
+      <span class="kr">forall</span> (<span class="nv">x</span> <span class="nv">y</span> : elt),
+      In x (add y (f s)) -&gt;
+      ~ E.eq x y -&gt;
+      In x (f s).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t) (<span class="nv">s</span> : t) (<span class="nv">x</span> <span class="nv">y</span> : elt),
+In x (add y (f s)) -&gt; ~ E.eq x y -&gt; In x (f s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="FSetDecide-v-chk32" style="display: none" type="checkbox"><label class="coq-input" for="FSetDecide-v-chk32"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">f</span> : t -&gt; t) (<span class="nv">s</span> : t) (<span class="nv">x</span> <span class="nv">y</span> : elt),
+In x (add y (f s)) -&gt; ~ E.eq x y -&gt; In x (f s)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">      </span><span class="coq-sentence"><span class="coq-input"><span class="highlight">fsetdec.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">FSetDecideTestCases</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">WDecide_fun</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> FSetInterface.</span></span></span></pre><div class="doc">
+Now comes variants for self-contained weak sets and for full sets.
+    For these variants, only one argument is necessary. Thanks to
+    the subtyping <span class="inlinecode"><span class="id" title="var">WS</span>≤<span class="id" title="var">S</span></span>, the <span class="inlinecode"><span class="id" title="var">Decide</span></span> functor which is meant to be
+    used on modules <span class="inlinecode">(<span class="id" title="var">M</span>:<span class="id" title="var">S</span>)</span> can simply be an alias of <span class="inlinecode"><span class="id" title="var">WDecide</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">WDecide</span> (M:WS) := !WDecide_fun M.E M.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">Decide</span> := WDecide.</span></span></span></pre></article></body></html>

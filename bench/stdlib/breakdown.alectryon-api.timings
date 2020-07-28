@@ -1,0 +1,15 @@
+alectryon-api	stdlib/theories/Lists/ListSet.v	real: 1.408	user: 0.662	sys: 0.030	0
+alectryon-api	stdlib/theories/Lists/ListSet.v	real: 1.419	user: 0.685	sys: 0.013	0
+alectryon-api	stdlib/theories/Lists/ListSet.v	real: 1.349	user: 0.620	sys: 0.038	0
+alectryon-api	stdlib/theories/Lists/ListSet.v	real: 1.414	user: 0.660	sys: 0.015	0
+alectryon-api	stdlib/theories/Lists/ListSet.v	real: 1.452	user: 0.668	sys: 0.037	0
+alectryon-api	stdlib/theories/Reals/Ranalysis3.v	real: 69.911	user: 42.674	sys: 0.718	0
+alectryon-api	stdlib/theories/Reals/Ranalysis3.v	real: 70.537	user: 42.709	sys: 0.843	0
+alectryon-api	stdlib/theories/Reals/Ranalysis3.v	real: 70.491	user: 42.852	sys: 0.769	0
+alectryon-api	stdlib/theories/Reals/Ranalysis3.v	real: 70.005	user: 42.519	sys: 0.749	0
+alectryon-api	stdlib/theories/Reals/Ranalysis3.v	real: 69.545	user: 42.455	sys: 0.732	0
+alectryon-api	stdlib/theories/Strings/Byte.v	real: 8.370	user: 0.304	sys: 0.021	0
+alectryon-api	stdlib/theories/Strings/Byte.v	real: 8.327	user: 0.320	sys: 0.019	0
+alectryon-api	stdlib/theories/Strings/Byte.v	real: 8.396	user: 0.329	sys: 0.009	0
+alectryon-api	stdlib/theories/Strings/Byte.v	real: 8.421	user: 0.293	sys: 0.031	0
+alectryon-api	stdlib/theories/Strings/Byte.v	real: 8.355	user: 0.311	sys: 0.028	0

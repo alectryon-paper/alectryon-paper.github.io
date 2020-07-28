@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html><head><title>BinPosDef.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* -*- coding: utf-8 -*- *)</span>
+<span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span>
+
+<span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">Binary positive numbers, operations</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
+Initial development by Pierre Crégut, CNET, Lannion, France 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The type <span class="inlinecode"><span class="id" title="var">positive</span></span> and its constructors <span class="inlinecode"><span class="id" title="var">xI</span></span> and <span class="inlinecode"><span class="id" title="var">xO</span></span> and <span class="inlinecode"><span class="id" title="var">xH</span></span>
+    are now defined in <span class="inlinecode"><span class="id" title="var">BinNums.v</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> BinNums.</span></span></span></pre><div class="doc">
+Postfix notation for positive numbers, which allows mimicking
+    the position of bits in a big-endian representation.
+    For instance, we can write <span class="inlinecode">1~1~0</span> instead of <span class="inlinecode">(<span class="id" title="var">xO</span></span> <span class="inlinecode">(<span class="id" title="var">xI</span></span> <span class="inlinecode"><span class="id" title="var">xH</span>))</span>
+    for the number 6 (which is 110 in binary notation).
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Notation</span> <span class="s2">&quot;1&quot;</span> := xH.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;p ~ 1&quot;</span> := (xI p)
+ (<span class="kn">at level</span> <span class="mi">7</span>, <span class="kn">left associativity</span>, <span class="kn">format</span> <span class="s2">&quot;p &#39;~&#39; &#39;1&#39;&quot;</span>) : positive_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;p ~ 0&quot;</span> := (xO p)
+ (<span class="kn">at level</span> <span class="mi">7</span>, <span class="kn">left associativity</span>, <span class="kn">format</span> <span class="s2">&quot;p &#39;~&#39; &#39;0&#39;&quot;</span>) : positive_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> positive_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">Pos</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">t</span> := positive.</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Operations over positive numbers</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab3"></a><h2 class="section">Successor</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">succ</span> <span class="nv">x</span> :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | p~<span class="mi">1</span> =&gt; (succ p)~<span class="mi">0</span>
+    | p~<span class="mi">0</span> =&gt; p~<span class="mi">1</span>
+    | <span class="mi">1</span> =&gt; <span class="mi">1</span>~<span class="mi">0</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab4"></a><h2 class="section">Addition</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">add</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">match</span> x, y <span class="kr">with</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; (add_carry p q)~<span class="mi">0</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; (add p q)~<span class="mi">1</span>
+    | p~<span class="mi">1</span>, <span class="mi">1</span> =&gt; (succ p)~<span class="mi">0</span>
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; (add p q)~<span class="mi">1</span>
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; (add p q)~<span class="mi">0</span>
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; p~<span class="mi">1</span>
+    | <span class="mi">1</span>, q~<span class="mi">1</span> =&gt; (succ q)~<span class="mi">0</span>
+    | <span class="mi">1</span>, q~<span class="mi">0</span> =&gt; q~<span class="mi">1</span>
+    | <span class="mi">1</span>, <span class="mi">1</span> =&gt; <span class="mi">1</span>~<span class="mi">0</span>
+  <span class="kr">end</span>
+
+<span class="kr">with</span> add_carry x y :=
+  <span class="kr">match</span> x, y <span class="kr">with</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; (add_carry p q)~<span class="mi">1</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; (add_carry p q)~<span class="mi">0</span>
+    | p~<span class="mi">1</span>, <span class="mi">1</span> =&gt; (succ p)~<span class="mi">1</span>
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; (add_carry p q)~<span class="mi">0</span>
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; (add p q)~<span class="mi">1</span>
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; (succ p)~<span class="mi">0</span>
+    | <span class="mi">1</span>, q~<span class="mi">1</span> =&gt; (succ q)~<span class="mi">1</span>
+    | <span class="mi">1</span>, q~<span class="mi">0</span> =&gt; (succ q)~<span class="mi">0</span>
+    | <span class="mi">1</span>, <span class="mi">1</span> =&gt; <span class="mi">1</span>~<span class="mi">1</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;+&quot;</span> := add : positive_scope.</span></span></span></pre><div class="doc">
+<a name="lab5"></a><h2 class="section">Operation <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">→</span> <span class="inlinecode">2*<span class="id" title="var">x</span>-1</span></h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">pred_double</span> <span class="nv">x</span> :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | p~<span class="mi">1</span> =&gt; p~<span class="mi">0</span>~<span class="mi">1</span>
+    | p~<span class="mi">0</span> =&gt; (pred_double p)~<span class="mi">1</span>
+    | <span class="mi">1</span> =&gt; <span class="mi">1</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab6"></a><h2 class="section">Predecessor</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">pred</span> <span class="nv">x</span> :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | p~<span class="mi">1</span> =&gt; p~<span class="mi">0</span>
+    | p~<span class="mi">0</span> =&gt; pred_double p
+    | <span class="mi">1</span> =&gt; <span class="mi">1</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab7"></a><h2 class="section">The predecessor of a positive number can be seen as a <span class="inlinecode"><span class="id" title="var">N</span></span></h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">pred_N</span> <span class="nv">x</span> :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | p~<span class="mi">1</span> =&gt; Npos (p~<span class="mi">0</span>)
+    | p~<span class="mi">0</span> =&gt; Npos (pred_double p)
+    | <span class="mi">1</span> =&gt; N0
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab8"></a><h2 class="section">An auxiliary type for subtraction</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">mask</span> : <span class="kt">Set</span> :=
+| IsNul : mask
+| IsPos : positive -&gt; mask
+| IsNeg : mask.</span></span></span></pre><div class="doc">
+<a name="lab9"></a><h2 class="section">Operation <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">→</span> <span class="inlinecode">2*<span class="id" title="var">x</span>+1</span></h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">succ_double_mask</span> (<span class="nv">x</span>:mask) : mask :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | IsNul =&gt; IsPos <span class="mi">1</span>
+    | IsNeg =&gt; IsNeg
+    | IsPos p =&gt; IsPos p~<span class="mi">1</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab10"></a><h2 class="section">Operation <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">→</span> <span class="inlinecode">2*<span class="id" title="var">x</span></span></h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">double_mask</span> (<span class="nv">x</span>:mask) : mask :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | IsNul =&gt; IsNul
+    | IsNeg =&gt; IsNeg
+    | IsPos p =&gt; IsPos p~<span class="mi">0</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab11"></a><h2 class="section">Operation <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">→</span> <span class="inlinecode">2*<span class="id" title="var">x</span>-2</span></h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">double_pred_mask</span> <span class="nv">x</span> : mask :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | p~<span class="mi">1</span> =&gt; IsPos p~<span class="mi">0</span>~<span class="mi">0</span>
+    | p~<span class="mi">0</span> =&gt; IsPos (pred_double p)~<span class="mi">0</span>
+    | <span class="mi">1</span> =&gt; IsNul
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab12"></a><h2 class="section">Predecessor with mask</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">pred_mask</span> (<span class="nv">p</span> : mask) : mask :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | IsPos <span class="mi">1</span> =&gt; IsNul
+    | IsPos q =&gt; IsPos (pred q)
+    | IsNul =&gt; IsNeg
+    | IsNeg =&gt; IsNeg
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab13"></a><h2 class="section">Subtraction, result as a mask</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">sub_mask</span> (<span class="nv">x</span> <span class="nv">y</span>:positive) {<span class="nv">struct</span> <span class="nv">y</span>} : mask :=
+  <span class="kr">match</span> x, y <span class="kr">with</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; double_mask (sub_mask p q)
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; succ_double_mask (sub_mask p q)
+    | p~<span class="mi">1</span>, <span class="mi">1</span> =&gt; IsPos p~<span class="mi">0</span>
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; succ_double_mask (sub_mask_carry p q)
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; double_mask (sub_mask p q)
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; IsPos (pred_double p)
+    | <span class="mi">1</span>, <span class="mi">1</span> =&gt; IsNul
+    | <span class="mi">1</span>, _ =&gt; IsNeg
+  <span class="kr">end</span>
+
+<span class="kr">with</span> sub_mask_carry (x y:positive) {<span class="kr">struct</span> y} : mask :=
+  <span class="kr">match</span> x, y <span class="kr">with</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; succ_double_mask (sub_mask_carry p q)
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; double_mask (sub_mask p q)
+    | p~<span class="mi">1</span>, <span class="mi">1</span> =&gt; IsPos (pred_double p)
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; double_mask (sub_mask_carry p q)
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; succ_double_mask (sub_mask_carry p q)
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; double_pred_mask p
+    | <span class="mi">1</span>, _ =&gt; IsNeg
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab14"></a><h2 class="section">Subtraction, result as a positive, returning 1 if <span class="inlinecode"><span class="id" title="var">x</span>≤<span class="id" title="var">y</span></span></h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sub</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">match</span> sub_mask x y <span class="kr">with</span>
+    | IsPos z =&gt; z
+    | _ =&gt; <span class="mi">1</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;-&quot;</span> := sub : positive_scope.</span></span></span></pre><div class="doc">
+<a name="lab15"></a><h2 class="section">Multiplication</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">mul</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+    | p~<span class="mi">1</span> =&gt; y + (mul p y)~<span class="mi">0</span>
+    | p~<span class="mi">0</span> =&gt; (mul p y)~<span class="mi">0</span>
+    | <span class="mi">1</span> =&gt; y
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;*&quot;</span> := mul : positive_scope.</span></span></span></pre><div class="doc">
+<a name="lab16"></a><h2 class="section">Iteration over a positive number</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">iter</span> {<span class="nv">A</span>} (<span class="nv">f</span>:A -&gt; A) : A -&gt; positive -&gt; A :=
+  <span class="kr">fix</span> iter_fix x n := <span class="kr">match</span> n <span class="kr">with</span>
+    | xH =&gt; f x
+    | xO n&#39; =&gt; iter_fix (iter_fix x n&#39;) n&#39;
+    | xI n&#39; =&gt; f (iter_fix (iter_fix x n&#39;) n&#39;)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab17"></a><h2 class="section">Power</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">pow</span> (<span class="nv">x</span>:positive) := iter (mul x) <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;^&quot;</span> := pow : positive_scope.</span></span></span></pre><div class="doc">
+<a name="lab18"></a><h2 class="section">Square</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">square</span> <span class="nv">p</span> :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | p~<span class="mi">1</span> =&gt; (square p + p)~<span class="mi">0</span>~<span class="mi">1</span>
+    | p~<span class="mi">0</span> =&gt; (square p)~<span class="mi">0</span>~<span class="mi">0</span>
+    | <span class="mi">1</span> =&gt; <span class="mi">1</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab19"></a><h2 class="section">Division by 2 rounded below but for 1</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">div2</span> <span class="nv">p</span> :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | <span class="mi">1</span> =&gt; <span class="mi">1</span>
+    | p~<span class="mi">0</span> =&gt; p
+    | p~<span class="mi">1</span> =&gt; p
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Division by 2 rounded up 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">div2_up</span> <span class="nv">p</span> :=
+ <span class="kr">match</span> p <span class="kr">with</span>
+   | <span class="mi">1</span> =&gt; <span class="mi">1</span>
+   | p~<span class="mi">0</span> =&gt; p
+   | p~<span class="mi">1</span> =&gt; succ p
+ <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab20"></a><h2 class="section">Number of digits in a positive number</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">size_nat</span> <span class="nv">p</span> : nat :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | <span class="mi">1</span> =&gt; S O
+    | p~<span class="mi">1</span> =&gt; S (size_nat p)
+    | p~<span class="mi">0</span> =&gt; S (size_nat p)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Same, with positive output 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">size</span> <span class="nv">p</span> :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | <span class="mi">1</span> =&gt; <span class="mi">1</span>
+    | p~<span class="mi">1</span> =&gt; succ (size p)
+    | p~<span class="mi">0</span> =&gt; succ (size p)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab21"></a><h2 class="section">Comparison on binary positive numbers</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">compare_cont</span> (<span class="nv">r</span>:comparison) (<span class="nv">x</span> <span class="nv">y</span>:positive) {<span class="nv">struct</span> <span class="nv">y</span>} : comparison :=
+  <span class="kr">match</span> x, y <span class="kr">with</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; compare_cont r p q
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; compare_cont Gt p q
+    | p~<span class="mi">1</span>, <span class="mi">1</span> =&gt; Gt
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; compare_cont Lt p q
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; compare_cont r p q
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; Gt
+    | <span class="mi">1</span>, q~<span class="mi">1</span> =&gt; Lt
+    | <span class="mi">1</span>, q~<span class="mi">0</span> =&gt; Lt
+    | <span class="mi">1</span>, <span class="mi">1</span> =&gt; r
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">compare</span> := compare_cont Eq.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;?=&quot;</span> := <span class="nb">compare</span> (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : positive_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">min</span> <span class="nv">p</span> <span class="nv">p&#39;</span> :=
+ <span class="kr">match</span> p ?= p&#39; <span class="kr">with</span>
+ | Lt | Eq =&gt; p
+ | Gt =&gt; p&#39;
+ <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">max</span> <span class="nv">p</span> <span class="nv">p&#39;</span> :=
+ <span class="kr">match</span> p ?= p&#39; <span class="kr">with</span>
+ | Lt | Eq =&gt; p&#39;
+ | Gt =&gt; p
+ <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab22"></a><h2 class="section">Boolean equality and comparisons</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">eqb</span> <span class="nv">p</span> <span class="nv">q</span> {<span class="nv">struct</span> <span class="nv">q</span>} :=
+  <span class="kr">match</span> p, q <span class="kr">with</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; eqb p q
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; eqb p q
+    | <span class="mi">1</span>, <span class="mi">1</span> =&gt; true
+    | _, _ =&gt; false
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">leb</span> <span class="nv">x</span> <span class="nv">y</span> :=
+ <span class="kr">match</span> x ?= y <span class="kr">with</span> Gt =&gt; false | _ =&gt; true <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ltb</span> <span class="nv">x</span> <span class="nv">y</span> :=
+ <span class="kr">match</span> x ?= y <span class="kr">with</span> Lt =&gt; true | _ =&gt; false <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;=?&quot;</span> := eqb (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : positive_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;&lt;=?&quot;</span> := leb (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : positive_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;&lt;?&quot;</span> := ltb (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : positive_scope.</span></span></span></pre><div class="doc">
+<a name="lab23"></a><h2 class="section">A Square Root function for positive numbers</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+We proceed by blocks of two digits : if p is written qbb'
+    then sqrt(p) will be sqrt(q)~0 or sqrt(q)~1.
+    For deciding easily in which case we are, we store the remainder
+    (as a mask, since it can be null).
+    Instead of copy-pasting the following code four times, we
+    factorize as an auxiliary function, with f and g being either
+    xO or xI depending of the initial digits.
+    NB: (sub_mask (g (f 1)) 4) is a hack, morally it's g (f 0).
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrtrem_step</span> (<span class="nv">f</span> <span class="nv">g</span>:positive-&gt;positive) <span class="nv">p</span> :=
+ <span class="kr">match</span> p <span class="kr">with</span>
+  | (s, IsPos r) =&gt;
+    <span class="kr">let</span> <span class="nv">s&#39;</span> := s~<span class="mi">0</span>~<span class="mi">1</span> <span class="kr">in</span>
+    <span class="kr">let</span> <span class="nv">r&#39;</span> := g (f r) <span class="kr">in</span>
+    <span class="kr">if</span> s&#39; &lt;=? r&#39; <span class="kr">then</span> (s~<span class="mi">1</span>, sub_mask r&#39; s&#39;)
+    <span class="kr">else</span> (s~<span class="mi">0</span>, IsPos r&#39;)
+  | (s,_)  =&gt; (s~<span class="mi">0</span>, sub_mask (g (f <span class="mi">1</span>)) <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">0</span>)
+ <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">sqrtrem</span> <span class="nv">p</span> : positive * mask :=
+ <span class="kr">match</span> p <span class="kr">with</span>
+  | <span class="mi">1</span> =&gt; (<span class="mi">1</span>,IsNul)
+  | <span class="mi">1</span>~<span class="mi">0</span> =&gt; (<span class="mi">1</span>,IsPos <span class="mi">1</span>)
+  | <span class="mi">1</span>~<span class="mi">1</span> =&gt; (<span class="mi">1</span>,IsPos <span class="mi">1</span>~<span class="mi">0</span>)
+  | p~<span class="mi">0</span>~<span class="mi">0</span> =&gt; sqrtrem_step xO xO (sqrtrem p)
+  | p~<span class="mi">0</span>~<span class="mi">1</span> =&gt; sqrtrem_step xO xI (sqrtrem p)
+  | p~<span class="mi">1</span>~<span class="mi">0</span> =&gt; sqrtrem_step xI xO (sqrtrem p)
+  | p~<span class="mi">1</span>~<span class="mi">1</span> =&gt; sqrtrem_step xI xI (sqrtrem p)
+ <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt</span> <span class="nv">p</span> := fst (sqrtrem p).</span></span></span></pre><div class="doc">
+<a name="lab24"></a><h2 class="section">Greatest Common Divisor</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">divide</span> <span class="nv">p</span> <span class="nv">q</span> := <span class="kr">exists</span> <span class="nv">r</span>, q = r*p.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;( p | q )&quot;</span> := (divide p q) (<span class="kn">at level</span> <span class="mi">0</span>) : positive_scope.</span></span></span></pre><div class="doc">
+Instead of the Euclid algorithm, we use here the Stein binary
+   algorithm, which is faster for this representation. This algorithm
+   is almost structural, but in the last cases we do some recursive
+   calls on subtraction, hence the need for a counter.
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">gcdn</span> (<span class="nv">n</span> : nat) (<span class="nv">a</span> <span class="nv">b</span> : positive) : positive :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+    | O =&gt; <span class="mi">1</span>
+    | S n =&gt;
+      <span class="kr">match</span> a,b <span class="kr">with</span>
+	| <span class="mi">1</span>, _ =&gt; <span class="mi">1</span>
+	| _, <span class="mi">1</span> =&gt; <span class="mi">1</span>
+	| a~<span class="mi">0</span>, b~<span class="mi">0</span> =&gt; (gcdn n a b)~<span class="mi">0</span>
+	| _  , b~<span class="mi">0</span> =&gt; gcdn n a b
+	| a~<span class="mi">0</span>, _   =&gt; gcdn n a b
+	| a&#39;~<span class="mi">1</span>, b&#39;~<span class="mi">1</span> =&gt;
+          <span class="kr">match</span> a&#39; ?= b&#39; <span class="kr">with</span>
+	    | Eq =&gt; a
+	    | Lt =&gt; gcdn n (b&#39;-a&#39;) a
+	    | Gt =&gt; gcdn n (a&#39;-b&#39;) b
+          <span class="kr">end</span>
+      <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+We'll show later that we need at most (log2(a.b)) loops 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">gcd</span> (<span class="nv">a</span> <span class="nv">b</span> : positive) := gcdn (size_nat a + size_nat b)%nat a b.</span></span></span></pre><div class="doc">
+Generalized Gcd, also computing the division of a and b by the gcd 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Printing Universes</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">ggcdn</span> (<span class="nv">n</span> : nat) (<span class="nv">a</span> <span class="nv">b</span> : positive) : (positive*(positive*positive)) :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+    | O =&gt; (<span class="mi">1</span>,(a,b))
+    | S n =&gt;
+      <span class="kr">match</span> a,b <span class="kr">with</span>
+	| <span class="mi">1</span>, _ =&gt; (<span class="mi">1</span>,(<span class="mi">1</span>,b))
+	| _, <span class="mi">1</span> =&gt; (<span class="mi">1</span>,(a,<span class="mi">1</span>))
+	| a~<span class="mi">0</span>, b~<span class="mi">0</span> =&gt;
+           <span class="kr">let</span> (<span class="nv">g</span>,p) := ggcdn n a b <span class="kr">in</span>
+           (g~<span class="mi">0</span>,p)
+	| _, b~<span class="mi">0</span> =&gt;
+           <span class="kr">let</span> &#39;(g,(aa,bb)) := ggcdn n a b <span class="kr">in</span>
+           (g,(aa, bb~<span class="mi">0</span>))
+	| a~<span class="mi">0</span>, _ =&gt;
+           <span class="kr">let</span> &#39;(g,(aa,bb)) := ggcdn n a b <span class="kr">in</span>
+           (g,(aa~<span class="mi">0</span>, bb))
+	| a&#39;~<span class="mi">1</span>, b&#39;~<span class="mi">1</span> =&gt;
+           <span class="kr">match</span> a&#39; ?= b&#39; <span class="kr">with</span>
+	     | Eq =&gt; (a,(<span class="mi">1</span>,<span class="mi">1</span>))
+	     | Lt =&gt;
+	        <span class="kr">let</span> &#39;(g,(ba,aa)) := ggcdn n (b&#39;-a&#39;) a <span class="kr">in</span>
+	        (g,(aa, aa + ba~<span class="mi">0</span>))
+	     | Gt =&gt;
+		<span class="kr">let</span> &#39;(g,(ab,bb)) := ggcdn n (a&#39;-b&#39;) b <span class="kr">in</span>
+		(g,(bb + ab~<span class="mi">0</span>, bb))
+	   <span class="kr">end</span>
+      <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ggcd</span> (<span class="nv">a</span> <span class="nv">b</span>: positive) := ggcdn (size_nat a + size_nat b)%nat a b.</span></span></span></pre><div class="doc">
+Local copies of the not-yet-available <span class="inlinecode"><span class="id" title="var">N.double</span></span> and <span class="inlinecode"><span class="id" title="var">N.succ_double</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Nsucc_double</span> <span class="nv">x</span> :=
+  <span class="kr">match</span> x <span class="kr">with</span>
+  | N0 =&gt; Npos <span class="mi">1</span>
+  | Npos p =&gt; Npos p~<span class="mi">1</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Ndouble</span> <span class="nv">n</span> :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+  | N0 =&gt; N0
+  | Npos p =&gt; Npos p~<span class="mi">0</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Operation over bits. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Logical <span class="inlinecode"><span class="id" title="var">or</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">lor</span> (<span class="nv">p</span> <span class="nv">q</span> : positive) : positive :=
+  <span class="kr">match</span> p, q <span class="kr">with</span>
+    | <span class="mi">1</span>, q~<span class="mi">0</span> =&gt; q~<span class="mi">1</span>
+    | <span class="mi">1</span>, _ =&gt; q
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; p~<span class="mi">1</span>
+    | _, <span class="mi">1</span> =&gt; p
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; (lor p q)~<span class="mi">0</span>
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; (lor p q)~<span class="mi">1</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; (lor p q)~<span class="mi">1</span>
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; (lor p q)~<span class="mi">1</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Logical <span class="inlinecode"><span class="id" title="var">and</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">land</span> (<span class="nv">p</span> <span class="nv">q</span> : positive) : N :=
+  <span class="kr">match</span> p, q <span class="kr">with</span>
+    | <span class="mi">1</span>, q~<span class="mi">0</span> =&gt; N0
+    | <span class="mi">1</span>, _ =&gt; Npos <span class="mi">1</span>
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; N0
+    | _, <span class="mi">1</span> =&gt; Npos <span class="mi">1</span>
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; Ndouble (land p q)
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; Ndouble (land p q)
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; Ndouble (land p q)
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; Nsucc_double (land p q)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Logical <span class="inlinecode"><span class="id" title="var">diff</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">ldiff</span> (<span class="nv">p</span> <span class="nv">q</span>:positive) : N :=
+  <span class="kr">match</span> p, q <span class="kr">with</span>
+    | <span class="mi">1</span>, q~<span class="mi">0</span> =&gt; Npos <span class="mi">1</span>
+    | <span class="mi">1</span>, _ =&gt; N0
+    | _~<span class="mi">0</span>, <span class="mi">1</span> =&gt; Npos p
+    | p~<span class="mi">1</span>, <span class="mi">1</span> =&gt; Npos (p~<span class="mi">0</span>)
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; Ndouble (ldiff p q)
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; Ndouble (ldiff p q)
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; Ndouble (ldiff p q)
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; Nsucc_double (ldiff p q)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">xor</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">lxor</span> (<span class="nv">p</span> <span class="nv">q</span>:positive) : N :=
+  <span class="kr">match</span> p, q <span class="kr">with</span>
+    | <span class="mi">1</span>, <span class="mi">1</span> =&gt; N0
+    | <span class="mi">1</span>, q~<span class="mi">0</span> =&gt; Npos (q~<span class="mi">1</span>)
+    | <span class="mi">1</span>, q~<span class="mi">1</span> =&gt; Npos (q~<span class="mi">0</span>)
+    | p~<span class="mi">0</span>, <span class="mi">1</span> =&gt; Npos (p~<span class="mi">1</span>)
+    | p~<span class="mi">0</span>, q~<span class="mi">0</span> =&gt; Ndouble (lxor p q)
+    | p~<span class="mi">0</span>, q~<span class="mi">1</span> =&gt; Nsucc_double (lxor p q)
+    | p~<span class="mi">1</span>, <span class="mi">1</span> =&gt; Npos (p~<span class="mi">0</span>)
+    | p~<span class="mi">1</span>, q~<span class="mi">0</span> =&gt; Nsucc_double (lxor p q)
+    | p~<span class="mi">1</span>, q~<span class="mi">1</span> =&gt; Ndouble (lxor p q)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Shifts. NB: right shift of 1 stays at 1. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftl_nat</span> (<span class="nv">p</span>:positive) := nat_rect _ p (<span class="kr">fun</span> <span class="nv">_</span> =&gt; xO).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftr_nat</span> (<span class="nv">p</span>:positive) := nat_rect _ p (<span class="kr">fun</span> <span class="nv">_</span> =&gt; div2).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftl</span> (<span class="nv">p</span>:positive)(<span class="nv">n</span>:N) :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+    | N0 =&gt; p
+    | Npos n =&gt; iter xO p n
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftr</span> (<span class="nv">p</span>:positive)(<span class="nv">n</span>:N) :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+    | N0 =&gt; p
+    | Npos n =&gt; iter div2 p n
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Checking whether a particular bit is set or not 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">testbit_nat</span> (<span class="nv">p</span>:positive) : nat -&gt; bool :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | <span class="mi">1</span> =&gt; <span class="kr">fun</span> <span class="nv">n</span> =&gt; <span class="kr">match</span> n <span class="kr">with</span>
+                      | O =&gt; true
+                      | S _ =&gt; false
+                    <span class="kr">end</span>
+    | p~<span class="mi">0</span> =&gt; <span class="kr">fun</span> <span class="nv">n</span> =&gt; <span class="kr">match</span> n <span class="kr">with</span>
+                        | O =&gt; false
+                        | S n&#39; =&gt; testbit_nat p n&#39;
+                      <span class="kr">end</span>
+    | p~<span class="mi">1</span> =&gt; <span class="kr">fun</span> <span class="nv">n</span> =&gt; <span class="kr">match</span> n <span class="kr">with</span>
+                        | O =&gt; true
+                        | S n&#39; =&gt; testbit_nat p n&#39;
+                      <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Same, but with index in N 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">testbit</span> (<span class="nv">p</span>:positive)(<span class="nv">n</span>:N) :=
+  <span class="kr">match</span> p, n <span class="kr">with</span>
+    | p~<span class="mi">0</span>, N0 =&gt; false
+    | _, N0 =&gt; true
+    | <span class="mi">1</span>, _ =&gt; false
+    | p~<span class="mi">0</span>, Npos n =&gt; testbit p (pred_N n)
+    | p~<span class="mi">1</span>, Npos n =&gt; testbit p (pred_N n)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab25"></a><h2 class="section">From binary positive numbers to Peano natural numbers</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">iter_op</span> {<span class="nv">A</span>}(<span class="nv">op</span>:A-&gt;A-&gt;A) :=
+  <span class="kr">fix</span> iter (p:positive)(a:A) : A :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | <span class="mi">1</span> =&gt; a
+    | p~<span class="mi">0</span> =&gt; iter p (op a a)
+    | p~<span class="mi">1</span> =&gt; op a (iter p (op a a))
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_nat</span> (<span class="nv">x</span>:positive) : nat := iter_op plus x (S O).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> to_nat x: <span class="nb">simpl</span> never.</span></span></span></pre><div class="doc">
+<a name="lab26"></a><h2 class="section">From Peano natural numbers to binary positive numbers</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+A version preserving positive numbers, and sending 0 to 1. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">of_nat</span> (<span class="nv">n</span>:nat) : positive :=
+ <span class="kr">match</span> n <span class="kr">with</span>
+   | O =&gt; <span class="mi">1</span>
+   | S O =&gt; <span class="mi">1</span>
+   | S x =&gt; succ (of_nat x)
+ <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* Another version that converts [n] into [n+1] *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">of_succ_nat</span> (<span class="nv">n</span>:nat) : positive :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+    | O =&gt; <span class="mi">1</span>
+    | S x =&gt; succ (of_succ_nat x)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab27"></a><h2 class="section">Conversion with a decimal representation for printing/parsing</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">ten</span> := <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">1</span>~<span class="mi">0</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">of_uint_acc</span> (<span class="nv">d</span>:Decimal.uint)(<span class="nv">acc</span>:positive) :=
+  <span class="kr">match</span> d <span class="kr">with</span>
+  | Decimal.Nil =&gt; acc
+  | Decimal.D0 l =&gt; of_uint_acc l (mul ten acc)
+  | Decimal.D1 l =&gt; of_uint_acc l (add <span class="mi">1</span> (mul ten acc))
+  | Decimal.D2 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">0</span> (mul ten acc))
+  | Decimal.D3 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">1</span> (mul ten acc))
+  | Decimal.D4 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">0</span> (mul ten acc))
+  | Decimal.D5 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">1</span> (mul ten acc))
+  | Decimal.D6 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">0</span> (mul ten acc))
+  | Decimal.D7 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span> (mul ten acc))
+  | Decimal.D8 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">0</span>~<span class="mi">0</span> (mul ten acc))
+  | Decimal.D9 l =&gt; of_uint_acc l (add <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">0</span>~<span class="mi">1</span> (mul ten acc))
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">of_uint</span> (<span class="nv">d</span>:Decimal.uint) : N :=
+  <span class="kr">match</span> d <span class="kr">with</span>
+  | Decimal.Nil =&gt; N0
+  | Decimal.D0 l =&gt; of_uint l
+  | Decimal.D1 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>)
+  | Decimal.D2 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">0</span>)
+  | Decimal.D3 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">1</span>)
+  | Decimal.D4 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">0</span>)
+  | Decimal.D5 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">1</span>)
+  | Decimal.D6 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">0</span>)
+  | Decimal.D7 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>)
+  | Decimal.D8 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">0</span>~<span class="mi">0</span>)
+  | Decimal.D9 l =&gt; Npos (of_uint_acc l <span class="mi">1</span>~<span class="mi">0</span>~<span class="mi">0</span>~<span class="mi">1</span>)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_int</span> (<span class="nv">d</span>:Decimal.int) : option positive :=
+  <span class="kr">match</span> d <span class="kr">with</span>
+  | Decimal.Pos d =&gt;
+    <span class="kr">match</span> of_uint d <span class="kr">with</span>
+    | N0 =&gt; None
+    | Npos p =&gt; Some p
+    <span class="kr">end</span>
+  | Decimal.Neg _ =&gt; None
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">to_little_uint</span> <span class="nv">p</span> :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+  | <span class="mi">1</span> =&gt; Decimal.D1 Decimal.Nil
+  | p~<span class="mi">1</span> =&gt; Decimal.Little.succ_double (to_little_uint p)
+  | p~<span class="mi">0</span> =&gt; Decimal.Little.double (to_little_uint p)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_uint</span> <span class="nv">p</span> := Decimal.rev (to_little_uint p).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_int</span> <span class="nv">n</span> := Decimal.Pos (to_uint n).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Numeral Notation</span> <span class="nf">positive</span> of_int to_uint : positive_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Pos</span>.</span></span></span></pre><div class="doc">
+Re-export the notation for those who just <span class="inlinecode"><span class="id" title="keyword">Import</span></span> <span class="inlinecode"><span class="id" title="var">BinPosDef</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Numeral Notation</span> <span class="nf">positive</span> Pos.of_int Pos.to_uint : positive_scope.</span></span></span></pre></article></body></html>

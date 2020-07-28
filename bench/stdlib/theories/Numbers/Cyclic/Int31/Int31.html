@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html><head><title>Int31.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span>
+<span class="c">(*            Benjamin Gregoire, Laurent Thery, INRIA, 2007             *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+This library has been deprecated since Coq version 8.10. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> NaryFunctions.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Wf_nat.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> ZArith.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> DoubleType.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Unset Elimination Schemes</span>.</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">31-bit integers</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+This file contains basic definitions of a 31-bit integer
+  arithmetic. In fact it is more general than that. The only reason
+  for this use of 31 is the underlying mechanism for hardware-efficient
+  computations by A. Spiwack. Apart from this, a switch to, say,
+  63-bit integers is now just a matter of replacing every occurrences
+  of 31 by 63. This is actually made possible by the use of
+  dependently-typed n-ary constructions for the inductive type
+  <span class="inlinecode"><span class="id" title="var">int31</span></span>, its constructor <span class="inlinecode"><span class="id" title="var">I31</span></span> and any pattern matching on it.
+  If you modify this file, please preserve this genericity.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">size</span> := <span class="mi">31</span>%nat.</span></span></span></pre><div class="doc">
+Digits 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">digits</span> : <span class="kt">Type</span> := D0 | D1.</span></span></span></pre><div class="doc">
+The type of 31-bit integers 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The type <span class="inlinecode"><span class="id" title="var">int31</span></span> has a unique constructor <span class="inlinecode"><span class="id" title="var">I31</span></span> that expects
+   31 arguments of type <span class="inlinecode"><span class="id" title="var">digits</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">digits31</span> <span class="nv">t</span> := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span> nfun digits size t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">int31</span> : <span class="kt">Type</span> := I31 : digits31 int31.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Scheme</span> <span class="nf">int31_ind</span> := <span class="kn">Induction for</span> int31 <span class="kn">Sort</span> <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Scheme</span> <span class="nf">int31_rec</span> := <span class="kn">Induction for</span> int31 <span class="kn">Sort</span> <span class="kt">Set</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Scheme</span> <span class="nf">int31_rect</span> := <span class="kn">Induction for</span> int31 <span class="kn">Sort</span> <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Scope</span> int31_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Delimit Scope</span> int31_scope <span class="kr">with</span> int31.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Bind Scope</span> int31_scope <span class="kr">with</span> int31.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> int31_scope.</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Constants</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Zero is <span class="inlinecode"><span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">D0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">D0</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">On</span> : int31 := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span> napply_cst _ _ D0 size I31.</span></span></span></pre><div class="doc">
+One is <span class="inlinecode"><span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">D0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">D0</span></span> <span class="inlinecode"><span class="id" title="var">D1</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">In</span> : int31 := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span> (napply_cst _ _ D0 (size-<span class="mi">1</span>) I31) D1.</span></span></span></pre><div class="doc">
+The biggest integer is <span class="inlinecode"><span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">D1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">D1</span></span>, corresponding to <span class="inlinecode">(2^<span class="id" title="var">size</span>)-1</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Tn</span> : int31 := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span> napply_cst _ _ D1 size I31.</span></span></span></pre><div class="doc">
+Two is <span class="inlinecode"><span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">D0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">D0</span></span> <span class="inlinecode"><span class="id" title="var">D1</span></span> <span class="inlinecode"><span class="id" title="var">D0</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Twon</span> : int31 := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span> (napply_cst _ _ D0 (size-<span class="mi">2</span>) I31) D1 D0.</span></span></span></pre><div class="doc">
+<a name="lab3"></a><h1 class="section">Bits manipulation</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">sneakr</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> shifts <span class="inlinecode"><span class="id" title="var">x</span></span> to the right by one bit.
+   Rightmost digit is lost while leftmost digit becomes <span class="inlinecode"><span class="id" title="var">b</span></span>.
+   Pseudo-code is
+    <span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode">(<span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">d0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">dN</span>)</span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">d0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">d</span>(<span class="id" title="var">N</span>-1)</span> <span class="inlinecode"><span class="id" title="keyword">end</span></span> <span class="inlinecode"></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sneakr</span> : digits -&gt; int31 -&gt; int31 := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+ <span class="kr">fun</span> <span class="nv">b</span> =&gt; int31_rect _ (napply_except_last _ _ (size-<span class="mi">1</span>) (I31 b)).</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">sneakl</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> shifts <span class="inlinecode"><span class="id" title="var">x</span></span> to the left by one bit.
+   Leftmost digit is lost while rightmost digit becomes <span class="inlinecode"><span class="id" title="var">b</span></span>.
+   Pseudo-code is
+    <span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode">(<span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">d0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">dN</span>)</span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">d1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">dN</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="keyword">end</span></span> <span class="inlinecode"></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sneakl</span> : digits -&gt; int31 -&gt; int31 := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+ <span class="kr">fun</span> <span class="nv">b</span> =&gt; int31_rect _ (<span class="kr">fun</span> <span class="nv">_</span> =&gt; napply_then_last _ _ b (size-<span class="mi">1</span>) I31).</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">shiftl</span></span>, <span class="inlinecode"><span class="id" title="var">shiftr</span></span>, <span class="inlinecode"><span class="id" title="var">twice</span></span> and <span class="inlinecode"><span class="id" title="var">twice_plus_one</span></span> are direct
+    consequences of <span class="inlinecode"><span class="id" title="var">sneakl</span></span> and <span class="inlinecode"><span class="id" title="var">sneakr</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftl</span> := sneakl D0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftr</span> := sneakr D0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">twice</span> := sneakl D0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">twice_plus_one</span> := sneakl D1.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">firstl</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> returns the leftmost digit of number <span class="inlinecode"><span class="id" title="var">x</span></span>.
+    Pseudo-code is <span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode">(<span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">d0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">dN</span>)</span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">d0</span></span> <span class="inlinecode"><span class="id" title="keyword">end</span></span> <span class="inlinecode"></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">firstl</span> : int31 -&gt; digits := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+ int31_rect _ (<span class="kr">fun</span> <span class="nv">d</span> =&gt; napply_discard _ _ d (size-<span class="mi">1</span>)).</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">firstr</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> returns the rightmost digit of number <span class="inlinecode"><span class="id" title="var">x</span></span>.
+    Pseudo-code is <span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode">(<span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">d0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">dN</span>)</span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">dN</span></span> <span class="inlinecode"><span class="id" title="keyword">end</span></span> <span class="inlinecode"></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">firstr</span> : int31 -&gt; digits := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+ int31_rect _ (napply_discard _ _ (<span class="kr">fun</span> <span class="nv">d</span>=&gt;d) (size-<span class="mi">1</span>)).</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">iszero</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> is true iff <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">D0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">D0</span></span>. Pseudo-code is
+    <span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode">(<span class="id" title="var">I31</span></span> <span class="inlinecode"><span class="id" title="var">D0</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">D0</span>)</span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">true</span></span> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">false</span></span> <span class="inlinecode"><span class="id" title="keyword">end</span></span> <span class="inlinecode"></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">iszero</span> : int31 -&gt; bool := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+ <span class="kr">let</span> <span class="nv">f</span> <span class="nv">d</span> <span class="nv">b</span> := <span class="kr">match</span> d <span class="kr">with</span> D0 =&gt; b | D1 =&gt; false <span class="kr">end</span>
+ <span class="kr">in</span> int31_rect _ (nfold_bis _ _ f true size).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* NB: DO NOT transform the above match in a nicer (if then else).</span>
+<span class="c">   It seems to work, but later &quot;unfold iszero&quot; takes forever. *)</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">base</span></span> is <span class="inlinecode">2^31</span>, obtained via iterations of <span class="inlinecode"><span class="id" title="var">Z.double</span></span>.
+   It can also be seen as the smallest b &gt; 0 s.t. phi_inv b = 0
+   (see below) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">base</span> := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span>
+ iter_nat size Z Z.double <span class="mi">1</span>%Z.</span></span></span></pre><div class="doc">
+<a name="lab4"></a><h1 class="section">Recursors</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">recl_aux</span> (<span class="nv">n</span>:nat)(<span class="nv">A</span>:<span class="kt">Type</span>)(<span class="nv">case0</span>:A)(<span class="nv">caserec</span>:digits-&gt;int31-&gt;A-&gt;A)
+ (<span class="nv">i</span>:int31) : A :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+  | O =&gt; case0
+  | S next =&gt;
+          <span class="kr">if</span> iszero i <span class="kr">then</span>
+             case0
+          <span class="kr">else</span>
+             <span class="kr">let</span> <span class="nv">si</span> := shiftl i <span class="kr">in</span>
+             caserec (firstl i) si (recl_aux next A case0 caserec si)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">recr_aux</span> (<span class="nv">n</span>:nat)(<span class="nv">A</span>:<span class="kt">Type</span>)(<span class="nv">case0</span>:A)(<span class="nv">caserec</span>:digits-&gt;int31-&gt;A-&gt;A)
+ (<span class="nv">i</span>:int31) : A :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+  | O =&gt; case0
+  | S next =&gt;
+          <span class="kr">if</span> iszero i <span class="kr">then</span>
+             case0
+          <span class="kr">else</span>
+             <span class="kr">let</span> <span class="nv">si</span> := shiftr i <span class="kr">in</span>
+             caserec (firstr i) si (recr_aux next A case0 caserec si)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">recl</span> := recl_aux size.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">recr</span> := recr_aux size.</span></span></span></pre><div class="doc">
+<a name="lab5"></a><h1 class="section">Conversions</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+From int31 to Z, we simply iterates <span class="inlinecode"><span class="id" title="var">Z.double</span></span> or <span class="inlinecode"><span class="id" title="var">Z.succ_double</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">phi</span> : int31 -&gt; Z :=
+ recr Z (<span class="mi">0</span>%Z)
+  (<span class="kr">fun</span> <span class="nv">b</span> <span class="nv">_</span> =&gt; <span class="kr">match</span> b <span class="kr">with</span> D0 =&gt; Z.double | D1 =&gt; Z.succ_double <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+From positive to int31. An abstract definition could be :
+      <span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="var">phi_inv</span></span> <span class="inlinecode">(2<span class="id" title="var">n</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode">2*(<span class="id" title="var">phi_inv</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">∧</span>
+<span class="inlinecode"><span class="id" title="var">phi_inv</span></span> <span class="inlinecode">2<span class="id" title="var">n</span>+1</span> <span class="inlinecode">=</span> <span class="inlinecode">2*(<span class="id" title="var">phi_inv</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> <span class="inlinecode"></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">phi_inv_positive</span> <span class="nv">p</span> :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | xI q =&gt; twice_plus_one (phi_inv_positive q)
+    | xO q =&gt; twice (phi_inv_positive q)
+    | xH =&gt; In
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+The negative part : 2-complement  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">complement_negative</span> <span class="nv">p</span> :=
+  <span class="kr">match</span> p <span class="kr">with</span>
+    | xI q =&gt; twice (complement_negative q)
+    | xO q =&gt; twice_plus_one (complement_negative q)
+    | xH =&gt; twice Tn
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+A simple incrementation function 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">incr</span> : int31 -&gt; int31 :=
+ recr int31 In
+   (<span class="kr">fun</span> <span class="nv">b</span> <span class="nv">si</span> <span class="nv">rec</span> =&gt; <span class="kr">match</span> b <span class="kr">with</span>
+     | D0 =&gt; sneakl D1 si
+     | D1 =&gt; sneakl D0 rec <span class="kr">end</span>).</span></span></span></pre><div class="doc">
+We can now define the conversion from Z to int31. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">phi_inv</span> : Z -&gt; int31 := <span class="kr">fun</span> <span class="nv">n</span> =&gt;
+ <span class="kr">match</span> n <span class="kr">with</span>
+ | Z0 =&gt; On
+ | Zpos p =&gt; phi_inv_positive p
+ | Zneg p =&gt; incr (complement_negative p)
+ <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">phi_inv_nonneg</span></span> returns <span class="inlinecode"><span class="id" title="var">None</span></span> if the <span class="inlinecode"><span class="id" title="var">Z</span></span> is negative; this matches the old behavior of parsing int31 numerals 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">phi_inv_nonneg</span> : Z -&gt; option int31 := <span class="kr">fun</span> <span class="nv">n</span> =&gt;
+ <span class="kr">match</span> n <span class="kr">with</span>
+ | Zneg _ =&gt; None
+ | _ =&gt; Some (phi_inv n)
+ <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">phi_inv2</span></span> is similar to <span class="inlinecode"><span class="id" title="var">phi_inv</span></span> but returns a double word
+    <span class="inlinecode"><span class="id" title="var">zn2z</span></span> <span class="inlinecode"><span class="id" title="var">int31</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">phi_inv2</span> <span class="nv">n</span> :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+  | Z0 =&gt; W0
+  | _ =&gt; WW (phi_inv (n/base)%Z) (phi_inv n)
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">phi2</span></span> is similar to <span class="inlinecode"><span class="id" title="var">phi</span></span> but takes a double word (two args) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">phi2</span> <span class="nv">nh</span> <span class="nv">nl</span> :=
+  ((phi nh)*base+(phi nl))%Z.</span></span></span></pre><div class="doc">
+<a name="lab6"></a><h1 class="section">Addition</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Addition modulo <span class="inlinecode">2^31</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">add31</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) := phi_inv ((phi n)+(phi m)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n + m&quot;</span> := (add31 n m) : int31_scope.</span></span></span></pre><div class="doc">
+Addition with carry (the result is thus exact) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* spiwack : when executed in non-compiled*)</span>
+<span class="c">(* mode, (phi n)+(phi m) is computed twice*)</span>
+<span class="c">(* it may be considered to optimize it *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">add31c</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) :=
+  <span class="kr">let</span> <span class="nv">npm</span> := n+m <span class="kr">in</span>
+  <span class="kr">match</span> (phi npm ?= (phi n)+(phi m))%Z <span class="kr">with</span>
+  | Eq =&gt; C0 npm
+  | _ =&gt; C1 npm
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n &#39;+c&#39; m&quot;</span> := (add31c n m) (<span class="kn">at level</span> <span class="mi">50</span>, <span class="kn">no associativity</span>) : int31_scope.</span></span></span></pre><div class="doc">
+ Addition plus one with carry (the result is thus exact) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">add31carryc</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) :=
+  <span class="kr">let</span> <span class="nv">npmpone_exact</span> := ((phi n)+(phi m)+<span class="mi">1</span>)%Z <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">npmpone</span> := phi_inv npmpone_exact <span class="kr">in</span>
+  <span class="kr">match</span> (phi npmpone ?= npmpone_exact)%Z <span class="kr">with</span>
+  | Eq =&gt; C0 npmpone
+  | _ =&gt; C1 npmpone
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+<a name="lab7"></a><h1 class="section">Subtraction</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Subtraction modulo <span class="inlinecode">2^31</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sub31</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) := phi_inv ((phi n)-(phi m)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n - m&quot;</span> := (sub31 n m) : int31_scope.</span></span></span></pre><div class="doc">
+Subtraction with carry (thus exact) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sub31c</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) :=
+  <span class="kr">let</span> <span class="nv">nmm</span> := n-m <span class="kr">in</span>
+  <span class="kr">match</span> (phi nmm ?= (phi n)-(phi m))%Z <span class="kr">with</span>
+  | Eq =&gt; C0 nmm
+  | _ =&gt; C1 nmm
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n &#39;-c&#39; m&quot;</span> := (sub31c n m) (<span class="kn">at level</span> <span class="mi">50</span>, <span class="kn">no associativity</span>) : int31_scope.</span></span></span></pre><div class="doc">
+subtraction minus one with carry (thus exact) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sub31carryc</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) :=
+  <span class="kr">let</span> <span class="nv">nmmmone_exact</span> := ((phi n)-(phi m)-<span class="mi">1</span>)%Z <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">nmmmone</span> := phi_inv nmmmone_exact <span class="kr">in</span>
+  <span class="kr">match</span> (phi nmmmone ?= nmmmone_exact)%Z <span class="kr">with</span>
+  | Eq =&gt; C0 nmmmone
+  | _ =&gt; C1 nmmmone
+  <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Opposite 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">opp31</span> <span class="nv">x</span> := On - x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;- x&quot;</span> := (opp31 x) : int31_scope.</span></span></span></pre><div class="doc">
+Multiplication 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+multiplication modulo <span class="inlinecode">2^31</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">mul31</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) := phi_inv ((phi n)*(phi m)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n * m&quot;</span> := (mul31 n m) : int31_scope.</span></span></span></pre><div class="doc">
+multiplication with double word result (thus exact) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">mul31c</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) := phi_inv2 ((phi n)*(phi m)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n &#39;*c&#39; m&quot;</span> := (mul31c n m) (<span class="kn">at level</span> <span class="mi">40</span>, <span class="kn">no associativity</span>) : int31_scope.</span></span></span></pre><div class="doc">
+<a name="lab8"></a><h1 class="section">Division</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Division of a double size word modulo <span class="inlinecode">2^31</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">div3121</span> (<span class="nv">nh</span> <span class="nv">nl</span> <span class="nv">m</span> : int31) :=
+  <span class="kr">let</span> (<span class="nv">q</span>,r) := Z.div_eucl (phi2 nh nl) (phi m) <span class="kr">in</span>
+  (phi_inv q, phi_inv r).</span></span></span></pre><div class="doc">
+Division modulo <span class="inlinecode">2^31</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">div31</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) :=
+  <span class="kr">let</span> (<span class="nv">q</span>,r) := Z.div_eucl (phi n) (phi m) <span class="kr">in</span>
+  (phi_inv q, phi_inv r).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n / m&quot;</span> := (div31 n m) : int31_scope.</span></span></span></pre><div class="doc">
+<a name="lab9"></a><h1 class="section">Unsigned comparison</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">compare31</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) := ((phi n)?=(phi m))%Z.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;n ?= m&quot;</span> := (compare31 n m) (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : int31_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">eqb31</span> (<span class="nv">n</span> <span class="nv">m</span> : int31) :=
+ <span class="kr">match</span> n ?= m <span class="kr">with</span> Eq =&gt; true | _ =&gt; false <span class="kr">end</span>.</span></span></span></pre><div class="doc">
+Computing the <span class="inlinecode"><span class="id" title="var">i</span></span>-th iterate of a function:
+    <span class="inlinecode"><span class="id" title="var">iter_int31</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">i</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">iter_int31</span> <span class="nv">i</span> <span class="nv">A</span> <span class="nv">f</span> :=
+  recr (A-&gt;A) (<span class="kr">fun</span> <span class="nv">x</span> =&gt; x)
+   (<span class="kr">fun</span> <span class="nv">b</span> <span class="nv">si</span> <span class="nv">rec</span> =&gt; <span class="kr">match</span> b <span class="kr">with</span>
+      | D0 =&gt; <span class="kr">fun</span> <span class="nv">x</span> =&gt; rec (rec x)
+      | D1 =&gt; <span class="kr">fun</span> <span class="nv">x</span> =&gt; f (rec (rec x))
+    <span class="kr">end</span>)
+    i.</span></span></span></pre><div class="doc">
+Combining the <span class="inlinecode">(31-<span class="id" title="var">p</span>)</span> low bits of <span class="inlinecode"><span class="id" title="var">i</span></span> above the <span class="inlinecode"><span class="id" title="var">p</span></span> high bits of <span class="inlinecode"><span class="id" title="var">j</span></span>:
+    <span class="inlinecode"><span class="id" title="var">addmuldiv31</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span> <span class="inlinecode"><span class="id" title="var">j</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">i</span>*2^<span class="id" title="var">p</span>+<span class="id" title="var">j</span>/2^(31-<span class="id" title="var">p</span>)</span>  (modulo <span class="inlinecode">2^31</span>) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">addmuldiv31</span> <span class="nv">p</span> <span class="nv">i</span> <span class="nv">j</span> :=
+ <span class="kr">let</span> (<span class="nv">res</span>, _ ) :=
+ iter_int31 p (int31*int31)
+  (<span class="kr">fun</span> <span class="nv">ij</span> =&gt; <span class="kr">let</span> (<span class="nv">i</span>,j) := ij <span class="kr">in</span> (sneakl (firstl j) i, shiftl j))
+  (i,j)
+ <span class="kr">in</span>
+ res.</span></span></span></pre><div class="doc">
+Bitwise operations 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">lor31</span> <span class="nv">n</span> <span class="nv">m</span> := phi_inv (Z.lor (phi n) (phi m)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">land31</span> <span class="nv">n</span> <span class="nv">m</span> := phi_inv (Z.land (phi n) (phi m)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">lxor31</span> <span class="nv">n</span> <span class="nv">m</span> := phi_inv (Z.lxor (phi n) (phi m)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">lnot31</span> <span class="nv">n</span> := lxor31 Tn n.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ldiff31</span> <span class="nv">n</span> <span class="nv">m</span> := land31 n (lnot31 m).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">euler</span> (<span class="nv">guard</span>:nat) (<span class="nv">i</span> <span class="nv">j</span>:int31) {<span class="nv">struct</span> <span class="nv">guard</span>} :=
+  <span class="kr">match</span> <span class="kp">guard</span> <span class="kr">with</span>
+    | O =&gt; In
+    | S p =&gt; <span class="kr">match</span> j ?= On <span class="kr">with</span>
+               | Eq =&gt; i
+               | _ =&gt; euler p j (<span class="kr">let</span> (<span class="nv">_</span>, r ) := i/j <span class="kr">in</span> r)
+             <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">gcd31</span> (<span class="nv">i</span> <span class="nv">j</span>:int31) := euler (<span class="mi">2</span>*size)%nat i j.</span></span></span></pre><div class="doc">
+Square root functions using newton iteration
+    we use a very naive upper-bound on the iteration
+    2^31 instead of the usual 31.
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt31_step</span> (<span class="nv">rec</span>: int31 -&gt; int31 -&gt; int31) (<span class="nv">i</span> <span class="nv">j</span>: int31)  :=
+<span class="kn">Eval</span> <span class="nb">lazy</span> delta [Twon] <span class="kr">in</span>
+  <span class="kr">let</span> (<span class="nv">quo</span>,_) := i/j <span class="kr">in</span>
+  <span class="kr">match</span> quo ?= j <span class="kr">with</span>
+    Lt =&gt; rec i (fst ((j + quo)/Twon))
+  | _ =&gt;  j
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">iter31_sqrt</span> (<span class="nv">n</span>: nat) (<span class="nv">rec</span>: int31 -&gt; int31 -&gt; int31)
+          (<span class="nv">i</span> <span class="nv">j</span>: int31) {<span class="nv">struct</span> <span class="nv">n</span>} : int31 :=
+  sqrt31_step
+   (<span class="kr">match</span> n <span class="kr">with</span>
+      O =&gt;  rec
+   | S n =&gt; (iter31_sqrt n (iter31_sqrt n rec))
+   <span class="kr">end</span>) i j.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt31</span> <span class="nv">i</span> :=
+<span class="kn">Eval</span> <span class="nb">lazy</span> delta [On In Twon] <span class="kr">in</span>
+  <span class="kr">match</span> compare31 In i <span class="kr">with</span>
+    Gt =&gt; On
+  | Eq =&gt; In
+  | Lt =&gt; iter31_sqrt <span class="mi">31</span> (<span class="kr">fun</span> <span class="nv">i</span> <span class="nv">j</span> =&gt; j) i (fst (i/Twon))
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">v30</span> := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span> (addmuldiv31 (phi_inv (Z.of_nat size - <span class="mi">1</span>)) In On).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt312_step</span> (<span class="nv">rec</span>: int31 -&gt; int31 -&gt; int31 -&gt; int31)
+   (<span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>: int31)  :=
+<span class="kn">Eval</span> <span class="nb">lazy</span> delta [Twon v30] <span class="kr">in</span>
+  <span class="kr">match</span> ih ?= j <span class="kr">with</span> Eq =&gt; j | Gt =&gt; j | _ =&gt;
+  <span class="kr">let</span> (<span class="nv">quo</span>,_) := div3121 ih il j <span class="kr">in</span>
+  <span class="kr">match</span> quo ?= j <span class="kr">with</span>
+    Lt =&gt; <span class="kr">let</span> <span class="nv">m</span> := <span class="kr">match</span> j +c quo <span class="kr">with</span>
+                    C0 m1 =&gt; fst (m1/Twon)
+                  | C1 m1 =&gt; fst (m1/Twon) + v30
+                  <span class="kr">end</span> <span class="kr">in</span> rec ih il m
+  | _ =&gt;  j
+  <span class="kr">end</span> <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">iter312_sqrt</span> (<span class="nv">n</span>: nat)
+          (<span class="nv">rec</span>: int31  -&gt; int31 -&gt; int31 -&gt; int31)
+          (<span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>: int31) {<span class="nv">struct</span> <span class="nv">n</span>} : int31 :=
+  sqrt312_step
+   (<span class="kr">match</span> n <span class="kr">with</span>
+      O =&gt;  rec
+   | S n =&gt; (iter312_sqrt n (iter312_sqrt n rec))
+   <span class="kr">end</span>) ih il j.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt312</span> <span class="nv">ih</span> <span class="nv">il</span> :=
+<span class="kn">Eval</span> <span class="nb">lazy</span> delta [On In] <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">s</span> := iter312_sqrt <span class="mi">31</span> (<span class="kr">fun</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span> =&gt; j) ih il Tn <span class="kr">in</span>
+           <span class="kr">match</span> s *c s <span class="kr">with</span>
+            W0 =&gt; (On, C0 On) <span class="c">(* impossible *)</span>
+          | WW ih1 il1 =&gt;
+             <span class="kr">match</span> il -c il1 <span class="kr">with</span>
+                C0 il2 =&gt;
+                  <span class="kr">match</span> ih ?= ih1 <span class="kr">with</span>
+                    Gt =&gt; (s, C1 il2)
+                  | _  =&gt; (s, C0 il2)
+                  <span class="kr">end</span>
+              | C1 il2 =&gt;
+                  <span class="kr">match</span> (ih - In) ?= ih1 <span class="kr">with</span> <span class="c">(* we could parametrize ih - 1 *)</span>
+                    Gt =&gt; (s, C1 il2)
+                  | _  =&gt; (s, C0 il2)
+                  <span class="kr">end</span>
+              <span class="kr">end</span>
+          <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">p2i</span> <span class="nv">n</span> <span class="nv">p</span> : (N*int31)%type :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+    | O =&gt; (Npos p, On)
+    | S n =&gt; <span class="kr">match</span> p <span class="kr">with</span>
+               | xO p =&gt; <span class="kr">let</span> (<span class="nv">r</span>,i) := p2i n p <span class="kr">in</span> (r, Twon*i)
+               | xI p =&gt; <span class="kr">let</span> (<span class="nv">r</span>,i) := p2i n p <span class="kr">in</span> (r, Twon*i+In)
+               | xH =&gt; (N0, In)
+             <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">positive_to_int31</span> (<span class="nv">p</span>:positive) := p2i size p.</span></span></span></pre><div class="doc">
+Constant 31 converted into type int31.
+    It is used as default answer for numbers of zeros
+    in <span class="inlinecode"><span class="id" title="var">head0</span></span> and <span class="inlinecode"><span class="id" title="var">tail0</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">T31</span> : int31 := <span class="kn">Eval</span> <span class="nb">compute</span> <span class="kr">in</span> phi_inv (Z.of_nat size).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">head031</span> (<span class="nv">i</span>:int31) :=
+  recl _ (<span class="kr">fun</span> <span class="nv">_</span> =&gt; T31)
+   (<span class="kr">fun</span> <span class="nv">b</span> <span class="nv">si</span> <span class="nv">rec</span> <span class="nv">n</span> =&gt; <span class="kr">match</span> b <span class="kr">with</span>
+     | D0 =&gt; rec (add31 n In)
+     | D1 =&gt; n
+    <span class="kr">end</span>)
+   i On.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">tail031</span> (<span class="nv">i</span>:int31) :=
+  recr _ (<span class="kr">fun</span> <span class="nv">_</span> =&gt; T31)
+   (<span class="kr">fun</span> <span class="nv">b</span> <span class="nv">si</span> <span class="nv">rec</span> <span class="nv">n</span> =&gt; <span class="kr">match</span> b <span class="kr">with</span>
+     | D0 =&gt; rec (add31 n In)
+     | D1 =&gt; n
+    <span class="kr">end</span>)
+   i On.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Numeral Notation</span> <span class="nf">int31</span> phi_inv_nonneg phi : int31_scope.</span></span></span></pre></article></body></html>

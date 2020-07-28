@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html><head><title>IndPrinciples.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="doc">
+<a name="lab1"></a><h1 class="section">IndPrinciples: Induction Principles</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+With the Curry-Howard correspondence and its realization in Coq in
+    mind, we can now take a deeper look at induction principles. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Warnings</span> <span class="s2">&quot;-notation-overridden,-parsing&quot;</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> LF <span class="kn">Require Export</span> ProofObjects.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Basics</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Every time we declare a new <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> datatype, Coq
+    automatically generates an <i>induction principle</i> for this type.
+    This induction principle is a theorem like any other: If <span class="inlinecode"><span class="id" title="var">t</span></span> is
+    defined inductively, the corresponding induction principle is
+    called <span class="inlinecode"><span class="id" title="var">t_ind</span></span>.  Here is the one for natural numbers: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="IndPrinciples-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk0"><span class="highlight"><span class="kn">Check</span> nat_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">nat_ind
+     : <span class="kr">forall</span> <span class="nv">P</span> : nat -&gt; <span class="kt">Prop</span>,
+       P <span class="mi">0</span> -&gt;
+       (<span class="kr">forall</span> <span class="nv">n</span> : nat, P n -&gt; P (S n)) -&gt;
+       <span class="kr">forall</span> <span class="nv">n</span> : nat, P n</span></blockquote></div></div></small></span></pre><div class="doc">
+The <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic is a straightforward wrapper that, at its
+    core, simply performs <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">t_ind</span></span>.  To see this more clearly,
+    let's experiment with directly using <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">nat_ind</span></span>, instead of
+    the <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic, to carry out some proofs.  Here, for
+    example, is an alternate proof of a theorem that we saw in the
+    <span class="inlinecode"><span class="id" title="var">Basics</span></span> chapter. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk1"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">mult_0_r&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span>:nat,
+  n * <span class="mi">0</span> = <span class="mi">0</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, n * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk2"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, n * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk3"><span class="highlight"><span class="nb">apply</span> nat_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="IndPrinciples-v-chk4" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator coq-extra-goal-label" for="IndPrinciples-v-chk4"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, n * <span class="mi">0</span> = <span class="mi">0</span> -&gt; S n * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk5"><span class="highlight">- <span class="c">(* n = O *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk6"><span class="highlight">- <span class="c">(* n = S n&#39; *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, n * <span class="mi">0</span> = <span class="mi">0</span> -&gt; S n * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk7"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, n * <span class="mi">0</span> = <span class="mi">0</span> -&gt; n * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk8"><span class="highlight"><span class="nb">intros</span> n&#39; IHn&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n&#39; * <span class="mi">0</span> = <span class="mi">0</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n&#39; * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk9"><span class="highlight"><span class="nb">rewrite</span> -&gt; IHn&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n&#39; * <span class="mi">0</span> = <span class="mi">0</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+This proof is basically the same as the earlier one, but a
+    few minor differences are worth noting.
+
+<div class="paragraph"> </div>
+
+    First, in the induction step of the proof (the <span class="inlinecode">"<span class="id" title="var">S</span>"</span> case), we
+    have to do a little bookkeeping manually (the <span class="inlinecode"><span class="id" title="tactic">intros</span></span>) that
+    <span class="inlinecode"><span class="id" title="tactic">induction</span></span> does automatically.
+
+<div class="paragraph"> </div>
+
+    Second, we do not introduce <span class="inlinecode"><span class="id" title="var">n</span></span> into the context before applying
+    <span class="inlinecode"><span class="id" title="var">nat_ind</span></span> -- the conclusion of <span class="inlinecode"><span class="id" title="var">nat_ind</span></span> is a quantified formula,
+    and <span class="inlinecode"><span class="id" title="tactic">apply</span></span> needs this conclusion to exactly match the shape of
+    the goal state, including the quantifier.  By contrast, the
+    <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic works either with a variable in the context or
+    a quantified variable in the goal.
+
+<div class="paragraph"> </div>
+
+    These conveniences make <span class="inlinecode"><span class="id" title="tactic">induction</span></span> nicer to use in practice than
+    applying induction principles like <span class="inlinecode"><span class="id" title="var">nat_ind</span></span> directly.  But it is
+    important to realize that, modulo these bits of bookkeeping,
+    applying <span class="inlinecode"><span class="id" title="var">nat_ind</span></span> is what we are really doing. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab3"></a><h4 class="section">Exercise: 2 stars, standard, optional (plus_one_r')</h4>
+<div class="paragraph"> </div>
+
+    Complete this proof without using the <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chka"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">plus_one_r&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span>:nat,
+  n + <span class="mi">1</span> = S n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, n + <span class="mi">1</span> = S n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chkb" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chkb"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, n + <span class="mi">1</span> = S n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">  <span class="c">(* FILL IN HERE *)</span></span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Admitted</span>.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Coq generates induction principles for every datatype defined with
+    <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>, including those that aren't recursive.  Although of
+    course we don't need induction to prove properties of
+    non-recursive datatypes, the idea of an induction principle still
+    makes sense for them: it gives a way to prove that a property
+    holds for all values of the type.
+
+<div class="paragraph"> </div>
+
+    These generated principles follow a similar pattern. If we define
+    a type <span class="inlinecode"><span class="id" title="var">t</span></span> with constructors <span class="inlinecode"><span class="id" title="var">c1</span></span> ... <span class="inlinecode"><span class="id" title="var">cn</span></span>, Coq generates a
+    theorem with this shape:
+
+<div class="paragraph"> </div>
+
+    t_ind : forall P : t -&gt; Prop,
+              ... case for c1 ... -&gt;
+              ... case for c2 ... -&gt; ...
+              ... case for cn ... -&gt;
+              forall n : t, P n
+
+<div class="paragraph"> </div>
+
+    The specific shape of each case depends on the arguments to the
+    corresponding constructor.  Before trying to write down a general
+    rule, let's look at some more examples. First, an example where
+    the constructors take no arguments: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">yesno</span> : <span class="kt">Type</span> :=
+  | yes
+  | no.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="IndPrinciples-v-chkc" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chkc"><span class="highlight"><span class="kn">Check</span> yesno_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">yesno_ind
+     : <span class="kr">forall</span> <span class="nv">P</span> : yesno -&gt; <span class="kt">Prop</span>,
+       P yes -&gt; P no -&gt; <span class="kr">forall</span> <span class="nv">y</span> : yesno, P y</span></blockquote></div></div></small></span></pre><div class="doc">
+<a name="lab4"></a><h4 class="section">Exercise: 1 star, standard, optional (rgb)</h4>
+<div class="paragraph"> </div>
+
+    Write out the induction principle that Coq will generate for the
+    following datatype.  Write down your answer on paper or type it
+    into a comment, and then compare it with what Coq prints. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">rgb</span> : <span class="kt">Type</span> :=
+  | <span class="nb">red</span>
+  | green
+  | blue.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="IndPrinciples-v-chkd" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chkd"><span class="highlight"><span class="kn">Check</span> rgb_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">rgb_ind
+     : <span class="kr">forall</span> <span class="nv">P</span> : rgb -&gt; <span class="kt">Prop</span>,
+       P <span class="nb">red</span> -&gt;
+       P green -&gt; P blue -&gt; <span class="kr">forall</span> <span class="nv">r</span> : rgb, P r</span></blockquote></div></div></small></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Here's another example, this time with one of the constructors
+    taking some arguments. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">natlist</span> : <span class="kt">Type</span> :=
+  | nnil
+  | ncons (n : nat) (l : natlist).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="IndPrinciples-v-chke" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chke"><span class="highlight"><span class="kn">Check</span> natlist_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">natlist_ind
+     : <span class="kr">forall</span> <span class="nv">P</span> : natlist -&gt; <span class="kt">Prop</span>,
+       P nnil -&gt;
+       (<span class="kr">forall</span> (<span class="nv">n</span> : nat) (<span class="nv">l</span> : natlist),
+        P l -&gt; P (ncons n l)) -&gt;
+       <span class="kr">forall</span> <span class="nv">n</span> : natlist, P n</span></blockquote></div></div></small></span></pre><div class="doc">
+<a name="lab5"></a><h4 class="section">Exercise: 1 star, standard, optional (natlist1)</h4>
+<div class="paragraph"> </div>
+
+    Suppose we had written the above definition a little
+   differently: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">natlist1</span> : <span class="kt">Type</span> :=
+  | nnil1
+  | nsnoc1 (l : natlist1) (n : nat).</span></span></span></pre><div class="doc">
+Now what will the induction principle look like? 
+
+<div class="paragraph"> </div>
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+From these examples, we can extract this general rule:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> The type declaration gives several constructors; each
+      corresponds to one clause of the induction principle.
+
+</li>
+<li> Each constructor <span class="inlinecode"><span class="id" title="var">c</span></span> takes argument types <span class="inlinecode"><span class="id" title="var">a1</span></span> ... <span class="inlinecode"><span class="id" title="var">an</span></span>.
+
+</li>
+<li> Each <span class="inlinecode"><span class="id" title="var">ai</span></span> can be either <span class="inlinecode"><span class="id" title="var">t</span></span> (the datatype we are defining) or
+      some other type <span class="inlinecode"><span class="id" title="var">s</span></span>.
+
+</li>
+<li> The corresponding case of the induction principle says:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> "For all values <span class="inlinecode"><span class="id" title="var">x1</span></span>...<span class="inlinecode"><span class="id" title="var">xn</span></span> of types <span class="inlinecode"><span class="id" title="var">a1</span></span>...<span class="inlinecode"><span class="id" title="var">an</span></span>, if <span class="inlinecode"><span class="id" title="var">P</span></span>
+          holds for each of the inductive arguments (each <span class="inlinecode"><span class="id" title="var">xi</span></span> of type
+          <span class="inlinecode"><span class="id" title="var">t</span></span>), then <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">x1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">xn</span></span>".
+
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab6"></a><h4 class="section">Exercise: 1 star, standard, optional (byntree_ind)</h4>
+<div class="paragraph"> </div>
+
+    Write out the induction principle that Coq will generate for the
+    following datatype.  (Again, write down your answer on paper or
+    type it into a comment, and then compare it with what Coq
+    prints.) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">byntree</span> : <span class="kt">Type</span> :=
+ | bempty
+ | bleaf (yn : yesno)
+ | nbranch (yn : yesno) (t1 t2 : byntree).</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab7"></a><h4 class="section">Exercise: 1 star, standard, optional (ex_set)</h4>
+<div class="paragraph"> </div>
+
+    Here is an induction principle for an inductively defined
+    set.
+
+<div class="paragraph"> </div>
+
+      ExSet_ind :
+         forall P : ExSet -&gt; Prop,
+             (forall b : bool, P (con1 b)) -&gt;
+             (forall (n : nat) (e : ExSet), P e -&gt; P (con2 n e)) -&gt;
+             forall e : ExSet, P e
+
+<div class="paragraph"> </div>
+
+    Give an <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definition of <span class="inlinecode"><span class="id" title="var">ExSet</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">ExSet</span> : <span class="kt">Type</span> :=
+  <span class="c">(* FILL IN HERE *)</span>
+.</span></span></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab8"></a><h1 class="section">Polymorphism</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Next, what about polymorphic datatypes?
+
+<div class="paragraph"> </div>
+
+    The inductive definition of polymorphic lists
+
+<div class="paragraph"> </div>
+
+      Inductive list (X:Type) : Type :=
+        | nil : list X
+        | cons : X -&gt; list X -&gt; list X.
+
+<div class="paragraph"> </div>
+
+    is very similar to that of <span class="inlinecode"><span class="id" title="var">natlist</span></span>.  The main difference is
+    that, here, the whole definition is <i>parameterized</i> on a set <span class="inlinecode"><span class="id" title="var">X</span></span>:
+    that is, we are defining a <i>family</i> of inductive types <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span>,
+    one for each <span class="inlinecode"><span class="id" title="var">X</span></span>.  (Note that, wherever <span class="inlinecode"><span class="id" title="var">list</span></span> appears in the body
+    of the declaration, it is always applied to the parameter <span class="inlinecode"><span class="id" title="var">X</span></span>.)
+    The induction principle is likewise parameterized on <span class="inlinecode"><span class="id" title="var">X</span></span>:
+
+<div class="paragraph"> </div>
+
+      list_ind :
+        forall (X : Type) (P : list X -&gt; Prop),
+           P <font size="-2">☐</font> -&gt;
+           (forall (x : X) (l : list X), P l -&gt; P (x :: l)) -&gt;
+           forall l : list X, P l
+
+<div class="paragraph"> </div>
+
+    Note that the <i>whole</i> induction principle is parameterized on
+    <span class="inlinecode"><span class="id" title="var">X</span></span>.  That is, <span class="inlinecode"><span class="id" title="var">list_ind</span></span> can be thought of as a polymorphic
+    function that, when applied to a type <span class="inlinecode"><span class="id" title="var">X</span></span>, gives us back an
+    induction principle specialized to the type <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab9"></a><h4 class="section">Exercise: 1 star, standard, optional (tree)</h4>
+<div class="paragraph"> </div>
+
+    Write out the induction principle that Coq will generate for
+   the following datatype.  Compare your answer with what Coq
+   prints. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">tree</span> (<span class="nv">X</span>:<span class="kt">Type</span>) : <span class="kt">Type</span> :=
+  | leaf (x : X)
+  | node (t1 t2 : tree X).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="IndPrinciples-v-chkf" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chkf"><span class="highlight"><span class="kn">Check</span> tree_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">tree_ind
+     : <span class="kr">forall</span> (<span class="nv">X</span> : <span class="kt">Type</span>) (<span class="nv">P</span> : tree X -&gt; <span class="kt">Prop</span>),
+       (<span class="kr">forall</span> <span class="nv">x</span> : X, P (leaf X x)) -&gt;
+       (<span class="kr">forall</span> <span class="nv">t1</span> : tree X,
+        P t1 -&gt;
+        <span class="kr">forall</span> <span class="nv">t2</span> : tree X, P t2 -&gt; P (node X t1 t2)) -&gt;
+       <span class="kr">forall</span> <span class="nv">t</span> : tree X, P t</span></blockquote></div></div></small></span></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab10"></a><h4 class="section">Exercise: 1 star, standard, optional (mytype)</h4>
+<div class="paragraph"> </div>
+
+    Find an inductive definition that gives rise to the
+    following induction principle:
+
+<div class="paragraph"> </div>
+
+      mytype_ind :
+        forall (X : Type) (P : mytype X -&gt; Prop),
+            (forall x : X, P (constr1 X x)) -&gt;
+            (forall n : nat, P (constr2 X n)) -&gt;
+            (forall m : mytype X, P m -&gt;
+               forall n : nat, P (constr3 X m n)) -&gt;
+            forall m : mytype X, P m
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab11"></a><h4 class="section">Exercise: 1 star, standard, optional (foo)</h4>
+<div class="paragraph"> </div>
+
+    Find an inductive definition that gives rise to the
+    following induction principle:
+
+<div class="paragraph"> </div>
+
+      foo_ind :
+        forall (X Y : Type) (P : foo X Y -&gt; Prop),
+             (forall x : X, P (bar X Y x)) -&gt;
+             (forall y : Y, P (baz X Y y)) -&gt;
+             (forall f1 : nat -&gt; foo X Y,
+               (forall n : nat, P (f1 n)) -&gt; P (quux X Y f1)) -&gt;
+             forall f2 : foo X Y, P f2
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab12"></a><h4 class="section">Exercise: 1 star, standard, optional (foo')</h4>
+<div class="paragraph"> </div>
+
+    Consider the following inductive definition: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">foo&#39;</span> (<span class="nv">X</span>:<span class="kt">Type</span>) : <span class="kt">Type</span> :=
+  | C1 (l : list X) (f : foo&#39; X)
+  | C2.</span></span></span></pre><div class="doc">
+What induction principle will Coq generate for <span class="inlinecode"><span class="id" title="var">foo'</span></span>?  Fill
+   in the blanks, then check your answer with Coq.)
+
+<div class="paragraph"> </div>
+
+     foo'_ind :
+        forall (X : Type) (P : foo' X -&gt; Prop),
+              (forall (l : list X) (f : foo' X),
+                    <i>_____________________</i> -&gt;
+                    <i>_____________________</i>   ) -&gt;
+             <i>_________________________________________</i> -&gt;
+             forall f : foo' X, <i>______________________</i>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<font size="-2">☐</font>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab13"></a><h1 class="section">Induction Hypotheses</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Where does the phrase "induction hypothesis" fit into this story?
+
+<div class="paragraph"> </div>
+
+    The induction principle for numbers
+
+<div class="paragraph"> </div>
+
+       forall P : nat -&gt; Prop,
+            P 0  -&gt;
+            (forall n : nat, P n -&gt; P (S n))  -&gt;
+            forall n : nat, P n
+
+<div class="paragraph"> </div>
+
+   is a generic statement that holds for all propositions
+   <span class="inlinecode"><span class="id" title="var">P</span></span> (or rather, strictly speaking, for all families of
+   propositions <span class="inlinecode"><span class="id" title="var">P</span></span> indexed by a number <span class="inlinecode"><span class="id" title="var">n</span></span>).  Each time we
+   use this principle, we are choosing <span class="inlinecode"><span class="id" title="var">P</span></span> to be a particular
+   expression of type <span class="inlinecode"><span class="id" title="var">nat</span>→<span class="id" title="keyword">Prop</span></span>.
+
+<div class="paragraph"> </div>
+
+   We can make proofs by induction more explicit by giving
+   this expression a name.  For example, instead of stating
+   the theorem <span class="inlinecode"><span class="id" title="var">mult_0_r</span></span> as "<span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">n</span>,</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">×</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode">0</span>," we can
+   write it as "<span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">n</span>,</span> <span class="inlinecode"><span class="id" title="var">P_m0r</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>", where <span class="inlinecode"><span class="id" title="var">P_m0r</span></span> is defined
+   as... 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">P_m0r</span> (<span class="nv">n</span>:nat) : <span class="kt">Prop</span> :=
+  n * <span class="mi">0</span> = <span class="mi">0</span>.</span></span></span></pre><div class="doc">
+... or equivalently: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">P_m0r&#39;</span> : nat-&gt;<span class="kt">Prop</span> :=
+  <span class="kr">fun</span> <span class="nv">n</span> =&gt; n * <span class="mi">0</span> = <span class="mi">0</span>.</span></span></span></pre><div class="doc">
+Now it is easier to see where <span class="inlinecode"><span class="id" title="var">P_m0r</span></span> appears in the proof. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk10"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">mult_0_r&#39;&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span>:nat,
+  P_m0r n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, P_m0r n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk11" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk11"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, P_m0r n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk12" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk12"><span class="highlight"><span class="nb">apply</span> nat_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P_m0r <span class="mi">0</span></span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="IndPrinciples-v-chk13" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator coq-extra-goal-label" for="IndPrinciples-v-chk13"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, P_m0r n -&gt; P_m0r (S n)</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk14" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk14"><span class="highlight">- <span class="c">(* n = O *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P_m0r <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk15" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk15"><span class="highlight">- <span class="c">(* n = S n&#39; *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, P_m0r n -&gt; P_m0r (S n)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">    <span class="c">(* Note the proof state at this point! *)</span>
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk16" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk16"><span class="highlight"><span class="nb">intros</span> n IHn.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">P_m0r n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P_m0r (S n)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk17" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk17"><span class="highlight"><span class="nb">unfold</span> P_m0r <span class="kr">in</span> IHn.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n * <span class="mi">0</span> = <span class="mi">0</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P_m0r (S n)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk18" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk18"><span class="highlight"><span class="nb">unfold</span> P_m0r.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n * <span class="mi">0</span> = <span class="mi">0</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S n * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk19" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk19"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n * <span class="mi">0</span> = <span class="mi">0</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n * <span class="mi">0</span> = <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> IHn.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+This extra naming step isn't something that we do in
+    normal proofs, but it is useful to do it explicitly for an example
+    or two, because it allows us to see exactly what the induction
+    hypothesis is.  If we prove <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">n</span>,</span> <span class="inlinecode"><span class="id" title="var">P_m0r</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> by induction on
+    <span class="inlinecode"><span class="id" title="var">n</span></span> (using either <span class="inlinecode"><span class="id" title="tactic">induction</span></span> or <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">nat_ind</span></span>), we see that the
+    first subgoal requires us to prove <span class="inlinecode"><span class="id" title="var">P_m0r</span></span> <span class="inlinecode">0</span> ("<span class="inlinecode"><span class="id" title="var">P</span></span> holds for
+    zero"), while the second subgoal requires us to prove <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">n'</span>,</span>
+<span class="inlinecode"><span class="id" title="var">P_m0r</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">P_m0r</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span>)</span> (that is "<span class="inlinecode"><span class="id" title="var">P</span></span> holds of <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span> if it
+    holds of <span class="inlinecode"><span class="id" title="var">n'</span></span>" or, more elegantly, "<span class="inlinecode"><span class="id" title="var">P</span></span> is preserved by <span class="inlinecode"><span class="id" title="var">S</span></span>").
+    The <i>induction hypothesis</i> is the premise of this latter
+    implication -- the assumption that <span class="inlinecode"><span class="id" title="var">P</span></span> holds of <span class="inlinecode"><span class="id" title="var">n'</span></span>, which we are
+    allowed to use in proving that <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab14"></a><h1 class="section">More on the <span class="inlinecode"><span class="id" title="tactic">induction</span></span> Tactic</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+The <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic actually does even more low-level
+    bookkeeping for us than we discussed above.
+
+<div class="paragraph"> </div>
+
+    Recall the informal statement of the induction principle for
+    natural numbers:
+<ul class="doclist">
+<li> If <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> is some proposition involving a natural number n, and
+        we want to show that P holds for <i>all</i> numbers n, we can
+        reason like this:
+<ul class="doclist">
+<li> show that <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">O</span></span> holds
+
+</li>
+<li> show that, if <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span> holds, then so does <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span>)</span>
+</li>
+<li> conclude that <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> holds for all n.
+
+</li>
+</ul>
+</li>
+</ul>
+    So, when we begin a proof with <span class="inlinecode"><span class="id" title="tactic">intros</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> and then <span class="inlinecode"><span class="id" title="tactic">induction</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>,
+    we are first telling Coq to consider a <i>particular</i> <span class="inlinecode"><span class="id" title="var">n</span></span> (by
+    introducing it into the context) and then telling it to prove
+    something about <i>all</i> numbers (by using induction).
+
+<div class="paragraph"> </div>
+
+    What Coq actually does in this situation, internally, is to
+    "re-generalize" the variable we perform induction on.  For
+    example, in our original proof that <span class="inlinecode"><span class="id" title="var">plus</span></span> is associative... 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk1a" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk1a"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">plus_assoc&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> <span class="nv">p</span> : nat,
+  n + (m + p) = (n + m) + p.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> <span class="nv">p</span> : nat, n + (m + p) = n + m + p</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk1b" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk1b"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> <span class="nv">p</span> : nat, n + (m + p) = n + m + p</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">  <span class="c">(* ...we first introduce all 3 variables into the context,</span>
+<span class="c">     which amounts to saying &quot;Consider an arbitrary [n], [m], and</span>
+<span class="c">     [p]...&quot; *)</span>
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk1c" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk1c"><span class="highlight"><span class="nb">intros</span> n m p.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, m, p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n + (m + p) = n + m + p</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">  <span class="c">(* ...We now use the [induction] tactic to prove [P n] (that</span>
+<span class="c">     is, [n + (m + p) = (n + m) + p]) for _all_ [n],</span>
+<span class="c">     and hence also for the particular [n] that is in the context</span>
+<span class="c">     at the moment. *)</span>
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk1d" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk1d"><span class="highlight"><span class="nb">induction</span> n <span class="kr">as</span> [| n&#39;].</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m, p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> + (m + p) = <span class="mi">0</span> + m + p</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="IndPrinciples-v-chk1e" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n', m, p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n&#39; + (m + p) = n&#39; + m + p</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="IndPrinciples-v-chk1e"><hr></label><div class="goal-conclusion"><span class="highlight">S n&#39; + (m + p) = S n&#39; + m + p</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk1f" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk1f"><span class="highlight">- <span class="c">(* n = O *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m, p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> + (m + p) = <span class="mi">0</span> + m + p</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk20" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk20"><span class="highlight">- <span class="c">(* n = S n&#39; *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n', m, p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n&#39; + (m + p) = n&#39; + m + p</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S n&#39; + (m + p) = S n&#39; + m + p</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">    <span class="c">(* In the second subgoal generated by [induction] -- the</span>
+<span class="c">       &quot;inductive step&quot; -- we must prove that [P n&#39;] implies</span>
+<span class="c">       [P (S n&#39;)] for all [n&#39;].  The [induction] tactic</span>
+<span class="c">       automatically introduces [n&#39;] and [P n&#39;] into the context</span>
+<span class="c">       for us, leaving just [P (S n&#39;)] as the goal. *)</span>
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk21" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk21"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n', m, p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n&#39; + (m + p) = n&#39; + m + p</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S (n&#39; + (m + p)) = S (n&#39; + m + p)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk22" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk22"><span class="highlight"><span class="nb">rewrite</span> -&gt; IHn&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n', m, p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n&#39; + (m + p) = n&#39; + m + p</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S (n&#39; + m + p) = S (n&#39; + m + p)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+It also works to apply <span class="inlinecode"><span class="id" title="tactic">induction</span></span> to a variable that is
+    quantified in the goal. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk23" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk23"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">plus_comm&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> : nat,
+  n + m = m + n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> : nat, n + m = m + n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk24" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk24"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> : nat, n + m = m + n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk25" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk25"><span class="highlight"><span class="nb">induction</span> n <span class="kr">as</span> [| n&#39;].</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">m</span> : nat, <span class="mi">0</span> + m = m + <span class="mi">0</span></span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="IndPrinciples-v-chk26" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">m</span> : nat, n&#39; + m = m + n&#39;</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="IndPrinciples-v-chk26"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">m</span> : nat, S n&#39; + m = m + S n&#39;</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk27" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk27"><span class="highlight">- <span class="c">(* n = O *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">m</span> : nat, <span class="mi">0</span> + m = m + <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk28" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk28"><span class="highlight"><span class="nb">intros</span> m.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> + m = m + <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk29" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk29"><span class="highlight"><span class="nb">rewrite</span> &lt;- plus_n_O.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> + m = m</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk2a" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk2a"><span class="highlight">- <span class="c">(* n = S n&#39; *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">m</span> : nat, n&#39; + m = m + n&#39;</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">m</span> : nat, S n&#39; + m = m + S n&#39;</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk2b" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk2b"><span class="highlight"><span class="nb">intros</span> m.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">m0</span> : nat, n&#39; + m0 = m0 + n&#39;</span></span></span></div><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S n&#39; + m = m + S n&#39;</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk2c" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk2c"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">m0</span> : nat, n&#39; + m0 = m0 + n&#39;</span></span></span></div><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S (n&#39; + m) = m + S n&#39;</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk2d" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk2d"><span class="highlight"><span class="nb">rewrite</span> -&gt; IHn&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">m0</span> : nat, n&#39; + m0 = m0 + n&#39;</span></span></span></div><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S (m + n&#39;) = m + S n&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk2e" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk2e"><span class="highlight"><span class="nb">rewrite</span> &lt;- plus_n_Sm.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">m0</span> : nat, n&#39; + m0 = m0 + n&#39;</span></span></span></div><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S (m + n&#39;) = S (m + n&#39;)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+Note that <span class="inlinecode"><span class="id" title="tactic">induction</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> leaves <span class="inlinecode"><span class="id" title="var">m</span></span> still bound in the goal --
+    i.e., what we are proving inductively is a statement beginning
+    with <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span>.
+
+<div class="paragraph"> </div>
+
+    If we do <span class="inlinecode"><span class="id" title="tactic">induction</span></span> on a variable that is quantified in the goal
+    <i>after</i> some other quantifiers, the <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic will
+    automatically introduce the variables bound by these quantifiers
+    into the context. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk2f" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk2f"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">plus_comm&#39;&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> : nat,
+  n + m = m + n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> : nat, n + m = m + n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk30" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk30"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span> : nat, n + m = m + n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">  <span class="c">(* Let&#39;s do induction on [m] this time, instead of [n]... *)</span>
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk31" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk31"><span class="highlight"><span class="nb">induction</span> m <span class="kr">as</span> [| m&#39;].</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n + <span class="mi">0</span> = <span class="mi">0</span> + n</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="IndPrinciples-v-chk32" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, m'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHm'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n + m&#39; = m&#39; + n</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="IndPrinciples-v-chk32"><hr></label><div class="goal-conclusion"><span class="highlight">n + S m&#39; = S m&#39; + n</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk33" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk33"><span class="highlight">- <span class="c">(* m = O *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n + <span class="mi">0</span> = <span class="mi">0</span> + n</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk34" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk34"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n + <span class="mi">0</span> = n</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk35" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk35"><span class="highlight"><span class="nb">rewrite</span> &lt;- plus_n_O.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n = n</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk36" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk36"><span class="highlight">- <span class="c">(* m = S m&#39; *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, m'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHm'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n + m&#39; = m&#39; + n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n + S m&#39; = S m&#39; + n</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk37" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk37"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, m'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHm'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n + m&#39; = m&#39; + n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n + S m&#39; = S (m&#39; + n)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk38" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk38"><span class="highlight"><span class="nb">rewrite</span> &lt;- IHm&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, m'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHm'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n + m&#39; = m&#39; + n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n + S m&#39; = S (n + m&#39;)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk39" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk39"><span class="highlight"><span class="nb">rewrite</span> &lt;- plus_n_Sm.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, m'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHm'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">n + m&#39; = m&#39; + n</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">S (n + m&#39;) = S (n + m&#39;)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+<a name="lab15"></a><h4 class="section">Exercise: 1 star, standard, optional (plus_explicit_prop)</h4>
+<div class="paragraph"> </div>
+
+    Rewrite both <span class="inlinecode"><span class="id" title="var">plus_assoc'</span></span> and <span class="inlinecode"><span class="id" title="var">plus_comm'</span></span> and their proofs in
+    the same style as <span class="inlinecode"><span class="id" title="var">mult_0_r''</span></span> above -- that is, for each theorem,
+    give an explicit <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> of the proposition being proved by
+    induction, and state the theorem and proof in terms of this
+    defined proposition.  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* FILL IN HERE </span>
+
+<span class="c">    [] *)</span>
+
+<span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab16"></a><h1 class="section">Induction Principles in <span class="inlinecode"><span class="id" title="keyword">Prop</span></span></h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Earlier, we looked in detail at the induction principles that Coq
+    generates for inductively defined <i>sets</i>.  The induction
+    principles for inductively defined <i>propositions</i> like <span class="inlinecode"><span class="id" title="var">even</span></span> are a
+    tiny bit more complicated.  As with all induction principles, we
+    want to use the induction principle on <span class="inlinecode"><span class="id" title="var">even</span></span> to prove things by
+    inductively considering the possible shapes that something in <span class="inlinecode"><span class="id" title="var">even</span></span>
+    can have.  Intuitively speaking, however, what we want to prove
+    are not statements about <i>evidence</i> but statements about
+    <i>numbers</i>: accordingly, we want an induction principle that lets
+    us prove properties of numbers by induction on evidence.
+
+<div class="paragraph"> </div>
+
+    For example, from what we've said so far, you might expect the
+    inductive definition of <span class="inlinecode"><span class="id" title="var">even</span></span>...
+
+<div class="paragraph"> </div>
+
+      Inductive even : nat -&gt; Prop :=
+      | ev_0 : even 0
+      | ev_SS : forall n : nat, even n -&gt; even (S (S n)).
+
+<div class="paragraph"> </div>
+
+    ...to give rise to an induction principle that looks like this...
+
+<div class="paragraph"> </div>
+
+    ev_ind_max : forall P : (forall n : nat, even n -&gt; Prop),
+         P O ev_0 -&gt;
+         (forall (m : nat) (E : even m),
+            P m E -&gt;
+            P (S (S m)) (ev_SS m E)) -&gt;
+         forall (n : nat) (E : even n),
+         P n E
+
+<div class="paragraph"> </div>
+
+     ... because:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> Since <span class="inlinecode"><span class="id" title="var">even</span></span> is indexed by a number <span class="inlinecode"><span class="id" title="var">n</span></span> (every <span class="inlinecode"><span class="id" title="var">even</span></span> object <span class="inlinecode"><span class="id" title="var">E</span></span> is
+       a piece of evidence that some particular number <span class="inlinecode"><span class="id" title="var">n</span></span> is even),
+       the proposition <span class="inlinecode"><span class="id" title="var">P</span></span> is parameterized by both <span class="inlinecode"><span class="id" title="var">n</span></span> and <span class="inlinecode"><span class="id" title="var">E</span></span> --
+       that is, the induction principle can be used to prove
+       assertions involving both an even number and the evidence that
+       it is even.
+
+<div class="paragraph"> </div>
+</li>
+<li> Since there are two ways of giving evidence of evenness (<span class="inlinecode"><span class="id" title="var">even</span></span>
+       has two constructors), applying the induction principle
+       generates two subgoals:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> We must prove that <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <span class="inlinecode"><span class="id" title="var">O</span></span> and <span class="inlinecode"><span class="id" title="var">ev_0</span></span>.
+
+<div class="paragraph"> </div>
+</li>
+<li> We must prove that, whenever <span class="inlinecode"><span class="id" title="var">n</span></span> is an even number and <span class="inlinecode"><span class="id" title="var">E</span></span>
+           is an evidence of its evenness, if <span class="inlinecode"><span class="id" title="var">P</span></span> holds of <span class="inlinecode"><span class="id" title="var">n</span></span> and
+           <span class="inlinecode"><span class="id" title="var">E</span></span>, then it also holds of <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> and <span class="inlinecode"><span class="id" title="var">ev_SS</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">E</span></span>.
+
+<div class="paragraph"> </div>
+</li>
+</ul>
+</li>
+<li> If these subgoals can be proved, then the induction principle
+       tells us that <span class="inlinecode"><span class="id" title="var">P</span></span> is true for <i>all</i> even numbers <span class="inlinecode"><span class="id" title="var">n</span></span> and
+       evidence <span class="inlinecode"><span class="id" title="var">E</span></span> of their evenness.
+
+</li>
+</ul>
+<div class="paragraph"> </div>
+
+    This is more flexibility than we normally need or want: it is
+    giving us a way to prove logical assertions where the assertion
+    involves properties of some piece of <i>evidence</i> of evenness, while
+    all we really care about is proving properties of <i>numbers</i> that
+    are even -- we are interested in assertions about numbers, not
+    about evidence.  It would therefore be more convenient to have an
+    induction principle for proving propositions <span class="inlinecode"><span class="id" title="var">P</span></span> that are
+    parameterized just by <span class="inlinecode"><span class="id" title="var">n</span></span> and whose conclusion establishes <span class="inlinecode"><span class="id" title="var">P</span></span> for
+    all even numbers <span class="inlinecode"><span class="id" title="var">n</span></span>:
+
+<div class="paragraph"> </div>
+
+       forall P : nat -&gt; Prop,
+       ... -&gt;
+       forall n : nat,
+       even n -&gt; P n
+
+<div class="paragraph"> </div>
+
+    For this reason, Coq actually generates the following simplified
+    induction principle for <span class="inlinecode"><span class="id" title="var">even</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="IndPrinciples-v-chk3a" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk3a"><span class="highlight"><span class="kn">Check</span> even_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">even_ind
+     : <span class="kr">forall</span> <span class="nv">P</span> : nat -&gt; <span class="kt">Prop</span>,
+       P <span class="mi">0</span> -&gt;
+       (<span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; P n -&gt; P (S (S n))) -&gt;
+       <span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; P n</span></blockquote></div></div></small></span></pre><div class="doc">
+In particular, Coq has dropped the evidence term <span class="inlinecode"><span class="id" title="var">E</span></span> as a
+    parameter of the the proposition <span class="inlinecode"><span class="id" title="var">P</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+In English, <span class="inlinecode"><span class="id" title="var">ev_ind</span></span> says:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> Suppose, <span class="inlinecode"><span class="id" title="var">P</span></span> is a property of natural numbers (that is, <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> is
+      a <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> for every <span class="inlinecode"><span class="id" title="var">n</span></span>).  To show that <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> holds whenever <span class="inlinecode"><span class="id" title="var">n</span></span>
+      is even, it suffices to show:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <span class="inlinecode">0</span>,
+
+<div class="paragraph"> </div>
+</li>
+<li> for any <span class="inlinecode"><span class="id" title="var">n</span></span>, if <span class="inlinecode"><span class="id" title="var">n</span></span> is even and <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <span class="inlinecode"><span class="id" title="var">n</span></span>, then <span class="inlinecode"><span class="id" title="var">P</span></span>
+        holds for <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span>. 
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+As expected, we can apply <span class="inlinecode"><span class="id" title="var">ev_ind</span></span> directly instead of using
+    <span class="inlinecode"><span class="id" title="tactic">induction</span></span>.  For example, we can use it to show that <span class="inlinecode"><span class="id" title="var">even'</span></span> (the
+    slightly awkward alternate definition of evenness that we saw in
+    an exercise in the \chap{IndProp} chapter) is equivalent to the
+    cleaner inductive definition <span class="inlinecode"><span class="id" title="var">even</span></span>: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk3b" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk3b"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">ev_ev&#39;</span> : <span class="kr">forall</span> <span class="nv">n</span>, even n -&gt; even&#39; n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even&#39; n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk3c" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk3c"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even&#39; n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk3d" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk3d"><span class="highlight"><span class="nb">apply</span> even_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even&#39; <span class="mi">0</span></span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="IndPrinciples-v-chk3e" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator coq-extra-goal-label" for="IndPrinciples-v-chk3e"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even&#39; n -&gt; even&#39; (S (S n))</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk3f" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk3f"><span class="highlight">- <span class="c">(* ev_0 *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even&#39; <span class="mi">0</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> even&#39;_0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk40" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk40"><span class="highlight">- <span class="c">(* ev_SS *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat, even n -&gt; even&#39; n -&gt; even&#39; (S (S n))</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk41" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk41"><span class="highlight"><span class="nb">intros</span> m Hm IH.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hm</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even m</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IH</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even&#39; m</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even&#39; (S (S m))</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk42" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk42"><span class="highlight"><span class="nb">apply</span> (even&#39;_sum <span class="mi">2</span> m).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hm</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even m</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IH</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even&#39; m</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even&#39; <span class="mi">2</span></span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="IndPrinciples-v-chk43" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hm</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even m</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IH</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even&#39; m</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="IndPrinciples-v-chk43"><hr></label><div class="goal-conclusion"><span class="highlight">even&#39; m</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk44" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk44"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hm</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even m</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IH</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even&#39; m</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even&#39; <span class="mi">2</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> even&#39;_2.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input class="coq-toggle" id="IndPrinciples-v-chk45" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk45"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">m</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hm</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even m</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IH</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">even&#39; m</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">even&#39; m</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> IH.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+The precise form of an <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definition can affect the
+    induction principle Coq generates.
+
+<div class="paragraph"> </div>
+
+    For example, in chapter <span class="inlinecode"><span class="id" title="var">IndProp</span></span>, we defined <span class="inlinecode">≤</span> as: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* Inductive le : nat -&gt; nat -&gt; Prop :=</span>
+<span class="c">     | le_n : forall n, le n n</span>
+<span class="c">     | le_S : forall n m, (le n m) -&gt; (le n (S m)). *)</span></span></span></pre><div class="doc">
+This definition can be streamlined a little by observing that the
+    left-hand argument <span class="inlinecode"><span class="id" title="var">n</span></span> is the same everywhere in the definition,
+    so we can actually make it a "general parameter" to the whole
+    definition, rather than an argument to each constructor. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">le</span> (<span class="nv">n</span>:nat) : nat -&gt; <span class="kt">Prop</span> :=
+  | le_n : le n n
+  | le_S m (H : le n m) : le n (S m).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;m &lt;= n&quot;</span> := (le m n).</span></span></span></pre><div class="doc">
+The second one is better, even though it looks less symmetric.
+    Why?  Because it gives us a simpler induction principle. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="IndPrinciples-v-chk46" style="display: none" type="checkbox"><label class="coq-input" for="IndPrinciples-v-chk46"><span class="highlight"><span class="kn">Check</span> le_ind.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">le_ind
+     : <span class="kr">forall</span> (<span class="nv">n</span> : nat) (<span class="nv">P</span> : nat -&gt; <span class="kt">Prop</span>),
+       P n -&gt;
+       (<span class="kr">forall</span> <span class="nv">m</span> : nat, n &lt;= m -&gt; P m -&gt; P (S m)) -&gt;
+       <span class="kr">forall</span> <span class="nv">n0</span> : nat, n &lt;= n0 -&gt; P n0</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab17"></a><h1 class="section">Formal vs. Informal Proofs by Induction</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Question: What is the relation between a formal proof of a
+    proposition <span class="inlinecode"><span class="id" title="var">P</span></span> and an informal proof of the same proposition <span class="inlinecode"><span class="id" title="var">P</span></span>?
+
+<div class="paragraph"> </div>
+
+    Answer: The latter should <i>teach</i> the reader how to produce the
+    former.
+
+<div class="paragraph"> </div>
+
+    Question: How much detail is needed??
+
+<div class="paragraph"> </div>
+
+    Unfortunately, there is no single right answer; rather, there is a
+    range of choices.
+
+<div class="paragraph"> </div>
+
+    At one end of the spectrum, we can essentially give the reader the
+    whole formal proof (i.e., the "informal" proof will amount to just
+    transcribing the formal one into words).  This may give the reader
+    the ability to reproduce the formal one for themselves, but it
+    probably doesn't <i>teach</i> them anything much.
+
+<div class="paragraph"> </div>
+
+   At the other end of the spectrum, we can say "The theorem is true
+   and you can figure out why for yourself if you think about it hard
+   enough."  This is also not a good teaching strategy, because often
+   writing the proof requires one or more significant insights into
+   the thing we're proving, and most readers will give up before they
+   rediscover all the same insights as we did.
+
+<div class="paragraph"> </div>
+
+   In the middle is the golden mean -- a proof that includes all of
+   the essential insights (saving the reader the hard work that we
+   went through to find the proof in the first place) plus high-level
+   suggestions for the more routine parts to save the reader from
+   spending too much time reconstructing these (e.g., what the IH says
+   and what must be shown in each case of an inductive proof), but not
+   so much detail that the main ideas are obscured.
+
+<div class="paragraph"> </div>
+
+   Since we've spent much of this chapter looking "under the hood" at
+   formal proofs by induction, now is a good moment to talk a little
+   about <i>informal</i> proofs by induction.
+
+<div class="paragraph"> </div>
+
+   In the real world of mathematical communication, written proofs
+   range from extremely longwinded and pedantic to extremely brief and
+   telegraphic.  Although the ideal is somewhere in between, while one
+   is getting used to the style it is better to start out at the
+   pedantic end.  Also, during the learning phase, it is probably
+   helpful to have a clear standard to compare against.  With this in
+   mind, we offer two templates -- one for proofs by induction over
+   <i>data</i> (i.e., where the thing we're doing induction on lives in
+   <span class="inlinecode"><span class="id" title="keyword">Type</span></span>) and one for proofs by induction over <i>evidence</i> (i.e.,
+   where the inductively defined thing lives in <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>). 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab18"></a><h2 class="section">Induction Over an Inductively Defined Set</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<i>Template</i>:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> <i>Theorem</i>: &lt;Universally quantified proposition of the form
+         "For all <span class="inlinecode"><span class="id" title="var">n</span>:<span class="id" title="var">S</span></span>, <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">n</span>)</span>," where <span class="inlinecode"><span class="id" title="var">S</span></span> is some inductively defined
+         set.&gt;
+
+<div class="paragraph"> </div>
+<i>Proof</i>: By induction on <span class="inlinecode"><span class="id" title="var">n</span></span>.
+
+<div class="paragraph"> </div>
+
+           &lt;one case for each constructor <span class="inlinecode"><span class="id" title="var">c</span></span> of <span class="inlinecode"><span class="id" title="var">S</span></span>...&gt;
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> Suppose <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">a1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">ak</span></span>, where &lt;...and here we state
+             the IH for each of the <span class="inlinecode"><span class="id" title="var">a</span></span>'s that has type <span class="inlinecode"><span class="id" title="var">S</span></span>, if any&gt;.
+             We must show &lt;...and here we restate <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">a1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">ak</span>)</span>&gt;.
+
+<div class="paragraph"> </div>
+
+             &lt;go on and prove <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">n</span>)</span> to finish the case...&gt;
+
+<div class="paragraph"> </div>
+</li>
+<li> &lt;other cases similarly...&gt;                        <font size="-2">☐</font>
+</li>
+</ul>
+</li>
+</ul>
+<div class="paragraph"> </div>
+<i>Example</i>:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> <i>Theorem</i>: For all sets <span class="inlinecode"><span class="id" title="var">X</span></span>, lists <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span>, and numbers
+        <span class="inlinecode"><span class="id" title="var">n</span></span>, if <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span> then <span class="inlinecode"><span class="id" title="var">index</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">None</span></span>.
+
+<div class="paragraph"> </div>
+<i>Proof</i>: By induction on <span class="inlinecode"><span class="id" title="var">l</span></span>.
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> Suppose <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode">[]</span>.  We must show, for all numbers <span class="inlinecode"><span class="id" title="var">n</span></span>,
+          that, if <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode">[]</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>, then <span class="inlinecode"><span class="id" title="var">index</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">[]</span> <span class="inlinecode">=</span>
+<span class="inlinecode"><span class="id" title="var">None</span></span>.
+
+<div class="paragraph"> </div>
+
+          This follows immediately from the definition of <span class="inlinecode"><span class="id" title="var">index</span></span>.
+
+<div class="paragraph"> </div>
+</li>
+<li> Suppose <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">::</span> <span class="inlinecode"><span class="id" title="var">l'</span></span> for some <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">l'</span></span>, where
+          <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l'</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n'</span></span> implies <span class="inlinecode"><span class="id" title="var">index</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span>)</span> <span class="inlinecode"><span class="id" title="var">l'</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">None</span></span>, for
+          any number <span class="inlinecode"><span class="id" title="var">n'</span></span>.  We must show, for all <span class="inlinecode"><span class="id" title="var">n</span></span>, that, if
+          <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode">(<span class="id" title="var">x</span>::<span class="id" title="var">l'</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span> then <span class="inlinecode"><span class="id" title="var">index</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">(<span class="id" title="var">x</span>::<span class="id" title="var">l'</span>)</span> <span class="inlinecode">=</span>
+<span class="inlinecode"><span class="id" title="var">None</span></span>.
+
+<div class="paragraph"> </div>
+
+          Let <span class="inlinecode"><span class="id" title="var">n</span></span> be a number with <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>.  Since
+
+<div class="paragraph"> </div>
+
+            length l = length (x::l') = S (length l'),
+
+<div class="paragraph"> </div>
+
+          it suffices to show that
+
+<div class="paragraph"> </div>
+
+            index (S (length l')) l' = None.
+
+<div class="paragraph"> </div>
+
+          But this follows directly from the induction hypothesis,
+          picking <span class="inlinecode"><span class="id" title="var">n'</span></span> to be <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l'</span></span>.  <font size="-2">☐</font>
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ================================================================= *)</span></span></span></pre><div class="doc">
+<a name="lab19"></a><h2 class="section">Induction Over an Inductively Defined Proposition</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Since inductively defined proof objects are often called
+    "derivation trees," this form of proof is also known as <i>induction
+    on derivations</i>.
+
+<div class="paragraph"> </div>
+<i>Template</i>:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> <i>Theorem</i>: &lt;Proposition of the form "<span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">P</span></span>," where <span class="inlinecode"><span class="id" title="var">Q</span></span> is
+         some inductively defined proposition (more generally,
+         "For all <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span>, <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span>")&gt;
+
+<div class="paragraph"> </div>
+<i>Proof</i>: By induction on a derivation of <span class="inlinecode"><span class="id" title="var">Q</span></span>.  &lt;Or, more
+         generally, "Suppose we are given <span class="inlinecode"><span class="id" title="var">x</span></span>, <span class="inlinecode"><span class="id" title="var">y</span></span>, and <span class="inlinecode"><span class="id" title="var">z</span></span>.  We
+         show that <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> implies <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span>, by induction on a
+         derivation of <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span>"...&gt;
+
+<div class="paragraph"> </div>
+
+           &lt;one case for each constructor <span class="inlinecode"><span class="id" title="var">c</span></span> of <span class="inlinecode"><span class="id" title="var">Q</span></span>...&gt;
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> Suppose the final rule used to show <span class="inlinecode"><span class="id" title="var">Q</span></span> is <span class="inlinecode"><span class="id" title="var">c</span></span>.  Then
+             &lt;...and here we state the types of all of the <span class="inlinecode"><span class="id" title="var">a</span></span>'s
+             together with any equalities that follow from the
+             definition of the constructor and the IH for each of
+             the <span class="inlinecode"><span class="id" title="var">a</span></span>'s that has type <span class="inlinecode"><span class="id" title="var">Q</span></span>, if there are any&gt;.  We must
+             show &lt;...and here we restate <span class="inlinecode"><span class="id" title="var">P</span></span>&gt;.
+
+<div class="paragraph"> </div>
+
+             &lt;go on and prove <span class="inlinecode"><span class="id" title="var">P</span></span> to finish the case...&gt;
+
+<div class="paragraph"> </div>
+</li>
+<li> &lt;other cases similarly...&gt;                        <font size="-2">☐</font>
+</li>
+</ul>
+</li>
+</ul>
+<div class="paragraph"> </div>
+<i>Example</i>
+<ul class="doclist">
+<li> <i>Theorem</i>: The <span class="inlinecode">≤</span> relation is transitive -- i.e., for all
+         numbers <span class="inlinecode"><span class="id" title="var">n</span></span>, <span class="inlinecode"><span class="id" title="var">m</span></span>, and <span class="inlinecode"><span class="id" title="var">o</span></span>, if <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">m</span></span> and <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">o</span></span>, then
+         <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">o</span></span>.
+
+<div class="paragraph"> </div>
+<i>Proof</i>: By induction on a derivation of <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">o</span></span>.
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> Suppose the final rule used to show <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">o</span></span> is
+             <span class="inlinecode"><span class="id" title="var">le_n</span></span>. Then <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">o</span></span> and we must show that <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">m</span></span>,
+             which is immediate by hypothesis.
+
+<div class="paragraph"> </div>
+</li>
+<li> Suppose the final rule used to show <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">o</span></span> is
+             <span class="inlinecode"><span class="id" title="var">le_S</span></span>.  Then <span class="inlinecode"><span class="id" title="var">o</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">o'</span></span> for some <span class="inlinecode"><span class="id" title="var">o'</span></span> with <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">o'</span></span>.
+             We must show that <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">o'</span></span>.
+             By induction hypothesis, <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">o'</span></span>.
+
+<div class="paragraph"> </div>
+
+             But then, by <span class="inlinecode"><span class="id" title="var">le_S</span></span>, <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">o'</span></span>.  <font size="-2">☐</font>
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* Wed Jan 9 12:02:46 EST 2019 *)</span></span></span></pre></article></body></html>

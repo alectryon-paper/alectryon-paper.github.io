@@ -1,0 +1,2588 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tactic Index &mdash; Coq 8.10.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/notations.js"></script>
+        <script src="_static/alectryon.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/ansi.css" type="text/css" />
+  <link rel="stylesheet" href="_static/coqdoc.css" type="text/css" />
+  <link rel="stylesheet" href="_static/notations.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pre-text.css" type="text/css" />
+  <link rel="stylesheet" href="_static/alectryon.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tango_subtle.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tango_subtle.min.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+ 
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Coq
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                8.10.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Indexes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coq-cmdindex.html">Command index</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tactic index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coq-optindex.html">Flags, options and tables index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coq-exnindex.html">Errors and warnings index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Preamble</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction and Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">Early history of Coq</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="history.html#historical-roots">Historical roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#versions-1-to-5">Versions 1 to 5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-1">Version 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-2">Version 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-3">Version 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-4">Version 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-5">Version 5</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#versions-6">Versions 6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-6-1">Version 6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-6-2">Version 6.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#version-6-3">Version 6.3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#versions-7">Versions 7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="history.html#summary-of-changes">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#details-of-changes-in-7-0-and-7-1">Details of changes in 7.0 and 7.1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="history.html#main-novelties">Main novelties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="history.html#details-of-changes">Details of changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#details-of-changes-in-7-2">Details of changes in 7.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#details-of-changes-in-7-3">Details of changes in 7.3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="history.html#changes-in-7-3-1">Changes in 7.3.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="history.html#details-of-changes-in-7-4">Details of changes in 7.4</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Recent changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-10">Version 8.10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#summary-of-changes">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#other-changes-in-8-10-beta1">Other changes in 8.10+beta1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#changes-in-8-10-beta2">Changes in 8.10+beta2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#changes-in-8-10-beta3">Changes in 8.10+beta3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#changes-in-8-10-0">Changes in 8.10.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#changes-in-8-10-1">Changes in 8.10.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#changes-in-8-10-2">Changes in 8.10.2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-9">Version 8.9</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id147">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-9-beta1">Details of changes in 8.9+beta1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#changes-in-8-8-0">Changes in 8.8.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#changes-in-8-8-1">Changes in 8.8.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-8">Version 8.8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id149">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-8-beta1">Details of changes in 8.8+beta1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-8-0">Details of changes in 8.8.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-8-1">Details of changes in 8.8.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-8-2">Details of changes in 8.8.2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-7">Version 8.7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id150">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#potential-compatibility-issues">Potential compatibility issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-7-beta1">Details of changes in 8.7+beta1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-7-beta2">Details of changes in 8.7+beta2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-7-0">Details of changes in 8.7.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-7-1">Details of changes in 8.7.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-7-2">Details of changes in 8.7.2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-6">Version 8.6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id151">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#potential-sources-of-incompatibilities">Potential sources of incompatibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-6beta1">Details of changes in 8.6beta1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-6">Details of changes in 8.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-6-1">Details of changes in 8.6.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-5">Version 8.5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id152">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id153">Potential sources of incompatibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-5beta1">Details of changes in 8.5beta1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-5beta2">Details of changes in 8.5beta2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-5beta3">Details of changes in 8.5beta3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-5">Details of changes in 8.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-5pl1">Details of changes in 8.5pl1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-5pl2">Details of changes in 8.5pl2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-5pl3">Details of changes in 8.5pl3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-4">Version 8.4</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id154">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id156">Potential sources of incompatibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-4beta">Details of changes in 8.4beta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-4beta2">Details of changes in 8.4beta2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-4">Details of changes in 8.4</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-3">Version 8.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id157">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes">Details of changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-2">Version 8.2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id158">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id159">Details of changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-1">Version 8.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id160">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-1beta">Details of changes in 8.1beta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-1gamma">Details of changes in 8.1gamma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-1">Details of changes in 8.1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html#version-8-0">Version 8.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#id161">Summary of changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-0beta-old-syntax">Details of changes in 8.0beta old syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-0beta-new-syntax">Details of changes in 8.0beta new syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changes.html#details-of-changes-in-8-0">Details of changes in 8.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">The language</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="language/gallina-specification-language.html">The Gallina specification language</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-specification-language.html#about-the-grammars-in-the-manual">About the grammars in the manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-specification-language.html#lexical-conventions">Lexical conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-specification-language.html#terms">Terms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#syntax-of-terms">Syntax of terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#types">Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#qualified-identifiers-and-simple-identifiers">Qualified identifiers and simple identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#numerals">Numerals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#sorts">Sorts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#binders">Binders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#abstractions">Abstractions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#products">Products</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#applications">Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#type-cast">Type cast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#inferable-subterms">Inferable subterms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#let-in-definitions">Let-in definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#definition-by-case-analysis">Definition by case analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#recursive-functions">Recursive functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-specification-language.html#the-vernacular">The Vernacular</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#assumptions">Assumptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#inductive-definitions">Inductive definitions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#simple-inductive-types">Simple inductive types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#simple-annotated-inductive-types">Simple annotated inductive types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#parameterized-inductive-types">Parameterized inductive types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#variants">Variants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#mutually-defined-inductive-types">Mutually defined inductive types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#co-inductive-types">Co-inductive types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#definition-of-recursive-functions">Definition of recursive functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#definition-of-functions-by-recursion-over-inductive-objects">Definition of functions by recursion over inductive objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-specification-language.html#definitions-of-recursive-objects-in-co-inductive-types">Definitions of recursive objects in co-inductive types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#assertions-and-proofs">Assertions and proofs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-specification-language.html#attributes">Attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="language/gallina-extensions.html">Extensions of <span class="smallcaps">Gallina</span></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#record-types">Record types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#primitive-projections">Primitive Projections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#primitive-record-types">Primitive Record Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#reduction">Reduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#compatibility-projections-and-match">Compatibility Projections and <code class="code highlight coq docutils literal notranslate"><span class="keyword reserved"><span class="pre">match</span></span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#variants-and-extensions-of-match">Variants and extensions of <code class="code highlight coq docutils literal notranslate"><span class="keyword reserved"><span class="pre">match</span></span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#multiple-and-nested-pattern-matching">Multiple and nested pattern matching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#pattern-matching-on-boolean-values-the-if-expression">Pattern-matching on boolean values: the if expression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#irrefutable-patterns-the-destructuring-let-variants">Irrefutable patterns: the destructuring let variants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#first-destructuring-let-syntax">First destructuring let syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#second-destructuring-let-syntax">Second destructuring let syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#controlling-pretty-printing-of-match-expressions">Controlling pretty-printing of match expressions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#printing-nested-patterns">Printing nested patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#factorization-of-clauses-with-same-right-hand-side">Factorization of clauses with same right-hand side</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#use-of-a-default-clause">Use of a default clause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#printing-of-wildcard-patterns">Printing of wildcard patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#printing-of-the-elimination-predicate">Printing of the elimination predicate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#printing-matching-on-irrefutable-patterns">Printing matching on irrefutable patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#printing-matching-on-booleans">Printing matching on booleans</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#advanced-recursive-functions">Advanced recursive functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#section-mechanism">Section mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#module-system">Module system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#reserved-commands-inside-an-interactive-module">Reserved commands inside an interactive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#reserved-commands-inside-an-interactive-module-type">Reserved commands inside an interactive module type:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#libraries-and-qualified-names">Libraries and qualified names</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#names-of-libraries">Names of libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#qualified-names">Qualified names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#libraries-and-filesystem">Libraries and filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#implicit-arguments">Implicit arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#the-different-kinds-of-implicit-arguments">The different kinds of implicit arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#implicit-arguments-inferable-from-the-knowledge-of-other-arguments-of-a-function">Implicit arguments inferable from the knowledge of other arguments of a function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#implicit-arguments-inferable-by-resolution">Implicit arguments inferable by resolution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#maximal-or-non-maximal-insertion-of-implicit-arguments">Maximal or non maximal insertion of implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#casual-use-of-implicit-arguments">Casual use of implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#declaration-of-implicit-arguments">Declaration of implicit arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#implicit-argument-binders">Implicit Argument Binders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/gallina-extensions.html#declaring-implicit-arguments">Declaring Implicit Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#automatic-declaration-of-implicit-arguments">Automatic declaration of implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#mode-for-automatic-declaration-of-implicit-arguments">Mode for automatic declaration of implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#controlling-strict-implicit-arguments">Controlling strict implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#controlling-contextual-implicit-arguments">Controlling contextual implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#controlling-reversible-pattern-implicit-arguments">Controlling reversible-pattern implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#controlling-the-insertion-of-implicit-arguments-not-followed-by-explicit-arguments">Controlling the insertion of implicit arguments not followed by explicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#explicit-applications">Explicit applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#renaming-implicit-arguments">Renaming implicit arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#displaying-what-the-implicit-arguments-are">Displaying what the implicit arguments are</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#explicit-displaying-of-implicit-arguments-for-pretty-printing">Explicit displaying of implicit arguments for pretty-printing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#interaction-with-subtyping">Interaction with subtyping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#deactivation-of-implicit-arguments-for-parsing">Deactivation of implicit arguments for parsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#canonical-structures">Canonical structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#implicit-types-of-variables">Implicit types of variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#implicit-generalization">Implicit generalization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#coercions">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#printing-constructions-in-full">Printing constructions in full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#printing-universes">Printing universes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#existential-variables">Existential variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#explicit-displaying-of-existential-instances-for-pretty-printing">Explicit displaying of existential instances for pretty-printing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/gallina-extensions.html#solving-existential-variables-using-tactics">Solving existential variables using tactics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/gallina-extensions.html#primitive-integers">Primitive Integers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="language/coq-library.html">The <span class="smallcaps">Coq</span> library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="language/coq-library.html#the-basic-library">The basic library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#notations">Notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#logic">Logic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/coq-library.html#propositional-connectives">Propositional Connectives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/coq-library.html#quantifiers">Quantifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/coq-library.html#equality">Equality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/coq-library.html#lemmas">Lemmas</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#datatypes">Datatypes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/coq-library.html#programming">Programming</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#specification">Specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#basic-arithmetics">Basic Arithmetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#well-founded-recursion">Well-founded recursion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#accessing-the-type-level">Accessing the Type level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#tactics">Tactics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/coq-library.html#the-standard-library">The standard library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#survey">Survey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#peanos-arithmetic-nat">Peano’s arithmetic (nat)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#notations-for-integer-arithmetics">Notations for integer arithmetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#real-numbers-library">Real numbers library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/coq-library.html#notations-for-real-numbers">Notations for real numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/coq-library.html#some-tactics-for-real-numbers">Some tactics for real numbers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/coq-library.html#list-library">List library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/coq-library.html#users-contributions">Users’ contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="language/cic.html">Calculus of Inductive Constructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#the-terms">The terms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#sorts">Sorts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#terms">Terms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#typing-rules">Typing rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#conversion-rules">Conversion rules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#reduction">β-reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#iota-reduction">ι-reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#delta-reduction">δ-reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#zeta-reduction">ζ-reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#expansion">η-expansion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#proof-irrelevance">Proof Irrelevance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#convertibility">Convertibility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#subtyping-rules">Subtyping rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#inductive-definitions">Inductive Definitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#types-of-inductive-objects">Types of inductive objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#well-formed-inductive-definitions">Well-formed inductive definitions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#arity-of-a-given-sort">Arity of a given sort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#arity">Arity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#type-of-constructor">Type of constructor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#positivity-condition">Positivity Condition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#strict-positivity">Strict positivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#nested-positivity">Nested Positivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#correctness-rules">Correctness rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#template-polymorphism">Template polymorphism</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#destructors">Destructors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#the-match-with-end-construction">The match ... with ... end construction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="language/cic.html#fixpoint-definitions">Fixpoint definitions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#id29">Typing rule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language/cic.html#reduction-rule">Reduction rule</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#admissible-rules-for-global-environments">Admissible rules for global environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#co-inductive-types">Co-inductive types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/cic.html#the-calculus-of-inductive-constructions-with-impredicative-set">The Calculus of Inductive Constructions with impredicative Set</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="language/module-system.html">The Module System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="language/module-system.html#modules-and-module-types">Modules and module types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language/module-system.html#typing-modules">Typing Modules</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">The proof engine</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proof-engine/vernacular-commands.html">Vernacular commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#displaying">Displaying</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#flags-options-and-tables">Flags, Options and Tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/vernacular-commands.html#scope-qualifiers-for-set-and-unset">Scope qualifiers for <code class="xref coq coq-cmd docutils literal notranslate"><span class="pre">Set</span></code> and <code class="xref coq coq-cmd docutils literal notranslate"><span class="pre">Unset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#requests-to-the-environment">Requests to the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#printing-flags">Printing flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#loading-files">Loading files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#compiled-files">Compiled files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#loadpath">Loadpath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#backtracking">Backtracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#quitting-and-debugging">Quitting and debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#controlling-display">Controlling display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#controlling-the-reduction-strategies-and-the-conversion-algorithm">Controlling the reduction strategies and the conversion algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#controlling-the-locality-of-commands">Controlling the locality of commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/vernacular-commands.html#internal-registration-commands">Internal registration commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/vernacular-commands.html#exposing-constants-to-ocaml-libraries">Exposing constants to OCaml libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/vernacular-commands.html#inlining-hints-for-the-fast-reduction-machines">Inlining hints for the fast reduction machines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/vernacular-commands.html#registering-primitive-operations">Registering primitive operations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proof-engine/proof-handling.html">Proof handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/proof-handling.html#switching-on-off-the-proof-editing-mode">Switching on/off the proof editing mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/proof-handling.html#proof-using-options">Proof using options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/proof-handling.html#name-a-set-of-section-hypotheses-for-proof-using">Name a set of section hypotheses for <code class="docutils literal notranslate"><span class="pre">Proof</span> <span class="pre">using</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/proof-handling.html#navigation-in-the-proof-tree">Navigation in the proof tree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/proof-handling.html#bullets">Bullets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/proof-handling.html#set-bullet-behavior">Set Bullet Behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/proof-handling.html#requesting-information">Requesting information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/proof-handling.html#showing-differences-between-proof-steps">Showing differences between proof steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/proof-handling.html#how-to-enable-diffs">How to enable diffs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/proof-handling.html#how-diffs-are-calculated">How diffs are calculated</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/proof-handling.html#controlling-the-effect-of-proof-editing-commands">Controlling the effect of proof editing commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/proof-handling.html#controlling-memory-usage">Controlling memory usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proof-engine/tactics.html">Tactics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#common-elements-of-tactics">Common elements of tactics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#invocation-of-tactics">Invocation of tactics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#bindings-list">Bindings list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#intro-patterns">Intro patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#occurrence-sets-and-occurrence-clauses">Occurrence sets and occurrence clauses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#applying-theorems">Applying theorems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#managing-the-local-context">Managing the local context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#controlling-the-proof-flow">Controlling the proof flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#case-analysis-and-induction">Case analysis and induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#rewriting-expressions">Rewriting expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#performing-computations">Performing computations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#conversion-tactics-applied-to-hypotheses">Conversion tactics applied to hypotheses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#automation">Automation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#controlling-automation">Controlling automation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#the-hints-databases-for-auto-and-eauto">The hints databases for auto and eauto</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/tactics.html#creating-hint-databases">Creating Hint databases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#hint-databases-defined-in-the-coq-standard-library">Hint databases defined in the Coq standard library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#hint-locality">Hint locality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/tactics.html#setting-implicit-automation-tactics">Setting implicit automation tactics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#decision-procedures">Decision procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#checking-properties-of-terms">Checking properties of terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#equality">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#equality-and-inductive-sets">Equality and inductive sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#inversion">Inversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#classical-tactics">Classical tactics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#automating">Automating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#non-logical-tactics">Non-logical tactics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#delaying-solving-unification-constraints">Delaying solving unification constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#proof-maintenance">Proof maintenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/tactics.html#performance-oriented-tactic-variants">Performance-oriented tactic variants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proof-engine/ltac.html">The tactic language</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ltac.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ltac.html#semantics">Semantics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#sequence">Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#local-application-of-tactics">Local application of tactics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#goal-selectors">Goal selectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#for-loop">For loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#repeat-loop">Repeat loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#error-catching">Error catching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#detecting-progress">Detecting progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#backtracking-branching">Backtracking branching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#first-tactic-to-work">First tactic to work</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#left-biased-branching">Left-biased branching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#generalized-biased-branching">Generalized biased branching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#soft-cut">Soft cut</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#checking-the-successes">Checking the successes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#checking-the-failure">Checking the failure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#checking-the-success">Checking the success</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#solving">Solving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#identity">Identity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#failing">Failing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#timeout">Timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#timing-a-tactic">Timing a tactic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#timing-a-tactic-that-evaluates-to-a-term">Timing a tactic that evaluates to a term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#local-definitions">Local definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#application">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#function-construction">Function construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#pattern-matching-on-terms">Pattern matching on terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#pattern-matching-on-goals">Pattern matching on goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#filling-a-term-context">Filling a term context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#generating-fresh-hypothesis-names">Generating fresh hypothesis names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#computing-in-a-constr">Computing in a constr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#recovering-the-type-of-a-term">Recovering the type of a term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#manipulating-untyped-terms">Manipulating untyped terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#counting-the-goals">Counting the goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#testing-boolean-expressions">Testing boolean expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#proving-a-subgoal-as-a-separate-lemma">Proving a subgoal as a separate lemma</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ltac.html#tactic-toplevel-definitions">Tactic toplevel definitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#defining-ltac-functions">Defining <code class="docutils literal notranslate"><span class="pre">L</span></code><sub>tac</sub> functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#printing-ltac-tactics">Printing <code class="docutils literal notranslate"><span class="pre">L</span></code><sub>tac</sub> tactics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ltac.html#examples-of-using-ltac">Examples of using <code class="docutils literal notranslate"><span class="pre">L</span></code><sub>tac</sub></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#proof-that-the-natural-numbers-have-at-least-two-elements">Proof that the natural numbers have at least two elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#proving-that-a-list-is-a-permutation-of-a-second-list">Proving that a list is a permutation of a second list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#deciding-intuitionistic-propositional-logic">Deciding intuitionistic propositional logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#deciding-type-isomorphisms">Deciding type isomorphisms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ltac.html#debugging-ltac-tactics">Debugging <code class="docutils literal notranslate"><span class="pre">L</span></code><sub>tac</sub> tactics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#backtraces">Backtraces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#info-trace">Info trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#interactive-debugger">Interactive debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#profiling-ltac-tactics">Profiling <code class="docutils literal notranslate"><span class="pre">L</span></code><sub>tac</sub> tactics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ltac.html#run-time-optimization-tactic">Run-time optimization tactic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proof-engine/detailed-tactic-examples.html">Detailed examples of tactics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/detailed-tactic-examples.html#dependent-induction">dependent induction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/detailed-tactic-examples.html#a-larger-example">A larger example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/detailed-tactic-examples.html#autorewrite">autorewrite</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html">The <span class="smallcaps">SSReflect</span> proof language</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#getting-started">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#compatibility-issues">Compatibility issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#gallina-extensions"><span class="smallcaps">Gallina</span> extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#pattern-assignment">Pattern assignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#pattern-conditional">Pattern conditional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#parametric-polymorphism">Parametric polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#anonymous-arguments">Anonymous arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#wildcards">Wildcards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#abbreviations">Abbreviations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#matching">Matching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#occurrence-selection">Occurrence selection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#basic-localization">Basic localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#basic-tactics">Basic tactics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#bookkeeping">Bookkeeping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-defective-tactics">The defective tactics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-move-tactic">The move tactic.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-case-tactic">The case tactic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-elim-tactic">The elim tactic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-apply-tactic">The apply tactic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#discharge">Discharge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#clear-rules">Clear rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#matching-for-apply-and-exact">Matching for apply and exact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-abstract-tactic">The abstract tactic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#introduction-in-the-context">Introduction in the context</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#simplification-items">Simplification items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#views">Views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#intro-patterns">Intro patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#clear-switch">Clear switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#branching-and-destructuring">Branching and destructuring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#block-introduction">Block introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#generation-of-equations">Generation of equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#type-families">Type families</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#control-flow">Control flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#indentation-and-bullets">Indentation and bullets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#terminators">Terminators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#selectors">Selectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#iteration">Iteration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#localization">Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#structure">Structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-have-tactic">The have tactic.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#generating-let-in-context-entries-with-have">Generating let in context entries with have</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-have-tactic-and-typeclass-resolution">The have tactic and typeclass resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#variants-the-suff-and-wlog-tactics">Variants: the suff and wlog tactics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#rewriting">Rewriting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#an-extended-rewrite-tactic">An extended rewrite tactic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#remarks-and-examples">Remarks and examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#rewrite-redex-selection">Rewrite redex selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#chained-rewrite-steps">Chained rewrite steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#explicit-redex-switches-are-matched-first">Explicit redex switches are matched first</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#occurrence-switches-and-redex-switches">Occurrence switches and redex switches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#occurrence-selection-and-repetition">Occurrence selection and repetition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#multi-rule-rewriting">Multi-rule rewriting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#wildcards-vs-abstractions">Wildcards vs abstractions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#when-ssr-rewrite-fails-on-standard-coq-licit-rewrite">When <span class="smallcaps">SSReflect</span> rewrite fails on standard <span class="smallcaps">Coq</span> licit rewrite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#existential-metavariables-and-rewriting">Existential metavariables and rewriting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#rewriting-under-binders">Rewriting under binders</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-under-tactic">The under tactic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#interactive-mode">Interactive mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#one-liner-mode">One-liner mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#locking-unlocking">Locking, unlocking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#congruence">Congruence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#contextual-patterns">Contextual patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#syntax">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#matching-contextual-patterns">Matching contextual patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#contextual-pattern-in-set-and-the-tactical">Contextual pattern in set and the : tactical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#contextual-patterns-in-rewrite">Contextual patterns in rewrite</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#patterns-for-recurrent-contexts">Patterns for recurrent contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#views-and-reflection">Views and reflection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#interpreting-eliminations">Interpreting eliminations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#interpreting-assumptions">Interpreting assumptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#specializing-assumptions">Specializing assumptions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#interpreting-goals">Interpreting goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#boolean-reflection">Boolean reflection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#the-reflect-predicate">The reflect predicate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#general-mechanism-for-interpreting-goals-and-assumptions">General mechanism for interpreting goals and assumptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#id13">Specializing assumptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#id14">Interpreting assumptions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#interpreting-equivalences">Interpreting equivalences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#declaring-new-hint-views">Declaring new Hint Views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#multiple-views">Multiple views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#ssr-searching-tool"><span class="smallcaps">SSReflect</span> searching tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#synopsis-and-index">Synopsis and Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#items-and-switches">Items and switches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#tactics">Tactics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#tacticals">Tacticals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#commands">Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proof-engine/ssreflect-proof-language.html#settings">Settings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User extensions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-extensions/syntax-extensions.html">Syntax extensions and interpretation scopes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/syntax-extensions.html#notations">Notations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#basic-notations">Basic notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#precedences-and-associativity">Precedences and associativity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#complex-notations">Complex notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#simple-factorization-rules">Simple factorization rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#displaying-symbolic-notations">Displaying symbolic notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#the-infix-command">The Infix command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#reserving-notations">Reserving notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#simultaneous-definition-of-terms-and-notations">Simultaneous definition of terms and notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#displaying-information-about-notations">Displaying information about notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#locating-notations">Locating notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#notations-and-binders">Notations and binders</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#binders-bound-in-the-notation-and-parsed-as-identifiers">Binders bound in the notation and parsed as identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#binders-bound-in-the-notation-and-parsed-as-patterns">Binders bound in the notation and parsed as patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#binders-bound-in-the-notation-and-parsed-as-terms">Binders bound in the notation and parsed as terms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#binders-not-bound-in-the-notation">Binders not bound in the notation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#notations-with-recursive-patterns">Notations with recursive patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#notations-with-recursive-patterns-involving-binders">Notations with recursive patterns involving binders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#predefined-entries">Predefined entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#custom-entries">Custom entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#summary">Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#syntax-of-notations">Syntax of notations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#persistence-of-notations">Persistence of notations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/syntax-extensions.html#interpretation-scopes">Interpretation scopes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#global-interpretation-rules-for-notations">Global interpretation rules for notations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#local-interpretation-rules-for-notations">Local interpretation rules for notations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#local-opening-of-an-interpretation-scope">Local opening of an interpretation scope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#binding-arguments-of-a-constant-to-an-interpretation-scope">Binding arguments of a constant to an interpretation scope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user-extensions/syntax-extensions.html#binding-types-of-arguments-to-an-interpretation-scope">Binding types of arguments to an interpretation scope</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#the-type-scope-interpretation-scope">The <code class="docutils literal notranslate"><span class="pre">type_scope</span></code> interpretation scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#the-function-scope-interpretation-scope">The <code class="docutils literal notranslate"><span class="pre">function_scope</span></code> interpretation scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#interpretation-scopes-used-in-the-standard-library-of-coq">Interpretation scopes used in the standard library of Coq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/syntax-extensions.html#displaying-information-about-scopes">Displaying information about scopes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/syntax-extensions.html#abbreviations">Abbreviations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/syntax-extensions.html#numeral-notations">Numeral notations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/syntax-extensions.html#string-notations">String notations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/syntax-extensions.html#tactic-notations">Tactic Notations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user-extensions/proof-schemes.html">Proof schemes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/proof-schemes.html#generation-of-induction-principles-with-scheme">Generation of induction principles with <code class="docutils literal notranslate"><span class="pre">Scheme</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/proof-schemes.html#automatic-declaration-of-schemes">Automatic declaration of schemes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-extensions/proof-schemes.html#combined-scheme">Combined Scheme</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/proof-schemes.html#generation-of-induction-principles-with-functional-scheme">Generation of induction principles with <code class="docutils literal notranslate"><span class="pre">Functional</span></code> <code class="docutils literal notranslate"><span class="pre">Scheme</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-extensions/proof-schemes.html#generation-of-inversion-principles-with-derive-inversion">Generation of inversion principles with <code class="docutils literal notranslate"><span class="pre">Derive</span></code> <code class="docutils literal notranslate"><span class="pre">Inversion</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Practical tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="practical-tools/coq-commands.html">The <span class="smallcaps">Coq</span> commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coq-commands.html#interactive-use-coqtop">Interactive use (coqtop)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coq-commands.html#batch-compilation-coqc">Batch compilation (coqc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coq-commands.html#customization-at-launch-time">Customization at launch time</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/coq-commands.html#by-resource-file">By resource file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/coq-commands.html#by-environment-variables">By environment variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/coq-commands.html#by-command-line-options">By command line options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coq-commands.html#compiled-libraries-checker-coqchk">Compiled libraries checker (coqchk)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="practical-tools/utilities.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/utilities.html#using-coq-as-a-library">Using Coq as a library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/utilities.html#building-a-coq-project">Building a <span class="smallcaps">Coq</span> project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/utilities.html#building-a-coq-project-with-coq-makefile">Building a <span class="smallcaps">Coq</span> project with coq_makefile</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#coqmakefile-local">CoqMakefile.local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#timing-targets-and-performance-testing">Timing targets and performance testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#reusing-extending-the-generated-makefile">Reusing/extending the generated Makefile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#building-a-subset-of-the-targets-with-j">Building a subset of the targets with <code class="docutils literal notranslate"><span class="pre">-j</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/utilities.html#building-a-coq-project-with-dune">Building a <span class="smallcaps">Coq</span> project with Dune</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/utilities.html#computing-module-dependencies">Computing Module dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/utilities.html#documenting-coq-files-with-coqdoc">Documenting <span class="smallcaps">Coq</span> files with coqdoc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/utilities.html#principles">Principles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#coq-material-inside-documentation"><span class="smallcaps">Coq</span> material inside documentation.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#pretty-printing">Pretty-printing.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#sections">Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#lists">Lists.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#rules">Rules.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#emphasis">Emphasis.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#escaping-to-latex-and-html">Escaping to <span class="smallcaps">LaTeX</span> and HTML.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#verbatim">Verbatim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#hyperlinks">Hyperlinks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#hiding-showing-parts-of-the-source">Hiding / Showing parts of the source.</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/utilities.html#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="practical-tools/utilities.html#command-line-options">Command line options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/utilities.html#the-coqdoc-latex-style-file">The coqdoc <span class="smallcaps">LaTeX</span> style file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/utilities.html#embedded-coq-phrases-inside-latex-documents">Embedded Coq phrases inside <span class="smallcaps">LaTeX</span> documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/utilities.html#man-pages">Man pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="practical-tools/coqide.html"><span class="smallcaps">Coq</span> Integrated Development Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#managing-files-and-buffers-basic-editing">Managing files and buffers, basic editing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#interactive-navigation-into-coq-scripts">Interactive navigation into Coq scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#proof-folding">Proof folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#vernacular-commands-templates">Vernacular commands, templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#queries">Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#compilation">Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#customizations">Customizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practical-tools/coqide.html#using-unicode-symbols">Using Unicode symbols</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/coqide.html#displaying-unicode-symbols">Displaying Unicode symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/coqide.html#bindings-for-input-of-unicode-symbols">Bindings for input of Unicode symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/coqide.html#adding-custom-bindings">Adding custom bindings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="practical-tools/coqide.html#character-encoding-for-saved-files">Character encoding for saved files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Addendum</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="addendum/extended-pattern-matching.html">Extended pattern matching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#patterns">Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#multiple-patterns">Multiple patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#aliasing-subpatterns">Aliasing subpatterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#nested-patterns">Nested patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#disjunctive-patterns">Disjunctive patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#about-patterns-of-parametric-types">About patterns of parametric types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extended-pattern-matching.html#parameters-in-patterns">Parameters in patterns</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#implicit-arguments-in-patterns">Implicit arguments in patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#matching-objects-of-dependent-types">Matching objects of dependent types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#understanding-dependencies-in-patterns">Understanding dependencies in patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#when-the-elimination-predicate-must-be-provided">When the elimination predicate must be provided</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extended-pattern-matching.html#dependent-pattern-matching">Dependent pattern matching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extended-pattern-matching.html#multiple-dependent-pattern-matching">Multiple dependent pattern matching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extended-pattern-matching.html#patterns-in-in">Patterns in <code class="docutils literal notranslate"><span class="pre">in</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#using-pattern-matching-to-write-proofs">Using pattern matching to write proofs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#pattern-matching-on-inductive-objects-involving-local-definitions">Pattern-matching on inductive objects involving local definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#pattern-matching-and-coercions">Pattern-matching and coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extended-pattern-matching.html#when-does-the-expansion-strategy-fail">When does the expansion strategy fail?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/implicit-coercions.html">Implicit Coercions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#general-presentation">General Presentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#coercions">Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#identity-coercions">Identity Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#inheritance-graph">Inheritance Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#declaring-coercions">Declaring Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#displaying-available-coercions">Displaying Available Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#activating-the-printing-of-coercions">Activating the Printing of Coercions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#classes-as-records">Classes as Records</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#coercions-and-sections">Coercions and Sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#coercions-and-modules">Coercions and Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/implicit-coercions.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/implicit-coercions.html#coercion-at-function-application">Coercion at function application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/implicit-coercions.html#coercion-to-a-type">Coercion to a type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/implicit-coercions.html#coercion-to-a-function">Coercion to a function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/canonical-structures.html">Canonical Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/canonical-structures.html#notation-overloading">Notation overloading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/canonical-structures.html#derived-canonical-structures">Derived Canonical Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/canonical-structures.html#hierarchy-of-structures">Hierarchy of structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/canonical-structures.html#compact-declaration-of-canonical-structures">Compact declaration of Canonical Structures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/type-classes.html">Typeclasses</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/type-classes.html#class-and-instance-declarations">Class and Instance declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/type-classes.html#binding-classes">Binding classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/type-classes.html#parameterized-instances">Parameterized Instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/type-classes.html#sections-and-contexts">Sections and contexts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/type-classes.html#building-hierarchies">Building hierarchies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/type-classes.html#superclasses">Superclasses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/type-classes.html#substructures">Substructures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/type-classes.html#summary-of-the-commands">Summary of the commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/type-classes.html#typeclasses-transparent-typeclasses-opaque">Typeclasses Transparent, Typeclasses Opaque</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/type-classes.html#settings">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/type-classes.html#typeclasses-eauto">Typeclasses eauto <code class="docutils literal notranslate"><span class="pre">:=</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/omega.html">Omega: a solver for quantifier-free problems in Presburger Arithmetic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/omega.html#description-of-omega">Description of <code class="docutils literal notranslate"><span class="pre">omega</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/omega.html#arithmetical-goals-recognized-by-omega">Arithmetical goals recognized by <code class="docutils literal notranslate"><span class="pre">omega</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/omega.html#messages-from-omega">Messages from <code class="docutils literal notranslate"><span class="pre">omega</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/omega.html#using-omega">Using <code class="docutils literal notranslate"><span class="pre">omega</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/omega.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/omega.html#technical-data">Technical data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/omega.html#overview-of-the-tactic">Overview of the tactic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/omega.html#overview-of-the-omega-decision-procedure">Overview of the OMEGA decision procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/omega.html#bugs">Bugs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/micromega.html">Micromega: tactics for solving arithmetic goals over ordered rings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/micromega.html#short-description-of-the-tactics">Short description of the tactics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/micromega.html#positivstellensatz-refutations"><em>Positivstellensatz</em> refutations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/micromega.html#lra-a-decision-procedure-for-linear-real-and-rational-arithmetic"><code class="docutils literal notranslate"><span class="pre">lra</span></code>: a decision procedure for linear real and rational arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/micromega.html#lia-a-tactic-for-linear-integer-arithmetic"><code class="docutils literal notranslate"><span class="pre">lia</span></code>: a tactic for linear integer arithmetic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/micromega.html#high-level-view-of-lia">High level view of <code class="docutils literal notranslate"><span class="pre">lia</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/micromega.html#cutting-plane-proofs">Cutting plane proofs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/micromega.html#case-split">Case split</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/micromega.html#nra-a-proof-procedure-for-non-linear-arithmetic"><code class="docutils literal notranslate"><span class="pre">nra</span></code>: a proof procedure for non-linear arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/micromega.html#nia-a-proof-procedure-for-non-linear-integer-arithmetic"><code class="docutils literal notranslate"><span class="pre">nia</span></code>: a proof procedure for non-linear integer arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/micromega.html#psatz-a-proof-procedure-for-non-linear-arithmetic"><code class="docutils literal notranslate"><span class="pre">psatz</span></code>: a proof procedure for non-linear arithmetic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/extraction.html">Extraction of programs in <span class="smallcaps">OCaml</span> and Haskell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extraction.html#generating-ml-code">Generating ML Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extraction.html#extraction-options">Extraction Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#setting-the-target-language">Setting the target language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#inlining-and-optimizations">Inlining and optimizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#extra-elimination-of-useless-arguments">Extra elimination of useless arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#realizing-axioms">Realizing axioms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#realizing-inductive-types">Realizing inductive types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#avoiding-conflicts-with-existing-filenames">Avoiding conflicts with existing filenames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#additional-settings">Additional settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extraction.html#differences-between-coq-and-ml-type-systems">Differences between <span class="smallcaps">Coq</span> and ML type systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/extraction.html#some-examples">Some examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#a-detailed-example-euclidean-division">A detailed example: Euclidean division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#extraction-s-horror-museum">Extraction's horror museum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/extraction.html#users-contributions">Users' Contributions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/program.html">Program</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/program.html#elaborating-programs">Elaborating programs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/program.html#syntactic-control-over-equalities">Syntactic control over equalities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/program.html#program-definition">Program Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/program.html#program-fixpoint">Program Fixpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/program.html#program-lemma">Program Lemma</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/program.html#solving-obligations">Solving obligations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/program.html#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/ring.html">The ring and field tactic families</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#what-does-this-tactic-do">What does this tactic do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#the-variables-map">The variables map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#is-it-automatic">Is it automatic?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#concrete-usage-in-coq">Concrete usage in Coq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#adding-a-ring-structure">Adding a ring structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#dealing-with-fields">Dealing with fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#adding-a-new-field-structure">Adding a new field structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#history-of-ring">History of ring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/ring.html#discussion">Discussion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/nsatz.html">Nsatz: tactics for proving equalities in integral domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/nsatz.html#more-about-nsatz">More about <code class="docutils literal notranslate"><span class="pre">nsatz</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/generalized-rewriting.html">Generalized rewriting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/generalized-rewriting.html#introduction-to-generalized-rewriting">Introduction to generalized rewriting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#relations-and-morphisms">Relations and morphisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#adding-new-relations-and-morphisms">Adding new relations and morphisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#rewriting-and-non-reflexive-relations">Rewriting and non reflexive relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#rewriting-and-non-symmetric-relations">Rewriting and non symmetric relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#rewriting-in-ambiguous-setoid-contexts">Rewriting in ambiguous setoid contexts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/generalized-rewriting.html#commands-and-tactics">Commands and tactics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#first-class-setoids-and-morphisms">First class setoids and morphisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#tactics-enabled-on-user-provided-relations">Tactics enabled on user provided relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#printing-relations-and-morphisms">Printing relations and morphisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#deprecated-syntax-and-backward-incompatibilities">Deprecated syntax and backward incompatibilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/generalized-rewriting.html#extensions">Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#rewriting-under-binders">Rewriting under binders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#subrelations">Subrelations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#constant-unfolding">Constant unfolding</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/generalized-rewriting.html#strategies-for-rewriting">Strategies for rewriting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addendum/generalized-rewriting.html#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/parallel-proof-processing.html">Asynchronous and Parallel Proof Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/parallel-proof-processing.html#proof-annotations">Proof annotations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/parallel-proof-processing.html#automatic-suggestion-of-proof-annotations">Automatic suggestion of proof annotations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/parallel-proof-processing.html#proof-blocks-and-error-resilience">Proof blocks and error resilience</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/parallel-proof-processing.html#caveats">Caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/parallel-proof-processing.html#interactive-mode">Interactive mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/parallel-proof-processing.html#id2">Caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/parallel-proof-processing.html#batch-mode">Batch mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/parallel-proof-processing.html#limiting-the-number-of-parallel-workers">Limiting the number of parallel workers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/miscellaneous-extensions.html">Miscellaneous extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/miscellaneous-extensions.html#program-derivation">Program derivation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/universe-polymorphism.html">Polymorphic Universes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#general-presentation">General Presentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#polymorphic-monomorphic">Polymorphic, Monomorphic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#cumulative-noncumulative">Cumulative, NonCumulative</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/universe-polymorphism.html#an-example-of-a-proof-using-cumulativity">An example of a proof using cumulativity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#cumulativity-weak-constraints">Cumulativity Weak Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#global-and-local-universes">Global and local universes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#conversion-and-unification">Conversion and unification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#minimization">Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/universe-polymorphism.html#explicit-universes">Explicit Universes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addendum/universe-polymorphism.html#polymorphic-definitions">Polymorphic definitions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addendum/sprop.html">SProp (proof irrelevant propositions)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="addendum/sprop.html#basic-constructs">Basic constructs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/sprop.html#encodings-for-strict-propositions">Encodings for strict propositions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addendum/sprop.html#issues-with-non-cumulativity">Issues with non-cumulativity</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zebibliography.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Coq</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tactic Index</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/coq/coq/blob/master/doc/sphinx/coq-tacindex" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+
+   <h1>Tactic Index</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-+"><strong>+</strong></a> | 
+   <a href="#cap-."><strong>.</strong></a> | 
+   <a href="#cap-="><strong>=</strong></a> | 
+   <a href="#cap-["><strong>[</strong></a> | 
+   <a href="#cap-_"><strong>_</strong></a> | 
+   <a href="#cap-a"><strong>a</strong></a> | 
+   <a href="#cap-b"><strong>b</strong></a> | 
+   <a href="#cap-c"><strong>c</strong></a> | 
+   <a href="#cap-d"><strong>d</strong></a> | 
+   <a href="#cap-e"><strong>e</strong></a> | 
+   <a href="#cap-f"><strong>f</strong></a> | 
+   <a href="#cap-g"><strong>g</strong></a> | 
+   <a href="#cap-h"><strong>h</strong></a> | 
+   <a href="#cap-i"><strong>i</strong></a> | 
+   <a href="#cap-l"><strong>l</strong></a> | 
+   <a href="#cap-m"><strong>m</strong></a> | 
+   <a href="#cap-n"><strong>n</strong></a> | 
+   <a href="#cap-o"><strong>o</strong></a> | 
+   <a href="#cap-p"><strong>p</strong></a> | 
+   <a href="#cap-r"><strong>r</strong></a> | 
+   <a href="#cap-s"><strong>s</strong></a> | 
+   <a href="#cap-t"><strong>t</strong></a> | 
+   <a href="#cap-u"><strong>u</strong></a> | 
+   <a href="#cap-v"><strong>v</strong></a> | 
+   <a href="#cap-w"><strong>w</strong></a> | 
+   <a href="#cap-|"><strong>|</strong></a>
+   </div>
+
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-+"><td></td><td>
+       <strong>+</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.backtracking-branching"><code class="xref">+ (backtracking branching)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-."><td></td><td>
+       <strong>.</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.goal-selector"><code class="xref">... : ... (goal selector)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.ssreflect"><code class="xref">... : ... (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-="><td></td><td>
+       <strong>=</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn."><code class="xref">=&gt;</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-["><td></td><td>
+       <strong>[</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.dispatch"><code class="xref">[&gt; ... | ... | ... ] (dispatch)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-_"><td></td><td>
+       <strong>_</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv."><code class="xref">_</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-a"><td></td><td>
+       <strong>a</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.abstract"><code class="xref">abstract</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.abstract-ssreflect"><code class="xref">abstract (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.absurd"><code class="xref">absurd</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.admit"><code class="xref">admit</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacv.all"><code class="xref">all: ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.apply"><code class="xref">apply</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.apply-ssreflect"><code class="xref">apply (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.apply-in"><code class="xref">apply ... in</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.apply-in-as"><code class="xref">apply ... in ... as</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.assert"><code class="xref">assert</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.assert-fails"><code class="xref">assert_fails</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.assert-succeeds"><code class="xref">assert_succeeds</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.assumption"><code class="xref">assumption</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.auto"><code class="xref">auto</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/type-classes.html#coq:tacn.autoapply"><code class="xref">autoapply</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.autorewrite"><code class="xref">autorewrite</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.autounfold"><code class="xref">autounfold</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-b"><td></td><td>
+       <strong>b</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.btauto"><code class="xref">btauto</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.by"><code class="xref">by</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-c"><td></td><td>
+       <strong>c</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.case"><code class="xref">case</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.case-ssreflect"><code class="xref">case (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.cbn"><code class="xref">cbn</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.cbv"><code class="xref">cbv</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.change"><code class="xref">change</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.change-no-check"><code class="xref">change_no_check</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.classical-left"><code class="xref">classical_left</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.classical-right"><code class="xref">classical_right</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.clear"><code class="xref">clear</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.clearbody"><code class="xref">clearbody</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.cofix"><code class="xref">cofix</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.compare"><code class="xref">compare</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.compute"><code class="xref">compute</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.congr"><code class="xref">congr</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.congruence"><code class="xref">congruence</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.congruence-with"><code class="xref">congruence with</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.constr-eq"><code class="xref">constr_eq</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.constr-eq-strict"><code class="xref">constr_eq_strict</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.constructor"><code class="xref">constructor</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.contradict"><code class="xref">contradict</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.contradiction"><code class="xref">contradiction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.convert-concl-no-check"><code class="xref">convert_concl_no_check</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.cut"><code class="xref">cut</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.cutrewrite"><code class="xref">cutrewrite</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.cycle"><code class="xref">cycle</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-d"><td></td><td>
+       <strong>d</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.debug-auto"><code class="xref">debug auto</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.debug-trivial"><code class="xref">debug trivial</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.decide-equality"><code class="xref">decide equality</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.decompose"><code class="xref">decompose</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.dependent-destruction"><code class="xref">dependent destruction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.dependent-induction"><code class="xref">dependent induction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.dependent-inversion"><code class="xref">dependent inversion</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.dependent-inversion-with"><code class="xref">dependent inversion ... with ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.dependent-rewrite"><code class="xref">dependent rewrite -&gt;</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.dependent-rewrite"><code class="xref">dependent rewrite &lt;-</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.destruct"><code class="xref">destruct</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.destruct-eqn"><code class="xref">destruct ... eqn:</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.dintuition"><code class="xref">dintuition</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.discriminate"><code class="xref">discriminate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="language/coq-library.html#coq:tacn.discrr"><code class="xref">discrR</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.do"><code class="xref">do</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.do-ssreflect"><code class="xref">do (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.done"><code class="xref">done</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.double-induction"><code class="xref">double induction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.dtauto"><code class="xref">dtauto</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-e"><td></td><td>
+       <strong>e</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eapply"><code class="xref">eapply</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eassert"><code class="xref">eassert</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eassumption"><code class="xref">eassumption</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.easy"><code class="xref">easy</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.eauto"><code class="xref">eauto</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.ecase"><code class="xref">ecase</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.econstructor"><code class="xref">econstructor</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.edestruct"><code class="xref">edestruct</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.ediscriminate"><code class="xref">ediscriminate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eelim"><code class="xref">eelim</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eenough"><code class="xref">eenough</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eexact"><code class="xref">eexact</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eexists"><code class="xref">eexists</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.einduction"><code class="xref">einduction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.einjection"><code class="xref">einjection</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.eintros"><code class="xref">eintros</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eleft"><code class="xref">eleft</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.elim"><code class="xref">elim</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.elim-ssreflect"><code class="xref">elim (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.elim-with"><code class="xref">elim ... with</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.elimtype"><code class="xref">elimtype</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.enough"><code class="xref">enough</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.epose"><code class="xref">epose</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.epose-proof"><code class="xref">epose proof</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eremember"><code class="xref">eremember</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.erewrite"><code class="xref">erewrite</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eright"><code class="xref">eright</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.eset"><code class="xref">eset</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.esimplify-eq"><code class="xref">esimplify_eq</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.esplit"><code class="xref">esplit</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.evar"><code class="xref">evar</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.exact"><code class="xref">exact</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.exact-no-check"><code class="xref">exact_no_check</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.exactly-once"><code class="xref">exactly_once</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.exfalso"><code class="xref">exfalso</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.exists"><code class="xref">exists</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-f"><td></td><td>
+       <strong>f</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.f-equal"><code class="xref">f_equal</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.fail"><code class="xref">fail</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.field"><code class="xref">field</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.field-simplify"><code class="xref">field_simplify</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.field-simplify-eq"><code class="xref">field_simplify_eq</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.finish-timing"><code class="xref">finish_timing</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.first"><code class="xref">first</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.first-ssreflect"><code class="xref">first (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacv.first-last"><code class="xref">first last</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.firstorder"><code class="xref">firstorder</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.fix"><code class="xref">fix</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.fold"><code class="xref">fold</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.function-induction"><code class="xref">function induction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.functional-inversion"><code class="xref">functional inversion</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-g"><td></td><td>
+       <strong>g</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.generalize"><code class="xref">generalize</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.generally-have"><code class="xref">generally have</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacv.gfail"><code class="xref">gfail</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.give-up"><code class="xref">give_up</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.guard"><code class="xref">guard</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-h"><td></td><td>
+       <strong>h</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.has-evar"><code class="xref">has_evar</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.have"><code class="xref">have</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.hnf"><code class="xref">hnf</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-i"><td></td><td>
+       <strong>i</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.idtac"><code class="xref">idtac</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.in"><code class="xref">in</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.induction"><code class="xref">induction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.induction-using"><code class="xref">induction ... using ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.info-trivial"><code class="xref">info_trivial</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.injection"><code class="xref">injection</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.instantiate"><code class="xref">instantiate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.intro"><code class="xref">intro</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.intros"><code class="xref">intros</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.intros"><code class="xref">intros ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.intuition"><code class="xref">intuition</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.inversion"><code class="xref">inversion</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.inversion-using"><code class="xref">inversion ... using ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.inversion-clear"><code class="xref">inversion_clear</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.inversion-sigma"><code class="xref">inversion_sigma</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.is-evar"><code class="xref">is_evar</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.is-var"><code class="xref">is_var</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-l"><td></td><td>
+       <strong>l</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.lapply"><code class="xref">lapply</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.last"><code class="xref">last</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacv.last-first"><code class="xref">last first</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.lazy"><code class="xref">lazy</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.left"><code class="xref">left</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.let"><code class="xref">let ... := ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/micromega.html#coq:tacn.lia"><code class="xref">lia</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/micromega.html#coq:tacn.lra"><code class="xref">lra</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.ltac-seq"><code class="xref">ltac-seq</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-m"><td></td><td>
+       <strong>m</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.match-goal"><code class="xref">match goal</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.move"><code class="xref">move</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.move-after"><code class="xref">move ... after ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.move-at-bottom"><code class="xref">move ... at bottom</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.move-at-top"><code class="xref">move ... at top</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.move-before"><code class="xref">move ... before ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-n"><td></td><td>
+       <strong>n</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.native-cast-no-check"><code class="xref">native_cast_no_check</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.native-compute"><code class="xref">native_compute</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/micromega.html#coq:tacn.nia"><code class="xref">nia</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.notypeclasses-refine"><code class="xref">notypeclasses refine</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.now"><code class="xref">now</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/micromega.html#coq:tacn.nra"><code class="xref">nra</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/nsatz.html#coq:tacn.nsatz"><code class="xref">nsatz</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-o"><td></td><td>
+       <strong>o</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.omega"><code class="xref">omega</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.once"><code class="xref">once</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacv.only"><code class="xref">only ... : ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.optimize-heap"><code class="xref">optimize_heap</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.over"><code class="xref">over</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-p"><td></td><td>
+       <strong>p</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacv.par"><code class="xref">par: ...</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.pattern"><code class="xref">pattern</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.pose"><code class="xref">pose</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.pose-ssreflect"><code class="xref">pose (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.pose-proof"><code class="xref">pose proof</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.progress"><code class="xref">progress</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/micromega.html#coq:tacn.psatz"><code class="xref">psatz</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-r"><td></td><td>
+       <strong>r</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.red"><code class="xref">red</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.refine"><code class="xref">refine</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.reflexivity"><code class="xref">reflexivity</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.remember"><code class="xref">remember</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.rename"><code class="xref">rename</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.repeat"><code class="xref">repeat</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.replace"><code class="xref">replace</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.reset-ltac-profile"><code class="xref">reset ltac profile</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.restart-timer"><code class="xref">restart_timer</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.revert"><code class="xref">revert</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.revert-dependent"><code class="xref">revert dependent</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.revgoals"><code class="xref">revgoals</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.rewrite"><code class="xref">rewrite</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.rewrite-ssreflect"><code class="xref">rewrite (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/generalized-rewriting.html#coq:tacn.rewrite-strat"><code class="xref">rewrite_strat</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.right"><code class="xref">right</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.ring"><code class="xref">ring</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.ring-simplify"><code class="xref">ring_simplify</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.rtauto"><code class="xref">rtauto</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-s"><td></td><td>
+       <strong>s</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.set"><code class="xref">set</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.set-ssreflect"><code class="xref">set (ssreflect)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/generalized-rewriting.html#coq:tacv.setoid-reflexivity"><code class="xref">setoid_reflexivity</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/generalized-rewriting.html#coq:tacv.setoid-replace"><code class="xref">setoid_replace</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/generalized-rewriting.html#coq:tacv.setoid-rewrite"><code class="xref">setoid_rewrite</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/generalized-rewriting.html#coq:tacv.setoid-symmetry"><code class="xref">setoid_symmetry</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/generalized-rewriting.html#coq:tacv.setoid-transitivity"><code class="xref">setoid_transitivity</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.shelve"><code class="xref">shelve</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.shelve-unifiable"><code class="xref">shelve_unifiable</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.show-ltac-profile"><code class="xref">show ltac profile</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.simpl"><code class="xref">simpl</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.simple-apply"><code class="xref">simple apply</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.simple-destruct"><code class="xref">simple destruct</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.simple-eapply"><code class="xref">simple eapply</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.simple-induction"><code class="xref">simple induction</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.simple-inversion"><code class="xref">simple inversion</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.simple-notypeclasses-refine"><code class="xref">simple notypeclasses refine</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.simple-refine"><code class="xref">simple refine</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.simplify-eq"><code class="xref">simplify_eq</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.solve"><code class="xref">solve</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.solve-constraints"><code class="xref">solve_constraints</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.specialize"><code class="xref">specialize</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.split"><code class="xref">split</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="language/coq-library.html#coq:tacn.split-rabs"><code class="xref">split_Rabs</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="language/coq-library.html#coq:tacn.split-rmult"><code class="xref">split_Rmult</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.start-ltac-profiling"><code class="xref">start ltac profiling</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.stepl"><code class="xref">stepl</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.stepr"><code class="xref">stepr</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.stop-ltac-profiling"><code class="xref">stop ltac profiling</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.subst"><code class="xref">subst</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.suff"><code class="xref">suff</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.suffices"><code class="xref">suffices</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.swap"><code class="xref">swap</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.symmetry"><code class="xref">symmetry</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-t"><td></td><td>
+       <strong>t</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.tauto"><code class="xref">tauto</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.time"><code class="xref">time</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.time-constr"><code class="xref">time_constr</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.timeout"><code class="xref">timeout</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.transitivity"><code class="xref">transitivity</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacv.transparent-abstract"><code class="xref">transparent_abstract</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.trivial"><code class="xref">trivial</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.try"><code class="xref">try</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.tryif"><code class="xref">tryif</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="addendum/type-classes.html#coq:tacn.typeclasses-eauto"><code class="xref">typeclasses eauto</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-u"><td></td><td>
+       <strong>u</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.under"><code class="xref">under</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.unfold"><code class="xref">unfold</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.unify"><code class="xref">unify</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.unlock"><code class="xref">unlock</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacn.unshelve"><code class="xref">unshelve</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-v"><td></td><td>
+       <strong>v</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.vm-cast-no-check"><code class="xref">vm_cast_no_check</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/tactics.html#coq:tacv.vm-compute"><code class="xref">vm_compute</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-w"><td></td><td>
+       <strong>w</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.without-loss"><code class="xref">without loss</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ssreflect-proof-language.html#coq:tacn.wlog"><code class="xref">wlog</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-|"><td></td><td>
+       <strong>|</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="proof-engine/ltac.html#coq:tacn.left-biased-branching"><code class="xref">|| (left-biased branching)</code></a></td><td>
+       <em></em></td></tr>
+   </table>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 1999-2018, Inria
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

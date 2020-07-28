@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html><head><title>NZAxioms.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+Initial Author : Evgeny Makarov, INRIA, 2007 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Equalities Orders NumPrelude GenericMinMax.</span></span></span></pre><div class="doc">
+Axiomatization of a domain with zero, successor, predecessor,
+    and a bi-directional induction principle. We require <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>
+    but not the other way around, since this domain is meant
+    to be either N or Z. In fact it can be a few other things,
+    for instance <span class="inlinecode"><span class="id" title="var">Z</span>/<span class="id" title="var">nZ</span></span> (See file <span class="inlinecode"><span class="id" title="var">NZDomain</span></span> for a study of that).
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">ZeroSuccPred</span> (<span class="kn">Import</span> T:Typ).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">Inline</span>(<span class="mi">20</span>) <span class="nv">zero</span> : t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">Inline</span>(<span class="mi">50</span>) <span class="nv">succ</span> : t -&gt; t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">Inline</span> <span class="nv">pred</span> : t -&gt; t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">ZeroSuccPred</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">ZeroSuccPredNotation</span> (T:Typ)(<span class="kn">Import</span> NZ:ZeroSuccPred T).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;0&quot;</span> := zero.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">S</span> := succ.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">P</span> := pred.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">ZeroSuccPredNotation</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">ZeroSuccPred&#39;</span> (T:Typ) :=
+ ZeroSuccPred T &lt;+ ZeroSuccPredNotation T.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">IsNZDomain</span> (<span class="kn">Import</span> E:Eq&#39;)(<span class="kn">Import</span> NZ:ZeroSuccPred&#39; E).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Instance</span> succ_wd : Proper (eq ==&gt; eq) S.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Instance</span> pred_wd : Proper (eq ==&gt; eq) P.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">pred_succ</span> : <span class="kr">forall</span> <span class="nv">n</span>, P (S n) == n.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">bi_induction</span> :
+  <span class="kr">forall</span> <span class="nv">A</span> : t -&gt; <span class="kt">Prop</span>, Proper (eq==&gt;iff) A -&gt;
+    A <span class="mi">0</span> -&gt; (<span class="kr">forall</span> <span class="nv">n</span>, A n &lt;-&gt; A (S n)) -&gt; <span class="kr">forall</span> <span class="nv">n</span>, A n.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">IsNZDomain</span>.</span></span></span></pre><div class="doc">
+Axiomatization of some more constants
+
+<div class="paragraph"> </div>
+
+    Simply denoting "1" for (S 0) and so on works ok when implementing
+    by nat, but leaves some (N.succ N0) when implementing by N.
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">OneTwo</span> (<span class="kn">Import</span> T:Typ).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">Inline</span>(<span class="mi">20</span>) <span class="nv">one</span> <span class="nv">two</span> : t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">OneTwo</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">OneTwoNotation</span> (T:Typ)(<span class="kn">Import</span> NZ:OneTwo T).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;1&quot;</span> := one.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;2&quot;</span> := two.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">OneTwoNotation</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">OneTwo&#39;</span> (T:Typ) := OneTwo T &lt;+ OneTwoNotation T.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">IsOneTwo</span> (E:Eq&#39;)(Z:ZeroSuccPred&#39; E)(O:OneTwo&#39; E).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> E Z O.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">one_succ</span> : <span class="mi">1</span> == S <span class="mi">0</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">two_succ</span> : <span class="mi">2</span> == S <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">IsOneTwo</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZDomainSig</span> :=
+ EqualityType &lt;+ ZeroSuccPred &lt;+ IsNZDomain &lt;+ OneTwo &lt;+ IsOneTwo.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZDomainSig&#39;</span> :=
+ EqualityType&#39; &lt;+ ZeroSuccPred&#39; &lt;+ IsNZDomain &lt;+ OneTwo&#39; &lt;+ IsOneTwo.</span></span></span></pre><div class="doc">
+Axiomatization of basic operations : <span class="inlinecode">+</span> <span class="inlinecode">-</span> <span class="inlinecode">×</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">AddSubMul</span> (<span class="kn">Import</span> T:Typ).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameters</span> <span class="nv">Inline</span> <span class="nv">add</span> <span class="nv">sub</span> <span class="nv">mul</span> : t -&gt; t -&gt; t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">AddSubMul</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">AddSubMulNotation</span> (T:Typ)(<span class="kn">Import</span> NZ:AddSubMul T).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;x + y&quot;</span> := (add x y).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;x - y&quot;</span> := (sub x y).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;x * y&quot;</span> := (mul x y).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">AddSubMulNotation</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">AddSubMul&#39;</span> (T:Typ) := AddSubMul T &lt;+ AddSubMulNotation T.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">IsAddSubMul</span> (<span class="kn">Import</span> E:NZDomainSig&#39;)(<span class="kn">Import</span> NZ:AddSubMul&#39; E).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Instance</span> add_wd : Proper (eq ==&gt; eq ==&gt; eq) add.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Instance</span> sub_wd : Proper (eq ==&gt; eq ==&gt; eq) sub.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Instance</span> mul_wd : Proper (eq ==&gt; eq ==&gt; eq) mul.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">add_0_l</span> : <span class="kr">forall</span> <span class="nv">n</span>, <span class="mi">0</span> + n == n.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">add_succ_l</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span>, (S n) + m == S (n + m).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">sub_0_r</span> : <span class="kr">forall</span> <span class="nv">n</span>, n - <span class="mi">0</span> == n.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">sub_succ_r</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span>, n - (S m) == P (n - m).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">mul_0_l</span> : <span class="kr">forall</span> <span class="nv">n</span>, <span class="mi">0</span> * n == <span class="mi">0</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">mul_succ_l</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span>, S n * m == n * m + m.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">IsAddSubMul</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZBasicFunsSig</span> := NZDomainSig &lt;+ AddSubMul &lt;+ IsAddSubMul.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZBasicFunsSig&#39;</span> := NZDomainSig&#39; &lt;+ AddSubMul&#39; &lt;+IsAddSubMul.</span></span></span></pre><div class="doc">
+Old name for the same interface: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZAxiomsSig</span> := NZBasicFunsSig.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZAxiomsSig&#39;</span> := NZBasicFunsSig&#39;.</span></span></span></pre><div class="doc">
+Axiomatization of order 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZOrd</span> := NZDomainSig &lt;+ HasLt &lt;+ HasLe.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZOrd&#39;</span> := NZDomainSig&#39; &lt;+ HasLt &lt;+ HasLe &lt;+
+                      LtNotation &lt;+ LeNotation &lt;+ LtLeNotation.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">IsNZOrd</span> (<span class="kn">Import</span> NZ : NZOrd&#39;).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Instance</span> lt_wd : Proper (eq ==&gt; eq ==&gt; iff) lt.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">lt_eq_cases</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span>, n &lt;= m &lt;-&gt; n &lt; m \/ n == m.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">lt_irrefl</span> : <span class="kr">forall</span> <span class="nv">n</span>, ~ (n &lt; n).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">lt_succ_r</span> : <span class="kr">forall</span> <span class="nv">n</span> <span class="nv">m</span>, n &lt; S m &lt;-&gt; n &lt;= m.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">IsNZOrd</span>.</span></span></span></pre><div class="doc">
+NB: the compatibility of <span class="inlinecode"><span class="id" title="var">le</span></span> can be proved later from <span class="inlinecode"><span class="id" title="var">lt_wd</span></span>
+    and <span class="inlinecode"><span class="id" title="var">lt_eq_cases</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZOrdSig</span> := NZOrd &lt;+ IsNZOrd.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZOrdSig&#39;</span> := NZOrd&#39; &lt;+ IsNZOrd.</span></span></span></pre><div class="doc">
+Everything together : 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZOrdAxiomsSig</span> &lt;: NZBasicFunsSig &lt;: NZOrdSig
+ := NZOrdSig &lt;+ AddSubMul &lt;+ IsAddSubMul &lt;+ HasMinMax.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZOrdAxiomsSig&#39;</span> &lt;: NZOrdAxiomsSig
+ := NZOrdSig&#39; &lt;+ AddSubMul&#39; &lt;+ IsAddSubMul &lt;+ HasMinMax.</span></span></span></pre><div class="doc">
+Same, plus a comparison function. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZDecOrdSig</span> := NZOrdSig &lt;+ HasCompare.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZDecOrdSig&#39;</span> := NZOrdSig&#39; &lt;+ HasCompare.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZDecOrdAxiomsSig</span> := NZOrdAxiomsSig &lt;+ HasCompare.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZDecOrdAxiomsSig&#39;</span> := NZOrdAxiomsSig&#39; &lt;+ HasCompare.</span></span></span></pre><div class="doc">
+A square function 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NZSquare</span> (<span class="kn">Import</span> NZ : NZBasicFunsSig&#39;).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">Inline</span> <span class="nv">square</span> : t -&gt; t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">square_spec</span> : <span class="kr">forall</span> <span class="nv">n</span>, square n == n * n.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">NZSquare</span>.</span></span></span></pre></article></body></html>

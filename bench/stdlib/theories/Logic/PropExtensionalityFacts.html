@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html><head><title>PropExtensionalityFacts.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+Some facts and definitions about propositional and predicate extensionality
+
+<div class="paragraph"> </div>
+
+We investigate the relations between the following extensionality principles
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> Proposition extensionality
+
+</li>
+<li> Predicate extensionality
+
+</li>
+<li> Propositional functional extensionality
+
+</li>
+<li> Provable-proposition extensionality
+
+</li>
+<li> Refutable-proposition extensionality
+
+</li>
+<li> Extensional proposition representatives
+
+</li>
+<li> Extensional predicate representatives
+
+</li>
+<li> Extensional propositional function representatives
+
+</li>
+</ul>
+<div class="paragraph"> </div>
+
+Table of contents
+
+<div class="paragraph"> </div>
+
+1. Definitions
+
+<div class="paragraph"> </div>
+
+2.1 Predicate extensionality &lt;-&gt; Proposition extensionality + Propositional functional extensionality
+
+<div class="paragraph"> </div>
+
+2.2 Propositional extensionality -&gt; Provable propositional extensionality
+
+<div class="paragraph"> </div>
+
+2.3 Propositional extensionality -&gt; Refutable propositional extensionality
+
+<div class="paragraph"> </div>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Implicit Arguments</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">Definitions</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Propositional extensionality 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">PropositionalExtensionality</span> :=
+  (<span class="kr">forall</span> <span class="nv">A</span> <span class="nv">B</span> : <span class="kt">Prop</span>, (A &lt;-&gt; B) -&gt; A = B).</span></span></span></pre><div class="doc">
+Provable-proposition extensionality 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">ProvablePropositionExtensionality</span> :=
+  (<span class="kr">forall</span> <span class="nv">A</span>:<span class="kt">Prop</span>, A -&gt; A = <span class="kt">True</span>).</span></span></span></pre><div class="doc">
+Refutable-proposition extensionality 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">RefutablePropositionExtensionality</span> :=
+  (<span class="kr">forall</span> <span class="nv">A</span>:<span class="kt">Prop</span>, ~A -&gt; A = <span class="kt">False</span>).</span></span></span></pre><div class="doc">
+Predicate extensionality 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">PredicateExtensionality</span> :=
+  (<span class="kr">forall</span> (<span class="nv">A</span>:<span class="kt">Type</span>) (<span class="nv">P</span> <span class="nv">Q</span> : A -&gt; <span class="kt">Prop</span>), (<span class="kr">forall</span> <span class="nv">x</span>, P x &lt;-&gt; Q x) -&gt; P = Q).</span></span></span></pre><div class="doc">
+Propositional functional extensionality 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">PropositionalFunctionalExtensionality</span> :=
+  (<span class="kr">forall</span> (<span class="nv">A</span>:<span class="kt">Type</span>) (<span class="nv">P</span> <span class="nv">Q</span> : A -&gt; <span class="kt">Prop</span>), (<span class="kr">forall</span> <span class="nv">x</span>, P x = Q x) -&gt; P = Q).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Propositional and predicate extensionality</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab3"></a><h2 class="section">Predicate extensionality &lt;-&gt; Propositional extensionality + Propositional functional extensionality</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">PredExt_imp_PropExt</span> : PredicateExtensionality -&gt; PropositionalExtensionality.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PredicateExtensionality -&gt; PropositionalExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PredicateExtensionality -&gt; PropositionalExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk2"><span class="highlight"><span class="nb">intros</span> Ext A B Equiv.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PredicateExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A, B</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Equiv</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A &lt;-&gt; B</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">A = B</span></div></blockquote></div></div></small><span class="coq-wsp"> 
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk3"><span class="highlight"><span class="nb">change</span> A <span class="kr">with</span> ((<span class="kr">fun</span> <span class="nv">_</span> =&gt; A) I).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PredicateExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A, B</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Equiv</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A &lt;-&gt; B</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(<span class="kr">fun</span> <span class="nv">_</span> : <span class="kt">True</span> =&gt; A) I = B</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">rewrite</span> Ext <span class="kr">with</span> (P := <span class="kr">fun</span> <span class="nv">_</span> : <span class="kt">True</span> =&gt;A) (Q := <span class="kr">fun</span> <span class="nv">_</span> =&gt; B).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk4"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">PredExt_imp_PropFunExt</span> : PredicateExtensionality -&gt; PropositionalFunctionalExtensionality.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PredicateExtensionality -&gt;
+PropositionalFunctionalExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk5"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PredicateExtensionality -&gt;
+PropositionalFunctionalExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk6"><span class="highlight"><span class="nb">intros</span> Ext A P Q Eq.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PredicateExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Eq</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : A, P x = Q x</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P = Q</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk7"><span class="highlight"><span class="nb">apply</span> Ext.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PredicateExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Eq</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : A, P x = Q x</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : A, P x &lt;-&gt; Q x</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk8"><span class="highlight"><span class="nb">intros</span> x.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PredicateExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Eq</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">x0</span> : A, P x0 = Q x0</span></span></span></div><div class="goal-hyp"><span class="hyp-names">x</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P x &lt;-&gt; Q x</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">rewrite</span> (Eq x).</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk9"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">PropExt_and_PropFunExt_imp_PredExt</span> :
+  PropositionalExtensionality -&gt; PropositionalFunctionalExtensionality -&gt; PredicateExtensionality.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality -&gt;
+PropositionalFunctionalExtensionality -&gt;
+PredicateExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chka"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality -&gt;
+PropositionalFunctionalExtensionality -&gt;
+PredicateExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chkb" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chkb"><span class="highlight"><span class="nb">intros</span> Ext FunExt A P Q Equiv.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PropositionalExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">FunExt</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PropositionalFunctionalExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Equiv</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : A, P x &lt;-&gt; Q x</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P = Q</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chkc" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chkc"><span class="highlight"><span class="nb">apply</span> FunExt.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PropositionalExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">FunExt</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PropositionalFunctionalExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Equiv</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : A, P x &lt;-&gt; Q x</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> : A, P x = Q x</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chkd" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chkd"><span class="highlight"><span class="nb">intros</span> x.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">Ext</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PropositionalExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">FunExt</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">PropositionalFunctionalExtensionality</span></span></span></div><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">P, Q</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">Equiv</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kr">forall</span> <span class="nv">x0</span> : A, P x0 &lt;-&gt; Q x0</span></span></span></div><div class="goal-hyp"><span class="hyp-names">x</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">P x = Q x</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">apply</span> Ext.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chke" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chke"><span class="highlight"><span class="kn">Theorem</span> <span class="nf">PropExt_and_PropFunExt_iff_PredExt</span> :
+  PropositionalExtensionality /\ PropositionalFunctionalExtensionality &lt;-&gt; PredicateExtensionality.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality /\
+PropositionalFunctionalExtensionality &lt;-&gt;
+PredicateExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chkf" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chkf"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality /\
+PropositionalFunctionalExtensionality &lt;-&gt;
+PredicateExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">firstorder using</span> PredExt_imp_PropExt, PredExt_imp_PropFunExt, PropExt_and_PropFunExt_imp_PredExt.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab4"></a><h2 class="section">Propositional extensionality and provable proposition extensionality</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk10"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">PropExt_imp_ProvPropExt</span> : PropositionalExtensionality -&gt; ProvablePropositionExtensionality.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality -&gt;
+ProvablePropositionExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk11" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk11"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality -&gt;
+ProvablePropositionExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">intros</span> Ext A Ha; <span class="nb">apply</span> Ext; <span class="nb">split</span>; <span class="nb">trivial</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab5"></a><h2 class="section">Propositional extensionality and refutable proposition extensionality</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk12" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk12"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">PropExt_imp_RefutPropExt</span> : PropositionalExtensionality -&gt; RefutablePropositionExtensionality.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality -&gt;
+RefutablePropositionExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="PropExtensionalityFacts-v-chk13" style="display: none" type="checkbox"><label class="coq-input" for="PropExtensionalityFacts-v-chk13"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">PropositionalExtensionality -&gt;
+RefutablePropositionExtensionality</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">intros</span> Ext A Ha; <span class="nb">apply</span> Ext; <span class="nb">split</span>; <span class="bp">easy</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre></article></body></html>

@@ -1,0 +1,59 @@
+Remakefile : Remakefile.in config.status
+all : src/Calc/Bracket.vo src/Calc/Div.vo src/Calc/Operations.vo src/Calc/Round.vo src/Calc/Sqrt.vo src/Core/Core.vo src/Core/Defs.vo src/Core/Digits.vo src/Core/FIX.vo src/Core/FLT.vo src/Core/FLX.vo src/Core/FTZ.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_NE.vo src/Core/Round_pred.vo src/Core/Ulp.vo src/Core/Zaux.vo src/IEEE754/Binary.vo src/IEEE754/BinarySingleNaN.vo src/IEEE754/Bits.vo src/IEEE754/SpecFloatCompat.vo src/IEEE754/SpecFloatCopy.vo src/Pff/Pff.vo src/Pff/Pff2Flocq.vo src/Pff/Pff2FlocqAux.vo src/Prop/Div_sqrt_error.vo src/Prop/Double_rounding.vo src/Prop/Mult_error.vo src/Prop/Plus_error.vo src/Prop/Relative.vo src/Prop/Round_odd.vo src/Prop/Sterbenz.vo src/Version.vo
+check : examples/Average.vo examples/Compute.vo examples/Double_rounding_odd_radix.vo examples/Homogen.vo
+check-more : examples/Cody_Waite.vo examples/Division_u16.vo examples/Sqrt_sqr.vo examples/Triangle.vo
+clean :
+configure config.status : configure.in
+deps.dot : Remakefile.in src/Calc/Bracket.v src/Calc/Div.v src/Calc/Operations.v src/Calc/Round.v src/Calc/Sqrt.v src/Core/Core.v src/Core/Defs.v src/Core/Digits.v src/Core/FIX.v src/Core/FLT.v src/Core/FLX.v src/Core/FTZ.v src/Core/Float_prop.v src/Core/Generic_fmt.v src/Core/Raux.v src/Core/Round_NE.v src/Core/Round_pred.v src/Core/Ulp.v src/Core/Zaux.v src/IEEE754/Binary.v src/IEEE754/BinarySingleNaN.v src/IEEE754/Bits.v src/IEEE754/SpecFloatCompat.v src/IEEE754/SpecFloatCopy.v src/Pff/Pff.v src/Pff/Pff2Flocq.v src/Pff/Pff2FlocqAux.v src/Prop/Div_sqrt_error.v src/Prop/Double_rounding.v src/Prop/Mult_error.v src/Prop/Plus_error.v src/Prop/Relative.v src/Prop/Round_odd.v src/Prop/Sterbenz.v src/Version.v
+deps.map : deps.dot
+deps.png : deps.dot
+dist : configure
+doc : html/index.html
+examples/Average.vo : examples/Average.v src/Core/Core.vo src/Prop/Plus_error.vo
+examples/Cody_Waite.vo : examples/Cody_Waite.v src/Core/Core.vo
+examples/Compute.vo : examples/Compute.v src/Calc/Bracket.vo src/Calc/Div.vo src/Calc/Operations.vo src/Calc/Round.vo src/Calc/Sqrt.vo src/Core/Core.vo
+examples/Division_u16.vo : examples/Division_u16.v src/Core/Core.vo
+examples/Double_rounding_odd_radix.vo : examples/Double_rounding_odd_radix.v src/Calc/Operations.vo src/Core/Defs.vo src/Core/FLT.vo src/Core/FLX.vo src/Core/FTZ.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Ulp.vo src/Prop/Double_rounding.vo
+examples/Homogen.vo : examples/Homogen.v src/Calc/Operations.vo src/Core/Core.vo src/Prop/Plus_error.vo src/Prop/Relative.vo
+examples/Sqrt_sqr.vo : examples/Compute.vo examples/Sqrt_sqr.v src/Calc/Bracket.vo src/Calc/Div.vo src/Calc/Operations.vo src/Calc/Round.vo src/Core/Core.vo
+examples/Triangle.vo : examples/Triangle.v src/Calc/Operations.vo src/Core/Core.vo src/Prop/Relative.vo src/Prop/Sterbenz.vo
+html/index.html : src/Calc/Bracket.vo src/Calc/Div.vo src/Calc/Operations.vo src/Calc/Round.vo src/Calc/Sqrt.vo src/Core/Core.vo src/Core/Defs.vo src/Core/Digits.vo src/Core/FIX.vo src/Core/FLT.vo src/Core/FLX.vo src/Core/FTZ.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_NE.vo src/Core/Round_pred.vo src/Core/Ulp.vo src/Core/Zaux.vo src/IEEE754/Binary.vo src/IEEE754/BinarySingleNaN.vo src/IEEE754/Bits.vo src/IEEE754/SpecFloatCompat.vo src/IEEE754/SpecFloatCopy.vo src/Pff/Pff.vo src/Pff/Pff2Flocq.vo src/Pff/Pff2FlocqAux.vo src/Prop/Div_sqrt_error.vo src/Prop/Double_rounding.vo src/Prop/Mult_error.vo src/Prop/Plus_error.vo src/Prop/Relative.vo src/Prop/Round_odd.vo src/Prop/Sterbenz.vo src/Version.vo
+install :
+public : deps.map deps.png html/index.html
+src/Calc/Bracket.vo : src/Calc/Bracket.v src/Core/Defs.vo src/Core/Float_prop.vo src/Core/Raux.vo src/IEEE754/SpecFloatCompat.vo
+src/Calc/Div.vo : src/Calc/Bracket.vo src/Calc/Div.v src/Core/Defs.vo src/Core/Digits.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo
+src/Calc/Operations.vo : src/Calc/Operations.v src/Core/Defs.vo src/Core/Float_prop.vo src/Core/Raux.vo
+src/Calc/Round.vo : src/Calc/Bracket.vo src/Calc/Round.v src/Core/Core.vo src/Core/Digits.vo src/Core/Float_prop.vo
+src/Calc/Sqrt.vo : src/Calc/Bracket.vo src/Calc/Sqrt.v src/Core/Defs.vo src/Core/Digits.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo
+src/Core/Core.vo : src/Core/Core.v src/Core/Defs.vo src/Core/FIX.vo src/Core/FLT.vo src/Core/FLX.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_NE.vo src/Core/Round_pred.vo src/Core/Ulp.vo
+src/Core/Defs.vo : src/Core/Defs.v src/Core/Raux.vo
+src/Core/Digits.vo : src/Core/Digits.v src/Core/Zaux.vo src/IEEE754/SpecFloatCompat.vo
+src/Core/FIX.vo : src/Core/Defs.vo src/Core/FIX.v src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_NE.vo src/Core/Round_pred.vo src/Core/Ulp.vo
+src/Core/FLT.vo : src/Core/Defs.vo src/Core/FIX.vo src/Core/FLT.v src/Core/FLX.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_NE.vo src/Core/Round_pred.vo src/Core/Ulp.vo
+src/Core/FLX.vo : src/Core/Defs.vo src/Core/FIX.vo src/Core/FLX.v src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_NE.vo src/Core/Round_pred.vo src/Core/Ulp.vo
+src/Core/FTZ.vo : src/Core/Defs.vo src/Core/FLX.vo src/Core/FTZ.v src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_pred.vo src/Core/Ulp.vo
+src/Core/Float_prop.vo : src/Core/Defs.vo src/Core/Digits.vo src/Core/Float_prop.v src/Core/Raux.vo
+src/Core/Generic_fmt.vo : src/Core/Defs.vo src/Core/Float_prop.vo src/Core/Generic_fmt.v src/Core/Raux.vo src/Core/Round_pred.vo
+src/Core/Raux.vo : src/Core/Raux.v src/Core/Zaux.vo
+src/Core/Round_NE.vo : src/Core/Defs.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_NE.v src/Core/Round_pred.vo src/Core/Ulp.vo
+src/Core/Round_pred.vo : src/Core/Defs.vo src/Core/Raux.vo src/Core/Round_pred.v
+src/Core/Ulp.vo : src/Core/Defs.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Round_pred.vo src/Core/Ulp.v
+src/Core/Zaux.vo : src/Core/Zaux.v src/IEEE754/SpecFloatCompat.vo
+src/IEEE754/Binary.vo : src/Calc/Bracket.vo src/Calc/Div.vo src/Calc/Operations.vo src/Calc/Round.vo src/Calc/Sqrt.vo src/Core/Core.vo src/Core/Digits.vo src/IEEE754/Binary.v src/Prop/Relative.vo
+src/IEEE754/BinarySingleNaN.vo : src/Calc/Bracket.vo src/Calc/Div.vo src/Calc/Operations.vo src/Calc/Round.vo src/Calc/Sqrt.vo src/Core/Core.vo src/Core/Digits.vo src/IEEE754/BinarySingleNaN.v src/IEEE754/SpecFloatCompat.vo src/Prop/Relative.vo
+src/IEEE754/Bits.vo : src/Core/Core.vo src/Core/Digits.vo src/IEEE754/Binary.vo src/IEEE754/Bits.v
+src/IEEE754/SpecFloatCompat.v : config.status src/IEEE754/SpecFloatCompat.v.in
+src/IEEE754/SpecFloatCompat.vo : src/IEEE754/SpecFloatCompat.v src/IEEE754/SpecFloatCopy.vo
+src/IEEE754/SpecFloatCopy.vo : src/IEEE754/SpecFloatCopy.v
+src/Pff/Pff.vo : src/Pff/Pff.v
+src/Pff/Pff2Flocq.vo : src/Calc/Operations.vo src/Core/Core.vo src/Pff/Pff.vo src/Pff/Pff2Flocq.v src/Pff/Pff2FlocqAux.vo src/Prop/Mult_error.vo src/Prop/Plus_error.vo src/Prop/Sterbenz.vo
+src/Pff/Pff2FlocqAux.vo : src/Core/Core.vo src/Pff/Pff.vo src/Pff/Pff2FlocqAux.v
+src/Prop/Div_sqrt_error.vo : src/Calc/Operations.vo src/Core/Core.vo src/Prop/Div_sqrt_error.v src/Prop/Mult_error.vo src/Prop/Relative.vo src/Prop/Sterbenz.vo
+src/Prop/Double_rounding.vo : src/Calc/Operations.vo src/Core/Defs.vo src/Core/FLT.vo src/Core/FLX.vo src/Core/FTZ.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Ulp.vo src/Prop/Double_rounding.v
+src/Prop/Mult_error.vo : src/Calc/Operations.vo src/Core/Core.vo src/Prop/Mult_error.v src/Prop/Plus_error.vo
+src/Prop/Plus_error.vo : src/Calc/Operations.vo src/Core/Defs.vo src/Core/FIX.vo src/Core/FLT.vo src/Core/FLX.vo src/Core/Float_prop.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Core/Ulp.vo src/Prop/Plus_error.v src/Prop/Relative.vo
+src/Prop/Relative.vo : src/Core/Core.vo src/Prop/Relative.v
+src/Prop/Round_odd.vo : src/Calc/Operations.vo src/Core/Core.vo src/Prop/Round_odd.v
+src/Prop/Sterbenz.vo : src/Calc/Operations.vo src/Core/Defs.vo src/Core/Generic_fmt.vo src/Core/Raux.vo src/Prop/Sterbenz.v
+src/Version.v : config.status src/Version.v.in
+src/Version.vo : src/Version.v

@@ -1,0 +1,15 @@
+# M-x org-babel-tangle
+* xyz
+  #+begin_src coq :tangle babel.coq :comments both
+    Definition b := 1.
+  #+end_src
+* abc
+  #+begin_src coq :tangle babel.coq :comments both
+    Goal True ∧ True.
+      split.
+      - exact I.
+      - enough (1 + 1 = 2).
+        + exact I.
+        + reflexivity.
+    Qed.
+  #+end_src

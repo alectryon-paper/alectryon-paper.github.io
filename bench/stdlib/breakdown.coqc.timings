@@ -1,0 +1,15 @@
+coqc	stdlib/theories/Lists/ListSet.v	real: 0.497	user: 0.413	sys: 0.084	0
+coqc	stdlib/theories/Lists/ListSet.v	real: 0.489	user: 0.377	sys: 0.112	0
+coqc	stdlib/theories/Lists/ListSet.v	real: 0.488	user: 0.387	sys: 0.100	0
+coqc	stdlib/theories/Lists/ListSet.v	real: 0.492	user: 0.356	sys: 0.136	0
+coqc	stdlib/theories/Lists/ListSet.v	real: 0.496	user: 0.411	sys: 0.084	0
+coqc	stdlib/theories/Reals/Ranalysis3.v	real: 0.867	user: 0.715	sys: 0.152	0
+coqc	stdlib/theories/Reals/Ranalysis3.v	real: 0.857	user: 0.708	sys: 0.148	0
+coqc	stdlib/theories/Reals/Ranalysis3.v	real: 0.870	user: 0.730	sys: 0.132	0
+coqc	stdlib/theories/Reals/Ranalysis3.v	real: 0.854	user: 0.678	sys: 0.173	0
+coqc	stdlib/theories/Reals/Ranalysis3.v	real: 0.863	user: 0.735	sys: 0.128	0
+coqc	stdlib/theories/Strings/Byte.v	real: 7.353	user: 7.190	sys: 0.160	0
+coqc	stdlib/theories/Strings/Byte.v	real: 7.680	user: 7.499	sys: 0.180	0
+coqc	stdlib/theories/Strings/Byte.v	real: 7.558	user: 7.405	sys: 0.152	0
+coqc	stdlib/theories/Strings/Byte.v	real: 7.715	user: 7.544	sys: 0.172	0
+coqc	stdlib/theories/Strings/Byte.v	real: 7.463	user: 7.298	sys: 0.164	0

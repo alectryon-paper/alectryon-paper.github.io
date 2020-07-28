@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html><head><title>FSetInterface.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">Finite set library</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Set interfaces, inspired by the one of Ocaml. When compared with
+    Ocaml, the main differences are:
+<ul class="doclist">
+<li> the lack of <span class="inlinecode"><span class="id" title="var">iter</span></span> function, useless since Coq is purely functional
+
+</li>
+<li> the use of <span class="inlinecode"><span class="id" title="var">option</span></span> types instead of <span class="inlinecode"><span class="id" title="var">Not_found</span></span> exceptions
+
+</li>
+<li> the use of <span class="inlinecode"><span class="id" title="var">nat</span></span> instead of <span class="inlinecode"><span class="id" title="var">int</span></span> for the <span class="inlinecode"><span class="id" title="var">cardinal</span></span> function
+
+</li>
+</ul>
+<div class="paragraph"> </div>
+
+    Several variants of the set interfaces are available:
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">WSfun</span></span> : functorial signature for weak sets, non-dependent style
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">WS</span></span>    : self-contained version of <span class="inlinecode"><span class="id" title="var">WSfun</span></span>
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Sfun</span></span>  : functorial signature for ordered sets, non-dependent style
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">S</span></span>     : self-contained version of <span class="inlinecode"><span class="id" title="var">Sfun</span></span>
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Sdep</span></span>  : analog of <span class="inlinecode"><span class="id" title="var">S</span></span> written using dependent style
+
+</li>
+</ul>
+<div class="paragraph"> </div>
+
+    If unsure, <span class="inlinecode"><span class="id" title="var">S</span></span> is probably what you're looking for: other signatures
+    are subsets of it, apart from <span class="inlinecode"><span class="id" title="var">Sdep</span></span> which is isomorphic to <span class="inlinecode"><span class="id" title="var">S</span></span> (see
+    <span class="inlinecode"><span class="id" title="var">FSetBridge</span></span>).
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Bool OrderedType DecidableType.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Implicit Arguments</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Unset Strict Implicit</span>.</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Non-dependent signatures</h1>
+<div class="paragraph"> </div>
+
+    The following signatures presents sets as purely informative
+    programs together with axioms 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab3"></a><h2 class="section">Functorial signature for weak sets</h2>
+<div class="paragraph"> </div>
+
+    Weak sets are sets without ordering on base elements, only
+    a decidable equality. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">WSfun</span> (E : DecidableType).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">elt</span> := E.t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">t</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp"> </span></span></pre><div class="doc">
+the abstract type of sets 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span></pre><div class="doc">
+Logical predicates 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">In</span> : elt -&gt; t -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Equal</span> <span class="nv">s</span> <span class="nv">s&#39;</span> := <span class="kr">forall</span> <span class="nv">a</span> : elt, In a s &lt;-&gt; In a s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Subset</span> <span class="nv">s</span> <span class="nv">s&#39;</span> := <span class="kr">forall</span> <span class="nv">a</span> : elt, In a s -&gt; In a s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Empty</span> <span class="nv">s</span> := <span class="kr">forall</span> <span class="nv">a</span> : elt, ~ In a s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">For_all</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) <span class="nv">s</span> := <span class="kr">forall</span> <span class="nv">x</span>, In x s -&gt; P x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Exists</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) <span class="nv">s</span> := <span class="kr">exists</span> <span class="nv">x</span>, In x s /\ P x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;s  [=]  t&quot;</span> := (Equal s t) (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;s  [&lt;=]  t&quot;</span> := (Subset s t) (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">empty</span> : t.</span></span></span></pre><div class="doc">
+The empty set. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">is_empty</span> : t -&gt; bool.</span></span></span></pre><div class="doc">
+Test whether a set is empty or not. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">mem</span> : elt -&gt; t -&gt; bool.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">mem</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> tests whether <span class="inlinecode"><span class="id" title="var">x</span></span> belongs to the set <span class="inlinecode"><span class="id" title="var">s</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">add</span> : elt -&gt; t -&gt; t.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">add</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> returns a set containing all elements of <span class="inlinecode"><span class="id" title="var">s</span></span>,
+  plus <span class="inlinecode"><span class="id" title="var">x</span></span>. If <span class="inlinecode"><span class="id" title="var">x</span></span> was already in <span class="inlinecode"><span class="id" title="var">s</span></span>, <span class="inlinecode"><span class="id" title="var">s</span></span> is returned unchanged. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">singleton</span> : elt -&gt; t.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">singleton</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> returns the one-element set containing only <span class="inlinecode"><span class="id" title="var">x</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">remove</span> : elt -&gt; t -&gt; t.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">remove</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> returns a set containing all elements of <span class="inlinecode"><span class="id" title="var">s</span></span>,
+  except <span class="inlinecode"><span class="id" title="var">x</span></span>. If <span class="inlinecode"><span class="id" title="var">x</span></span> was not in <span class="inlinecode"><span class="id" title="var">s</span></span>, <span class="inlinecode"><span class="id" title="var">s</span></span> is returned unchanged. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">union</span> : t -&gt; t -&gt; t.</span></span></span></pre><div class="doc">
+Set union. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">inter</span> : t -&gt; t -&gt; t.</span></span></span></pre><div class="doc">
+Set intersection. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">diff</span> : t -&gt; t -&gt; t.</span></span></span></pre><div class="doc">
+Set difference. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">eq</span> : t -&gt; t -&gt; <span class="kt">Prop</span> := Equal.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_dec</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span>, { eq s s&#39; } + { ~ eq s s&#39; }.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">equal</span> : t -&gt; t -&gt; bool.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">equal</span></span> <span class="inlinecode"><span class="id" title="var">s1</span></span> <span class="inlinecode"><span class="id" title="var">s2</span></span> tests whether the sets <span class="inlinecode"><span class="id" title="var">s1</span></span> and <span class="inlinecode"><span class="id" title="var">s2</span></span> are
+  equal, that is, contain equal elements. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">subset</span> : t -&gt; t -&gt; bool.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">subset</span></span> <span class="inlinecode"><span class="id" title="var">s1</span></span> <span class="inlinecode"><span class="id" title="var">s2</span></span> tests whether the set <span class="inlinecode"><span class="id" title="var">s1</span></span> is a subset of
+  the set <span class="inlinecode"><span class="id" title="var">s2</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">fold</span> : <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>, (elt -&gt; A -&gt; A) -&gt; t -&gt; A -&gt; A.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">fold</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> computes <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">xN</span></span> <span class="inlinecode">...</span> <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x2</span></span> <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x1</span></span> <span class="inlinecode"><span class="id" title="var">a</span>))...)</span>,
+  where <span class="inlinecode"><span class="id" title="var">x1</span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">xN</span></span> are the elements of <span class="inlinecode"><span class="id" title="var">s</span></span>.
+  The order in which elements of <span class="inlinecode"><span class="id" title="var">s</span></span> are presented to <span class="inlinecode"><span class="id" title="var">f</span></span> is
+  unspecified. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">for_all</span> : (elt -&gt; bool) -&gt; t -&gt; bool.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">for_all</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> checks if all elements of the set
+  satisfy the predicate <span class="inlinecode"><span class="id" title="var">p</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">exists_</span> : (elt -&gt; bool) -&gt; t -&gt; bool.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> checks if at least one element of
+  the set satisfies the predicate <span class="inlinecode"><span class="id" title="var">p</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">filter</span> : (elt -&gt; bool) -&gt; t -&gt; t.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">filter</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> returns the set of all elements in <span class="inlinecode"><span class="id" title="var">s</span></span>
+  that satisfy predicate <span class="inlinecode"><span class="id" title="var">p</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">partition</span> : (elt -&gt; bool) -&gt; t -&gt; t * t.</span></span></span></pre><div class="doc">
+<span class="inlinecode"><span class="id" title="var">partition</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> returns a pair of sets <span class="inlinecode">(<span class="id" title="var">s1</span>,</span> <span class="inlinecode"><span class="id" title="var">s2</span>)</span>, where
+  <span class="inlinecode"><span class="id" title="var">s1</span></span> is the set of all the elements of <span class="inlinecode"><span class="id" title="var">s</span></span> that satisfy the
+  predicate <span class="inlinecode"><span class="id" title="var">p</span></span>, and <span class="inlinecode"><span class="id" title="var">s2</span></span> is the set of all the elements of
+  <span class="inlinecode"><span class="id" title="var">s</span></span> that do not satisfy <span class="inlinecode"><span class="id" title="var">p</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">cardinal</span> : t -&gt; nat.</span></span></span></pre><div class="doc">
+Return the number of elements of a set. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">elements</span> : t -&gt; list elt.</span></span></span></pre><div class="doc">
+Return the list of all elements of the given set, in any order. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">choose</span> : t -&gt; option elt.</span></span></span></pre><div class="doc">
+Return one element of the given set, or <span class="inlinecode"><span class="id" title="var">None</span></span> if
+  the set is empty. Which element is chosen is unspecified.
+  Equal sets could return different elements. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Spec</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">s</span> <span class="nv">s&#39;</span> <span class="nv">s&#39;&#39;</span>: t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">x</span> <span class="nv">y</span> : elt.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">In</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">In_1</span> : E.eq x y -&gt; In x s -&gt; In y s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">eq</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_refl</span> : eq s s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_sym</span> : eq s s&#39; -&gt; eq s&#39; s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_trans</span> : eq s s&#39; -&gt; eq s&#39; s&#39;&#39; -&gt; eq s s&#39;&#39;.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">mem</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">mem_1</span> : In x s -&gt; mem x s = true.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">mem_2</span> : mem x s = true -&gt; In x s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">equal</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">equal_1</span> : Equal s s&#39; -&gt; equal s s&#39; = true.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">equal_2</span> : equal s s&#39; = true -&gt; Equal s s&#39;.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">subset</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">subset_1</span> : Subset s s&#39; -&gt; subset s s&#39; = true.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">subset_2</span> : subset s s&#39; = true -&gt; Subset s s&#39;.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">empty</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">empty_1</span> : Empty empty.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">is_empty</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">is_empty_1</span> : Empty s -&gt; is_empty s = true.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">is_empty_2</span> : is_empty s = true -&gt; Empty s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">add</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">add_1</span> : E.eq x y -&gt; In y (add x s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">add_2</span> : In y s -&gt; In y (add x s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">add_3</span> : ~ E.eq x y -&gt; In y (add x s) -&gt; In y s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">remove</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">remove_1</span> : E.eq x y -&gt; ~ In y (remove x s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">remove_2</span> : ~ E.eq x y -&gt; In y s -&gt; In y (remove x s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">remove_3</span> : In y (remove x s) -&gt; In y s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">singleton</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">singleton_1</span> : In y (singleton x) -&gt; E.eq x y.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">singleton_2</span> : E.eq x y -&gt; In y (singleton x).</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">union</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">union_1</span> : In x (union s s&#39;) -&gt; In x s \/ In x s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">union_2</span> : In x s -&gt; In x (union s s&#39;).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">union_3</span> : In x s&#39; -&gt; In x (union s s&#39;).</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">inter</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">inter_1</span> : In x (inter s s&#39;) -&gt; In x s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">inter_2</span> : In x (inter s s&#39;) -&gt; In x s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">inter_3</span> : In x s -&gt; In x s&#39; -&gt; In x (inter s s&#39;).</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">diff</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">diff_1</span> : In x (diff s s&#39;) -&gt; In x s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">diff_2</span> : In x (diff s s&#39;) -&gt; ~ In x s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">diff_3</span> : In x s -&gt; ~ In x s&#39; -&gt; In x (diff s s&#39;).</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="tactic">fold</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">fold_1</span> : <span class="kr">forall</span> (<span class="nv">A</span> : <span class="kt">Type</span>) (<span class="nv">i</span> : A) (<span class="nv">f</span> : elt -&gt; A -&gt; A),
+      <span class="nb">fold</span> f s i = fold_left (<span class="kr">fun</span> <span class="nv">a</span> <span class="nv">e</span> =&gt; f e a) (elements s) i.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">cardinal</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">cardinal_1</span> : cardinal s = length (elements s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Filter</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">f</span> : elt -&gt; bool.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">filter</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">filter_1</span> : compat_bool E.eq f -&gt; In x (filter f s) -&gt; In x s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">filter_2</span> : compat_bool E.eq f -&gt; In x (filter f s) -&gt; f x = true.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">filter_3</span> :
+      compat_bool E.eq f -&gt; In x s -&gt; f x = true -&gt; In x (filter f s).</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">for_all</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">for_all_1</span> :
+      compat_bool E.eq f -&gt;
+      For_all (<span class="kr">fun</span> <span class="nv">x</span> =&gt; f x = true) s -&gt; for_all f s = true.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">for_all_2</span> :
+      compat_bool E.eq f -&gt;
+      for_all f s = true -&gt; For_all (<span class="kr">fun</span> <span class="nv">x</span> =&gt; f x = true) s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="tactic">∃</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">exists_1</span> :
+      compat_bool E.eq f -&gt;
+      Exists (<span class="kr">fun</span> <span class="nv">x</span> =&gt; f x = true) s -&gt; exists_ f s = true.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">exists_2</span> :
+      compat_bool E.eq f -&gt;
+      exists_ f s = true -&gt; Exists (<span class="kr">fun</span> <span class="nv">x</span> =&gt; f x = true) s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">partition</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">partition_1</span> :
+      compat_bool E.eq f -&gt; Equal (fst (partition f s)) (filter f s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">partition_2</span> :
+      compat_bool E.eq f -&gt;
+      Equal (snd (partition f s)) (filter (<span class="kr">fun</span> <span class="nv">x</span> =&gt; negb (f x)) s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Filter</span>.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">elements</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">elements_1</span> : In x s -&gt; InA E.eq x (elements s).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">elements_2</span> : InA E.eq x (elements s) -&gt; In x s.</span></span></span></pre><div class="doc">
+When compared with ordered sets, here comes the only
+      property that is really weaker: 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">elements_3w</span> : NoDupA E.eq (elements s).</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">choose</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">choose_1</span> : choose s = Some x -&gt; In x s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">choose_2</span> : choose s = None -&gt; Empty s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Spec</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Transparent</span> elt : core.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> mem_1 equal_1 subset_1 empty_1
+    is_empty_1 choose_1 choose_2 add_1 add_2 remove_1
+    remove_2 singleton_2 union_1 union_2 union_3
+    inter_3 diff_3 fold_1 filter_3 for_all_1 exists_1
+    partition_1 partition_2 elements_1 elements_3w
+    : <span class="nb">set</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Immediate</span> In_1 mem_2 equal_2 subset_2 is_empty_2 add_3
+    remove_3 singleton_1 inter_1 inter_2 diff_1 diff_2
+    filter_1 filter_2 for_all_2 exists_2 elements_2
+    : <span class="nb">set</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">WSfun</span>.</span></span></span></pre><div class="doc">
+<a name="lab4"></a><h2 class="section">Static signature for weak sets</h2>
+<div class="paragraph"> </div>
+
+    Similar to the functorial signature <span class="inlinecode"><span class="id" title="var">SW</span></span>, except that the
+    module <span class="inlinecode"><span class="id" title="var">E</span></span> of base elements is incorporated in the signature. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">WS</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Module</span> <span class="nf">E</span> : DecidableType.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Include</span> WSfun E.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">WS</span>.</span></span></span></pre><div class="doc">
+<a name="lab5"></a><h2 class="section">Functorial signature for sets on ordered elements</h2>
+<div class="paragraph"> </div>
+
+    Based on <span class="inlinecode"><span class="id" title="var">WSfun</span></span>, plus ordering on sets and <span class="inlinecode"><span class="id" title="var">min_elt</span></span> and <span class="inlinecode"><span class="id" title="var">max_elt</span></span>
+    and some stronger specifications for other functions. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">Sfun</span> (E : OrderedType).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Include</span> WSfun E.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">lt</span> : t -&gt; t -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">compare</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t, Compare lt eq s s&#39;.</span></span></span></pre><div class="doc">
+Total ordering between sets. Can be used as the ordering function
+  for doing sets of sets. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">min_elt</span> : t -&gt; option elt.</span></span></span></pre><div class="doc">
+Return the smallest element of the given set
+  (with respect to the <span class="inlinecode"><span class="id" title="var">E.compare</span></span> ordering),
+  or <span class="inlinecode"><span class="id" title="var">None</span></span> if the set is empty. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">max_elt</span> : t -&gt; option elt.</span></span></span></pre><div class="doc">
+Same as <span class="inlinecode"><span class="id" title="var">min_elt</span></span>, but returns the largest element of the
+  given set. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Spec</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">s</span> <span class="nv">s&#39;</span> <span class="nv">s&#39;&#39;</span> : t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">x</span> <span class="nv">y</span> : elt.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">lt</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">lt_trans</span> : lt s s&#39; -&gt; lt s&#39; s&#39;&#39; -&gt; lt s s&#39;&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">lt_not_eq</span> : lt s s&#39; -&gt; ~ eq s s&#39;.</span></span></span></pre><div class="doc">
+Additional specification of <span class="inlinecode"><span class="id" title="var">elements</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">elements_3</span> : sort E.lt (elements s).</span></span></span></pre><div class="doc">
+Remark: since <span class="inlinecode"><span class="id" title="tactic">fold</span></span> is specified via <span class="inlinecode"><span class="id" title="var">elements</span></span>, this stronger
+   specification of <span class="inlinecode"><span class="id" title="var">elements</span></span> has an indirect impact on <span class="inlinecode"><span class="id" title="tactic">fold</span></span>,
+   which can now be proved to receive elements in increasing order.
+  
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">min_elt</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">min_elt_1</span> : min_elt s = Some x -&gt; In x s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">min_elt_2</span> : min_elt s = Some x -&gt; In y s -&gt; ~ E.lt y x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">min_elt_3</span> : min_elt s = None -&gt; Empty s.</span></span></span></pre><div class="doc">
+Specification of <span class="inlinecode"><span class="id" title="var">max_elt</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">max_elt_1</span> : max_elt s = Some x -&gt; In x s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">max_elt_2</span> : max_elt s = Some x -&gt; In y s -&gt; ~ E.lt x y.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">max_elt_3</span> : max_elt s = None -&gt; Empty s.</span></span></span></pre><div class="doc">
+Additional specification of <span class="inlinecode"><span class="id" title="var">choose</span></span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">choose_3</span> : choose s = Some x -&gt; choose s&#39; = Some y -&gt;
+    Equal s s&#39; -&gt; E.eq x y.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Spec</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> elements_3 : <span class="nb">set</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Immediate</span>
+    min_elt_1 min_elt_2 min_elt_3 max_elt_1 max_elt_2 max_elt_3 : <span class="nb">set</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Sfun</span>.</span></span></span></pre><div class="doc">
+<a name="lab6"></a><h2 class="section">Static signature for sets on ordered elements</h2>
+<div class="paragraph"> </div>
+
+    Similar to the functorial signature <span class="inlinecode"><span class="id" title="var">Sfun</span></span>, except that the
+    module <span class="inlinecode"><span class="id" title="var">E</span></span> of base elements is incorporated in the signature. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">S</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Module</span> <span class="nf">E</span> : OrderedType.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Include</span> Sfun E.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">S</span>.</span></span></span></pre><div class="doc">
+<a name="lab7"></a><h2 class="section">Some subtyping tests</h2>
+<pre>
+WSfun ---&gt; WS
+ |         |
+ |         |
+ V         V
+Sfun  ---&gt; S
+
+Module S_WS (M : S) &lt;: WS := M.
+Module Sfun_WSfun (E:OrderedType)(M : Sfun E) &lt;: WSfun E := M.
+Module S_Sfun (M : S) &lt;: Sfun M.E := M.
+Module WS_WSfun (M : WS) &lt;: WSfun M.E := M.
+</pre>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<a name="lab8"></a><h1 class="section">Dependent signature</h1>
+<div class="paragraph"> </div>
+
+    Signature <span class="inlinecode"><span class="id" title="var">Sdep</span></span> presents ordered sets using dependent types 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">Sdep</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Module</span> <span class="nf">E</span> : OrderedType.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">elt</span> := E.t.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">t</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">In</span> : elt -&gt; t -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Equal</span> <span class="nv">s</span> <span class="nv">s&#39;</span> := <span class="kr">forall</span> <span class="nv">a</span> : elt, In a s &lt;-&gt; In a s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Subset</span> <span class="nv">s</span> <span class="nv">s&#39;</span> := <span class="kr">forall</span> <span class="nv">a</span> : elt, In a s -&gt; In a s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Add</span> <span class="nv">x</span> <span class="nv">s</span> <span class="nv">s&#39;</span> := <span class="kr">forall</span> <span class="nv">y</span>, In y s&#39; &lt;-&gt; E.eq x y \/ In y s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Empty</span> <span class="nv">s</span> := <span class="kr">forall</span> <span class="nv">a</span> : elt, ~ In a s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">For_all</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) <span class="nv">s</span> := <span class="kr">forall</span> <span class="nv">x</span>, In x s -&gt; P x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Exists</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) <span class="nv">s</span> := <span class="kr">exists</span> <span class="nv">x</span>, In x s /\ P x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;s [=] t&quot;</span> := (Equal s t) (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">eq</span> : t -&gt; t -&gt; <span class="kt">Prop</span> := Equal.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">lt</span> : t -&gt; t -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">compare</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t, Compare lt eq s s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_refl</span> : <span class="kr">forall</span> <span class="nv">s</span> : t, eq s s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_sym</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t, eq s s&#39; -&gt; eq s&#39; s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_trans</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> <span class="nv">s&#39;&#39;</span> : t, eq s s&#39; -&gt; eq s&#39; s&#39;&#39; -&gt; eq s s&#39;&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">lt_trans</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> <span class="nv">s&#39;&#39;</span> : t, lt s s&#39; -&gt; lt s&#39; s&#39;&#39; -&gt; lt s s&#39;&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">lt_not_eq</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t, lt s s&#39; -&gt; ~ eq s s&#39;.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">eq_In</span> : <span class="kr">forall</span> (<span class="nv">s</span> : t) (<span class="nv">x</span> <span class="nv">y</span> : elt), E.eq x y -&gt; In x s -&gt; In y s.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">empty</span> : {s : t | Empty s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">is_empty</span> : <span class="kr">forall</span> <span class="nv">s</span> : t, {Empty s} + {~ Empty s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">mem</span> : <span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">s</span> : t), {In x s} + {~ In x s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">add</span> : <span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">s</span> : t), {s&#39; : t | <span class="kn">Add</span> x s s&#39;}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">singleton</span> : <span class="kr">forall</span> <span class="nv">x</span> : elt, {s : t | <span class="kr">forall</span> <span class="nv">y</span> : elt, In y s &lt;-&gt; E.eq x y}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">remove</span> :
+      <span class="kr">forall</span> (<span class="nv">x</span> : elt) (<span class="nv">s</span> : t),
+      {s&#39; : t | <span class="kr">forall</span> <span class="nv">y</span> : elt, In y s&#39; &lt;-&gt; ~ E.eq x y /\ In y s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">union</span> :
+      <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t,
+      {s&#39;&#39; : t | <span class="kr">forall</span> <span class="nv">x</span> : elt, In x s&#39;&#39; &lt;-&gt; In x s \/ In x s&#39;}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">inter</span> :
+      <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t,
+      {s&#39;&#39; : t | <span class="kr">forall</span> <span class="nv">x</span> : elt, In x s&#39;&#39; &lt;-&gt; In x s /\ In x s&#39;}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">diff</span> :
+      <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t,
+      {s&#39;&#39; : t | <span class="kr">forall</span> <span class="nv">x</span> : elt, In x s&#39;&#39; &lt;-&gt; In x s /\ ~ In x s&#39;}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">equal</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t, {s[=]s&#39;} + {~ s[=]s&#39;}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">subset</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span> : t, {Subset s s&#39;} + {~ Subset s s&#39;}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">filter</span> :
+      <span class="kr">forall</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) (<span class="nv">Pdec</span> : <span class="kr">forall</span> <span class="nv">x</span> : elt, {P x} + {~ P x})
+        (<span class="nv">s</span> : t),
+      {s&#39; : t | compat_P E.eq P -&gt; <span class="kr">forall</span> <span class="nv">x</span> : elt, In x s&#39; &lt;-&gt; In x s /\ P x}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">for_all</span> :
+      <span class="kr">forall</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) (<span class="nv">Pdec</span> : <span class="kr">forall</span> <span class="nv">x</span> : elt, {P x} + {~ P x})
+        (<span class="nv">s</span> : t),
+      {compat_P E.eq P -&gt; For_all P s} + {compat_P E.eq P -&gt; ~ For_all P s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">exists_</span> :
+      <span class="kr">forall</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) (<span class="nv">Pdec</span> : <span class="kr">forall</span> <span class="nv">x</span> : elt, {P x} + {~ P x})
+        (<span class="nv">s</span> : t),
+      {compat_P E.eq P -&gt; Exists P s} + {compat_P E.eq P -&gt; ~ Exists P s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">partition</span> :
+      <span class="kr">forall</span> (<span class="nv">P</span> : elt -&gt; <span class="kt">Prop</span>) (<span class="nv">Pdec</span> : <span class="kr">forall</span> <span class="nv">x</span> : elt, {P x} + {~ P x})
+        (<span class="nv">s</span> : t),
+      {partition : t * t |
+      <span class="kr">let</span> (<span class="nv">s1</span>, s2) := partition <span class="kr">in</span>
+      compat_P E.eq P -&gt;
+      For_all P s1 /\
+      For_all (<span class="kr">fun</span> <span class="nv">x</span> =&gt; ~ P x) s2 /\
+      (<span class="kr">forall</span> <span class="nv">x</span> : elt, In x s &lt;-&gt; In x s1 \/ In x s2)}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">elements</span> :
+      <span class="kr">forall</span> <span class="nv">s</span> : t,
+      {l : list elt |
+      sort E.lt l /\ (<span class="kr">forall</span> <span class="nv">x</span> : elt, In x s &lt;-&gt; InA E.eq x l)}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">fold</span> :
+      <span class="kr">forall</span> (<span class="nv">A</span> : <span class="kt">Type</span>) (<span class="nv">f</span> : elt -&gt; A -&gt; A) (<span class="nv">s</span> : t) (<span class="nv">i</span> : A),
+      {r : A | <span class="kr">let</span> (<span class="nv">l</span>,_) := elements s <span class="kr">in</span>
+                  r = fold_left (<span class="kr">fun</span> <span class="nv">a</span> <span class="nv">e</span> =&gt; f e a) l i}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">cardinal</span> :
+      <span class="kr">forall</span> <span class="nv">s</span> : t,
+      {r : nat | <span class="kr">let</span> (<span class="nv">l</span>,_) := elements s <span class="kr">in</span> r = length l }.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">min_elt</span> :
+      <span class="kr">forall</span> <span class="nv">s</span> : t,
+      {x : elt | In x s /\ For_all (<span class="kr">fun</span> <span class="nv">y</span> =&gt; ~ E.lt y x) s} + {Empty s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span>
+    <span class="nv">max_elt</span> :
+      <span class="kr">forall</span> <span class="nv">s</span> : t,
+      {x : elt | In x s /\ For_all (<span class="kr">fun</span> <span class="nv">y</span> =&gt; ~ E.lt x y) s} + {Empty s}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">choose</span> : <span class="kr">forall</span> <span class="nv">s</span> : t, {x : elt | In x s} + {Empty s}.</span></span></span></pre><div class="doc">
+The <span class="inlinecode"><span class="id" title="var">choose_3</span></span> specification of <span class="inlinecode"><span class="id" title="var">S</span></span> cannot be packed
+        in the dependent version of <span class="inlinecode"><span class="id" title="var">choose</span></span>, so we leave it separate. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">choose_equal</span> : <span class="kr">forall</span> <span class="nv">s</span> <span class="nv">s&#39;</span>, Equal s s&#39; -&gt;
+     <span class="kr">match</span> choose s, choose s&#39; <span class="kr">with</span>
+       | inleft (exist _ x _), inleft (exist _ x&#39; _) =&gt; E.eq x x&#39;
+       | inright _, inright _  =&gt; <span class="kt">True</span>
+       | _, _  =&gt; <span class="kt">False</span>
+     <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Sdep</span>.</span></span></span></pre></article></body></html>

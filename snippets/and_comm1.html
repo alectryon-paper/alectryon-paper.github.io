@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>and_comm1.v</title>
+<link rel="stylesheet" href="alectryon.css" type="text/css" />
+<link rel="stylesheet" href="docutils_basic.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.min.css" type="text/css" />
+<script type="text/javascript" src="alectryon.js"></script>
+</head>
+<body>
+<div class="alectryon-root alectryon-standalone alectryon-centered"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="document">
+
+
+<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="and-comm1-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="and-comm1-v-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">and_comm</span> : <span class="kr">∀</span> <span class="nv">A</span> <span class="nv">B</span>, A ∧ B → B ∧ A.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">∀</span> <span class="nv">A</span> <span class="nv">B</span> : <span class="kt">Prop</span>, A ∧ B → B ∧ A</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kp">repeat</span> <span class="kr">match goal with</span>
+    | [          |- <span class="kr">∀</span> <span class="nv">_</span>, _ ] =&gt; <span class="nb">intros</span>
+    | [          |- _ ∧ _  ] =&gt; <span class="nb">split</span>
+    | [ H: _ ∧ _ |- _      ] =&gt; <span class="nb">destruct</span> H
+    | [ H: ?a    |- ?a     ] =&gt; <span class="bp">assumption</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,15 @@
+sertop	stdlib/theories/Lists/ListSet.v	real: 0.733	user: 0.692	sys: 0.032	0
+sertop	stdlib/theories/Lists/ListSet.v	real: 0.707	user: 0.671	sys: 0.036	0
+sertop	stdlib/theories/Lists/ListSet.v	real: 0.696	user: 0.640	sys: 0.052	0
+sertop	stdlib/theories/Lists/ListSet.v	real: 0.702	user: 0.647	sys: 0.052	0
+sertop	stdlib/theories/Lists/ListSet.v	real: 0.691	user: 0.631	sys: 0.060	0
+sertop	stdlib/theories/Reals/Ranalysis3.v	real: 21.411	user: 21.196	sys: 0.212	0
+sertop	stdlib/theories/Reals/Ranalysis3.v	real: 21.280	user: 21.091	sys: 0.188	0
+sertop	stdlib/theories/Reals/Ranalysis3.v	real: 21.060	user: 20.776	sys: 0.212	0
+sertop	stdlib/theories/Reals/Ranalysis3.v	real: 20.761	user: 20.360	sys: 0.256	0
+sertop	stdlib/theories/Reals/Ranalysis3.v	real: 20.498	user: 20.295	sys: 0.200	0
+sertop	stdlib/theories/Strings/Byte.v	real: 8.082	user: 7.992	sys: 0.088	0
+sertop	stdlib/theories/Strings/Byte.v	real: 8.393	user: 8.292	sys: 0.100	0
+sertop	stdlib/theories/Strings/Byte.v	real: 8.336	user: 8.195	sys: 0.140	0
+sertop	stdlib/theories/Strings/Byte.v	real: 7.996	user: 7.911	sys: 0.076	0
+sertop	stdlib/theories/Strings/Byte.v	real: 7.967	user: 7.831	sys: 0.104	0

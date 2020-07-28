@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html><head><title>Morphisms_Relations.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">Morphism instances for relations.</h1>
+<div class="paragraph"> </div>
+
+   Author: Matthieu Sozeau
+   Institution: LRI, CNRS UMR 8623 - University Paris Sud
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Relation_Definitions.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Classes.Morphisms.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Program.Program.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Generalizable Variables</span> <span class="nf">A</span> l.</span></span></span></pre><div class="doc">
+Morphisms for relations 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk0"><span class="highlight"><span class="kn">Instance</span> <span class="nf">relation_conjunction_morphism</span> : Proper (relation_equivalence (A:=A) ==&gt;
+  relation_equivalence ==&gt; relation_equivalence) relation_conjunction.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (relation_equivalence ==&gt;
+   relation_equivalence ==&gt; relation_equivalence)
+  relation_conjunction</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (relation_equivalence ==&gt;
+   relation_equivalence ==&gt; relation_equivalence)
+  relation_conjunction</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">firstorder</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk2"><span class="highlight"><span class="kn">Instance</span> <span class="nf">relation_disjunction_morphism</span> : Proper (relation_equivalence (A:=A) ==&gt;
+  relation_equivalence ==&gt; relation_equivalence) relation_disjunction.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (relation_equivalence ==&gt;
+   relation_equivalence ==&gt; relation_equivalence)
+  relation_disjunction</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk3"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (relation_equivalence ==&gt;
+   relation_equivalence ==&gt; relation_equivalence)
+  relation_disjunction</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">firstorder</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="c">(* Predicate equivalence is exactly the same as the pointwise lifting of [iff]. *)</span>
+
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk4"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">predicate_equivalence_pointwise</span> (<span class="nv">l</span> : Tlist) :
+  Proper (@predicate_equivalence l ==&gt; pointwise_lifting iff l) id.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper
+  (predicate_equivalence ==&gt; pointwise_lifting iff l)
+  id</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk5"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper
+  (predicate_equivalence ==&gt; pointwise_lifting iff l)
+  id</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk6"><span class="highlight"><span class="kp">do</span> <span class="mi">2</span> <span class="nb">red</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> : predicate l,
+predicate_equivalence x y -&gt;
+pointwise_lifting iff l (id x) (id y)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk7"><span class="highlight"><span class="nb">unfold</span> predicate_equivalence.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> : predicate l,
+pointwise_lifting iff l x y -&gt;
+pointwise_lifting iff l (id x) (id y)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">auto</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk8"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">predicate_implication_pointwise</span> (<span class="nv">l</span> : Tlist) :
+  Proper (@predicate_implication l ==&gt; pointwise_lifting impl l) id.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper
+  (predicate_implication ==&gt; pointwise_lifting impl l)
+  id</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk9"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper
+  (predicate_implication ==&gt; pointwise_lifting impl l)
+  id</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chka"><span class="highlight"><span class="kp">do</span> <span class="mi">2</span> <span class="nb">red</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> : predicate l,
+predicate_implication x y -&gt;
+pointwise_lifting impl l (id x) (id y)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chkb" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chkb"><span class="highlight"><span class="nb">unfold</span> predicate_implication.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">l</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Tlist</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> : predicate l,
+pointwise_lifting impl l x y -&gt;
+pointwise_lifting impl l (id x) (id y)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">auto</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+The instantiation at relation allows rewriting applications of relations
+    <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> to <span class="inlinecode"><span class="id" title="var">R'</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span>  when <span class="inlinecode"><span class="id" title="var">R</span></span> and <span class="inlinecode"><span class="id" title="var">R'</span></span> are in <span class="inlinecode"><span class="id" title="var">relation_equivalence</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chkc" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chkc"><span class="highlight"><span class="kn">Instance</span> <span class="nf">relation_equivalence_pointwise</span> :
+  Proper (relation_equivalence ==&gt; pointwise_relation A (pointwise_relation A iff)) id.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (relation_equivalence ==&gt;
+   pointwise_relation A (pointwise_relation A iff)) id</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chkd" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chkd"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (relation_equivalence ==&gt;
+   pointwise_relation A (pointwise_relation A iff)) id</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chke" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chke"><span class="highlight"><span class="nb">intro</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper
+  (relation_equivalence ==&gt;
+   pointwise_relation A (pointwise_relation A iff)) id</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> (predicate_equivalence_pointwise (Tcons A (Tcons A Tnil))).</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chkf" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chkf"><span class="highlight"><span class="kn">Instance</span> <span class="nf">subrelation_pointwise</span> :
+  Proper (subrelation ==&gt; pointwise_relation A (pointwise_relation A impl)) id.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (subrelation ==&gt;
+   pointwise_relation A (pointwise_relation A impl))
+  id</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk10"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+Proper
+  (subrelation ==&gt;
+   pointwise_relation A (pointwise_relation A impl))
+  id</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk11" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk11"><span class="highlight"><span class="nb">intro</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper
+  (subrelation ==&gt;
+   pointwise_relation A (pointwise_relation A impl))
+  id</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> (predicate_implication_pointwise (Tcons A (Tcons A Tnil))).</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk12" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk12"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">flip_pointwise_relation</span> <span class="nv">A</span> (<span class="nv">R</span> : relation A) :
+  relation_equivalence (pointwise_relation A (flip R)) (flip (pointwise_relation A R)).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">relation A</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">relation_equivalence (pointwise_relation A (flip R))
+  (flip (pointwise_relation A R))</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk13" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk13"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">relation A</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">relation_equivalence (pointwise_relation A (flip R))
+  (flip (pointwise_relation A R))</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Relations-v-chk14" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Relations-v-chk14"><span class="highlight"><span class="nb">intros</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">relation A</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">relation_equivalence (pointwise_relation A (flip R))
+  (flip (pointwise_relation A R))</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">split</span>; <span class="nb">firstorder</span>.</span></span><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre></article></body></html>

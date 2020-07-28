@@ -1,0 +1,5 @@
+Goal True.
+
+(*||*)
+
+  exact I.

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html><head><title>Morphisms_Prop.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section"><span class="inlinecode"><span class="id" title="var">Proper</span></span> instances for propositional connectives.</h1>
+<div class="paragraph"> </div>
+
+   Author: Matthieu Sozeau
+   Institution: LRI, CNRS UMR 8623 - University Paris Sud
+
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Classes.Morphisms.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Program.Basics.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Program.Tactics.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Obligation Tactic</span> := <span class="kp">try</span> <span class="kp">solve</span> [simpl_relation | <span class="nb">firstorder</span> <span class="nb">auto</span>].</span></span></span></pre><div class="doc">
+Standard instances for <span class="inlinecode"><span class="id" title="var">not</span></span>, <span class="inlinecode"><span class="id" title="var">iff</span></span> and <span class="inlinecode"><span class="id" title="var">impl</span></span>. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Logical negation. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">not_impl_morphism</span> :
+  Proper (impl --&gt; impl) not | <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">not_iff_morphism</span> :
+  Proper (iff ++&gt; iff) not.</span></span></span></pre><div class="doc">
+Logical conjunction. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">and_impl_morphism</span> :
+  Proper (impl ==&gt; impl ==&gt; impl) <span class="kn">and</span> | <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">and_iff_morphism</span> :
+  Proper (iff ==&gt; iff ==&gt; iff) <span class="kn">and</span>.</span></span></span></pre><div class="doc">
+Logical disjunction. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">or_impl_morphism</span> :
+  Proper (impl ==&gt; impl ==&gt; impl) or | <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">or_iff_morphism</span> :
+  Proper (iff ==&gt; iff ==&gt; iff) or.</span></span></span></pre><div class="doc">
+Logical implication <span class="inlinecode"><span class="id" title="var">impl</span></span> is a morphism for logical equivalence. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">iff_iff_iff_impl_morphism</span> : Proper (iff ==&gt; iff ==&gt; iff) impl.</span></span></span></pre><div class="doc">
+Morphisms for quantifiers 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">ex_iff_morphism</span> {<span class="nv">A</span> : <span class="kt">Type</span>} : Proper (pointwise_relation A iff ==&gt; iff) (@ex A).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">ex_impl_morphism</span> {<span class="nv">A</span> : <span class="kt">Type</span>} :
+  Proper (pointwise_relation A impl ==&gt; impl) (@ex A) | <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">ex_flip_impl_morphism</span> {<span class="nv">A</span> : <span class="kt">Type</span>} :
+  Proper (pointwise_relation A (flip impl) ==&gt; flip impl) (@ex A) | <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">all_iff_morphism</span> {<span class="nv">A</span> : <span class="kt">Type</span>} :
+  Proper (pointwise_relation A iff ==&gt; iff) (@<span class="kp">all</span> A).</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">all_impl_morphism</span> {<span class="nv">A</span> : <span class="kt">Type</span>} :
+  Proper (pointwise_relation A impl ==&gt; impl) (@<span class="kp">all</span> A) | <span class="mi">1</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Instance</span> <span class="nf">all_flip_impl_morphism</span> {<span class="nv">A</span> : <span class="kt">Type</span>} :
+  Proper (pointwise_relation A (flip impl) ==&gt; flip impl) (@<span class="kp">all</span> A) | <span class="mi">1</span>.</span></span></span></pre><div class="doc">
+Equivalent points are simultaneously accessible or not 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Prop-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Prop-v-chk0"><span class="highlight"><span class="kn">Instance</span> <span class="nf">Acc_pt_morphism</span> {<span class="nv">A</span>:<span class="kt">Type</span>}(<span class="nv">E</span> <span class="nv">R</span> : A-&gt;A-&gt;<span class="kt">Prop</span>)
+ `(Equivalence _ E) `(Proper _ (E==&gt;E==&gt;iff) R) :
+ Proper (E==&gt;iff) (Acc R).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">E, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Equivalence E</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Proper (E ==&gt; E ==&gt; iff) R</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper (E ==&gt; iff) (Acc R)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Prop-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Prop-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">E, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Equivalence E</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Proper (E ==&gt; E ==&gt; iff) R</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper (E ==&gt; iff) (Acc R)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Prop-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Prop-v-chk2"><span class="highlight"><span class="nb">apply</span> proper_sym_impl_iff; <span class="nb">auto with</span> *.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">E, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Equivalence E</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Proper (E ==&gt; E ==&gt; iff) R</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Proper (E ==&gt; impl) (Acc R)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Prop-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Prop-v-chk3"><span class="highlight"><span class="nb">intros</span> x y EQ WF.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">E, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Equivalence E</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Proper (E ==&gt; E ==&gt; iff) R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">x, y</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A</span></span></span></div><div class="goal-hyp"><span class="hyp-names">EQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">E x y</span></span></span></div><div class="goal-hyp"><span class="hyp-names">WF</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Acc R x</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Acc R y</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Prop-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Prop-v-chk4"><span class="highlight"><span class="nb">apply</span> Acc_intro; <span class="nb">intros</span> z Hz.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">A</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">E, R</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A -&gt; A -&gt; <span class="kt">Prop</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Equivalence E</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H0</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Proper (E ==&gt; E ==&gt; iff) R</span></span></span></div><div class="goal-hyp"><span class="hyp-names">x, y</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A</span></span></span></div><div class="goal-hyp"><span class="hyp-names">EQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">E x y</span></span></span></div><div class="goal-hyp"><span class="hyp-names">WF</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Acc R x</span></span></span></div><div class="goal-hyp"><span class="hyp-names">z</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">A</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hz</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">R z y</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Acc R z</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Morphisms-Prop-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="Morphisms-Prop-v-chk5"><span class="highlight"><span class="nb">rewrite</span> &lt;- EQ <span class="kr">in</span> Hz.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">Tactic failure: Setoid library not loaded.</span></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">apply</span> Acc_inv <span class="kr">with</span> x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+Equivalent relations have the same accessible points 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Instance</span> <span class="nf">Acc_rel_morphism</span> {<span class="nv">A</span>:<span class="kt">Type</span>} :
+ Proper (relation_equivalence ==&gt; Logic.eq ==&gt; iff) (@Acc A).
+<span class="kn">Proof</span>.
+  <span class="nb">apply</span> proper_sym_impl_iff_2.
+  - <span class="nb">red</span>; <span class="bp">now</span> <span class="nb">symmetry</span>.
+  - <span class="nb">red</span>; <span class="bp">now</span> <span class="nb">symmetry</span>.
+  - <span class="nb">intros</span> R R&#39; EQ a a&#39; Ha WF. <span class="nb">subst</span> a&#39;.
+    <span class="nb">induction</span> WF <span class="kr">as</span> [x _ WF&#39;]. <span class="nb">constructor</span>.
+    <span class="nb">intros</span> y Ryx. <span class="bp">now</span> <span class="nb">apply</span> WF&#39;, EQ.
+<span class="kn">Qed</span>.</span></span></pre><div class="doc">
+Equivalent relations are simultaneously well-founded or not 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Instance</span> <span class="nf">well_founded_morphism</span> {<span class="nv">A</span> : <span class="kt">Type</span>} :
+ Proper (relation_equivalence ==&gt; iff) (@well_founded A).
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> well_founded. solve_proper.
+<span class="kn">Qed</span>.</span></span></pre></article></body></html>

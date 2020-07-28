@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html><head><title>Postscript.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="doc">
+<a name="lab1"></a><h1 class="section">Postscript</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Congratulations: We've made it to the end! 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab2"></a><h1 class="section">Looking Back</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+We've covered quite a bit of ground so far.  Here's a quick review...
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> <i>Functional programming</i>:
+<ul class="doclist">
+<li> "declarative" programming style (recursion over immutable
+            data structures, rather than looping over mutable arrays
+            or pointer structures)
+
+</li>
+<li> higher-order functions
+
+</li>
+<li> polymorphism 
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<ul class="doclist">
+<li> <i>Logic</i>, the mathematical basis for software engineering:
+
+<div class="paragraph"> </div>
+
+               logic                        calculus
+<ul class="doclist">
+<li>-------------------   ~   ----------------------------
+
+</li>
+</ul>
+        software engineering       mechanical/civil engineering
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> inductively defined sets and relations
+
+</li>
+<li> inductive proofs
+
+</li>
+<li> proof objects 
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+<ul class="doclist">
+<li> <i>Coq</i>, an industrial-strength proof assistant
+<ul class="doclist">
+<li> functional core language
+
+</li>
+<li> core tactics
+
+</li>
+<li> automation
+
+</li>
+</ul>
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab3"></a><h1 class="section">Looking Forward</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+If what you've seen so far has whetted your interest, you have two
+    choices for further reading in the <i>Software Foundations</i> series:
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> <i>Programming Language Foundations</i> (volume 2, by a set of
+             authors similar to this book's) covers material that
+             might be found in a graduate course on the theory of
+             programming languages, including Hoare logic, operational
+             semantics, and type systems.
+
+<div class="paragraph"> </div>
+</li>
+<li> <i>Verified Functional Algorithms</i> (volume 3, by Andrew
+             Appel) builds on the themes of functional programming and
+             program verification in Coq, addressing a range of topics
+             that might be found in a standard data structures course,
+             with an eye to formal verification. 
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+<a name="lab4"></a><h1 class="section">Other sources</h1>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+Here are some other good places to learn more...
+
+<div class="paragraph"> </div>
+<ul class="doclist">
+<li> This book includes some optional chapters covering topics
+         that you may find useful.  Take a look at the table of contents and the chapter dependency diagram to find
+         them.
+
+<div class="paragraph"> </div>
+</li>
+<li> For questions about Coq, the <span class="inlinecode">#<span class="id" title="var">coq</span></span> area of Stack
+         Overflow (https://stackoverflow.com/questions/tagged/coq)
+         is an excellent community resource.
+
+<div class="paragraph"> </div>
+</li>
+<li> Here are some great books on functional programming
+<ul class="doclist">
+<li> Learn You a Haskell for Great Good, by Miran Lipovaca
+              <span class="inlinecode"><span class="id" title="var">Lipovaca</span></span> <span class="inlinecode">2011</span> (in Bib.v).
+
+</li>
+<li> Real World Haskell, by Bryan O'Sullivan, John Goerzen,
+              and Don Stewart <span class="inlinecode"><span class="id" title="var">O'Sullivan</span></span> <span class="inlinecode">2008</span> (in Bib.v)
+
+</li>
+<li> ...and many other excellent books on Haskell, OCaml,
+              Scheme, Racket, Scala, F sharp, etc., etc.
+
+<div class="paragraph"> </div>
+</li>
+</ul>
+</li>
+<li> And some further resources for Coq:
+<ul class="doclist">
+<li> Certified Programming with Dependent Types, by Adam
+             Chlipala <span class="inlinecode"><span class="id" title="var">Chlipala</span></span> <span class="inlinecode">2013</span> (in Bib.v).
+
+</li>
+<li> Interactive Theorem Proving and Program Development:
+             Coq'Art: The Calculus of Inductive Constructions, by Yves
+             Bertot and Pierre Casteran <span class="inlinecode"><span class="id" title="var">Bertot</span></span> <span class="inlinecode">2004</span> (in Bib.v).
+
+<div class="paragraph"> </div>
+</li>
+</ul>
+</li>
+<li> If you're interested in real-world applications of formal
+         verification to critical software, see the Postscript chapter
+         of <i>Programming Language Foundations</i>.
+
+<div class="paragraph"> </div>
+</li>
+<li> For applications of Coq in building verified systems, the
+         lectures and course materials for the 2017 DeepSpec Summer
+         School are a great resource.
+         https://deepspec.org/event/dsss17/index.html
+
+</li>
+</ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* Wed Jan 9 12:02:47 EST 2019 *)</span></span></span></pre></article></body></html>

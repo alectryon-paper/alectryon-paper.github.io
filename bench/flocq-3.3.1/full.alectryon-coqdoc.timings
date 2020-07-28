@@ -1,0 +1,72 @@
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Version.v	real: 0.674	user: 0.581	sys: 0.100	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/IEEE754/SpecFloatCopy.v	real: 0.833	user: 0.767	sys: 0.084	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/IEEE754/SpecFloatCompat.v	real: 0.673	user: 0.601	sys: 0.083	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Zaux.v	real: 3.504	user: 3.522	sys: 0.173	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Digits.v	real: 7.660	user: 7.646	sys: 0.354	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Raux.v	real: 12.178	user: 12.296	sys: 0.503	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Defs.v	real: 1.063	user: 0.977	sys: 0.103	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Float_prop.v	real: 3.331	user: 3.291	sys: 0.177	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Round_pred.v	real: 12.973	user: 13.170	sys: 0.465	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Calc/Operations.v	real: 1.352	user: 1.263	sys: 0.126	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Calc/Bracket.v	real: 5.188	user: 5.137	sys: 0.231	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Generic_fmt.v	real: 14.343	user: 14.591	sys: 0.548	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Calc/Div.v	real: 2.296	user: 2.224	sys: 0.132	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Prop/Sterbenz.v	real: 2.623	user: 2.548	sys: 0.175	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Calc/Sqrt.v	real: 3.222	user: 3.144	sys: 0.195	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Ulp.v	real: 27.785	user: 28.210	sys: 0.847	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Round_NE.v	real: 12.328	user: 12.295	sys: 0.480	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/FIX.v	real: 1.267	user: 1.141	sys: 0.156	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/FLX.v	real: 2.511	user: 2.437	sys: 0.171	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/FTZ.v	real: 4.001	user: 3.926	sys: 0.238	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/FLT.v	real: 5.230	user: 5.139	sys: 0.277	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Core/Core.v	real: 1.079	user: 0.983	sys: 0.117	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Calc/Round.v	real: 8.706	user: 8.782	sys: 0.319	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Prop/Round_odd.v	real: 22.554	user: 22.750	sys: 0.749	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Prop/Relative.v	real: 9.894	user: 10.007	sys: 0.337	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	examples/Compute.v	real: 3.665	user: 3.617	sys: 0.190	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Prop/Plus_error.v	real: 8.246	user: 8.222	sys: 0.347	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	examples/Homogen.v	real: 15.699	user: 15.652	sys: 0.327	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Prop/Mult_error.v	real: 6.799	user: 6.806	sys: 0.250	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	examples/Average.v	real: 41.286	user: 41.751	sys: 1.292	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/IEEE754/BinarySingleNaN.v	real: 72.583	user: 73.070	sys: 1.551	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Prop/Div_sqrt_error.v	real: 21.311	user: 21.481	sys: 0.671	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/IEEE754/Binary.v	real: 98.966	user: 99.818	sys: 2.134	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/Prop/Double_rounding.v	real: 86.909	user: 87.535	sys: 1.998	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	src/IEEE754/Bits.v	real: 13.117	user: 13.207	sys: 0.459	0
+/home/clement/.opam/default/bin/coqc -R src Flocq -R examples FlocqEx
+alectryon-coqdoc	examples/Double_rounding_odd_radix.v	real: 53.296	user: 53.644	sys: 1.346	0

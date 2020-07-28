@@ -1,0 +1,10 @@
+% coq-tex coqtex.tex
+\begin{coq_example}
+Goal True ∧ True.
+  split.
+  - exact I.
+  - enough (1 + 1 = 2).
+    + exact I.
+    + reflexivity.
+Qed.
+\end{coq_example}

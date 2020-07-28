@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html><head><title>Int63.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span>
+<span class="c">(*            Benjamin Gregoire, Laurent Thery, INRIA, 2007             *)</span>
+<span class="sd">(************************************************************************)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Utf8.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> DoubleType.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Lia.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Zpow_facts.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Zgcd_alt.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> Znumtheory.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> bool <span class="kr">as</span> kernel.ind_bool.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> prod <span class="kr">as</span> kernel.ind_pair.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> carry <span class="kr">as</span> kernel.ind_carry.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> comparison <span class="kr">as</span> kernel.ind_cmp.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">size</span> := <span class="mi">63</span>%nat.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Primitive</span> <span class="nf">int</span> := #int63_type.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> int <span class="kr">as</span> num.int63.type.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Scope</span> int63_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">id_int</span> : int -&gt; int := <span class="kr">fun</span> <span class="nv">x</span> =&gt; x.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight"><span class="kn">Declare ML Module</span> <span class="s2">&quot;int63_syntax_plugin&quot;</span>.
+
+<span class="kn">Delimit Scope</span> int63_scope <span class="kr">with</span> int63.
+<span class="kn">Bind Scope</span> int63_scope <span class="kr">with</span> int.
+
+<span class="c">(* Logical operations *)</span>
+<span class="kn">Primitive</span> <span class="nf">lsl</span> := #int63_lsl.
+<span class="kn">Infix</span> <span class="s2">&quot;&lt;&lt;&quot;</span> := lsl (<span class="kn">at level</span> <span class="mi">30</span>, <span class="kn">no associativity</span>) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">lsr</span> := #int63_lsr.
+<span class="kn">Infix</span> <span class="s2">&quot;&gt;&gt;&quot;</span> := lsr (<span class="kn">at level</span> <span class="mi">30</span>, <span class="kn">no associativity</span>) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">land</span> := #int63_land.
+<span class="kn">Infix</span> <span class="s2">&quot;land&quot;</span> := land (<span class="kn">at level</span> <span class="mi">40</span>, <span class="kn">left associativity</span>) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">lor</span> := #int63_lor.
+<span class="kn">Infix</span> <span class="s2">&quot;lor&quot;</span> := lor (<span class="kn">at level</span> <span class="mi">40</span>, <span class="kn">left associativity</span>) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">lxor</span> := #int63_lxor.
+<span class="kn">Infix</span> <span class="s2">&quot;lxor&quot;</span> := lxor (<span class="kn">at level</span> <span class="mi">40</span>, <span class="kn">left associativity</span>) : int63_scope.
+
+<span class="c">(* Arithmetic modulo operations *)</span>
+<span class="kn">Primitive</span> <span class="nf">add</span> := #int63_add.
+<span class="kn">Notation</span> <span class="s2">&quot;n + m&quot;</span> := (add n m) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">sub</span> := #int63_sub.
+<span class="kn">Notation</span> <span class="s2">&quot;n - m&quot;</span> := (sub n m) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">mul</span> := #int63_mul.
+<span class="kn">Notation</span> <span class="s2">&quot;n * m&quot;</span> := (mul n m) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">mulc</span> := #int63_mulc.
+
+<span class="kn">Primitive</span> <span class="nf">div</span> := #int63_div.
+<span class="kn">Notation</span> <span class="s2">&quot;n / m&quot;</span> := (div n m) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">mod</span> := #int63_mod.
+<span class="kn">Notation</span> <span class="s2">&quot;n &#39;\%&#39; m&quot;</span> := (mod n m) (<span class="kn">at level</span> <span class="mi">40</span>, <span class="kn">left associativity</span>) : int63_scope.
+
+<span class="c">(* Comparisons *)</span>
+<span class="kn">Primitive</span> <span class="nf">eqb</span> := #int63_eq.
+<span class="kn">Notation</span> <span class="s2">&quot;m &#39;==&#39; n&quot;</span> := (eqb m n) (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">ltb</span> := #int63_lt.
+<span class="kn">Notation</span> <span class="s2">&quot;m &lt; n&quot;</span> := (ltb m n) : int63_scope.
+
+<span class="kn">Primitive</span> <span class="nf">leb</span> := #int63_le.
+<span class="kn">Notation</span> <span class="s2">&quot;m &lt;= n&quot;</span> := (leb m n) : int63_scope.
+<span class="kn">Notation</span> <span class="s2">&quot;m ≤ n&quot;</span> := (leb m n) (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : int63_scope.
+
+<span class="kn">Local Open Scope</span> int63_scope.</span></span></pre><div class="doc">
+The number of digits as a int 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">digits</span> := <span class="mi">63</span>.</span></span></pre><div class="doc">
+The bigger int 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">max_int</span> := <span class="kn">Eval</span> <span class="nb">vm_compute</span> <span class="kr">in</span> <span class="mi">0</span> - <span class="mi">1</span>.
+<span class="kn">Register Inline</span> max_int.</span></span></pre><div class="doc">
+Access to the nth digits 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">get_digit</span> <span class="nv">x</span> <span class="nv">p</span> := (<span class="mi">0</span> &lt; (x land (<span class="mi">1</span> &lt;&lt; p))).
+
+<span class="kn">Definition</span> <span class="nf">set_digit</span> <span class="nv">x</span> <span class="nv">p</span> (<span class="nv">b</span>:bool) :=
+  <span class="kr">if</span> <span class="kr">if</span> <span class="mi">0</span> &lt;= p <span class="kr">then</span> p &lt; digits <span class="kr">else</span> false <span class="kr">then</span>
+    <span class="kr">if</span> b <span class="kr">then</span> x lor (<span class="mi">1</span> &lt;&lt; p)
+    <span class="kr">else</span> x land (max_int lxor (<span class="mi">1</span> &lt;&lt; p))
+  <span class="kr">else</span> x.</span></span></pre><div class="doc">
+Equality to 0 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">is_zero</span> (<span class="nv">i</span>:int) := i == <span class="mi">0</span>.
+<span class="kn">Register Inline</span> is_zero.</span></span></pre><div class="doc">
+Parity 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">is_even</span> (<span class="nv">i</span>:int) := is_zero (i land <span class="mi">1</span>).
+<span class="kn">Register Inline</span> is_even.</span></span></pre><div class="doc">
+Bit 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">bit</span> <span class="nv">i</span> <span class="nv">n</span> :=  negb (is_zero ((i &gt;&gt; n) &lt;&lt; (digits - <span class="mi">1</span>))).
+<span class="c">(* Register bit as PrimInline. *)</span></span></span></pre><div class="doc">
+Extra modulo operations 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">opp</span> (<span class="nv">i</span>:int) := <span class="mi">0</span> - i.
+<span class="kn">Register Inline</span> opp.
+<span class="kn">Notation</span> <span class="s2">&quot;- x&quot;</span> := (opp x) : int63_scope.
+
+<span class="kn">Definition</span> <span class="nf">oppcarry</span> <span class="nv">i</span> := max_int - i.
+<span class="kn">Register Inline</span> oppcarry.
+
+<span class="kn">Definition</span> <span class="nf">succ</span> <span class="nv">i</span> := i + <span class="mi">1</span>.
+<span class="kn">Register Inline</span> succ.
+
+<span class="kn">Definition</span> <span class="nf">pred</span> <span class="nv">i</span> := i - <span class="mi">1</span>.
+<span class="kn">Register Inline</span> pred.
+
+<span class="kn">Definition</span> <span class="nf">addcarry</span> <span class="nv">i</span> <span class="nv">j</span> := i + j + <span class="mi">1</span>.
+<span class="kn">Register Inline</span> addcarry.
+
+<span class="kn">Definition</span> <span class="nf">subcarry</span> <span class="nv">i</span> <span class="nv">j</span> := i - j - <span class="mi">1</span>.
+<span class="kn">Register Inline</span> subcarry.</span></span></pre><div class="doc">
+Exact arithmetic operations 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">addc_def</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">let</span> <span class="nv">r</span> := x + y <span class="kr">in</span>
+  <span class="kr">if</span> r &lt; x <span class="kr">then</span> C1 r <span class="kr">else</span> C0 r.
+<span class="c">(* the same but direct implementation for effeciancy *)</span>
+<span class="kn">Primitive</span> <span class="nf">addc</span> := #int63_addc.
+<span class="kn">Notation</span> <span class="s2">&quot;n &#39;+c&#39; m&quot;</span> := (addc n m) (<span class="kn">at level</span> <span class="mi">50</span>, <span class="kn">no associativity</span>) : int63_scope.
+
+<span class="kn">Definition</span> <span class="nf">addcarryc_def</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">let</span> <span class="nv">r</span> := addcarry x y <span class="kr">in</span>
+  <span class="kr">if</span> r &lt;= x <span class="kr">then</span> C1 r <span class="kr">else</span> C0 r.
+<span class="c">(* the same but direct implementation for effeciancy *)</span>
+<span class="kn">Primitive</span> <span class="nf">addcarryc</span> := #int63_addcarryc.
+
+<span class="kn">Definition</span> <span class="nf">subc_def</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">if</span> y &lt;= x <span class="kr">then</span> C0 (x - y) <span class="kr">else</span> C1 (x - y).
+<span class="c">(* the same but direct implementation for effeciancy *)</span>
+<span class="kn">Primitive</span> <span class="nf">subc</span> := #int63_subc.
+<span class="kn">Notation</span> <span class="s2">&quot;n &#39;-c&#39; m&quot;</span> := (subc n m) (<span class="kn">at level</span> <span class="mi">50</span>, <span class="kn">no associativity</span>) : int63_scope.
+
+<span class="kn">Definition</span> <span class="nf">subcarryc_def</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">if</span> y &lt; x <span class="kr">then</span> C0 (x - y - <span class="mi">1</span>) <span class="kr">else</span> C1 (x - y - <span class="mi">1</span>).
+<span class="c">(* the same but direct implementation for effeciancy *)</span>
+<span class="kn">Primitive</span> <span class="nf">subcarryc</span> := #int63_subcarryc.
+
+<span class="kn">Definition</span> <span class="nf">diveucl_def</span> <span class="nv">x</span> <span class="nv">y</span> := (x/y, x\%y).
+<span class="c">(* the same but direct implementation for effeciancy *)</span>
+<span class="kn">Primitive</span> <span class="nf">diveucl</span> := #int63_diveucl.
+
+<span class="kn">Primitive</span> <span class="nf">diveucl_21</span> := #int63_div21.
+
+<span class="kn">Definition</span> <span class="nf">addmuldiv_def</span> <span class="nv">p</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  (x &lt;&lt; p) lor (y &gt;&gt; (digits - p)).
+<span class="kn">Primitive</span> <span class="nf">addmuldiv</span> := #int63_addmuldiv.
+
+<span class="kn">Definition</span> <span class="nf">oppc</span> (<span class="nv">i</span>:int) := <span class="mi">0</span> -c i.
+<span class="kn">Register Inline</span> oppc.
+
+<span class="kn">Definition</span> <span class="nf">succc</span> <span class="nv">i</span> := i +c <span class="mi">1</span>.
+<span class="kn">Register Inline</span> succc.
+
+<span class="kn">Definition</span> <span class="nf">predc</span> <span class="nv">i</span> := i -c <span class="mi">1</span>.
+<span class="kn">Register Inline</span> predc.</span></span></pre><div class="doc">
+Comparison 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Definition</span> <span class="nf">compare_def</span> <span class="nv">x</span> <span class="nv">y</span> :=
+  <span class="kr">if</span> x &lt; y <span class="kr">then</span> Lt
+  <span class="kr">else</span> <span class="kr">if</span> (x == y) <span class="kr">then</span> Eq <span class="kr">else</span> Gt.
+
+<span class="kn">Primitive</span> <span class="nf">compare</span> := #int63_compare.
+<span class="kn">Notation</span> <span class="s2">&quot;n ?= m&quot;</span> := (<span class="nb">compare</span> n m) (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : int63_scope.
+
+<span class="kn">Import</span> Bool ZArith.</span></span></pre><div class="doc">
+Translation to Z 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">to_Z_rec</span> (<span class="nv">n</span>:nat) (<span class="nv">i</span>:int) :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+  | O =&gt; <span class="mi">0</span>%Z
+  | S n =&gt;
+    (<span class="kr">if</span> is_even i <span class="kr">then</span> Z.double <span class="kr">else</span> Zdouble_plus_one) (to_Z_rec n (i &gt;&gt; <span class="mi">1</span>))
+  <span class="kr">end</span>.
+
+<span class="kn">Definition</span> <span class="nf">to_Z</span> := to_Z_rec size.
+
+<span class="kn">Fixpoint</span> <span class="nf">of_pos_rec</span> (<span class="nv">n</span>:nat) (<span class="nv">p</span>:positive) :=
+  <span class="kr">match</span> n, p <span class="kr">with</span>
+  | O, _ =&gt; <span class="mi">0</span>
+  | S n, xH =&gt; <span class="mi">1</span>
+  | S n, xO p =&gt; (of_pos_rec n p) &lt;&lt; <span class="mi">1</span>
+  | S n, xI p =&gt; (of_pos_rec n p) &lt;&lt; <span class="mi">1</span> lor <span class="mi">1</span>
+  <span class="kr">end</span>.
+
+<span class="kn">Definition</span> <span class="nf">of_pos</span> := of_pos_rec size.
+
+<span class="kn">Definition</span> <span class="nf">of_Z</span> <span class="nv">z</span> :=
+  <span class="kr">match</span> z <span class="kr">with</span>
+  | Zpos p =&gt; of_pos p
+  | Z0 =&gt; <span class="mi">0</span>
+  | Zneg p =&gt; - (of_pos p)
+  <span class="kr">end</span>.
+
+<span class="kn">Notation</span> <span class="s2">&quot;[| x |]&quot;</span> := (to_Z x)  (<span class="kn">at level</span> <span class="mi">0</span>, x <span class="kn">at level</span> <span class="mi">99</span>) : int63_scope.
+
+<span class="kn">Definition</span> <span class="nf">wB</span> := (<span class="mi">2</span> ^ (Z.of_nat size))%Z.
+
+<span class="kn">Lemma</span> <span class="nf">to_Z_rec_bounded</span> <span class="nv">size</span> : <span class="kr">forall</span> <span class="nv">x</span>, (<span class="mi">0</span> &lt;= to_Z_rec size x &lt; <span class="mi">2</span> ^ Z.of_nat size)%Z.
+<span class="kn">Proof</span>.
+ <span class="nb">elim</span> size. <span class="nb">simpl</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> n ih x; <span class="nb">rewrite</span> inj_S; <span class="nb">simpl</span>; <span class="nb">assert</span> (W := ih (x &gt;&gt; <span class="mi">1</span>)%int63).
+ <span class="nb">rewrite</span> Z.pow_succ_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">destruct</span> (is_even x).
+   <span class="nb">rewrite</span> Zdouble_mult; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zdouble_plus_one_mult; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Corollary</span> <span class="nf">to_Z_bounded</span> : <span class="kr">forall</span> <span class="nv">x</span>, (<span class="mi">0</span> &lt;= [| x |] &lt; wB)%Z.
+<span class="kn">Proof</span>. <span class="nb">apply</span> to_Z_rec_bounded. <span class="kn">Qed</span>.
+
+<span class="c">(* =================================================== *)</span>
+<span class="kn">Local Open Scope</span> Z_scope.
+<span class="c">(* General arithmetic results *)</span>
+<span class="kn">Lemma</span> <span class="nf">Z_lt_div2</span> <span class="nv">x</span> <span class="nv">y</span> : x &lt; <span class="mi">2</span> * y -&gt; x / <span class="mi">2</span> &lt; y.
+<span class="kn">Proof</span>. <span class="nb">apply</span> Z.div_lt_upper_bound; <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Theorem</span> <span class="nf">Zmod_le_first</span> <span class="nv">a</span> <span class="nv">b</span> : <span class="mi">0</span> &lt;= a -&gt; <span class="mi">0</span> &lt; b -&gt; <span class="mi">0</span> &lt;= a mod b &lt;= a.
+<span class="kn">Proof</span>.
+  <span class="nb">intros</span> ha hb; <span class="nb">case</span> (Z_mod_lt a b); [ <span class="nb">auto with</span> zarith | ]; <span class="nb">intros</span> p q; <span class="nb">apply</span> (conj p).
+  <span class="nb">case</span> (Z.le_gt_cases b a). <span class="bp">lia</span>.
+  <span class="nb">intros</span> hlt; <span class="nb">rewrite</span> Zmod_small; <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Theorem</span> <span class="nf">Zmod_distr</span>: <span class="kr">forall</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">r</span> <span class="nv">t</span>, <span class="mi">0</span> &lt;= a &lt;= b -&gt; <span class="mi">0</span> &lt;= r -&gt; <span class="mi">0</span> &lt;= t &lt; <span class="mi">2</span> ^a -&gt;
+  (<span class="mi">2</span> ^a * r + t) mod (<span class="mi">2</span> ^ b) = (<span class="mi">2</span> ^a * r) mod (<span class="mi">2</span> ^ b) + t.
+<span class="kn">Proof</span>.
+  <span class="nb">intros</span> a b r t (H1, H2) H3 (H4, H5).
+  <span class="nb">assert</span> (t &lt; <span class="mi">2</span> ^ b).
+  <span class="nb">apply</span> Z.lt_le_trans <span class="kr">with</span> (<span class="mi">1</span>:= H5); <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Zpower_le_monotone; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> Zplus_mod; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> -&gt; Zmod_small <span class="kr">with</span> (a := t); <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Zmod_small; <span class="nb">auto with</span> zarith.
+  <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+  <span class="nb">assert</span> (<span class="mi">0</span> &lt;= <span class="mi">2</span> ^a * r); <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Z.add_nonneg_nonneg; <span class="nb">auto with</span> zarith.
+  <span class="kr">match goal with</span> |- <span class="kp">context</span> [?X mod ?Y] =&gt; <span class="nb">case</span> (Z_mod_lt X Y) <span class="kr">end</span>;
+   <span class="nb">auto with</span> zarith.
+  <span class="nb">pattern</span> (<span class="mi">2</span> ^ b) <span class="nb">at</span> <span class="mi">2</span>; <span class="nb">replace</span> (<span class="mi">2</span> ^ b) <span class="kr">with</span> ((<span class="mi">2</span> ^ b - <span class="mi">2</span> ^a) + <span class="mi">2</span> ^ a);
+    <span class="kp">try</span> <span class="bp">ring</span>.
+  <span class="nb">apply</span> Z.add_le_lt_mono; <span class="nb">auto with</span> zarith.
+  <span class="nb">replace</span> b <span class="kr">with</span> ((b - a) + a); <span class="kp">try</span> <span class="bp">ring</span>.
+  <span class="nb">rewrite</span> Zpower_exp; <span class="nb">auto with</span> zarith.
+  <span class="nb">pattern</span> (<span class="mi">2</span> ^a) <span class="nb">at</span> <span class="mi">4</span>; <span class="nb">rewrite</span> &lt;- (Z.mul_1_l (<span class="mi">2</span> ^a));
+   <span class="kp">try</span> <span class="nb">rewrite</span> &lt;- Z.mul_sub_distr_r.
+  <span class="nb">rewrite</span> (Z.mul_comm (<span class="mi">2</span> ^(b - a))); <span class="nb">rewrite</span>  Zmult_mod_distr_l;
+   <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> (Z.mul_comm (<span class="mi">2</span> ^a)); <span class="nb">apply</span> Z.mul_le_mono_nonneg_r; <span class="nb">auto with</span> zarith.
+  <span class="kr">match goal with</span> |- <span class="kp">context</span> [?X mod ?Y] =&gt; <span class="nb">case</span> (Z_mod_lt X Y) <span class="kr">end</span>.
+    <span class="nb">apply</span> Z.lt_gt; <span class="nb">auto with</span> zarith.
+    <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="c">(* Results about pow2 *)</span>
+<span class="kn">Lemma</span> <span class="nf">pow2_pos</span> <span class="nv">n</span> : <span class="mi">0</span> &lt;= n → <span class="mi">2</span> ^ n &gt; <span class="mi">0</span>.
+<span class="kn">Proof</span>. <span class="nb">intros</span> h; <span class="nb">apply</span> Z.lt_gt, Zpower_gt_0; <span class="bp">lia</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">pow2_nz</span> <span class="nv">n</span> : <span class="mi">0</span> &lt;= n → <span class="mi">2</span> ^ n ≠ <span class="mi">0</span>.
+<span class="kn">Proof</span>. <span class="nb">intros</span> h; <span class="nb">generalize</span> (pow2_pos _ h); <span class="bp">lia</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Hint Resolve</span> pow2_pos pow2_nz : zarith.
+
+<span class="c">(* =================================================== *)</span></span></span></pre><div class="doc">
+Trivial lemmas without axiom 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">wB_diff_0</span> : wB &lt;&gt; <span class="mi">0</span>.
+<span class="kn">Proof</span>. <span class="bp">exact</span> (<span class="kr">fun</span> <span class="nv">x</span> =&gt; <span class="kr">let</span> <span class="nv">&#39;eq_refl</span> := x <span class="kr">in</span> idProp). <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">wB_pos</span> : <span class="mi">0</span> &lt; wB.
+<span class="kn">Proof</span>. <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">to_Z_0</span> : [|<span class="mi">0</span>|] = <span class="mi">0</span>.
+<span class="kn">Proof</span>. <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">to_Z_1</span> : [|<span class="mi">1</span>|] = <span class="mi">1</span>.
+<span class="kn">Proof</span>. <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="c">(* Notations *)</span>
+<span class="kn">Local Open Scope</span> Z_scope.
+
+<span class="kn">Notation</span> <span class="s2">&quot;[+| c |]&quot;</span> :=
+   (interp_carry <span class="mi">1</span> wB to_Z c)  (<span class="kn">at level</span> <span class="mi">0</span>, c <span class="kn">at level</span> <span class="mi">99</span>) : int63_scope.
+
+<span class="kn">Notation</span> <span class="s2">&quot;[-| c |]&quot;</span> :=
+   (interp_carry (-<span class="mi">1</span>) wB to_Z c)  (<span class="kn">at level</span> <span class="mi">0</span>, c <span class="kn">at level</span> <span class="mi">99</span>) : int63_scope.
+
+<span class="kn">Notation</span> <span class="s2">&quot;[|| x ||]&quot;</span> :=
+   (zn2z_to_Z wB to_Z x)  (<span class="kn">at level</span> <span class="mi">0</span>, x <span class="kn">at level</span> <span class="mi">99</span>) : int63_scope.
+
+<span class="c">(* Bijection : int63 &lt;-&gt; Bvector size *)</span>
+
+<span class="kn">Axiom</span> <span class="nv">of_to_Z</span> : <span class="kr">forall</span> <span class="nv">x</span>, of_Z [| x |] = x.
+
+<span class="kn">Notation</span> <span class="s2">&quot;&#39;φ&#39; x&quot;</span> := [| x |] (<span class="kn">at level</span> <span class="mi">0</span>) : int63_scope.
+
+<span class="kn">Lemma</span> <span class="nf">can_inj</span> {<span class="nv">rT</span> <span class="nv">aT</span>} {<span class="nv">f</span>: aT -&gt; rT} {<span class="nv">g</span>: rT -&gt; aT} (<span class="nv">K</span>: <span class="kr">forall</span> <span class="nv">a</span>, g (f a) = a) {<span class="nv">a</span> <span class="nv">a&#39;</span>} (<span class="nv">e</span>: f a = f a&#39;) : a = a&#39;.
+<span class="kn">Proof</span>. <span class="nb">generalize</span> (K a) (K a&#39;). <span class="bp">congruence</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">to_Z_inj</span> <span class="nv">x</span> <span class="nv">y</span> : φ x = φ y → x = y.
+<span class="kn">Proof</span>. <span class="bp">exact</span> (<span class="kr">λ</span> <span class="nv">e</span>, can_inj of_to_Z e). <span class="kn">Qed</span>.</span></span></pre><div class="doc">
+Specification of logical operations 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Local Open Scope</span> Z_scope.
+<span class="kn">Axiom</span> <span class="nv">lsl_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">p</span>, [| x &lt;&lt; p |] = [| x |] * <span class="mi">2</span> ^ [| p |] mod wB.
+
+<span class="kn">Axiom</span> <span class="nv">lsr_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">p</span>, [|x &gt;&gt; p|] = [|x|] / <span class="mi">2</span> ^ [|p|].
+
+<span class="kn">Axiom</span> <span class="nv">land_spec</span>: <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">i</span> , bit (x land y) i = bit x i &amp;&amp; bit y i.
+
+<span class="kn">Axiom</span> <span class="nv">lor_spec</span>: <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">i</span>, bit (x lor y) i = bit x i || bit y i.
+
+<span class="kn">Axiom</span> <span class="nv">lxor_spec</span>: <span class="kr">forall</span>  <span class="nv">x</span> <span class="nv">y</span> <span class="nv">i</span>, bit (x lxor y) i = xorb (bit x i) (bit y i).</span></span></pre><div class="doc">
+Specification of basic opetations 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* Arithmetic modulo operations *)</span>
+
+<span class="c">(* Remarque : les axiomes seraient plus simple si on utilise of_Z a la place :</span>
+<span class="c">   exemple : add_spec : forall x y, of_Z (x + y) = of_Z x + of_Z y. *)</span>
+
+<span class="kn">Axiom</span> <span class="nv">add_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, [|x + y|] = ([|x|] + [|y|]) mod wB.
+
+<span class="kn">Axiom</span> <span class="nv">sub_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, [|x - y|] = ([|x|] - [|y|]) mod wB.
+
+<span class="kn">Axiom</span> <span class="nv">mul_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, [| x * y |]  = [|x|] * [|y|] mod wB.
+
+<span class="kn">Axiom</span> <span class="nv">mulc_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, [|x|] * [|y|] = [|fst (mulc x y)|] * wB + [|snd (mulc x y)|].
+
+<span class="kn">Axiom</span> <span class="nv">div_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, [|x / y|] = [|x|] / [|y|].
+
+<span class="kn">Axiom</span> <span class="nv">mod_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, [|x \% y|] = [|x|] mod [|y|].
+
+<span class="c">(* Comparisons *)</span>
+<span class="kn">Axiom</span> <span class="nv">eqb_correct</span> : <span class="kr">forall</span> <span class="nv">i</span> <span class="nv">j</span>, (i == j)%int63 = true -&gt; i = j.
+
+<span class="kn">Axiom</span> <span class="nv">eqb_refl</span> : <span class="kr">forall</span> <span class="nv">x</span>, (x == x)%int63 = true.
+
+<span class="kn">Axiom</span> <span class="nv">ltb_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, (x &lt; y)%int63 = true &lt;-&gt; [|x|] &lt; [|y|].
+
+<span class="kn">Axiom</span> <span class="nv">leb_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, (x &lt;= y)%int63 = true &lt;-&gt; [|x|] &lt;= [|y|].</span></span></pre><div class="doc">
+Exotic operations 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
+I should add the definition (like for compare) 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Primitive</span> <span class="nf">head0</span> := #int63_head0.
+<span class="kn">Primitive</span> <span class="nf">tail0</span> := #int63_tail0.</span></span></pre><div class="doc">
+Axioms on operations which are just short cut 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">compare_def_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, <span class="nb">compare</span> x y = compare_def x y.
+
+<span class="kn">Axiom</span> <span class="nv">head0_spec</span>  : <span class="kr">forall</span> <span class="nv">x</span>,  <span class="mi">0</span> &lt; [|x|] -&gt;
+         wB/ <span class="mi">2</span> &lt;= <span class="mi">2</span> ^ ([|head0 x|]) * [|x|] &lt; wB.
+
+<span class="kn">Axiom</span> <span class="nv">tail0_spec</span>  : <span class="kr">forall</span> <span class="nv">x</span>, <span class="mi">0</span> &lt; [|x|] -&gt;
+         (<span class="kr">exists</span> <span class="nv">y</span>, <span class="mi">0</span> &lt;= y /\ [|x|] = (<span class="mi">2</span> * y + <span class="mi">1</span>) * (<span class="mi">2</span> ^ [|tail0 x|]))%Z.
+
+<span class="kn">Axiom</span> <span class="nv">addc_def_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, (x +c y)%int63 = addc_def x y.
+
+<span class="kn">Axiom</span> <span class="nv">addcarryc_def_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, addcarryc x y = addcarryc_def x y.
+
+<span class="kn">Axiom</span> <span class="nv">subc_def_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, (x -c y)%int63 = subc_def x y.
+
+<span class="kn">Axiom</span> <span class="nv">subcarryc_def_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, subcarryc x y = subcarryc_def x y.
+
+<span class="kn">Axiom</span> <span class="nv">diveucl_def_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, diveucl x y = diveucl_def x y.
+
+<span class="kn">Axiom</span> <span class="nv">diveucl_21_spec</span> :  <span class="kr">forall</span> <span class="nv">a1</span> <span class="nv">a2</span> <span class="nv">b</span>,
+   <span class="kr">let</span> (<span class="nv">q</span>,r) := diveucl_21 a1 a2 b <span class="kr">in</span>
+   <span class="kr">let</span> (<span class="nv">q&#39;</span>,r&#39;) := Z.div_eucl ([|a1|] * wB + [|a2|]) [|b|] <span class="kr">in</span>
+   [|a1|] &lt; [|b|] -&gt; [|q|] = q&#39; /\ [|r|] = r&#39;.
+
+<span class="kn">Axiom</span> <span class="nv">addmuldiv_def_spec</span> : <span class="kr">forall</span> <span class="nv">p</span> <span class="nv">x</span> <span class="nv">y</span>,
+  addmuldiv p x y = addmuldiv_def p x y.</span></span></pre><div class="doc">
+Square root functions using newton iteration 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Local Open Scope</span> int63_scope.
+
+<span class="kn">Definition</span> <span class="nf">sqrt_step</span> (<span class="nv">rec</span>: int -&gt; int -&gt; int) (<span class="nv">i</span> <span class="nv">j</span>: int) :=
+  <span class="kr">let</span> <span class="nv">quo</span> := i / j <span class="kr">in</span>
+  <span class="kr">if</span> quo &lt; j <span class="kr">then</span> rec i ((j + quo) &gt;&gt; <span class="mi">1</span>)
+  <span class="kr">else</span> j.
+
+<span class="kn">Definition</span> <span class="nf">iter_sqrt</span> :=
+ <span class="kn">Eval</span> <span class="nb">lazy</span> beta delta [sqrt_step] <span class="kr">in</span>
+ <span class="kr">fix</span> iter_sqrt (n: nat) (rec: int -&gt; int -&gt; int)
+          (i j: int) {<span class="kr">struct</span> n} : int :=
+  sqrt_step
+   (<span class="kr">fun</span> <span class="nv">i</span> <span class="nv">j</span> =&gt; <span class="kr">match</span> n <span class="kr">with</span>
+      O =&gt;  rec i j
+   | S n =&gt; (iter_sqrt n (iter_sqrt n rec)) i j
+   <span class="kr">end</span>) i j.
+
+<span class="kn">Definition</span> <span class="nf">sqrt</span> <span class="nv">i</span> :=
+  <span class="kr">match</span> <span class="nb">compare</span> <span class="mi">1</span> i <span class="kr">with</span>
+    Gt =&gt; <span class="mi">0</span>
+  | Eq =&gt; <span class="mi">1</span>
+  | Lt =&gt; iter_sqrt size (<span class="kr">fun</span> <span class="nv">i</span> <span class="nv">j</span> =&gt; j) i (i &gt;&gt; <span class="mi">1</span>)
+  <span class="kr">end</span>.
+
+<span class="kn">Definition</span> <span class="nf">high_bit</span> := <span class="mi">1</span> &lt;&lt; (digits - <span class="mi">1</span>).
+
+<span class="kn">Definition</span> <span class="nf">sqrt2_step</span> (<span class="nv">rec</span>: int -&gt; int -&gt; int -&gt; int)
+   (<span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>: int)  :=
+  <span class="kr">if</span> ih &lt; j <span class="kr">then</span>
+    <span class="kr">let</span> (<span class="nv">quo</span>,_) := diveucl_21 ih il j <span class="kr">in</span>
+    <span class="kr">if</span> quo &lt; j <span class="kr">then</span>
+      <span class="kr">match</span> j +c quo <span class="kr">with</span>
+      | C0 m1 =&gt; rec ih il (m1 &gt;&gt; <span class="mi">1</span>)
+      | C1 m1 =&gt; rec ih il ((m1 &gt;&gt; <span class="mi">1</span>) + high_bit)
+      <span class="kr">end</span>
+    <span class="kr">else</span> j
+  <span class="kr">else</span> j.
+
+<span class="kn">Definition</span> <span class="nf">iter2_sqrt</span> :=
+ <span class="kn">Eval</span> <span class="nb">lazy</span> beta delta [sqrt2_step] <span class="kr">in</span>
+ <span class="kr">fix</span> iter2_sqrt (n: nat)
+          (rec: int  -&gt; int -&gt; int -&gt; int)
+          (ih il j: int) {<span class="kr">struct</span> n} : int :=
+  sqrt2_step
+   (<span class="kr">fun</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span> =&gt;
+     <span class="kr">match</span> n <span class="kr">with</span>
+     | O =&gt;  rec ih il j
+     | S n =&gt; (iter2_sqrt n (iter2_sqrt n rec)) ih il j
+   <span class="kr">end</span>) ih il j.
+
+<span class="kn">Definition</span> <span class="nf">sqrt2</span> <span class="nv">ih</span> <span class="nv">il</span> :=
+  <span class="kr">let</span> <span class="nv">s</span> := iter2_sqrt size (<span class="kr">fun</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span> =&gt; j) ih il max_int <span class="kr">in</span>
+  <span class="kr">let</span> (<span class="nv">ih1</span>, il1) := mulc s s <span class="kr">in</span>
+  <span class="kr">match</span> il -c il1 <span class="kr">with</span>
+  | C0 il2 =&gt;
+    <span class="kr">if</span> ih1 &lt; ih <span class="kr">then</span> (s, C1 il2) <span class="kr">else</span> (s, C0 il2)
+  | C1 il2 =&gt;
+    <span class="kr">if</span> ih1 &lt; (ih - <span class="mi">1</span>) <span class="kr">then</span> (s, C1 il2) <span class="kr">else</span> (s, C0 il2)
+  <span class="kr">end</span>.</span></span></pre><div class="doc">
+Gcd 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">gcd_rec</span> (<span class="nv">guard</span>:nat) (<span class="nv">i</span> <span class="nv">j</span>:int) {<span class="nv">struct</span> <span class="nv">guard</span>} :=
+   <span class="kr">match</span> <span class="kp">guard</span> <span class="kr">with</span>
+   | O =&gt; <span class="mi">1</span>
+   | S p =&gt; <span class="kr">if</span> j == <span class="mi">0</span> <span class="kr">then</span> i <span class="kr">else</span> gcd_rec p j (i \% j)
+   <span class="kr">end</span>.
+
+<span class="kn">Definition</span> <span class="nf">gcd</span> := gcd_rec (<span class="mi">2</span>*size).</span></span></pre><div class="doc">
+equality 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">eqb_complete</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, x = y -&gt; (x == y) = true.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> x y H; <span class="nb">rewrite</span> -&gt; H, eqb_refl;<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqb_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, (x == y) = true &lt;-&gt; x = y.
+<span class="kn">Proof</span>.
+ <span class="nb">split</span>;<span class="nb">auto using</span> eqb_correct, eqb_complete.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqb_false_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, (x == y) = false &lt;-&gt; x &lt;&gt; y.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span>;<span class="nb">rewrite</span> &lt;- not_true_iff_false, eqb_spec;<span class="nb">split</span>;<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqb_false_complete</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, x &lt;&gt; y -&gt; (x == y) = false.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> x y;<span class="nb">rewrite</span> eqb_false_spec;<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqb_false_correct</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>, (x == y) = false -&gt; x &lt;&gt; y.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> x y;<span class="nb">rewrite</span> eqb_false_spec;<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Definition</span> <span class="nf">eqs</span> (<span class="nv">i</span> <span class="nv">j</span> : int) : {i = j} + { i &lt;&gt; j } :=
+  (<span class="kr">if</span> i == j <span class="kr">as</span> b <span class="kr">return</span> ((b = true -&gt; i = j) -&gt; (b = false -&gt; i &lt;&gt; j) -&gt; {i=j} + {i &lt;&gt; j} )
+    <span class="kr">then</span> <span class="kr">fun</span> (<span class="nv">Heq</span> : true = true -&gt; i = j) <span class="nv">_</span> =&gt; <span class="nb">left</span> _ (Heq (eq_refl true))
+    <span class="kr">else</span> <span class="kr">fun</span> <span class="nv">_</span> (<span class="nv">Hdiff</span> : false = false -&gt; i &lt;&gt; j) =&gt; <span class="nb">right</span> _ (Hdiff (eq_refl false)))
+  (eqb_correct i j)
+  (eqb_false_correct i j).
+
+<span class="kn">Lemma</span> <span class="nf">eq_dec</span> : <span class="kr">forall</span> <span class="nv">i</span> <span class="nv">j</span>:int, i = j \/ i &lt;&gt; j.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> i j;<span class="nb">destruct</span> (eqs i j);<span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="c">(* Extra function on equality *)</span>
+
+<span class="kn">Definition</span> <span class="nf">cast</span> <span class="nv">i</span> <span class="nv">j</span> :=
+     (<span class="kr">if</span> i == j <span class="kr">as</span> b <span class="kr">return</span> ((b = true -&gt; i = j) -&gt; option (<span class="kr">forall</span> <span class="nv">P</span> : int -&gt; <span class="kt">Type</span>, P i -&gt; P j))
+      <span class="kr">then</span> <span class="kr">fun</span> <span class="nv">Heq</span> : true = true -&gt; i = j =&gt;
+             Some
+             (<span class="kr">fun</span> (<span class="nv">P</span> : int -&gt; <span class="kt">Type</span>) (<span class="nv">Hi</span> : P i) =&gt;
+               <span class="kr">match</span> Heq (eq_refl true) <span class="kr">in</span> (_ = y) <span class="kr">return</span> (P y) <span class="kr">with</span>
+               | eq_refl =&gt; Hi
+               <span class="kr">end</span>)
+      <span class="kr">else</span> <span class="kr">fun</span> <span class="nv">_</span> : false = true -&gt; i = j =&gt; None) (eqb_correct i j).
+
+<span class="kn">Lemma</span> <span class="nf">cast_refl</span> : <span class="kr">forall</span> <span class="nv">i</span>, cast i i = Some (<span class="kr">fun</span> <span class="nv">P</span> <span class="nv">H</span> =&gt; H).
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> cast;<span class="nb">intros</span>.
+ <span class="nb">generalize</span> (eqb_correct i i).
+ <span class="nb">rewrite</span> eqb_refl;<span class="nb">intros</span>.
+ <span class="nb">rewrite</span> (Eqdep_dec.eq_proofs_unicity eq_dec (e (eq_refl true)) (eq_refl i));<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">cast_diff</span> : <span class="kr">forall</span> <span class="nv">i</span> <span class="nv">j</span>, i == j = false -&gt; cast i j = None.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span>;<span class="nb">unfold</span> cast;<span class="nb">intros</span>; <span class="nb">generalize</span> (eqb_correct i j).
+ <span class="nb">rewrite</span> H;<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Definition</span> <span class="nf">eqo</span> <span class="nv">i</span> <span class="nv">j</span> :=
+   (<span class="kr">if</span> i == j <span class="kr">as</span> b <span class="kr">return</span> ((b = true -&gt; i = j) -&gt; option (i=j))
+    <span class="kr">then</span> <span class="kr">fun</span> <span class="nv">Heq</span> : true = true -&gt; i = j =&gt;
+             Some (Heq (eq_refl true))
+     <span class="kr">else</span> <span class="kr">fun</span> <span class="nv">_</span> : false = true -&gt; i = j =&gt; None) (eqb_correct i j).
+
+<span class="kn">Lemma</span> <span class="nf">eqo_refl</span> : <span class="kr">forall</span> <span class="nv">i</span>, eqo i i = Some (eq_refl i).
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> eqo;<span class="nb">intros</span>.
+ <span class="nb">generalize</span> (eqb_correct i i).
+ <span class="nb">rewrite</span> eqb_refl;<span class="nb">intros</span>.
+ <span class="nb">rewrite</span> (Eqdep_dec.eq_proofs_unicity eq_dec (e (eq_refl true)) (eq_refl i));<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqo_diff</span> : <span class="kr">forall</span> <span class="nv">i</span> <span class="nv">j</span>, i == j = false -&gt; eqo i j = None.
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> eqo;<span class="nb">intros</span>; <span class="nb">generalize</span> (eqb_correct i j).
+ <span class="nb">rewrite</span> H;<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.</span></span></pre><div class="doc">
+Comparison 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">eqbP</span> <span class="nv">x</span> <span class="nv">y</span> : reflect ([| x |] = [| y |]) (x == y).
+<span class="kn">Proof</span>. <span class="nb">apply</span> iff_reflect; <span class="nb">rewrite</span> eqb_spec; <span class="nb">split</span>; [ <span class="nb">apply</span> to_Z_inj | <span class="nb">apply</span> <span class="nb">f_equal</span> ]. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">ltbP</span> <span class="nv">x</span> <span class="nv">y</span> : reflect ([| x |] &lt; [| y |])%Z (x &lt; y).
+<span class="kn">Proof</span>. <span class="nb">apply</span> iff_reflect; <span class="nb">symmetry</span>; <span class="nb">apply</span> ltb_spec. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lebP</span> <span class="nv">x</span> <span class="nv">y</span> : reflect ([| x |] &lt;= [| y |])%Z (x ≤ y).
+<span class="kn">Proof</span>. <span class="nb">apply</span> iff_reflect; <span class="nb">symmetry</span>; <span class="nb">apply</span> leb_spec. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">compare_spec</span> <span class="nv">x</span> <span class="nv">y</span> : <span class="nb">compare</span> x y = ([|x|] ?= [|y|])%Z.
+<span class="kn">Proof</span>.
+  <span class="nb">rewrite</span> compare_def_spec; <span class="nb">unfold</span> compare_def.
+  <span class="nb">case</span> ltbP; [ <span class="nb">auto using</span> Z.compare_lt_iff | <span class="nb">intros</span> hge ].
+  <span class="nb">case</span> eqbP; [ <span class="bp">now</span> <span class="nb">symmetry</span>; <span class="nb">apply</span> Z.compare_eq_iff | <span class="nb">intros</span> hne ].
+  <span class="nb">symmetry</span>; <span class="nb">apply</span> Z.compare_gt_iff; <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">is_zero_spec</span> <span class="nv">x</span> : is_zero x = true &lt;-&gt; x = <span class="mi">0</span>%int63.
+<span class="kn">Proof</span>. <span class="nb">apply</span> eqb_spec. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">diveucl_spec</span> <span class="nv">x</span> <span class="nv">y</span> :
+  <span class="kr">let</span> (<span class="nv">q</span>,r) := diveucl x y <span class="kr">in</span>
+  ([| q |], [| r |]) = Z.div_eucl [| x |] [| y |].
+<span class="kn">Proof</span>.
+ <span class="nb">rewrite</span> diveucl_def_spec; <span class="nb">unfold</span> diveucl_def; <span class="nb">rewrite</span> div_spec, mod_spec; <span class="nb">unfold</span> Z.div, Zmod.
+ <span class="nb">destruct</span> (Z.div_eucl [| x |] [| y |]); <span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Local Open Scope</span> Z_scope.</span></span></pre><div class="doc">
+Addition 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">addc_spec</span> <span class="nv">x</span> <span class="nv">y</span> : [+| x +c y |] = [| x |] + [| y |].
+<span class="kn">Proof</span>.
+  <span class="nb">rewrite</span> addc_def_spec; <span class="nb">unfold</span> addc_def, interp_carry.
+  <span class="nb">pose proof</span> (to_Z_bounded x); <span class="nb">pose proof</span> (to_Z_bounded y).
+  <span class="nb">case</span> ltbP; <span class="nb">rewrite</span> add_spec.
+    <span class="nb">case</span> (Z_lt_ge_dec ([| x |] + [| y |]) wB).
+      <span class="nb">intros</span> k; <span class="nb">rewrite</span> Zmod_small; <span class="bp">lia</span>.
+    <span class="nb">intros</span> hge; <span class="nb">rewrite</span> &lt;- (Zmod_unique _ _ <span class="mi">1</span> ([| x |] + [| y |] - wB)); <span class="bp">lia</span>.
+ <span class="nb">case</span> (Z_lt_ge_dec ([| x |] + [| y |]) wB).
+   <span class="nb">intros</span> k; <span class="nb">rewrite</span> Zmod_small; <span class="bp">lia</span>.
+ <span class="nb">intros</span> hge; <span class="nb">rewrite</span> &lt;- (Zmod_unique _ _ <span class="mi">1</span> ([| x |] + [| y |] - wB)); <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">succ_spec</span> <span class="nv">x</span> : [| succ x |] = ([| x |] + <span class="mi">1</span>) mod wB.
+<span class="kn">Proof</span>. <span class="nb">apply</span> add_spec. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">succc_spec</span> <span class="nv">x</span> : [+| succc x |] = [| x |] + <span class="mi">1</span>.
+<span class="kn">Proof</span>. <span class="nb">apply</span> addc_spec. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">addcarry_spec</span> <span class="nv">x</span> <span class="nv">y</span> : [| addcarry x y |] = ([| x |] + [| y |] + <span class="mi">1</span>) mod wB.
+<span class="kn">Proof</span>. <span class="nb">unfold</span> addcarry; <span class="nb">rewrite</span> -&gt; !add_spec, Zplus_mod_idemp_l; <span class="nb">trivial</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">addcarryc_spec</span> <span class="nv">x</span> <span class="nv">y</span> : [+| addcarryc x y |] = [| x |] + [| y |] + <span class="mi">1</span>.
+<span class="kn">Proof</span>.
+  <span class="nb">rewrite</span> addcarryc_def_spec; <span class="nb">unfold</span> addcarryc_def, interp_carry.
+  <span class="nb">pose proof</span> (to_Z_bounded x); <span class="nb">pose proof</span> (to_Z_bounded y).
+  <span class="nb">case</span> lebP; <span class="nb">rewrite</span> addcarry_spec.
+    <span class="nb">case</span> (Z_lt_ge_dec ([| x |] + [| y |] + <span class="mi">1</span>) wB).
+      <span class="nb">intros</span> hlt; <span class="nb">rewrite</span> Zmod_small; <span class="bp">lia</span>.
+    <span class="nb">intros</span> hge; <span class="nb">rewrite</span> &lt;- (Zmod_unique _ _ <span class="mi">1</span> ([| x |] + [| y |] + <span class="mi">1</span> - wB)); <span class="bp">lia</span>.
+  <span class="nb">case</span> (Z_lt_ge_dec ([| x |] + [| y |] + <span class="mi">1</span>) wB).
+    <span class="nb">intros</span> hlt; <span class="nb">rewrite</span> Zmod_small; <span class="bp">lia</span>.
+  <span class="nb">intros</span> hge; <span class="nb">rewrite</span> &lt;- (Zmod_unique _ _ <span class="mi">1</span> ([| x |] + [| y |] + <span class="mi">1</span> - wB)); <span class="bp">lia</span>.
+<span class="kn">Qed</span>.</span></span></pre><div class="doc">
+Subtraction 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">subc_spec</span> <span class="nv">x</span> <span class="nv">y</span> : [-| x -c y |] = [| x |] - [| y |].
+<span class="kn">Proof</span>.
+  <span class="nb">rewrite</span> subc_def_spec; <span class="nb">unfold</span> subc_def; <span class="nb">unfold</span> interp_carry.
+  <span class="nb">pose proof</span> (to_Z_bounded x); <span class="nb">pose proof</span> (to_Z_bounded y).
+  <span class="nb">case</span> lebP.
+    <span class="nb">intros</span> hle; <span class="nb">rewrite</span> sub_spec, Z.mod_small; <span class="bp">lia</span>.
+  <span class="nb">intros</span> hgt; <span class="nb">rewrite</span> sub_spec, &lt;- (Zmod_unique _ wB (-<span class="mi">1</span>) ([| x |] - [| y |] + wB)); <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">pred_spec</span> <span class="nv">x</span> : [| pred x |] = ([| x |] - <span class="mi">1</span>) mod wB.
+<span class="kn">Proof</span>. <span class="nb">apply</span> sub_spec. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">predc_spec</span> <span class="nv">x</span> : [-| predc x |] = [| x |] - <span class="mi">1</span>.
+<span class="kn">Proof</span>. <span class="nb">apply</span> subc_spec. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">oppc_spec</span> <span class="nv">x</span> : [-| oppc x |] = - [| x |].
+<span class="kn">Proof</span>. <span class="nb">unfold</span> oppc; <span class="nb">rewrite</span> -&gt; subc_spec, to_Z_0; <span class="nb">trivial</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">opp_spec</span> <span class="nv">x</span> : [|- x |] = - [| x |] mod wB.
+<span class="kn">Proof</span>. <span class="nb">unfold</span> opp; <span class="nb">rewrite</span> -&gt; sub_spec, to_Z_0; <span class="nb">trivial</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">oppcarry_spec</span> <span class="nv">x</span> : [| oppcarry x |] = wB - [| x |] - <span class="mi">1</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> oppcarry; <span class="nb">rewrite</span> sub_spec.
+ <span class="nb">rewrite</span> &lt;- Zminus_plus_distr, Zplus_comm, Zminus_plus_distr.
+ <span class="nb">apply</span> Zmod_small.
+ <span class="nb">generalize</span> (to_Z_bounded x); <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">subcarry_spec</span> <span class="nv">x</span> <span class="nv">y</span> : [| subcarry x y |] = ([| x |] - [| y |] - <span class="mi">1</span>) mod wB.
+<span class="kn">Proof</span>. <span class="nb">unfold</span> subcarry; <span class="nb">rewrite</span> !sub_spec, Zminus_mod_idemp_l; <span class="nb">trivial</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">subcarryc_spec</span> <span class="nv">x</span> <span class="nv">y</span> : [-| subcarryc x y |] = [| x |] - [| y |] - <span class="mi">1</span>.
+<span class="kn">Proof</span>.
+  <span class="nb">rewrite</span> subcarryc_def_spec; <span class="nb">unfold</span> subcarryc_def, interp_carry; <span class="nb">fold</span> (subcarry x y).
+ <span class="nb">pose proof</span> (to_Z_bounded x); <span class="nb">pose proof</span> (to_Z_bounded y).
+ <span class="nb">case</span> ltbP; <span class="nb">rewrite</span> subcarry_spec.
+   <span class="nb">intros</span> hlt; <span class="nb">rewrite</span> Zmod_small; <span class="bp">lia</span>.
+ <span class="nb">intros</span> hge; <span class="nb">rewrite</span> &lt;- (Zmod_unique _ _ (-<span class="mi">1</span>) ([| x |] - [| y |] - <span class="mi">1</span> + wB)); <span class="bp">lia</span>.
+<span class="kn">Qed</span>.</span></span></pre><div class="doc">
+GCD 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_Z_gcd</span> : <span class="kr">forall</span> <span class="nv">i</span> <span class="nv">j</span>, [| gcd i j |] = Zgcdn (<span class="mi">2</span> * size) [| j |] [| i |].
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> gcd.
+ <span class="nb">elim</span> (<span class="mi">2</span>*size)%nat. <span class="bp">reflexivity</span>.
+ <span class="nb">intros</span> n ih i j; <span class="nb">simpl</span>.
+ <span class="nb">pose proof</span> (to_Z_bounded j) <span class="kr">as</span> hj; <span class="nb">pose proof</span> (to_Z_bounded i).
+ <span class="nb">case</span> eqbP; <span class="nb">rewrite</span> to_Z_0.
+   <span class="nb">intros</span> -&gt;; <span class="nb">rewrite</span> Z.abs_eq; <span class="bp">lia</span>.
+ <span class="nb">intros</span> hne; <span class="nb">rewrite</span> ih; <span class="nb">clear</span> ih.
+ <span class="nb">rewrite</span> &lt;- mod_spec.
+ <span class="nb">revert</span> hj hne; <span class="nb">case</span> [| j |]; <span class="nb">intros</span>; <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">gcd_spec</span> <span class="nv">a</span> <span class="nv">b</span> : Zis_gcd [| a |] [| b |] [| gcd a b |].
+<span class="kn">Proof</span>.
+ <span class="nb">rewrite</span> to_Z_gcd.
+ <span class="nb">apply</span> Zis_gcd_sym.
+ <span class="nb">apply</span> Zgcdn_is_gcd.
+ <span class="nb">unfold</span> Zgcd_bound.
+ <span class="nb">generalize</span> (to_Z_bounded b).
+ <span class="nb">destruct</span> [|b|].
+ <span class="nb">unfold</span> size; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> (_,H).
+ <span class="nb">cut</span> (Psize p &lt;= size)%nat; [ <span class="bp">lia</span> | <span class="nb">rewrite</span> &lt;- Zpower2_Psize; <span class="nb">auto</span>].
+ <span class="nb">intros</span> (H,_); <span class="nb">compute</span> <span class="kr">in</span> H; <span class="nb">elim</span> H; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.</span></span></pre><div class="doc">
+Head0, Tail0 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">head00_spec</span> <span class="nv">x</span> : [| x |] = <span class="mi">0</span> -&gt; [| head0 x |] = [| digits |].
+<span class="kn">Proof</span>. <span class="bp">now</span> <span class="nb">intros</span> h; <span class="nb">rewrite</span> (to_Z_inj _ <span class="mi">0</span> h). <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">tail00_spec</span> <span class="nv">x</span> : [| x |] = <span class="mi">0</span> -&gt; [|tail0 x|] = [|digits|].
+<span class="kn">Proof</span>. <span class="bp">now</span> <span class="nb">intros</span> h; <span class="nb">rewrite</span> (to_Z_inj _ <span class="mi">0</span> h). <span class="kn">Qed</span>.
+
+<span class="kn">Infix</span> <span class="s2">&quot;≡&quot;</span> := (eqm wB) (<span class="kn">at level</span> <span class="mi">80</span>) : int63_scope.
+
+<span class="kn">Lemma</span> <span class="nf">eqm_mod</span> <span class="nv">x</span> <span class="nv">y</span> : x mod wB ≡ y mod wB → x ≡ y.
+<span class="kn">Proof</span>.
+  <span class="nb">intros</span> h.
+  <span class="nb">eapply</span> (eqm_trans).
+    <span class="nb">apply</span> eqm_sym; <span class="nb">apply</span> Zmod_eqm.
+  <span class="nb">apply</span> (eqm_trans _ _ _ _ h).
+  <span class="nb">apply</span> Zmod_eqm.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqm_sub</span> <span class="nv">x</span> <span class="nv">y</span> : x ≡ y → x - y ≡ <span class="mi">0</span>.
+<span class="kn">Proof</span>. <span class="nb">intros</span> h; <span class="nb">unfold</span> eqm; <span class="nb">rewrite</span> Zminus_mod, h, Z.sub_diag; <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqmE</span> <span class="nv">x</span> <span class="nv">y</span> : x ≡ y → <span class="kr">∃</span> <span class="nv">k</span>, x - y = k * wB.
+<span class="kn">Proof</span>.
+  <span class="nb">intros</span> h.
+  <span class="bp">exact</span> (Zmod_divide (x - y) wB (<span class="kr">λ</span> <span class="nv">e</span>, <span class="kr">let</span> <span class="nv">&#39;eq_refl</span> := e <span class="kr">in</span> I) (eqm_sub _ _ h)).
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqm_subE</span> <span class="nv">x</span> <span class="nv">y</span> : x ≡ y ↔ x - y ≡ <span class="mi">0</span>.
+<span class="kn">Proof</span>.
+  <span class="nb">split</span>. <span class="nb">apply</span> eqm_sub.
+  <span class="nb">intros</span> h; <span class="nb">case</span> (eqmE _ _ h); <span class="nb">clear</span> h; <span class="nb">intros</span> q h.
+  <span class="nb">assert</span> (y = x - q * wB) <span class="bp">by</span> <span class="bp">lia</span>.
+  <span class="nb">clear</span> h; <span class="nb">subst</span> y.
+  <span class="nb">unfold</span> eqm; <span class="nb">rewrite</span> Zminus_mod, Z_mod_mult, Z.sub_0_r, Zmod_mod; <span class="bp">reflexivity</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">int_eqm</span> <span class="nv">x</span> <span class="nv">y</span> : x = y → φ x ≡ φ y.
+<span class="kn">Proof</span>. <span class="nb">unfold</span> eqm; <span class="nb">intros</span> -&gt;; <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">eqmI</span> <span class="nv">x</span> <span class="nv">y</span> : φ x ≡ φ y → x = y.
+<span class="kn">Proof</span>.
+  <span class="nb">unfold</span> eqm.
+  <span class="kp">repeat</span> <span class="nb">rewrite</span> Zmod_small <span class="bp">by</span> <span class="nb">apply</span> to_Z_bounded.
+  <span class="nb">apply</span> to_Z_inj.
+<span class="kn">Qed</span>.
+
+<span class="c">(* ADD *)</span>
+<span class="kn">Lemma</span> <span class="nf">add_assoc</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span>: (x + (y + z) = (x + y) + z)%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> !add_spec.
+ <span class="nb">rewrite</span> -&gt; Zplus_mod_idemp_l, Zplus_mod_idemp_r, Zplus_assoc; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">add_comm</span> <span class="nv">x</span> <span class="nv">y</span>: (x + y = y + x)%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> -&gt; !add_spec, Zplus_comm; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">add_le_r</span> <span class="nv">m</span> <span class="nv">n</span>:
+  <span class="kr">if</span>  (n &lt;= m + n)%int63 <span class="kr">then</span>  ([|m|] + [|n|] &lt; wB)%Z <span class="kr">else</span>  (wB &lt;= [|m|] + [|n|])%Z.
+<span class="kn">Proof</span>.
+ <span class="nb">case</span> (to_Z_bounded m); <span class="nb">intros</span> H1m H2m.
+ <span class="nb">case</span> (to_Z_bounded n); <span class="nb">intros</span> H1n H2n.
+ <span class="nb">case</span> (Zle_or_lt wB ([|m|] + [|n|])); <span class="nb">intros</span> H.
+   <span class="nb">assert</span> (H1: ([| m + n |] = [|m|] + [|n|] - wB)%Z).
+     <span class="nb">rewrite</span> add_spec.
+     <span class="nb">replace</span> (([|m|] + [|n|]) mod wB)%Z <span class="kr">with</span> (((([|m|] + [|n|]) - wB) + wB) mod wB)%Z.
+     <span class="nb">rewrite</span> -&gt; Zplus_mod, Z_mod_same_full, Zplus_0_r, !Zmod_small; <span class="nb">auto with</span> zarith.
+     <span class="nb">rewrite</span> !Zmod_small; <span class="nb">auto with</span> zarith.
+     <span class="nb">apply</span> f_equal2 <span class="kr">with</span> (f := Zmod); <span class="nb">auto with</span> zarith.
+   <span class="nb">case_eq</span> (n &lt;= m + n)%int63; <span class="nb">auto</span>.
+   <span class="nb">rewrite</span> leb_spec, H1; <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> (H1: ([| m + n |] = [|m|] + [|n|])%Z).
+   <span class="nb">rewrite</span> add_spec, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">replace</span> (n &lt;= m + n)%int63 <span class="kr">with</span> true; <span class="nb">auto</span>.
+ <span class="nb">apply</span> sym_equal; <span class="nb">rewrite</span> leb_spec, H1; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">add_cancel_l</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : (x + y = x + z)%int63 -&gt; y = z.
+<span class="kn">Proof</span>.
+  <span class="nb">intros</span> h; <span class="nb">apply</span> int_eqm <span class="kr">in</span> h; <span class="nb">rewrite</span> !add_spec <span class="kr">in</span> h; <span class="nb">apply</span> eqm_mod, eqm_sub <span class="kr">in</span> h.
+  <span class="nb">replace</span> (_ + _ - _) <span class="kr">with</span> (φ(y) - φ(z)) <span class="kr">in</span> h <span class="bp">by</span> <span class="bp">lia</span>.
+  <span class="nb">rewrite</span> &lt;- eqm_subE <span class="kr">in</span> h.
+  <span class="nb">apply</span> eqmI, h.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">add_cancel_r</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : (y + x = z + x)%int63 -&gt; y = z.
+<span class="kn">Proof</span>.
+  <span class="nb">rewrite</span> !(<span class="kr">fun</span> <span class="nv">t</span> =&gt; add_comm t x); <span class="nb">intros</span> Hl; <span class="nb">apply</span> (add_cancel_l x); <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Coercion</span> <span class="nf">b2i</span> (b: bool) : int := <span class="kr">if</span> b <span class="kr">then</span> <span class="mi">1</span>%int63 <span class="kr">else</span> <span class="mi">0</span>%int63.
+
+<span class="c">(* LSR *)</span>
+<span class="kn">Lemma</span> <span class="nf">lsr0</span> <span class="nv">i</span> : <span class="mi">0</span> &gt;&gt; i = <span class="mi">0</span>%int63.
+<span class="kn">Proof</span>. <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> lsr_spec; <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lsr_0_r</span> <span class="nv">i</span>: i &gt;&gt; <span class="mi">0</span> = i.
+<span class="kn">Proof</span>. <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> lsr_spec, Zdiv_1_r; <span class="bp">exact</span> eq_refl. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lsr_1</span> <span class="nv">n</span> : <span class="mi">1</span> &gt;&gt; n = (n == <span class="mi">0</span>).
+<span class="kn">Proof</span>.
+  <span class="nb">case</span> eqbP.
+    <span class="nb">intros</span> h; <span class="nb">rewrite</span> (to_Z_inj _ _ h), lsr_0_r; <span class="bp">reflexivity</span>.
+ <span class="nb">intros</span> Hn.
+ <span class="nb">assert</span> (H1n : (<span class="mi">1</span> &gt;&gt; n = <span class="mi">0</span>)%int63); <span class="nb">auto</span>.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> lsr_spec.
+ <span class="nb">apply</span> Zdiv_small; <span class="nb">rewrite</span> to_Z_1; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">change</span> <span class="mi">1</span>%Z <span class="kr">with</span> (<span class="mi">2</span>^<span class="mi">0</span>)%Z.
+ <span class="nb">apply</span> Zpower_lt_monotone; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> to_Z_0 <span class="kr">in</span> Hn.
+ <span class="nb">generalize</span> (to_Z_bounded n).
+ <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lsr_add</span> <span class="nv">i</span> <span class="nv">m</span> <span class="nv">n</span>: ((i &gt;&gt; m) &gt;&gt; n = <span class="kr">if</span> n &lt;= m + n <span class="kr">then</span> i &gt;&gt; (m + n) <span class="kr">else</span> <span class="mi">0</span>)%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">case</span> (to_Z_bounded m); <span class="nb">intros</span> H1m H2m.
+ <span class="nb">case</span> (to_Z_bounded n); <span class="nb">intros</span> H1n H2n.
+ <span class="nb">case</span> (to_Z_bounded i); <span class="nb">intros</span> H1i H2i.
+ <span class="nb">generalize</span> (add_le_r m n); <span class="nb">case</span> (n &lt;= m + n)%int63; <span class="nb">intros</span> H.
+   <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> -&gt; !lsr_spec, Zdiv_Zdiv, &lt;- Zpower_exp; <span class="nb">auto with</span> zarith.
+   <span class="nb">rewrite</span> add_spec, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> -&gt; !lsr_spec, Zdiv_Zdiv, &lt;- Zpower_exp; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zdiv_small. <span class="nb">split</span>; [ <span class="nb">auto with</span> zarith | ].
+ <span class="nb">eapply</span> Z.lt_le_trans; [ | <span class="nb">apply</span> Zpower2_le_lin ]; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="c">(* LSL *)</span>
+<span class="kn">Lemma</span> <span class="nf">lsl0</span> <span class="nv">i</span>: <span class="mi">0</span> &lt;&lt; i = <span class="mi">0</span>%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> to_Z_inj.
+ <span class="nb">generalize</span> (lsl_spec <span class="mi">0</span> i).
+ <span class="nb">rewrite</span> to_Z_0, Zmult_0_l, Zmod_0_l; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lsl0_r</span> <span class="nv">i</span> : i &lt;&lt; <span class="mi">0</span> = i.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> to_Z_inj.
+ <span class="nb">rewrite</span> -&gt; lsl_spec, to_Z_0, Z.mul_1_r.
+ <span class="nb">apply</span> Zmod_small; <span class="nb">apply</span> (to_Z_bounded i).
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lsl_add_distr</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">n</span>: (x + y) &lt;&lt; n = ((x &lt;&lt; n) + (y &lt;&lt; n))%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> -&gt; !lsl_spec, !add_spec, Zmult_mod_idemp_l.
+ <span class="nb">rewrite</span> -&gt; !lsl_spec, &lt;-Zplus_mod.
+ <span class="nb">apply</span> f_equal2 <span class="kr">with</span> (f := Zmod); <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lsr_M_r</span> <span class="nv">x</span> <span class="nv">i</span> (<span class="nv">H</span>: (digits &lt;= i = true)%int63) : x &gt;&gt; i = <span class="mi">0</span>%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> to_Z_inj.
+ <span class="nb">rewrite</span> lsr_spec, to_Z_0.
+ <span class="nb">case</span> (to_Z_bounded x); <span class="nb">intros</span> H1x H2x.
+ <span class="nb">case</span> (to_Z_bounded digits); <span class="nb">intros</span> H1d H2d.
+ <span class="nb">rewrite</span> -&gt; leb_spec <span class="kr">in</span> H.
+ <span class="nb">apply</span> Zdiv_small; <span class="nb">split</span>; [ <span class="nb">auto</span> | ].
+ <span class="nb">apply</span> (Z.lt_le_trans _ _ _ H2x).
+ <span class="nb">unfold</span> wB; <span class="nb">change</span> (Z_of_nat size) <span class="kr">with</span> [|digits|].
+ <span class="nb">apply</span> Zpower_le_monotone; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="c">(* BIT *)</span>
+<span class="kn">Lemma</span> <span class="nf">bit_0_spec</span> <span class="nv">i</span>: [|bit i <span class="mi">0</span>|] = [|i|] mod <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> bit, is_zero. <span class="nb">rewrite</span> lsr_0_r.
+ <span class="nb">assert</span> (Hbi: ([|i|] mod <span class="mi">2</span> &lt; <span class="mi">2</span>)%Z).
+   <span class="nb">apply</span> Z_mod_lt; <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (to_Z_bounded i); <span class="nb">intros</span> H1i H2i.
+ <span class="nb">case</span> (Zmod_le_first [|i|] <span class="mi">2</span>); <span class="nb">auto with</span> zarith; <span class="nb">intros</span> H3i H4i.
+ <span class="nb">assert</span> (H2b: (<span class="mi">0</span> &lt; <span class="mi">2</span> ^ [|digits - <span class="mi">1</span>|])%Z).
+   <span class="nb">apply</span> Zpower_gt_0; <span class="nb">auto with</span> zarith.
+   <span class="nb">case</span> (to_Z_bounded (digits -<span class="mi">1</span>)); <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> (H: [|i &lt;&lt; (digits -<span class="mi">1</span>)|] = ([|i|] mod <span class="mi">2</span> * <span class="mi">2</span>^ [|digits -<span class="mi">1</span>|])%Z).
+ <span class="nb">rewrite</span> lsl_spec.
+ <span class="nb">rewrite</span> -&gt; (Z_div_mod_eq [|i|] <span class="mi">2</span>) <span class="nb">at</span> <span class="mi">1</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> -&gt; Zmult_plus_distr_l, &lt;-Zplus_mod_idemp_l.
+ <span class="nb">rewrite</span> -&gt; (Zmult_comm <span class="mi">2</span>), &lt;-Zmult_assoc.
+ <span class="nb">replace</span> (<span class="mi">2</span> * <span class="mi">2</span> ^ [|digits - <span class="mi">1</span>|])%Z <span class="kr">with</span> wB; <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> Z_mod_mult, Zplus_0_l; <span class="nb">apply</span> Zmod_small.
+ <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">replace</span> wB <span class="kr">with</span> (<span class="mi">2</span> * <span class="mi">2</span> ^ [|digits -<span class="mi">1</span>|])%Z; <span class="nb">auto</span>.
+ <span class="nb">apply</span> Zmult_lt_compat_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (Zle_lt_or_eq <span class="mi">0</span> ([|i|] mod <span class="mi">2</span>)); <span class="nb">auto with</span> zarith; <span class="nb">intros</span> Hi.
+ <span class="mi">2</span>: <span class="nb">generalize</span> H; <span class="nb">rewrite</span> &lt;-Hi, Zmult_0_l.
+ <span class="mi">2</span>: <span class="nb">replace</span> <span class="mi">0</span>%Z <span class="kr">with</span> [|<span class="mi">0</span>|]; <span class="nb">auto</span>.
+ <span class="mi">2</span>: <span class="bp">now</span> <span class="nb">case</span> eqbP.
+ <span class="nb">generalize</span> H; <span class="nb">replace</span> ([|i|] mod <span class="mi">2</span>) <span class="kr">with</span> <span class="mi">1</span>%Z; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zmult_1_l.
+ <span class="nb">intros</span> H1.
+ <span class="nb">assert</span> (H2: [|i &lt;&lt; (digits - <span class="mi">1</span>)|] &lt;&gt; [|<span class="mi">0</span>|]).
+  <span class="nb">replace</span> [|<span class="mi">0</span>|] <span class="kr">with</span> <span class="mi">0</span>%Z; <span class="nb">auto with</span> zarith.
+ <span class="bp">now</span> <span class="nb">case</span> eqbP.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_split</span> <span class="nv">i</span> : ( i = (i &gt;&gt; <span class="mi">1</span> ) &lt;&lt; <span class="mi">1</span> + bit i <span class="mi">0</span>)%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> to_Z_inj.
+ <span class="nb">rewrite</span> -&gt; add_spec, lsl_spec, lsr_spec, bit_0_spec, Zplus_mod_idemp_l.
+ <span class="nb">replace</span> (<span class="mi">2</span> ^ [|<span class="mi">1</span>|]) <span class="kr">with</span> <span class="mi">2</span>%Z; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> -&gt; Zmult_comm, &lt;-Z_div_mod_eq; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zmod_small; <span class="nb">auto</span>; <span class="nb">case</span> (to_Z_bounded i); <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_lsr</span> <span class="nv">x</span> <span class="nv">i</span> <span class="nv">j</span> :
+ (bit (x &gt;&gt; i) j = <span class="kr">if</span> j &lt;= i + j <span class="kr">then</span> bit x (i + j) <span class="kr">else</span> false)%int63.
+<span class="kn">Proof</span>.
+  <span class="nb">unfold</span> bit; <span class="nb">rewrite</span> lsr_add; <span class="nb">case</span> (_ ≤ _); <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_b2i</span> (<span class="nv">b</span>: bool) <span class="nv">i</span> : bit b i = (i == <span class="mi">0</span>) &amp;&amp; b.
+<span class="kn">Proof</span>.
+ <span class="nb">case</span> b; <span class="nb">unfold</span> bit; <span class="nb">simpl</span> b2i.
+ <span class="nb">rewrite</span> lsr_1; <span class="nb">case</span> (i == <span class="mi">0</span>); <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> lsr0, lsl0, andb_false_r; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_1</span> <span class="nv">n</span> : bit <span class="mi">1</span> n = (n == <span class="mi">0</span>).
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> bit; <span class="nb">rewrite</span> lsr_1.
+ <span class="nb">case</span> (_ == _); <span class="nb">simpl</span>; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Local Hint</span> <span class="kn">Resolve</span> Z.lt_gt Z.div_pos : zarith.
+
+<span class="kn">Lemma</span> <span class="nf">to_Z_split</span> <span class="nv">x</span> : [|x|] = [|(x  &gt;&gt; <span class="mi">1</span>)|] * <span class="mi">2</span> + [|bit x <span class="mi">0</span>|].
+<span class="kn">Proof</span>.
+  <span class="nb">case</span> (to_Z_bounded x); <span class="nb">intros</span> H1x H2x.
+  <span class="nb">case</span> (to_Z_bounded (bit x <span class="mi">0</span>)); <span class="nb">intros</span> H1b H2b.
+  <span class="nb">assert</span> (F1: <span class="mi">0</span> &lt;= [|x &gt;&gt; <span class="mi">1</span>|] &lt; wB/<span class="mi">2</span>).
+    <span class="nb">rewrite</span> -&gt; lsr_spec, to_Z_1, Z.pow_1_r. <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+    <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> -&gt; (bit_split x) <span class="nb">at</span> <span class="mi">1</span>.
+  <span class="nb">rewrite</span> -&gt; add_spec, Zmod_small, lsl_spec, to_Z_1, Z.pow_1_r, Zmod_small;
+    <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+  <span class="nb">change</span> wB <span class="kr">with</span> ((wB/<span class="mi">2</span>)*<span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> -&gt; lsl_spec, to_Z_1, Z.pow_1_r, Zmod_small; <span class="nb">auto with</span> zarith.
+  <span class="nb">change</span> wB <span class="kr">with</span> ((wB/<span class="mi">2</span>)*<span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> -&gt; lsl_spec, to_Z_1, Z.pow_1_r, Zmod_small; <span class="nb">auto with</span> zarith.
+  <span class="mi">2</span>: <span class="nb">change</span> wB <span class="kr">with</span> ((wB/<span class="mi">2</span>)*<span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+  <span class="nb">change</span> wB <span class="kr">with</span> (((wB/<span class="mi">2</span> - <span class="mi">1</span>) * <span class="mi">2</span> + <span class="mi">1</span>) + <span class="mi">1</span>).
+  <span class="nb">assert</span> ([|bit x <span class="mi">0</span>|] &lt;= <span class="mi">1</span>); <span class="nb">auto with</span> zarith.
+  <span class="nb">case</span> bit; <span class="bp">discriminate</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_M</span> <span class="nv">i</span> <span class="nv">n</span> (<span class="nv">H</span>: (digits &lt;= n = true)%int63): bit i n = false.
+<span class="kn">Proof</span>. <span class="nb">unfold</span> bit; <span class="nb">rewrite</span> lsr_M_r; <span class="nb">auto</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_half</span> <span class="nv">i</span> <span class="nv">n</span> (<span class="nv">H</span>: (n &lt; digits = true)%int63) : bit (i&gt;&gt;<span class="mi">1</span>) n = bit i (n+<span class="mi">1</span>).
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> bit.
+ <span class="nb">rewrite</span> lsr_add.
+ <span class="nb">case_eq</span> (n &lt;= (<span class="mi">1</span> + n))%int63.
+ <span class="nb">replace</span> (<span class="mi">1</span>+n)%int63 <span class="kr">with</span> (n+<span class="mi">1</span>)%int63; [<span class="nb">auto</span>|<span class="kp">idtac</span>].
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> !add_spec, Zplus_comm; <span class="nb">auto</span>.
+ <span class="nb">intros</span> H1; <span class="nb">assert</span> (H2: n = max_int).
+ <span class="mi">2</span>: <span class="nb">generalize</span> H; <span class="nb">rewrite</span> H2; <span class="bp">discriminate</span>.
+ <span class="nb">case</span> (to_Z_bounded n); <span class="nb">intros</span> H1n H2n.
+ <span class="nb">case</span> (Zle_lt_or_eq [|n|] (wB - <span class="mi">1</span>)); <span class="nb">auto with</span> zarith;
+   <span class="nb">intros</span> H2; <span class="nb">apply</span> to_Z_inj; <span class="nb">auto</span>.
+ <span class="nb">generalize</span> (add_le_r <span class="mi">1</span> n); <span class="nb">rewrite</span> H1.
+ <span class="nb">change</span> [|max_int|] <span class="kr">with</span> (wB - <span class="mi">1</span>)%Z.
+ <span class="nb">replace</span> [|<span class="mi">1</span>|] <span class="kr">with</span> <span class="mi">1</span>%Z; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_ext</span> <span class="nv">i</span> <span class="nv">j</span> : (<span class="kr">forall</span> <span class="nv">n</span>, bit i n = bit j n) -&gt; i = j.
+<span class="kn">Proof</span>.
+  <span class="nb">case</span> (to_Z_bounded j); <span class="nb">case</span> (to_Z_bounded i).
+  <span class="nb">unfold</span> wB; <span class="nb">revert</span> i j; <span class="nb">elim</span> size.
+    <span class="nb">simpl</span>; <span class="nb">intros</span> i j ???? _; <span class="nb">apply</span> to_Z_inj; <span class="bp">lia</span>.
+ <span class="nb">intros</span> n ih i j.
+ <span class="nb">rewrite</span> Nat2Z.inj_succ, Z.pow_succ_r <span class="bp">by</span> <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> hi1 hi2 hj1 hj2 hext.
+ <span class="nb">rewrite</span> (bit_split i), (bit_split j), hext.
+ <span class="kp">do</span> <span class="mi">2</span> <span class="nb">f_equal</span>; <span class="nb">apply</span> ih; <span class="nb">clear</span> ih.
+   <span class="mi">1</span>, <span class="mi">3</span>: <span class="nb">apply</span> to_Z_bounded.
+   <span class="mi">1</span>, <span class="mi">2</span>: <span class="nb">rewrite</span> lsr_spec; <span class="nb">auto using</span> Z_lt_div2.
+ <span class="nb">intros</span> b.
+ <span class="nb">case</span> (Zle_or_lt [|digits|] [|b|]).
+   <span class="nb">rewrite</span> &lt;- leb_spec; <span class="nb">intros</span>; <span class="nb">rewrite</span> !bit_M; <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> &lt;- ltb_spec; <span class="nb">intros</span>; <span class="nb">rewrite</span> !bit_half; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_lsl</span> <span class="nv">x</span> <span class="nv">i</span> <span class="nv">j</span> : bit (x &lt;&lt; i) j =
+(<span class="kr">if</span> (j &lt; i) || (digits &lt;= j) <span class="kr">then</span> false <span class="kr">else</span> bit x (j - i))%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">assert</span> (F1: <span class="mi">1</span> &gt;= <span class="mi">0</span>) <span class="bp">by</span> <span class="bp">discriminate</span>.
+ <span class="nb">case_eq</span> (digits &lt;= j)%int63; <span class="nb">intros</span> H.
+   <span class="nb">rewrite</span> orb_true_r, bit_M; <span class="nb">auto</span>.
+ <span class="nb">set</span> (d := [|digits|]).
+ <span class="nb">case</span> (Zle_or_lt d [|j|]); <span class="nb">intros</span> H1.
+   <span class="nb">case</span> (leb_spec digits j); <span class="nb">rewrite</span> H; <span class="nb">auto with</span> zarith.
+   <span class="nb">intros</span> _ HH; <span class="nb">generalize</span> (HH H1); <span class="bp">discriminate</span>.
+ <span class="nb">clear</span> H.
+ <span class="nb">generalize</span> (ltb_spec j i); <span class="nb">case</span> ltb; <span class="nb">intros</span> H2; <span class="nb">unfold</span> bit; <span class="nb">simpl</span>.
+   <span class="nb">assert</span> (F2: ([|j|] &lt; [|i|])%Z) <span class="bp">by</span> (<span class="nb">case</span> H2; <span class="nb">auto</span>); <span class="nb">clear</span> H2.
+   <span class="nb">replace</span> (is_zero (((x &lt;&lt; i) &gt;&gt; j) &lt;&lt; (digits - <span class="mi">1</span>))) <span class="kr">with</span> true; <span class="nb">auto</span>.
+   <span class="nb">case</span> (to_Z_bounded j); <span class="nb">intros</span>  H1j H2j.
+   <span class="nb">apply</span> sym_equal; <span class="nb">rewrite</span> is_zero_spec; <span class="nb">apply</span> to_Z_inj.
+   <span class="nb">rewrite</span> lsl_spec, lsr_spec, lsl_spec.
+   <span class="nb">replace</span> wB <span class="kr">with</span> (<span class="mi">2</span>^d); <span class="nb">auto</span>.
+   <span class="nb">pattern</span> d <span class="nb">at</span> <span class="mi">1</span>; <span class="nb">replace</span> d <span class="kr">with</span> ((d - ([|j|] + <span class="mi">1</span>)) + ([|j|] + <span class="mi">1</span>))%Z <span class="bp">by</span> <span class="bp">ring</span>.
+   <span class="nb">rewrite</span> Zpower_exp; <span class="nb">auto with</span> zarith.
+   <span class="nb">replace</span> [|i|] <span class="kr">with</span> (([|i|] - ([|j|] + <span class="mi">1</span>)) + ([|j|] + <span class="mi">1</span>))%Z <span class="bp">by</span> <span class="bp">ring</span>.
+   <span class="nb">rewrite</span> -&gt; Zpower_exp, Zmult_assoc; <span class="nb">auto with</span> zarith.
+   <span class="nb">rewrite</span> Zmult_mod_distr_r.
+   <span class="nb">rewrite</span> -&gt; Zplus_comm, Zpower_exp, !Zmult_assoc; <span class="nb">auto with</span> zarith.
+   <span class="nb">rewrite</span> -&gt; Z_div_mult_full; <span class="nb">auto with</span> zarith.
+   <span class="nb">rewrite</span> &lt;-Zmult_assoc, &lt;-Zpower_exp; <span class="nb">auto with</span> zarith.
+   <span class="nb">replace</span> (<span class="mi">1</span> + [|digits - <span class="mi">1</span>|])%Z <span class="kr">with</span> d; <span class="nb">auto with</span> zarith.
+   <span class="nb">rewrite</span> Z_mod_mult; <span class="nb">auto</span>.
+ <span class="nb">case</span> H2; <span class="nb">intros</span> _ H3; <span class="nb">case</span> (Zle_or_lt [|i|] [|j|]); <span class="nb">intros</span> F2.
+   <span class="mi">2</span>: <span class="nb">generalize</span> (H3 F2); <span class="bp">discriminate</span>.
+ <span class="nb">clear</span> H2 H3.
+ <span class="nb">apply</span> <span class="nb">f_equal</span> <span class="kr">with</span> (f := negb).
+ <span class="nb">apply</span> <span class="nb">f_equal</span> <span class="kr">with</span> (f := is_zero).
+ <span class="nb">apply</span> to_Z_inj.
+ <span class="nb">rewrite</span> -&gt; !lsl_spec, !lsr_spec, !lsl_spec.
+ <span class="nb">pattern</span> wB <span class="nb">at</span> <span class="mi">2</span> <span class="mi">3</span>; <span class="nb">replace</span> wB <span class="kr">with</span> (<span class="mi">2</span>^(<span class="mi">1</span>+ [|digits - <span class="mi">1</span>|])); <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> -&gt; Zpower_exp, Z.pow_1_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> !Zmult_mod_distr_r.
+ <span class="nb">apply</span> f_equal2 <span class="kr">with</span> (f := Zmult); <span class="nb">auto</span>.
+ <span class="nb">replace</span> wB <span class="kr">with</span> (<span class="mi">2</span>^ d); <span class="nb">auto with</span> zarith.
+ <span class="nb">replace</span> d <span class="kr">with</span> ((d - [|i|]) + [|i|])%Z <span class="bp">by</span> <span class="bp">ring</span>.
+ <span class="nb">case</span> (to_Z_bounded i); <span class="nb">intros</span>  H1i H2i.
+ <span class="nb">rewrite</span> Zpower_exp; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zmult_mod_distr_r.
+ <span class="nb">case</span> (to_Z_bounded j); <span class="nb">intros</span>  H1j H2j.
+ <span class="nb">replace</span> [|j - i|] <span class="kr">with</span> ([|j|] - [|i|])%Z.
+   <span class="mi">2</span>: <span class="nb">rewrite</span> sub_spec, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">set</span> (d1 := (d - [|i|])%Z).
+ <span class="nb">set</span> (d2 := ([|j|] - [|i|])%Z).
+ <span class="nb">pattern</span> [|j|] <span class="nb">at</span> <span class="mi">1</span>;
+   <span class="nb">replace</span> [|j|] <span class="kr">with</span> (d2 + [|i|])%Z.
+   <span class="mi">2</span>: <span class="nb">unfold</span> d2; <span class="bp">ring</span>.
+ <span class="nb">rewrite</span> -&gt; Zpower_exp; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> -&gt; Zdiv_mult_cancel_r.
+   <span class="mi">2</span>: <span class="nb">generalize</span> (Zpower2_lt_lin [| i |] H1i); <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> -&gt; (Z_div_mod_eq [|x|] (<span class="mi">2</span>^d1)) <span class="nb">at</span> <span class="mi">2</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">pattern</span> d1 <span class="nb">at</span> <span class="mi">2</span>;
+   <span class="nb">replace</span> d1 <span class="kr">with</span> (d2 + (<span class="mi">1</span>+ (d - [|j|] - <span class="mi">1</span>)))%Z
+   <span class="bp">by</span> (<span class="nb">unfold</span> d1, d2; <span class="bp">ring</span>).
+ <span class="nb">rewrite</span> Zpower_exp; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> &lt;-Zmult_assoc, Zmult_comm.
+ <span class="nb">rewrite</span> Zdiv.Z_div_plus_full_l; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zpower_exp, Z.pow_1_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> &lt;-Zplus_mod_idemp_l.
+ <span class="nb">rewrite</span> &lt;-!Zmult_assoc, Zmult_comm, Z_mod_mult, Zplus_0_l; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="c">(* LOR *)</span>
+<span class="kn">Lemma</span> <span class="nf">lor_lsr</span> <span class="nv">i1</span> <span class="nv">i2</span> <span class="nv">i</span>: (i1 lor i2) &gt;&gt; i = (i1 &gt;&gt; i) lor (i2 &gt;&gt; i).
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> -&gt; lor_spec, !bit_lsr, lor_spec.
+ <span class="nb">case</span> (_ &lt;= _)%int63; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lor_le</span> <span class="nv">x</span> <span class="nv">y</span> : (y &lt;= x lor y)%int63 = true.
+<span class="kn">Proof</span>.
+ <span class="nb">generalize</span> x y (to_Z_bounded x) (to_Z_bounded y); <span class="nb">clear</span> x y.
+ <span class="nb">unfold</span> wB; <span class="nb">elim</span> size.
+ <span class="nb">replace</span> (<span class="mi">2</span>^Z_of_nat <span class="mi">0</span>) <span class="kr">with</span> <span class="mi">1</span>%Z; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> x y Hx Hy; <span class="nb">replace</span> x <span class="kr">with</span> <span class="mi">0</span>%int63.
+ <span class="nb">replace</span> y <span class="kr">with</span> <span class="mi">0</span>%int63; <span class="nb">auto</span>.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> to_Z_0; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> to_Z_0; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> n IH x y; <span class="nb">rewrite</span> inj_S.
+ <span class="nb">unfold</span> Z.succ; <span class="nb">rewrite</span> -&gt; Zpower_exp, Z.pow_1_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> Hx Hy.
+ <span class="nb">rewrite</span> leb_spec.
+ <span class="nb">rewrite</span> -&gt; (to_Z_split y) <span class="nb">at</span> <span class="mi">1</span>; <span class="nb">rewrite</span> (to_Z_split (x lor y)).
+ <span class="nb">assert</span> ([|y&gt;&gt;<span class="mi">1</span>|] &lt;= [|(x lor y) &gt;&gt; <span class="mi">1</span>|]).
+  <span class="nb">rewrite</span> -&gt; lor_lsr, &lt;-leb_spec; <span class="nb">apply</span> IH.
+  <span class="nb">rewrite</span> -&gt; lsr_spec, to_Z_1, Z.pow_1_r; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> -&gt; lsr_spec, to_Z_1, Z.pow_1_r; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> ([|bit y <span class="mi">0</span>|] &lt;= [|bit (x lor y) <span class="mi">0</span>|]); <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> lor_spec; <span class="kp">do</span> <span class="mi">2</span> <span class="nb">case</span> bit; <span class="kp">try</span> <span class="bp">discriminate</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_0</span> <span class="nv">n</span> : bit <span class="mi">0</span> n = false.
+<span class="kn">Proof</span>. <span class="nb">unfold</span> bit; <span class="nb">rewrite</span> lsr0; <span class="nb">auto</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">bit_add_or</span> <span class="nv">x</span> <span class="nv">y</span>:
+  (<span class="kr">forall</span> <span class="nv">n</span>, bit x n = true -&gt; bit y n = true -&gt; <span class="kt">False</span>) &lt;-&gt; (x + y)%int63= x lor y.
+<span class="kn">Proof</span>.
+ <span class="nb">generalize</span> x y (to_Z_bounded x) (to_Z_bounded y); <span class="nb">clear</span> x y.
+ <span class="nb">unfold</span> wB; <span class="nb">elim</span> size.
+ <span class="nb">replace</span> (<span class="mi">2</span>^Z_of_nat <span class="mi">0</span>) <span class="kr">with</span> <span class="mi">1</span>%Z; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> x y Hx Hy; <span class="nb">replace</span> x <span class="kr">with</span> <span class="mi">0</span>%int63.
+ <span class="nb">replace</span> y <span class="kr">with</span> <span class="mi">0</span>%int63.
+ <span class="nb">split</span>; <span class="nb">auto</span>; <span class="nb">intros</span> _ n; <span class="nb">rewrite</span> !bit_0; <span class="bp">discriminate</span>.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> to_Z_0; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> to_Z_inj; <span class="nb">rewrite</span> to_Z_0; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> n IH x y; <span class="nb">rewrite</span> inj_S.
+ <span class="nb">unfold</span> Z.succ; <span class="nb">rewrite</span> Zpower_exp, Z.pow_1_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> Hx Hy.
+ <span class="nb">split</span>.
+ <span class="nb">intros</span> Hn.
+ <span class="nb">assert</span> (F1: ((x &gt;&gt; <span class="mi">1</span>) + (y &gt;&gt; <span class="mi">1</span>))%int63 = (x &gt;&gt; <span class="mi">1</span>) lor (y &gt;&gt; <span class="mi">1</span>)).
+   <span class="nb">apply</span> IH.
+   <span class="nb">rewrite</span> lsr_spec, Z.pow_1_r; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+   <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+   <span class="nb">rewrite</span> lsr_spec, Z.pow_1_r; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+   <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+   <span class="nb">intros</span> m H1 H2.
+   <span class="nb">case_eq</span> (digits &lt;= m)%int63;  [<span class="kp">idtac</span> | <span class="nb">rewrite</span> &lt;- not_true_iff_false];
+     <span class="nb">intros</span> Heq.
+   <span class="nb">rewrite</span> bit_M <span class="kr">in</span> H1; <span class="nb">auto</span>; <span class="bp">discriminate</span>.
+   <span class="nb">rewrite</span> leb_spec <span class="kr">in</span> Heq.
+   <span class="nb">apply</span> (Hn (m + <span class="mi">1</span>)%int63);
+     <span class="nb">rewrite</span> &lt;-bit_half; <span class="nb">auto</span>; <span class="nb">rewrite</span> ltb_spec; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> (bit_split (x lor y)), lor_lsr, &lt;- F1, lor_spec.
+ <span class="nb">replace</span> (b2i (bit x <span class="mi">0</span> || bit y <span class="mi">0</span>)) <span class="kr">with</span> (bit x <span class="mi">0</span> + bit y <span class="mi">0</span>)%int63.
+ <span class="mi">2</span>: <span class="nb">generalize</span> (Hn <span class="mi">0</span>%int63); <span class="kp">do</span> <span class="mi">2</span> <span class="nb">case</span> bit; <span class="nb">auto</span>; <span class="nb">intros</span> [ ]; <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> lsl_add_distr.
+ <span class="nb">rewrite</span> (bit_split x) <span class="nb">at</span> <span class="mi">1</span>; <span class="nb">rewrite</span> (bit_split y) <span class="nb">at</span> <span class="mi">1</span>.
+ <span class="nb">rewrite</span> &lt;-!add_assoc; <span class="nb">apply</span> f_equal2 <span class="kr">with</span> (f := add); <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> add_comm, &lt;-!add_assoc; <span class="nb">apply</span> f_equal2 <span class="kr">with</span> (f := add); <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> add_comm; <span class="nb">auto</span>.
+ <span class="nb">intros</span> Heq.
+ <span class="nb">generalize</span> (add_le_r x y); <span class="nb">rewrite</span> Heq, lor_le; <span class="nb">intro</span> Hb.
+ <span class="nb">generalize</span> Heq; <span class="nb">rewrite</span> (bit_split x) <span class="nb">at</span> <span class="mi">1</span>; <span class="nb">rewrite</span> (bit_split y )<span class="nb">at</span> <span class="mi">1</span>; <span class="nb">clear</span> Heq.
+ <span class="nb">rewrite</span> (<span class="kr">fun</span> <span class="nv">y</span> =&gt; add_comm y (bit x <span class="mi">0</span>)), &lt;-!add_assoc, add_comm,
+         &lt;-!add_assoc, (add_comm (bit y <span class="mi">0</span>)), add_assoc, &lt;-lsl_add_distr.
+ <span class="nb">rewrite</span> (bit_split (x lor y)), lor_spec.
+ <span class="nb">intros</span> Heq.
+ <span class="nb">assert</span> (F: (bit x <span class="mi">0</span> + bit y <span class="mi">0</span>)%int63 = (bit x <span class="mi">0</span> || bit y <span class="mi">0</span>)).
+  <span class="nb">assert</span> (F1: (<span class="mi">2</span> | wB)) <span class="bp">by</span> (<span class="nb">apply</span> Zpower_divide; <span class="nb">apply</span> refl_equal).
+  <span class="nb">assert</span> (F2: <span class="mi">0</span> &lt; wB) <span class="bp">by</span> (<span class="nb">apply</span> refl_equal).
+  <span class="nb">assert</span> (F3: [|bit x  <span class="mi">0</span> + bit y <span class="mi">0</span>|] mod <span class="mi">2</span> = [|bit x <span class="mi">0</span> || bit y <span class="mi">0</span>|] mod <span class="mi">2</span>).
+  <span class="nb">apply</span> trans_equal <span class="kr">with</span> (([|(x&gt;&gt;<span class="mi">1</span> + y&gt;&gt;<span class="mi">1</span>) &lt;&lt; <span class="mi">1</span>|] + [|bit x <span class="mi">0</span> + bit y <span class="mi">0</span>|]) mod <span class="mi">2</span>).
+  <span class="nb">rewrite</span> lsl_spec, Zplus_mod, &lt;-Zmod_div_mod; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> Z.pow_1_r, Z_mod_mult, Zplus_0_l, Zmod_mod; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> (Zmod_div_mod <span class="mi">2</span> wB), &lt;-add_spec, Heq; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> add_spec, &lt;-Zmod_div_mod; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> lsl_spec, Zplus_mod, &lt;-Zmod_div_mod; <span class="nb">auto with</span> zarith.
+  <span class="nb">rewrite</span> Z.pow_1_r, Z_mod_mult, Zplus_0_l, Zmod_mod; <span class="nb">auto with</span> zarith.
+  <span class="nb">generalize</span> F3; <span class="kp">do</span> <span class="mi">2</span> <span class="nb">case</span> bit; <span class="kp">try</span> <span class="bp">discriminate</span>; <span class="nb">auto</span>.
+ <span class="nb">case</span> (IH (x &gt;&gt; <span class="mi">1</span>) (y &gt;&gt; <span class="mi">1</span>)).
+ <span class="nb">rewrite</span> lsr_spec, to_Z_1, Z.pow_1_r; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> lsr_spec, to_Z_1, Z.pow_1_r; <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> _ HH m; <span class="nb">case</span> (to_Z_bounded m); <span class="nb">intros</span> H1m H2m.
+ <span class="nb">case_eq</span> (digits &lt;= m)%int63.
+ <span class="nb">intros</span> Hlm; <span class="nb">rewrite</span> bit_M; <span class="nb">auto</span>; <span class="bp">discriminate</span>.
+ <span class="nb">rewrite</span> &lt;- not_true_iff_false, leb_spec; <span class="nb">intros</span> Hlm.
+ <span class="nb">case</span> (Zle_lt_or_eq <span class="mi">0</span> [|m|]); <span class="nb">auto</span>; <span class="nb">intros</span> Hm.
+ <span class="nb">replace</span> m <span class="kr">with</span> ((m -<span class="mi">1</span>) + <span class="mi">1</span>)%int63.
+ <span class="nb">rewrite</span> &lt;-(bit_half x), &lt;-(bit_half y); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> HH.
+ <span class="nb">rewrite</span> &lt;-lor_lsr.
+ <span class="nb">assert</span> (<span class="mi">0</span> &lt;= [|bit (x lor y) <span class="mi">0</span>|] &lt;= <span class="mi">1</span>) <span class="bp">by</span> (<span class="nb">case</span> bit; <span class="nb">split</span>; <span class="bp">discriminate</span>).
+ <span class="nb">rewrite</span> F <span class="kr">in</span> Heq; <span class="nb">generalize</span> (add_cancel_r _ _ _ Heq).
+ <span class="nb">intros</span> Heq1; <span class="nb">apply</span> to_Z_inj.
+ <span class="nb">generalize</span> (<span class="nb">f_equal</span> to_Z Heq1); <span class="nb">rewrite</span> lsl_spec, to_Z_1, Z.pow_1_r, Zmod_small.
+ <span class="nb">rewrite</span> lsl_spec, to_Z_1, Z.pow_1_r, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (to_Z_bounded (x lor y)); <span class="nb">intros</span> H1xy H2xy.
+ <span class="nb">rewrite</span> lsr_spec, to_Z_1, Z.pow_1_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">change</span> wB <span class="kr">with</span> ((wB/<span class="mi">2</span>)*<span class="mi">2</span>); <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> ([|x lor y|] / <span class="mi">2</span>  &lt; wB / <span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith.
+ <span class="nb">split</span>.
+ <span class="nb">case</span> (to_Z_bounded (x &gt;&gt; <span class="mi">1</span> + y &gt;&gt; <span class="mi">1</span>)); <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> add_spec.
+ <span class="nb">apply</span> Z.le_lt_trans <span class="kr">with</span> (([|x &gt;&gt; <span class="mi">1</span>|] + [|y &gt;&gt; <span class="mi">1</span>|]) * <span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (Zmod_le_first ([|x &gt;&gt; <span class="mi">1</span>|] + [|y &gt;&gt; <span class="mi">1</span>|]) wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (to_Z_bounded (x &gt;&gt; <span class="mi">1</span>)); <span class="nb">case</span> (to_Z_bounded (y &gt;&gt; <span class="mi">1</span>)); <span class="nb">auto with</span> zarith.
+ <span class="nb">generalize</span> Hb; <span class="nb">rewrite</span> (to_Z_split x) <span class="nb">at</span> <span class="mi">1</span>; <span class="nb">rewrite</span> (to_Z_split y) <span class="nb">at</span> <span class="mi">1</span>.
+ <span class="nb">case</span> (to_Z_bounded (bit x <span class="mi">0</span>)); <span class="nb">case</span> (to_Z_bounded (bit y <span class="mi">0</span>)); <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> ltb_spec, sub_spec, to_Z_1, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> ltb_spec, sub_spec, to_Z_1, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> to_Z_inj.
+ <span class="nb">rewrite</span> add_spec, sub_spec, Zplus_mod_idemp_l, to_Z_1, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">pose proof</span> (to_Z_inj <span class="mi">0</span> _ Hm); <span class="nb">clear</span> Hm; <span class="nb">subst</span> m.
+ <span class="nb">intros</span> hx hy; <span class="nb">revert</span> F; <span class="nb">rewrite</span> hx, hy; <span class="nb">intros</span> F. <span class="nb">generalize</span> (<span class="nb">f_equal</span> to_Z F). <span class="nb">vm_compute</span>. <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">addmuldiv_spec</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">p</span> :
+  [| p |] &lt;= [| digits |] -&gt;
+  [| addmuldiv p x y |] = ([| x |] * (<span class="mi">2</span> ^ [| p |]) + [| y |] / (<span class="mi">2</span> ^ ([| digits |] - [| p |]))) mod wB.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> H.
+ <span class="nb">assert</span> (Fp := to_Z_bounded p); <span class="nb">assert</span> (Fd := to_Z_bounded digits).
+ <span class="nb">rewrite</span> addmuldiv_def_spec; <span class="nb">unfold</span> addmuldiv_def.
+ <span class="nb">case</span> (bit_add_or (x &lt;&lt; p) (y &gt;&gt; (digits - p))); <span class="nb">intros</span> HH _.
+ <span class="nb">rewrite</span> &lt;-HH, add_spec, lsl_spec, lsr_spec, Zplus_mod_idemp_l, sub_spec.
+ <span class="nb">rewrite</span> (<span class="kr">fun</span> <span class="nv">x</span> <span class="nv">y</span> =&gt; Zmod_small (x - y)); <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> n; <span class="nb">rewrite</span> -&gt; bit_lsl, bit_lsr.
+ <span class="nb">generalize</span> (add_le_r (digits - p) n).
+ <span class="nb">case</span> (_ ≤ _); <span class="kp">try</span> <span class="bp">discriminate</span>.
+ <span class="nb">rewrite</span> -&gt; sub_spec, Zmod_small; <span class="nb">auto with</span> zarith; <span class="nb">intros</span> H1.
+ <span class="nb">case_eq</span> (n &lt; p)%int63; <span class="kp">try</span> <span class="bp">discriminate</span>.
+ <span class="nb">rewrite</span> &lt;- not_true_iff_false, ltb_spec; <span class="nb">intros</span> H2.
+ <span class="nb">case</span> (_ ≤ _); <span class="kp">try</span> <span class="bp">discriminate</span>.
+ <span class="nb">intros</span> _; <span class="nb">rewrite</span> bit_M; <span class="kp">try</span> <span class="bp">discriminate</span>.
+ <span class="nb">rewrite</span> -&gt; leb_spec, add_spec, Zmod_small, sub_spec, Zmod_small; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> -&gt; sub_spec, Zmod_small; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="c">(* is_even *)</span>
+<span class="kn">Lemma</span> <span class="nf">is_even_bit</span> <span class="nv">i</span> : is_even i = negb (bit i <span class="mi">0</span>).
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> is_even.
+ <span class="nb">replace</span> (i land <span class="mi">1</span>) <span class="kr">with</span> (b2i (bit i <span class="mi">0</span>)).
+   <span class="nb">case</span> bit; <span class="nb">auto</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> bit_b2i, land_spec, bit_1.
+ <span class="nb">generalize</span> (eqb_spec n <span class="mi">0</span>).
+ <span class="nb">case</span> (n == <span class="mi">0</span>); <span class="nb">auto</span>.
+ <span class="nb">intros</span>(H,_); <span class="nb">rewrite</span> andb_true_r, H; <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> andb_false_r; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">is_even_spec</span> <span class="nv">x</span> : <span class="kr">if</span> is_even x <span class="kr">then</span> [|x|] mod <span class="mi">2</span> = <span class="mi">0</span> <span class="kr">else</span> [|x|] mod <span class="mi">2</span> = <span class="mi">1</span>.
+<span class="kn">Proof</span>.
+<span class="nb">rewrite</span> is_even_bit.
+<span class="nb">generalize</span> (bit_0_spec x); <span class="nb">case</span> bit; <span class="nb">simpl</span>; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">is_even_0</span> : is_even <span class="mi">0</span> = true.
+<span class="kn">Proof</span>. <span class="nb">apply</span> refl_equal. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">is_even_lsl_1</span> <span class="nv">i</span> : is_even (i &lt;&lt; <span class="mi">1</span>) = true.
+<span class="kn">Proof</span>.
+ <span class="nb">rewrite</span> is_even_bit, bit_lsl; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="c">(* Sqrt *)</span>
+
+ <span class="c">(* Direct transcription of an old proof</span>
+<span class="c">     of a fortran program in boyer-moore *)</span>
+
+<span class="kn">Ltac</span> <span class="nf">elim_div</span> :=
+  <span class="nb">unfold</span> Z.div, Z.modulo;
+  <span class="kr">match goal with</span>
+  |  H : <span class="kp">context</span>[ Z.div_eucl ?X ?Y ] |-  _ =&gt;
+     <span class="nb">generalize dependent</span> H; <span class="nb">generalize</span> (Z_div_mod_full X Y) ; <span class="nb">case</span> (Z.div_eucl X Y)
+  |  |-  <span class="kp">context</span>[ Z.div_eucl ?X ?Y ] =&gt;
+     <span class="nb">generalize</span> (Z_div_mod_full X Y) ; <span class="nb">case</span> (Z.div_eucl X Y)
+  <span class="kr">end</span>; <span class="nb">unfold</span> Remainder.
+
+<span class="kn">Lemma</span> <span class="nf">quotient_by_2</span> <span class="nv">a</span>: a - <span class="mi">1</span> &lt;= (a/<span class="mi">2</span>) + (a/<span class="mi">2</span>).
+<span class="kn">Proof</span>.
+ <span class="nb">case</span> (Z_mod_lt a <span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> H1; <span class="nb">rewrite</span> Zmod_eq_full; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt_main_trick</span> <span class="nv">j</span> <span class="nv">k</span>: <span class="mi">0</span> &lt;= j -&gt; <span class="mi">0</span> &lt;= k -&gt;
+   (j * k) + j &lt;= ((j + k)/<span class="mi">2</span> + <span class="mi">1</span>)  ^ <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> Hj; <span class="nb">generalize</span> Hj k; <span class="nb">pattern</span> j; <span class="nb">apply</span> natlike_ind;
+   <span class="nb">auto</span>; <span class="nb">clear</span> k j Hj.
+ <span class="nb">intros</span> _ k Hk; <span class="kp">repeat</span> <span class="nb">rewrite</span> Zplus_0_l.
+ <span class="nb">apply</span>  Zmult_le_0_compat; <span class="nb">generalize</span> (Z_div_pos k <span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> j Hj Hrec _ k Hk; <span class="nb">pattern</span> k; <span class="nb">apply</span> natlike_ind; <span class="nb">auto</span>; <span class="nb">clear</span> k Hk.
+ <span class="nb">rewrite</span> -&gt; Zmult_0_r, Zplus_0_r, Zplus_0_l.
+ <span class="nb">generalize</span> (sqr_pos (Z.succ j / <span class="mi">2</span>)) (quotient_by_2 (Z.succ j));
+   <span class="nb">unfold</span> Z.succ.
+ <span class="nb">rewrite</span> Z.pow_2_r, Zmult_plus_distr_l; <span class="kp">repeat</span> <span class="nb">rewrite</span> Zmult_plus_distr_r.
+ <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> k Hk _.
+ <span class="nb">replace</span> ((Z.succ j + Z.succ k) / <span class="mi">2</span>) <span class="kr">with</span> ((j + k)/<span class="mi">2</span> + <span class="mi">1</span>).
+ <span class="nb">generalize</span> (Hrec Hj k Hk) (quotient_by_2 (j + k)).
+ <span class="nb">unfold</span> Z.succ; <span class="kp">repeat</span> <span class="nb">rewrite</span> Z.pow_2_r;
+   <span class="kp">repeat</span> <span class="nb">rewrite</span> Zmult_plus_distr_l; <span class="kp">repeat</span> <span class="nb">rewrite</span> Zmult_plus_distr_r.
+ <span class="kp">repeat</span> <span class="nb">rewrite</span> Zmult_1_l; <span class="kp">repeat</span> <span class="nb">rewrite</span> Zmult_1_r.
+ <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> -&gt; Zplus_comm, &lt;- Z_div_plus_full_l; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> f_equal2; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt_main</span> <span class="nv">i</span> <span class="nv">j</span>: <span class="mi">0</span> &lt;= i -&gt; <span class="mi">0</span> &lt; j -&gt; i &lt; ((j + (i/j))/<span class="mi">2</span> + <span class="mi">1</span>) ^ <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> Hi Hj.
+ <span class="nb">assert</span> (Hij: <span class="mi">0</span> &lt;= i/j) <span class="bp">by</span> (<span class="nb">apply</span> Z_div_pos; <span class="nb">auto with</span> zarith).
+ <span class="nb">refine</span> (Z.lt_le_trans _ _ _ _ (sqrt_main_trick _ _ (Zlt_le_weak _ _ Hj) Hij)).
+ <span class="nb">pattern</span> i <span class="nb">at</span> <span class="mi">1</span>; <span class="nb">rewrite</span> -&gt; (Z_div_mod_eq i j); <span class="nb">case</span> (Z_mod_lt i j); <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt_test_false</span> <span class="nv">i</span> <span class="nv">j</span>: <span class="mi">0</span> &lt;= i -&gt; <span class="mi">0</span> &lt; j -&gt; i/j &lt; j -&gt;  (j + (i/j))/<span class="mi">2</span> &lt; j.
+<span class="kn">Proof</span>.
+  <span class="nb">intros</span> Hi Hj; elim_div; <span class="nb">intros</span> q r [ ? hr ]; [ <span class="bp">lia</span> | <span class="nb">subst</span> i ].
+  elim_div; <span class="nb">intros</span> a b [ h [ hb | ] ]; <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt_test_true</span> <span class="nv">i</span> <span class="nv">j</span>: <span class="mi">0</span> &lt;= i -&gt; <span class="mi">0</span> &lt; j -&gt; i/j &gt;= j -&gt; j ^ <span class="mi">2</span> &lt;= i.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> Hi Hj Hd; <span class="nb">rewrite</span> Z.pow_2_r.
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> (j * (i/j)); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Z_mult_div_ge; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt_step_correct</span> <span class="nv">rec</span> <span class="nv">i</span> <span class="nv">j</span>:
+  <span class="mi">0</span> &lt; [|i|] -&gt; <span class="mi">0</span> &lt; [|j|] -&gt; [|i|] &lt; ([|j|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt;
+   <span class="mi">2</span> * [|j|] &lt; wB -&gt;
+  (<span class="kr">forall</span> <span class="nv">j1</span> : int,
+    <span class="mi">0</span> &lt; [|j1|] &lt; [|j|] -&gt; [|i|] &lt; ([|j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt;
+    [|rec i j1|] ^ <span class="mi">2</span> &lt;= [|i|] &lt; ([|rec i j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span>) -&gt;
+  [|sqrt_step rec i j|] ^ <span class="mi">2</span> &lt;= [|i|] &lt; ([|sqrt_step rec i j|] + <span class="mi">1</span>) ^ <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">assert</span> (Hp2: <span class="mi">0</span> &lt; [|<span class="mi">2</span>|]) <span class="bp">by</span> <span class="bp">exact</span> (refl_equal Lt).
+ <span class="nb">intros</span> Hi Hj Hij H31 Hrec.
+ <span class="nb">unfold</span> sqrt_step.
+ <span class="nb">case</span> ltbP; <span class="nb">rewrite</span> div_spec.
+ - <span class="nb">intros</span> hlt.
+   <span class="nb">assert</span> ([| j + i / j|] = [|j|] + [|i|]/[|j|]) <span class="kr">as</span> hj.
+     <span class="nb">rewrite</span> add_spec, Zmod_small;<span class="nb">rewrite</span> div_spec; <span class="nb">auto with</span> zarith.
+   <span class="nb">apply</span> Hrec; <span class="nb">rewrite</span> lsr_spec, hj, to_Z_1; <span class="nb">change</span> (<span class="mi">2</span> ^ <span class="mi">1</span>) <span class="kr">with</span> <span class="mi">2</span>.
+   + <span class="nb">split</span>; [ | <span class="nb">apply</span> sqrt_test_false;<span class="nb">auto with</span> zarith].
+     <span class="nb">replace</span> ([|j|] + [|i|]/[|j|]) <span class="kr">with</span> (<span class="mi">1</span> * <span class="mi">2</span> + (([|j|] - <span class="mi">2</span>) + [|i|] / [|j|])) <span class="bp">by</span> <span class="bp">ring</span>.
+     <span class="nb">rewrite</span> Z_div_plus_full_l; <span class="nb">auto with</span> zarith.
+     <span class="nb">assert</span> (<span class="mi">0</span> &lt;= [|i|]/ [|j|]) <span class="bp">by</span> (<span class="nb">apply</span> Z_div_pos; <span class="nb">auto with</span> zarith).
+     <span class="nb">assert</span> (<span class="mi">0</span> &lt;= ([|j|] - <span class="mi">2</span> + [|i|] / [|j|]) / <span class="mi">2</span>) ; <span class="nb">auto with</span> zarith.
+     <span class="nb">apply</span> Z.div_pos; [ | <span class="bp">lia</span> ].
+     <span class="nb">case</span> (Zle_lt_or_eq <span class="mi">1</span> [|j|]); <span class="nb">auto with</span> zarith; <span class="nb">intros</span> Hj1.
+     <span class="nb">rewrite</span> &lt;- Hj1, Zdiv_1_r; <span class="bp">lia</span>.
+   + <span class="nb">apply</span> sqrt_main;<span class="nb">auto with</span> zarith.
+ - <span class="nb">split</span>;[<span class="nb">apply</span> sqrt_test_true | ];<span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">iter_sqrt_correct</span> <span class="nv">n</span> <span class="nv">rec</span> <span class="nv">i</span> <span class="nv">j</span>: <span class="mi">0</span> &lt; [|i|] -&gt; <span class="mi">0</span> &lt; [|j|] -&gt;
+  [|i|] &lt; ([|j|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt; <span class="mi">2</span> * [|j|] &lt; wB -&gt;
+  (<span class="kr">forall</span> <span class="nv">j1</span>, <span class="mi">0</span> &lt; [|j1|] -&gt; <span class="mi">2</span>^(Z_of_nat n) + [|j1|] &lt;= [|j|] -&gt;
+      [|i|] &lt; ([|j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt; <span class="mi">2</span> * [|j1|] &lt; wB -&gt;
+       [|rec i j1|] ^ <span class="mi">2</span> &lt;= [|i|] &lt; ([|rec i j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span>) -&gt;
+  [|iter_sqrt n rec i j|] ^ <span class="mi">2</span> &lt;= [|i|] &lt; ([|iter_sqrt n rec i j|] + <span class="mi">1</span>) ^ <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">revert</span> rec i j; <span class="nb">elim</span> n; <span class="nb">unfold</span> iter_sqrt; <span class="nb">fold</span> iter_sqrt; <span class="nb">clear</span> n.
+ <span class="nb">intros</span> rec i j Hi Hj Hij H31 Hrec; <span class="nb">apply</span> sqrt_step_correct; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span>; <span class="nb">apply</span> Hrec; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zpower_0_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> n Hrec rec i j Hi Hj Hij H31 HHrec.
+ <span class="nb">apply</span> sqrt_step_correct; <span class="nb">auto</span>.
+ <span class="nb">intros</span> j1 Hj1  Hjp1; <span class="nb">apply</span> Hrec; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> j2 Hj2 H2j2 Hjp2 Hj31; <span class="nb">apply</span> Hrec; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> j3 Hj3 Hpj3.
+ <span class="nb">apply</span> HHrec; <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> -&gt; inj_S, Z.pow_succ_r.
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> (<span class="mi">2</span> ^Z_of_nat n + [|j2|]); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zle_0_nat.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt_init</span> <span class="nv">i</span>: <span class="mi">1</span> &lt; i -&gt; i &lt; (i/<span class="mi">2</span> + <span class="mi">1</span>) ^ <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> Hi.
+ <span class="nb">assert</span> (H1: <span class="mi">0</span> &lt;= i - <span class="mi">2</span>) <span class="bp">by</span> <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> (H2: <span class="mi">1</span> &lt;= (i / <span class="mi">2</span>) ^ <span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+   <span class="nb">replace</span> i <span class="kr">with</span> (<span class="mi">1</span>* <span class="mi">2</span> + (i - <span class="mi">2</span>)); <span class="nb">auto with</span> zarith.
+   <span class="nb">rewrite</span> Z.pow_2_r, Z_div_plus_full_l; <span class="nb">auto with</span> zarith.
+   <span class="nb">generalize</span> (sqr_pos ((i - <span class="mi">2</span>)/ <span class="mi">2</span>)) (Z_div_pos (i - <span class="mi">2</span>) <span class="mi">2</span>).
+   <span class="nb">rewrite</span> Zmult_plus_distr_l; <span class="kp">repeat</span> <span class="nb">rewrite</span> Zmult_plus_distr_r.
+   <span class="nb">auto with</span> zarith.
+ <span class="nb">generalize</span> (quotient_by_2 i).
+ <span class="nb">rewrite</span> -&gt; Z.pow_2_r <span class="kr">in</span> H2 |- *;
+   <span class="kp">repeat</span> (<span class="nb">rewrite</span> Zmult_plus_distr_l ||
+           <span class="nb">rewrite</span> Zmult_plus_distr_r ||
+           <span class="nb">rewrite</span> Zmult_1_l || <span class="nb">rewrite</span> Zmult_1_r).
+   <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt_spec</span> : <span class="kr">forall</span> <span class="nv">x</span>,
+       [|sqrt x|] ^ <span class="mi">2</span> &lt;= [|x|] &lt; ([|sqrt x|] + <span class="mi">1</span>) ^ <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> i; <span class="nb">unfold</span> sqrt.
+ <span class="nb">rewrite</span> compare_spec. <span class="nb">case</span> Z.compare_spec; <span class="nb">rewrite</span> to_Z_1;
+   <span class="nb">intros</span> Hi; <span class="nb">auto with</span> zarith.
+ <span class="kp">repeat</span> <span class="nb">rewrite</span> Z.pow_2_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> iter_sqrt_correct; <span class="nb">auto with</span> zarith;
+  <span class="nb">rewrite</span> lsr_spec, to_Z_1; <span class="nb">change</span> (<span class="mi">2</span>^<span class="mi">1</span>) <span class="kr">with</span> <span class="mi">2</span>;  <span class="nb">auto with</span> zarith.
+  <span class="nb">replace</span> [|i|] <span class="kr">with</span> (<span class="mi">1</span> * <span class="mi">2</span> + ([|i|] - <span class="mi">2</span>))%Z; <span class="kp">try</span> <span class="bp">ring</span>.
+  <span class="nb">assert</span> (<span class="mi">0</span> &lt;= ([|i|] - <span class="mi">2</span>)/<span class="mi">2</span>)%Z <span class="bp">by</span> (<span class="nb">apply</span> Z_div_pos; <span class="nb">auto with</span> zarith).
+  <span class="nb">rewrite</span> Z_div_plus_full_l; <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> sqrt_init; <span class="nb">auto</span>.
+  <span class="nb">assert</span> (W:= Z_mult_div_ge [|i|] <span class="mi">2</span>);<span class="nb">assert</span> (W&#39;:= to_Z_bounded i);<span class="nb">auto with</span> zarith.
+  <span class="nb">intros</span> j2 H1 H2; <span class="bp">contradict</span> H2; <span class="nb">apply</span> Zlt_not_le.
+  <span class="nb">fold</span> wB;<span class="nb">assert</span> (W:=to_Z_bounded i).
+  <span class="nb">apply</span> Z.le_lt_trans <span class="kr">with</span> ([|i|]); <span class="nb">auto with</span> zarith.
+  <span class="nb">assert</span> (<span class="mi">0</span> &lt;= [|i|]/<span class="mi">2</span>)%Z <span class="bp">by</span> (<span class="nb">apply</span> Z_div_pos; <span class="nb">auto with</span> zarith).
+  <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> (<span class="mi">2</span> * ([|i|]/<span class="mi">2</span>)); <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Z_mult_div_ge; <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (to_Z_bounded i); <span class="kp">repeat</span> <span class="nb">rewrite</span> Z.pow_2_r; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="c">(* sqrt2 *)</span>
+<span class="kn">Lemma</span> <span class="nf">sqrt2_step_def</span> <span class="nv">rec</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>:
+   sqrt2_step rec ih il j =
+   <span class="kr">if</span> (ih &lt; j)%int63 <span class="kr">then</span>
+    <span class="kr">let</span> <span class="nv">quo</span> := fst (diveucl_21 ih il j) <span class="kr">in</span>
+    <span class="kr">if</span> (quo &lt; j)%int63 <span class="kr">then</span>
+     <span class="kr">let</span> <span class="nv">m</span> :=
+      <span class="kr">match</span> j +c quo <span class="kr">with</span>
+      | C0 m1 =&gt; m1 &gt;&gt; <span class="mi">1</span>
+      | C1 m1 =&gt; (m1 &gt;&gt; <span class="mi">1</span> + <span class="mi">1</span> &lt;&lt; (digits -<span class="mi">1</span>))%int63
+      <span class="kr">end</span> <span class="kr">in</span>
+     rec ih il m
+    <span class="kr">else</span> j
+   <span class="kr">else</span> j.
+<span class="kn">Proof</span>.
+ <span class="nb">unfold</span> sqrt2_step; <span class="nb">case</span> diveucl_21; <span class="nb">intros</span>;<span class="nb">simpl</span>.
+ <span class="nb">case</span> (j +c i);<span class="nb">trivial</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt2_lower_bound</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>:
+   [|| WW ih il||]  &lt; ([|j|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt; [|ih|] &lt;= [|j|].
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> H1.
+ <span class="nb">case</span> (to_Z_bounded j); <span class="nb">intros</span> Hbj _.
+ <span class="nb">case</span> (to_Z_bounded il); <span class="nb">intros</span> Hbil _.
+ <span class="nb">case</span> (to_Z_bounded ih); <span class="nb">intros</span> Hbih Hbih1.
+ <span class="nb">assert</span> (([|ih|] &lt; [|j|] + <span class="mi">1</span>)%Z); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zlt_square_simpl; <span class="nb">auto with</span> zarith.
+ <span class="nb">simpl</span> zn2z_to_Z <span class="kr">in</span> H1.
+ <span class="kp">repeat</span> <span class="nb">rewrite</span> &lt;-Z.pow_2_r.
+ <span class="nb">refine</span> (Z.le_lt_trans _ _ _ _ H1).
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> ([|ih|] * wB)%Z;<span class="kp">try</span> <span class="nb">rewrite</span> Z.pow_2_r; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">diveucl_21_spec_aux</span> : <span class="kr">forall</span> <span class="nv">a1</span> <span class="nv">a2</span> <span class="nv">b</span>,
+      wB/<span class="mi">2</span> &lt;= [|b|] -&gt;
+      [|a1|] &lt; [|b|] -&gt;
+      <span class="kr">let</span> (<span class="nv">q</span>,r) := diveucl_21 a1 a2 b <span class="kr">in</span>
+      [|a1|] *wB+ [|a2|] = [|q|] * [|b|] + [|r|] /\
+      <span class="mi">0</span> &lt;= [|r|] &lt; [|b|].
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> a1 a2 b H1 H2;<span class="nb">assert</span> (W:= diveucl_21_spec a1 a2 b).
+ <span class="nb">assert</span> (W1:= to_Z_bounded a1).
+ <span class="nb">assert</span> (W2:= to_Z_bounded a2).
+ <span class="nb">assert</span> (Wb:= to_Z_bounded b).
+ <span class="nb">assert</span> ([|b|]&gt;<span class="mi">0</span>) <span class="bp">by</span> (<span class="nb">auto with</span> zarith).
+ <span class="nb">generalize</span> (Z_div_mod ([|a1|]*wB+[|a2|]) [|b|] H).
+ <span class="nb">revert</span> W.
+ <span class="nb">destruct</span> (diveucl_21 a1 a2 b); <span class="nb">destruct</span> (Z.div_eucl ([|a1|]*wB+[|a2|]) [|b|]).
+ <span class="nb">intros</span> (H&#39;, H&#39;&#39;); <span class="nb">auto</span>; <span class="nb">rewrite</span> H&#39;, H&#39;&#39;; <span class="nb">clear</span> H&#39; H&#39;&#39;.
+ <span class="nb">intros</span> (H&#39;, H&#39;&#39;); <span class="nb">split</span>; [ |<span class="bp">exact</span> H&#39;&#39;].
+ <span class="bp">now</span> <span class="nb">rewrite</span> H&#39;, Zmult_comm.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">div2_phi</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>: (<span class="mi">2</span>^<span class="mi">62</span> &lt;= [|j|] -&gt; [|ih|] &lt; [|j|] -&gt;
+  [|fst (diveucl_21 ih il j)|] = [|| WW ih il||] /[|j|])%Z.
+<span class="kn">Proof</span>.
+ <span class="nb">intros</span> Hj Hj1.
+ <span class="nb">generalize</span> (diveucl_21_spec_aux ih il j Hj Hj1).
+ <span class="nb">case</span> diveucl_21; <span class="nb">intros</span> q r (Hq, Hr).
+ <span class="nb">apply</span> Zdiv_unique <span class="kr">with</span> [|r|]; <span class="nb">auto with</span> zarith.
+ <span class="nb">simpl</span> @fst; <span class="nb">apply</span> eq_trans <span class="kr">with</span> (<span class="mi">1</span> := Hq); <span class="bp">ring</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt2_step_correct</span> <span class="nv">rec</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>:
+  <span class="mi">2</span> ^ (Z_of_nat (size - <span class="mi">2</span>)) &lt;= [|ih|] -&gt;
+  <span class="mi">0</span> &lt; [|j|] -&gt; [|| WW ih il||] &lt; ([|j|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt;
+  (<span class="kr">forall</span> <span class="nv">j1</span>, <span class="mi">0</span> &lt; [|j1|] &lt; [|j|] -&gt;  [|| WW ih il||] &lt; ([|j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt;
+     [|rec ih il j1|] ^ <span class="mi">2</span> &lt;= [||WW ih il||] &lt; ([|rec ih il j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span>) -&gt;
+  [|sqrt2_step rec ih il j|] ^ <span class="mi">2</span> &lt;= [||WW ih il ||]
+      &lt; ([|sqrt2_step rec ih il j|] + <span class="mi">1</span>) ^  <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">assert</span> (Hp2: (<span class="mi">0</span> &lt; [|<span class="mi">2</span>|])%Z) <span class="bp">by</span> <span class="bp">exact</span> (refl_equal Lt).
+ <span class="nb">intros</span> Hih Hj Hij Hrec; <span class="nb">rewrite</span> sqrt2_step_def.
+ <span class="nb">assert</span> (H1: ([|ih|] &lt;= [|j|])%Z) <span class="bp">by</span> (<span class="nb">apply</span> sqrt2_lower_bound <span class="kr">with</span> il; <span class="nb">auto</span>).
+ <span class="nb">case</span> (to_Z_bounded ih); <span class="nb">intros</span> Hih1 _.
+ <span class="nb">case</span> (to_Z_bounded il); <span class="nb">intros</span> Hil1 _.
+ <span class="nb">case</span> (to_Z_bounded j); <span class="nb">intros</span> _ Hj1.
+ <span class="nb">assert</span> (Hp3: (<span class="mi">0</span> &lt; [||WW ih il||])).
+ {<span class="nb">simpl</span> zn2z_to_Z;<span class="nb">apply</span> Z.lt_le_trans <span class="kr">with</span> ([|ih|] * wB)%Z; <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Zmult_lt_0_compat; <span class="nb">auto with</span> zarith.
+  <span class="nb">refine</span> (Z.lt_le_trans _ _ _ _ Hih); <span class="nb">auto with</span> zarith. }
+ <span class="nb">cbv</span> zeta.
+ <span class="nb">case_eq</span> (ih &lt; j)%int63;<span class="nb">intros</span> Heq.
+ <span class="nb">rewrite</span> -&gt; ltb_spec <span class="kr">in</span> Heq.
+ <span class="mi">2</span>: <span class="nb">rewrite</span> &lt;-not_true_iff_false, ltb_spec <span class="kr">in</span> Heq.
+ <span class="mi">2</span>: <span class="nb">split</span>; <span class="nb">auto</span>.
+ <span class="mi">2</span>: <span class="nb">apply</span> sqrt_test_true; <span class="nb">auto with</span> zarith.
+ <span class="mi">2</span>: <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">replace</span> [|ih|] <span class="kr">with</span> [|j|]; <span class="nb">auto with</span> zarith.
+ <span class="mi">2</span>: <span class="nb">assert</span> (<span class="mi">0</span> &lt;= [|il|]/[|j|]) <span class="bp">by</span> (<span class="nb">apply</span> Z_div_pos; <span class="nb">auto with</span> zarith).
+ <span class="mi">2</span>: <span class="nb">rewrite</span> Zmult_comm, Z_div_plus_full_l; <span class="nb">unfold</span> base; <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (Zle_or_lt (<span class="mi">2</span>^(Z_of_nat size -<span class="mi">1</span>)) [|j|]); <span class="nb">intros</span> Hjj.
+ <span class="nb">case_eq</span> (fst (diveucl_21 ih il j) &lt; j)%int63;<span class="nb">intros</span> Heq0.
+ <span class="mi">2</span>: <span class="nb">rewrite</span> &lt;-not_true_iff_false, ltb_spec, (div2_phi _ _ _ Hjj Heq) <span class="kr">in</span> Heq0.
+ <span class="mi">2</span>: <span class="nb">split</span>; <span class="nb">auto</span>; <span class="nb">apply</span> sqrt_test_true; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> -&gt; ltb_spec, (div2_phi _ _ _ Hjj Heq) <span class="kr">in</span> Heq0.
+ <span class="kr">match goal with</span> |- <span class="kp">context</span>[rec _ _ ?X] =&gt;
+  <span class="nb">set</span> (u := X)
+ <span class="kr">end</span>.
+ <span class="nb">assert</span> (H: [|u|] = ([|j|] + ([||WW ih il||])/([|j|]))/<span class="mi">2</span>).
+ { <span class="nb">unfold</span> u; <span class="nb">generalize</span> (addc_spec j (fst (diveucl_21 ih il j)));
+  <span class="nb">case</span> addc;<span class="nb">unfold</span> interp_carry;<span class="nb">rewrite</span> (div2_phi _ _ _ Hjj Heq);<span class="nb">simpl</span> zn2z_to_Z.
+  { <span class="nb">intros</span> i H;<span class="nb">rewrite</span> lsr_spec, H;<span class="nb">trivial</span>. }
+  <span class="nb">intros</span> i H;<span class="nb">rewrite</span> &lt;- H.
+  <span class="nb">case</span> (to_Z_bounded i); <span class="nb">intros</span> H1i H2i.
+  <span class="nb">rewrite</span> -&gt; add_spec, Zmod_small, lsr_spec.
+  { <span class="nb">change</span> (<span class="mi">1</span> * wB) <span class="kr">with</span> ([|(<span class="mi">1</span> &lt;&lt; (digits -<span class="mi">1</span>))|] * <span class="mi">2</span>)%Z.
+    <span class="nb">rewrite</span> Z_div_plus_full_l; <span class="nb">auto with</span> zarith. }
+  <span class="nb">change</span> wB <span class="kr">with</span> (<span class="mi">2</span> * (wB/<span class="mi">2</span>))%Z; <span class="nb">auto</span>.
+  <span class="nb">replace</span> [|(<span class="mi">1</span> &lt;&lt; (digits - <span class="mi">1</span>))|] <span class="kr">with</span> (wB/<span class="mi">2</span>); <span class="nb">auto</span>.
+  <span class="nb">rewrite</span> lsr_spec; <span class="nb">auto</span>.
+  <span class="nb">replace</span> (<span class="mi">2</span>^[|<span class="mi">1</span>|]) <span class="kr">with</span> <span class="mi">2</span>%Z; <span class="nb">auto</span>.
+  <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+  <span class="nb">assert</span> ([|i|]/<span class="mi">2</span> &lt; wB/<span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Zdiv_lt_upper_bound; <span class="nb">auto with</span> zarith. }
+ <span class="nb">apply</span> Hrec; <span class="nb">rewrite</span> H; <span class="nb">clear</span> u H.
+ <span class="nb">assert</span> (Hf1: <span class="mi">0</span> &lt;= [||WW ih il||]/ [|j|]) <span class="bp">by</span> (<span class="nb">apply</span> Z_div_pos; <span class="nb">auto with</span> zarith).
+ <span class="nb">case</span> (Zle_lt_or_eq <span class="mi">1</span> ([|j|])); <span class="nb">auto with</span> zarith; <span class="nb">intros</span> Hf2.
+ <span class="mi">2</span>: <span class="bp">contradict</span> Heq0; <span class="nb">apply</span> Zle_not_lt; <span class="nb">rewrite</span> &lt;- Hf2, Zdiv_1_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">split</span>.
+ <span class="nb">replace</span> ([|j|] + [||WW ih il||]/ [|j|])%Z <span class="kr">with</span>
+        (<span class="mi">1</span> * <span class="mi">2</span> + (([|j|] - <span class="mi">2</span>) + [||WW ih il||] / [|j|])) <span class="bp">by</span> <span class="bp">lia</span>.
+ <span class="nb">rewrite</span> Z_div_plus_full_l; <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> (<span class="mi">0</span> &lt;= ([|j|] - <span class="mi">2</span> + [||WW ih il||] / [|j|]) / <span class="mi">2</span>) ; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> sqrt_test_false; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> sqrt_main; <span class="nb">auto with</span> zarith.
+ <span class="bp">contradict</span> Hij; <span class="nb">apply</span> Zle_not_lt.
+ <span class="nb">assert</span> ((<span class="mi">1</span> + [|j|]) &lt;= <span class="mi">2</span> ^ (Z_of_nat size - <span class="mi">1</span>)); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> ((<span class="mi">2</span> ^ (Z_of_nat size - <span class="mi">1</span>)) ^<span class="mi">2</span>); <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> (<span class="mi">0</span> &lt;= <span class="mi">1</span> + [|j|]); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zmult_le_compat; <span class="nb">auto with</span> zarith.
+ <span class="nb">change</span> ((<span class="mi">2</span> ^ (Z_of_nat size - <span class="mi">1</span>))^<span class="mi">2</span>) <span class="kr">with</span> (<span class="mi">2</span> ^ (Z_of_nat size - <span class="mi">2</span>) * wB).
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> ([|ih|] * wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">unfold</span> zn2z_to_Z, wB; <span class="nb">auto with</span> zarith.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">iter2_sqrt_correct</span> <span class="nv">n</span> <span class="nv">rec</span> <span class="nv">ih</span> <span class="nv">il</span> <span class="nv">j</span>:
+  <span class="mi">2</span>^(Z_of_nat (size - <span class="mi">2</span>)) &lt;= [|ih|] -&gt;  <span class="mi">0</span> &lt; [|j|] -&gt; [||WW ih il||] &lt; ([|j|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt;
+  (<span class="kr">forall</span> <span class="nv">j1</span>, <span class="mi">0</span> &lt; [|j1|] -&gt; <span class="mi">2</span>^(Z_of_nat n) + [|j1|] &lt;= [|j|] -&gt;
+      [||WW ih il||] &lt; ([|j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span> -&gt;
+       [|rec ih il j1|] ^ <span class="mi">2</span> &lt;= [||WW ih il||] &lt; ([|rec ih il j1|] + <span class="mi">1</span>) ^ <span class="mi">2</span>)  -&gt;
+  [|iter2_sqrt n rec ih il j|] ^ <span class="mi">2</span> &lt;= [||WW ih il||]
+      &lt; ([|iter2_sqrt n rec ih il j|] + <span class="mi">1</span>) ^ <span class="mi">2</span>.
+<span class="kn">Proof</span>.
+ <span class="nb">revert</span> rec ih il j; <span class="nb">elim</span> n; <span class="nb">unfold</span> iter2_sqrt; <span class="nb">fold</span> iter2_sqrt; <span class="nb">clear</span> n.
+ <span class="nb">intros</span> rec ih il j Hi Hj Hij Hrec; <span class="nb">apply</span> sqrt2_step_correct; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span>; <span class="nb">apply</span> Hrec; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zpower_0_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> n Hrec rec ih il j Hi Hj Hij HHrec.
+ <span class="nb">apply</span> sqrt2_step_correct; <span class="nb">auto</span>.
+ <span class="nb">intros</span> j1 Hj1  Hjp1; <span class="nb">apply</span> Hrec; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> j2 Hj2 H2j2 Hjp2; <span class="nb">apply</span> Hrec; <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> j3 Hj3 Hpj3.
+ <span class="nb">apply</span> HHrec; <span class="nb">auto</span>.
+ <span class="nb">rewrite</span> -&gt; inj_S, Z.pow_succ_r.
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> (<span class="mi">2</span> ^Z_of_nat n + [|j2|])%Z; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Zle_0_nat.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">sqrt2_spec</span> : <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>,
+       wB/ <span class="mi">4</span> &lt;= [|x|] -&gt;
+       <span class="kr">let</span> (<span class="nv">s</span>,r) := sqrt2 x y <span class="kr">in</span>
+          [||WW x y||] = [|s|] ^ <span class="mi">2</span> + [+|r|] /\
+          [+|r|] &lt;= <span class="mi">2</span> * [|s|].
+ <span class="kn">Proof</span>.
+ <span class="nb">intros</span> ih il Hih; <span class="nb">unfold</span> sqrt2.
+ <span class="nb">change</span> [||WW ih il||] <span class="kr">with</span> ([||WW ih il||]).
+ <span class="nb">assert</span> (Hbin: <span class="kr">forall</span> <span class="nv">s</span>, s * s + <span class="mi">2</span>* s + <span class="mi">1</span> = (s + <span class="mi">1</span>) ^ <span class="mi">2</span>) <span class="bp">by</span>
+  (<span class="nb">intros</span> s; <span class="bp">ring</span>).
+ <span class="nb">assert</span> (Hb: <span class="mi">0</span> &lt;= wB) <span class="bp">by</span> (<span class="nb">red</span>; <span class="nb">intros</span> HH; <span class="bp">discriminate</span>).
+ <span class="nb">assert</span> (Hi2: [||WW ih il ||] &lt; ([|max_int|] + <span class="mi">1</span>) ^ <span class="mi">2</span>).
+  <span class="nb">apply</span> Z.le_lt_trans <span class="kr">with</span> ((wB - <span class="mi">1</span>) * wB + (wB - <span class="mi">1</span>)); <span class="nb">auto with</span> zarith.
+  <span class="mi">2</span>: <span class="nb">apply</span> refl_equal.
+  <span class="nb">case</span> (to_Z_bounded ih); <span class="nb">case</span> (to_Z_bounded il); <span class="nb">intros</span> H1 H2 H3 H4.
+  <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (iter2_sqrt_correct size (<span class="kr">fun</span> <span class="nv">_</span> <span class="nv">_</span> <span class="nv">j</span> =&gt; j) ih il max_int); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> refl_equal.
+ <span class="nb">intros</span> j1 _ HH; <span class="bp">contradict</span> HH.
+ <span class="nb">apply</span> Zlt_not_le.
+ <span class="nb">case</span> (to_Z_bounded j1); <span class="nb">auto with</span> zarith.
+ <span class="nb">change</span> (<span class="mi">2</span> ^ Z_of_nat size) <span class="kr">with</span> ([|max_int|]+<span class="mi">1</span>)%Z; <span class="nb">auto with</span> zarith.
+ <span class="nb">set</span> (s := iter2_sqrt size (<span class="kr">fun</span> <span class="nv">_</span> <span class="nv">_</span> <span class="nv">j</span> : int=&gt; j) ih il max_int).
+ <span class="nb">intros</span> Hs1 Hs2.
+ <span class="nb">generalize</span> (mulc_spec s s); <span class="nb">case</span> mulc.
+ <span class="nb">simpl</span> fst; <span class="nb">simpl</span> snd; <span class="nb">intros</span> ih1 il1 Hihl1.
+ <span class="nb">generalize</span> (subc_spec il il1).
+ <span class="nb">case</span> subc; <span class="nb">intros</span> il2 Hil2.
+ <span class="nb">simpl</span> interp_carry <span class="kr">in</span> Hil2.
+ <span class="nb">case_eq</span> (ih1  &lt; ih)%int63;  [<span class="kp">idtac</span> | <span class="nb">rewrite</span> &lt;- not_true_iff_false];
+  <span class="nb">rewrite</span> ltb_spec; <span class="nb">intros</span> Heq.
+ <span class="nb">unfold</span> interp_carry; <span class="nb">rewrite</span> Zmult_1_l.
+ <span class="nb">rewrite</span> -&gt; Z.pow_2_r, Hihl1, Hil2.
+ <span class="nb">case</span> (Zle_lt_or_eq ([|ih1|] + <span class="mi">1</span>) ([|ih|])); <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> H2; <span class="bp">contradict</span> Hs2; <span class="nb">apply</span> Zle_not_lt.
+ <span class="nb">replace</span> (([|s|] + <span class="mi">1</span>) ^ <span class="mi">2</span>) <span class="kr">with</span> ([||WW ih1 il1||] + <span class="mi">2</span> * [|s|] + <span class="mi">1</span>).
+ <span class="nb">unfold</span> zn2z_to_Z.
+ <span class="nb">case</span> (to_Z_bounded il); <span class="nb">intros</span> Hpil _.
+ <span class="nb">assert</span> (Hl1l: [|il1|] &lt;= [|il|]).
+  <span class="nb">case</span> (to_Z_bounded il2); <span class="nb">rewrite</span> Hil2; <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> ([|ih1|] * wB + <span class="mi">2</span> * [|s|] + <span class="mi">1</span> &lt;= [|ih|] * wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (to_Z_bounded s); <span class="nb">intros</span> _ Hps.
+ <span class="nb">case</span> (to_Z_bounded ih1); <span class="nb">intros</span> Hpih1 _; <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> (([|ih1|] + <span class="mi">2</span>) * wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zmult_plus_distr_l.
+ <span class="nb">assert</span> (<span class="mi">2</span> * [|s|] + <span class="mi">1</span> &lt;= <span class="mi">2</span> * wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> &lt;-Hihl1, Hbin; <span class="nb">auto</span>.
+ <span class="nb">intros</span> H2; <span class="nb">split</span>.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> &lt;- H2; <span class="bp">ring</span>.
+ <span class="nb">replace</span> (wB + ([|il|] - [|il1|])) <span class="kr">with</span> ([||WW ih il||] - ([|s|] * [|s|])).
+ <span class="nb">rewrite</span> &lt;-Hbin <span class="kr">in</span> Hs2; <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Hihl1; <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> &lt;- H2; <span class="bp">ring</span>.
+ <span class="nb">unfold</span> interp_carry.
+ <span class="nb">case</span> (Zle_lt_or_eq [|ih|] [|ih1|]); <span class="nb">auto with</span> zarith; <span class="nb">intros</span> H.
+ <span class="bp">contradict</span> Hs1.
+ <span class="nb">apply</span> Zlt_not_le; <span class="nb">rewrite</span> Z.pow_2_r, Hihl1.
+ <span class="nb">unfold</span> zn2z_to_Z.
+ <span class="nb">case</span> (to_Z_bounded il); <span class="nb">intros</span> _ H2.
+ <span class="nb">apply</span> Z.lt_le_trans <span class="kr">with</span> (([|ih|] + <span class="mi">1</span>) * wB + <span class="mi">0</span>).
+ <span class="nb">rewrite</span> Zmult_plus_distr_l, Zplus_0_r; <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (to_Z_bounded il1); <span class="nb">intros</span> H3 _.
+ <span class="nb">apply</span> Zplus_le_compat; <span class="nb">auto with</span> zarith.
+ <span class="nb">split</span>.
+ <span class="nb">rewrite</span> Z.pow_2_r, Hihl1.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="bp">ring</span>[Hil2 H].
+ <span class="nb">replace</span> [|il2|] <span class="kr">with</span> ([||WW ih il||] - [||WW ih1 il1||]).
+ <span class="nb">unfold</span> zn2z_to_Z <span class="nb">at</span> <span class="mi">2</span>; <span class="nb">rewrite</span> &lt;-Hihl1.
+ <span class="nb">rewrite</span> &lt;-Hbin <span class="kr">in</span> Hs2; <span class="nb">auto with</span> zarith.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> H, Hil2; <span class="bp">ring</span>.
+ <span class="nb">unfold</span> interp_carry <span class="kr">in</span> Hil2 |- *.
+ <span class="nb">assert</span> (Hsih: [|ih - <span class="mi">1</span>|] = [|ih|] - <span class="mi">1</span>).
+  <span class="nb">rewrite</span> sub_spec, Zmod_small; <span class="nb">auto</span>; <span class="nb">replace</span> [|<span class="mi">1</span>|] <span class="kr">with</span> <span class="mi">1</span>; <span class="nb">auto</span>.
+  <span class="nb">case</span> (to_Z_bounded ih); <span class="nb">intros</span> H1 H2.
+  <span class="nb">split</span>; <span class="nb">auto with</span> zarith.
+  <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> (wB/<span class="mi">4</span> - <span class="mi">1</span>); <span class="nb">auto with</span> zarith.
+ <span class="nb">case_eq</span> (ih1 &lt; ih - <span class="mi">1</span>)%int63;  [<span class="kp">idtac</span> | <span class="nb">rewrite</span> &lt;- not_true_iff_false];
+  <span class="nb">rewrite</span> ltb_spec, Hsih; <span class="nb">intros</span> Heq.
+ <span class="nb">rewrite</span> Z.pow_2_r, Hihl1.
+ <span class="nb">case</span> (Zle_lt_or_eq ([|ih1|] + <span class="mi">2</span>) [|ih|]); <span class="nb">auto with</span> zarith.
+ <span class="nb">intros</span> H2; <span class="bp">contradict</span> Hs2; <span class="nb">apply</span> Zle_not_lt.
+ <span class="nb">replace</span> (([|s|] + <span class="mi">1</span>) ^ <span class="mi">2</span>) <span class="kr">with</span> ([||WW ih1 il1||] + <span class="mi">2</span> * [|s|] + <span class="mi">1</span>).
+ <span class="nb">unfold</span> zn2z_to_Z.
+ <span class="nb">assert</span> ([|ih1|] * wB + <span class="mi">2</span> * [|s|] + <span class="mi">1</span> &lt;= [|ih|] * wB + ([|il|] - [|il1|]));
+  <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> &lt;-Hil2.
+ <span class="nb">case</span> (to_Z_bounded il2); <span class="nb">intros</span> Hpil2 _.
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> ([|ih|] * wB + - wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">case</span> (to_Z_bounded s);  <span class="nb">intros</span> _ Hps.
+ <span class="nb">assert</span> (<span class="mi">2</span> * [|s|] + <span class="mi">1</span> &lt;= <span class="mi">2</span> * wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> ([|ih1|] * wB + <span class="mi">2</span> * wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">assert</span> (Hi: ([|ih1|] + <span class="mi">3</span>) * wB &lt;= [|ih|] * wB); <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> Zmult_plus_distr_l <span class="kr">in</span> Hi; <span class="nb">auto with</span> zarith.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> &lt;-Hihl1, Hbin; <span class="nb">auto</span>.
+ <span class="nb">intros</span> H2; <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> &lt;-H2.
+ <span class="nb">split</span>.
+ <span class="nb">replace</span> [|il|] <span class="kr">with</span> (([|il|] - [|il1|]) + [|il1|]); <span class="kp">try</span> <span class="bp">ring</span>.
+ <span class="nb">rewrite</span> &lt;-Hil2; <span class="bp">ring</span>.
+ <span class="nb">replace</span> (<span class="mi">1</span> * wB + [|il2|]) <span class="kr">with</span> ([||WW ih il||] - [||WW ih1 il1||]).
+ <span class="nb">unfold</span> zn2z_to_Z <span class="nb">at</span> <span class="mi">2</span>; <span class="nb">rewrite</span> &lt;-Hihl1.
+ <span class="nb">rewrite</span> &lt;-Hbin <span class="kr">in</span> Hs2; <span class="nb">auto with</span> zarith.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> &lt;-H2.
+ <span class="nb">replace</span> [|il|] <span class="kr">with</span> (([|il|] - [|il1|]) + [|il1|]); <span class="kp">try</span> <span class="bp">ring</span>.
+ <span class="nb">rewrite</span> &lt;-Hil2; <span class="bp">ring</span>.
+ <span class="nb">case</span> (Zle_lt_or_eq ([|ih|] - <span class="mi">1</span>) ([|ih1|])); <span class="nb">auto with</span> zarith; <span class="nb">intros</span> H1.
+ <span class="nb">assert</span> (He: [|ih|] = [|ih1|]).
+   <span class="nb">apply</span> Zle_antisym; <span class="nb">auto with</span> zarith.
+   <span class="nb">case</span> (Zle_or_lt [|ih1|] [|ih|]); <span class="nb">auto</span>; <span class="nb">intros</span> H2.
+   <span class="bp">contradict</span> Hs1; <span class="nb">apply</span> Zlt_not_le; <span class="nb">rewrite</span> Z.pow_2_r, Hihl1.
+  <span class="nb">unfold</span> zn2z_to_Z.
+  <span class="nb">case</span> (to_Z_bounded il); <span class="nb">intros</span> _ Hpil1.
+  <span class="nb">apply</span> Z.lt_le_trans <span class="kr">with</span> (([|ih|] + <span class="mi">1</span>) * wB).
+  <span class="nb">rewrite</span> Zmult_plus_distr_l, Zmult_1_l; <span class="nb">auto with</span> zarith.
+  <span class="nb">case</span> (to_Z_bounded il1); <span class="nb">intros</span> Hpil2 _.
+  <span class="nb">apply</span> Z.le_trans <span class="kr">with</span> (([|ih1|]) * wB); <span class="nb">auto with</span> zarith.
+ <span class="bp">contradict</span> Hs1; <span class="nb">apply</span> Zlt_not_le; <span class="nb">rewrite</span> Z.pow_2_r, Hihl1.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> He.
+ <span class="nb">assert</span> ([|il|] - [|il1|] &lt; <span class="mi">0</span>); <span class="nb">auto with</span> zarith.
+ <span class="nb">rewrite</span> &lt;-Hil2.
+ <span class="nb">case</span> (to_Z_bounded il2); <span class="nb">auto with</span> zarith.
+ <span class="nb">split</span>.
+ <span class="nb">rewrite</span> Z.pow_2_r, Hihl1.
+ <span class="nb">unfold</span> zn2z_to_Z; <span class="nb">rewrite</span> &lt;-H1.
+ <span class="nb">apply</span> trans_equal <span class="kr">with</span> ([|ih|] * wB + [|il1|] + ([|il|] - [|il1|])).
+ <span class="bp">ring</span>.
+ <span class="nb">rewrite</span> &lt;-Hil2; <span class="bp">ring</span>.
+ <span class="nb">replace</span> [|il2|] <span class="kr">with</span> ([||WW ih il||] - [||WW ih1 il1||]).
+ <span class="nb">unfold</span> zn2z_to_Z <span class="nb">at</span> <span class="mi">2</span>; <span class="nb">rewrite</span> &lt;- Hihl1.
+ <span class="nb">rewrite</span> &lt;-Hbin <span class="kr">in</span> Hs2; <span class="nb">auto with</span> zarith.
+ <span class="nb">unfold</span> zn2z_to_Z.
+ <span class="nb">rewrite</span> &lt;-H1.
+ <span class="nb">ring_simplify</span>.
+ <span class="nb">apply</span> trans_equal <span class="kr">with</span> (wB + ([|il|] - [|il1|])).
+ <span class="bp">ring</span>.
+ <span class="nb">rewrite</span> &lt;-Hil2; <span class="bp">ring</span>.
+<span class="kn">Qed</span>.
+
+<span class="c">(* of_pos *)</span>
+<span class="kn">Lemma</span> <span class="nf">of_pos_rec_spec</span> (<span class="nv">k</span>: nat) :
+  (k &lt;= size)%nat →
+  <span class="kr">∀</span> <span class="nv">p</span>, φ(of_pos_rec k p) = Zpos p mod <span class="mi">2</span> ^ Z.of_nat k.
+<span class="kn">Proof</span>.
+  <span class="nb">elim</span> k; <span class="nb">clear</span> k.
+    <span class="nb">intros</span> _ p; <span class="nb">simpl</span>; <span class="nb">rewrite</span> to_Z_0, Zmod_1_r; <span class="bp">reflexivity</span>.
+  <span class="nb">intros</span> n ih hn.
+  <span class="nb">assert</span> (n &lt;= size)%nat <span class="kr">as</span> hn&#39; <span class="bp">by</span> <span class="bp">lia</span>.
+  <span class="nb">specialize</span> (ih hn&#39;).
+  <span class="nb">intros</span> [ p | p | ].
+  <span class="mi">3</span>: {
+    <span class="nb">rewrite</span> Zmod_small. <span class="bp">reflexivity</span>.
+    <span class="nb">split</span>. <span class="bp">lia</span>.
+    <span class="nb">apply</span> Zpower_gt_1; <span class="bp">lia</span>.
+  }
+  - <span class="nb">simpl</span>.
+    <span class="nb">destruct</span> (bit_add_or (of_pos_rec n p &lt;&lt; <span class="mi">1</span>) <span class="mi">1</span>) <span class="kr">as</span> (H1, _).
+    <span class="nb">rewrite</span> &lt;- H1;<span class="nb">clear</span> H1.
+    <span class="mi">2</span>: {
+      <span class="nb">intros</span> i; <span class="nb">rewrite</span> bit_lsl, bit_1.
+      <span class="nb">case</span> eqbP.
+      + <span class="nb">intros</span> h; <span class="nb">apply</span> to_Z_inj <span class="kr">in</span> h; <span class="nb">subst</span>. <span class="bp">exact</span> (<span class="kr">λ</span> <span class="nv">e</span> <span class="nv">_</span>, diff_false_true e).
+      + <span class="bp">exact</span> (<span class="kr">λ</span> <span class="nv">_</span> <span class="nv">_</span>, diff_false_true).
+    }
+    <span class="nb">rewrite</span> add_spec, lsl_spec, ih, to_Z_1; <span class="nb">clear</span> ih.
+    <span class="nb">rewrite</span> Z.pow_pos_fold, Zpos_P_of_succ_nat.
+    <span class="nb">change</span> (Zpos p~<span class="mi">1</span>) <span class="kr">with</span> (<span class="mi">2</span> ^ <span class="mi">1</span> * Zpos p + <span class="mi">1</span>)%Z.
+    <span class="nb">rewrite</span> Zmod_distr <span class="bp">by</span> <span class="bp">lia</span>.
+    <span class="nb">rewrite</span> Zpower_Zsucc <span class="bp">by</span> <span class="nb">auto with</span> zarith.
+    <span class="nb">rewrite</span> Zplus_mod_idemp_l.
+    <span class="nb">rewrite</span> Zmod_small.
+      <span class="nb">rewrite</span> Zmult_mod_distr_l; <span class="bp">lia</span>.
+    <span class="nb">set</span> (a := Z.of_nat n).
+    <span class="nb">set</span> (b := Zpos p).
+    <span class="nb">change</span> (<span class="mi">2</span> ^ <span class="mi">1</span>) <span class="kr">with</span> <span class="mi">2</span>.
+    <span class="nb">pose proof</span> (pow2_pos a (Nat2Z.is_nonneg _)).
+    elim_div; <span class="nb">intros</span> x y [ ? ha]. <span class="bp">lia</span>.
+    <span class="nb">destruct</span> ha <span class="kr">as</span> [ ha | ]. <span class="mi">2</span>: <span class="bp">lia</span>.
+    <span class="nb">split</span>. <span class="bp">lia</span>.
+    <span class="nb">apply</span> Z.lt_le_trans <span class="kr">with</span> (<span class="mi">2</span> ^ (a + <span class="mi">1</span>)).
+    <span class="mi">2</span>: <span class="nb">apply</span> Z.pow_le_mono_r; <span class="nb">subst</span> a; <span class="bp">lia</span>.
+    <span class="nb">fold</span> (Z.succ a); <span class="nb">rewrite</span> Z.pow_succ_r. <span class="bp">lia</span>.
+    <span class="nb">subst</span> a; <span class="bp">lia</span>.
+  - <span class="nb">simpl</span>. <span class="nb">rewrite</span> lsl_spec, ih, to_Z_1, Zmod_small.
+      <span class="nb">rewrite</span> Z.pow_pos_fold, Zpos_P_of_succ_nat, Zpower_Zsucc <span class="bp">by</span> <span class="bp">lia</span>.
+      <span class="nb">change</span> (Zpos p~<span class="mi">0</span>) <span class="kr">with</span> (<span class="mi">2</span> ^ <span class="mi">1</span> * Zpos p)%Z.
+      <span class="nb">rewrite</span> Z.mul_mod_distr_l; <span class="nb">auto with</span> zarith.
+    <span class="nb">set</span> (a := Z.of_nat n).
+    <span class="nb">set</span> (b := Zpos p).
+    <span class="nb">change</span> (<span class="mi">2</span> ^ <span class="mi">1</span>) <span class="kr">with</span> <span class="mi">2</span>.
+    <span class="nb">pose proof</span> (pow2_pos a (Nat2Z.is_nonneg _)).
+    elim_div; <span class="nb">intros</span> x y [ ? ha]. <span class="bp">lia</span>.
+    <span class="nb">destruct</span> ha <span class="kr">as</span> [ ha | ]. <span class="mi">2</span>: <span class="bp">lia</span>.
+    <span class="nb">split</span>. <span class="bp">lia</span>.
+    <span class="nb">apply</span> Z.lt_le_trans <span class="kr">with</span> (<span class="mi">2</span> ^ (a + <span class="mi">1</span>)).
+    <span class="mi">2</span>: <span class="nb">apply</span> Z.pow_le_mono_r; <span class="nb">subst</span> a; <span class="bp">lia</span>.
+    <span class="nb">fold</span> (Z.succ a); <span class="nb">rewrite</span> Z.pow_succ_r. <span class="bp">lia</span>.
+    <span class="nb">subst</span> a; <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">is_int</span> <span class="nv">n</span> :
+  <span class="mi">0</span> &lt;= n &lt; <span class="mi">2</span> ^ φ digits →
+  n = φ (of_Z n).
+<span class="kn">Proof</span>.
+  <span class="nb">destruct</span> n. <span class="bp">reflexivity</span>. <span class="mi">2</span>: <span class="bp">lia</span>.
+  <span class="nb">intros</span> [_ h]. <span class="nb">simpl</span>.
+  <span class="nb">unfold</span> of_pos. <span class="nb">rewrite</span> of_pos_rec_spec <span class="bp">by</span> <span class="bp">lia</span>.
+  <span class="nb">symmetry</span>; <span class="nb">apply</span> Z.mod_small. <span class="nb">split</span>. <span class="bp">lia</span>. <span class="bp">exact</span> h.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">of_Z_spec</span> <span class="nv">n</span> : [| of_Z n |] = n mod wB.
+<span class="kn">Proof</span>.
+  <span class="nb">destruct</span> n. <span class="bp">reflexivity</span>.
+  { <span class="bp">now</span> <span class="nb">simpl</span>; <span class="nb">unfold</span> of_pos; <span class="nb">rewrite</span> of_pos_rec_spec <span class="bp">by</span> <span class="bp">lia</span>. }
+  <span class="nb">simpl</span>; <span class="nb">unfold</span> of_pos; <span class="nb">rewrite</span> opp_spec.
+  <span class="nb">rewrite</span> of_pos_rec_spec; [ |<span class="nb">auto</span>]; <span class="nb">fold</span> wB.
+  <span class="bp">now</span> <span class="nb">rewrite</span> &lt;-(Z.sub_0_l), Zminus_mod_idemp_r.
+<span class="kn">Qed</span>.
+
+<span class="c">(* General lemmas *)</span>
+<span class="kn">Lemma</span> <span class="nf">negbE</span> <span class="nv">a</span> <span class="nv">b</span> : a = negb b → negb a = b.
+<span class="kn">Proof</span>. <span class="nb">intros</span> -&gt;; <span class="nb">apply</span> negb_involutive. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">Z_oddE</span> <span class="nv">a</span> : Z.odd a = (a mod <span class="mi">2</span> =? <span class="mi">1</span>)%Z.
+<span class="kn">Proof</span>. <span class="nb">rewrite</span> Zmod_odd; <span class="nb">case</span> Z.odd; <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">Z_evenE</span> <span class="nv">a</span> : Z.even a = (a mod <span class="mi">2</span> =? <span class="mi">0</span>)%Z.
+<span class="kn">Proof</span>. <span class="nb">rewrite</span> Zmod_even; <span class="nb">case</span> Z.even; <span class="bp">reflexivity</span>. <span class="kn">Qed</span>.
+
+<span class="c">(* is_zero *)</span>
+<span class="kn">Lemma</span> <span class="nf">is_zeroE</span> <span class="nv">n</span> : is_zero n = Z.eqb (φ n) <span class="mi">0</span>.
+<span class="kn">Proof</span>.
+  <span class="nb">case</span> Z.eqb_spec.
+  - <span class="nb">intros</span> h; <span class="nb">apply</span> (to_Z_inj n <span class="mi">0</span>) <span class="kr">in</span> h; <span class="nb">subst</span> n; <span class="bp">reflexivity</span>.
+  - <span class="nb">generalize</span> (proj1 (is_zero_spec n)).
+    <span class="nb">case</span> is_zero; <span class="nb">auto</span>; <span class="nb">intros</span> -&gt;; <span class="nb">auto</span>; <span class="nb">destruct</span> <span class="mi">1</span>; <span class="bp">reflexivity</span>.
+<span class="kn">Qed</span>.
+
+<span class="c">(* bit *)</span>
+<span class="kn">Lemma</span> <span class="nf">bitE</span> <span class="nv">i</span> <span class="nv">j</span> : bit i j = Z.testbit φ(i) φ(j).
+<span class="kn">Proof</span>.
+  <span class="nb">apply</span> negbE; <span class="nb">rewrite</span> is_zeroE, lsl_spec, lsr_spec.
+  <span class="nb">generalize</span> (φ i) (to_Z_bounded i) (φ j) (to_Z_bounded j); <span class="nb">clear</span> i j;
+  <span class="nb">intros</span> i [hi hi&#39;] j [hj hj&#39;].
+  <span class="nb">rewrite</span> Z.testbit_eqb <span class="bp">by</span> <span class="nb">auto</span>; <span class="nb">rewrite</span> &lt;- Z_oddE, Z.negb_odd, Z_evenE.
+  <span class="nb">remember</span> (i / <span class="mi">2</span> ^ j) <span class="kr">as</span> k.
+  <span class="nb">change</span> wB <span class="kr">with</span> (<span class="mi">2</span> * <span class="mi">2</span> ^ φ (digits - <span class="mi">1</span>)).
+  <span class="nb">unfold</span> Z.modulo <span class="nb">at</span> <span class="mi">2</span>.
+  <span class="nb">generalize</span> (Z_div_mod_full k <span class="mi">2</span> (<span class="kr">λ</span> <span class="nv">k</span>, <span class="kr">let</span> <span class="nv">&#39;eq_refl</span> := k <span class="kr">in</span> I)); <span class="nb">unfold</span> Remainder.
+  <span class="nb">destruct</span> Z.div_eucl <span class="kr">as</span> [ p q ]; <span class="nb">intros</span> [hk [ hq | ]]. <span class="mi">2</span>: <span class="bp">lia</span>.
+  <span class="nb">rewrite</span> hk.
+  <span class="nb">remember</span> φ (digits - <span class="mi">1</span>) <span class="kr">as</span> m.
+  <span class="nb">replace</span> ((_ + _) * _) <span class="kr">with</span> (q * <span class="mi">2</span> ^ m + p * (<span class="mi">2</span> * <span class="mi">2</span> ^ m)) <span class="bp">by</span> <span class="bp">ring</span>.
+  <span class="nb">rewrite</span> Z_mod_plus <span class="bp">by</span> (<span class="nb">subst</span> m; <span class="bp">reflexivity</span>).
+  <span class="nb">assert</span> (q = <span class="mi">0</span> ∨ q = <span class="mi">1</span>) <span class="kr">as</span> D <span class="bp">by</span> <span class="bp">lia</span>.
+  <span class="nb">destruct</span> D; <span class="nb">subst</span>; <span class="bp">reflexivity</span>.
+<span class="kn">Qed</span>.
+
+<span class="c">(* land, lor, lxor *)</span>
+<span class="kn">Lemma</span> <span class="nf">lt_pow_lt_log</span> <span class="nv">d</span> <span class="nv">k</span> <span class="nv">n</span> :
+  <span class="mi">0</span> &lt; d &lt;= n →
+  <span class="mi">0</span> &lt;= k &lt; <span class="mi">2</span> ^ d →
+  Z.log2 k &lt; n.
+<span class="kn">Proof</span>.
+  <span class="nb">intros</span> [hd hdn] [hk hkd].
+  <span class="nb">assert</span> (k = <span class="mi">0</span> ∨ <span class="mi">0</span> &lt; k) <span class="kr">as</span> D <span class="bp">by</span> <span class="bp">lia</span>.
+  <span class="nb">clear</span> hk; <span class="nb">destruct</span> D <span class="kr">as</span> [ hk | hk ].
+  - <span class="nb">subst</span> k; <span class="nb">simpl</span>; <span class="bp">lia</span>.
+  - <span class="nb">apply</span> Z.log2_lt_pow2. <span class="bp">lia</span>.
+    <span class="nb">eapply</span> Z.lt_le_trans. <span class="bp">eassumption</span>.
+    <span class="nb">apply</span> Z.pow_le_mono_r; <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">land_spec&#39;</span> <span class="nv">x</span> <span class="nv">y</span> : φ (x land y) = Z.land φ(x) φ(y).
+<span class="kn">Proof</span>.
+  <span class="nb">apply</span> Z.bits_inj&#39;; <span class="nb">intros</span> n hn.
+  <span class="nb">destruct</span> (to_Z_bounded (x land y)) <span class="kr">as</span> [ hxy hxy&#39; ].
+  <span class="nb">destruct</span> (to_Z_bounded x) <span class="kr">as</span> [ hx hx&#39; ].
+  <span class="nb">destruct</span> (to_Z_bounded y) <span class="kr">as</span> [ hy hy&#39; ].
+  <span class="nb">case</span> (Z_lt_le_dec n (φ digits)); <span class="nb">intros</span> hd.
+  <span class="mi">2</span>: {
+    <span class="nb">rewrite</span> !Z.bits_above_log2; <span class="nb">auto</span>.
+    - <span class="nb">apply</span> Z.land_nonneg; <span class="nb">auto</span>.
+    - <span class="nb">eapply</span> Z.le_lt_trans.
+        <span class="nb">apply</span> Z.log2_land; <span class="bp">assumption</span>.
+       <span class="nb">apply</span> Z.min_lt_iff.
+       <span class="nb">left</span>. <span class="nb">apply</span> (lt_pow_lt_log φ digits). <span class="bp">exact</span> (conj eq_refl hd).
+      <span class="nb">split</span>; <span class="bp">assumption</span>.
+    - <span class="nb">apply</span> (lt_pow_lt_log φ digits). <span class="bp">exact</span> (conj eq_refl hd).
+      <span class="nb">split</span>; <span class="bp">assumption</span>.
+  }
+  <span class="nb">rewrite</span> (is_int n).
+    <span class="nb">rewrite</span> Z.land_spec, &lt;- !bitE, land_spec; <span class="bp">reflexivity</span>.
+  <span class="nb">apply</span> (conj hn).
+  <span class="nb">apply</span> (Z.lt_trans _ _ _ hd).
+  <span class="nb">apply</span> Zpower2_lt_lin. <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lor_spec&#39;</span> <span class="nv">x</span> <span class="nv">y</span> : φ (x lor y) = Z.lor φ(x) φ(y).
+<span class="kn">Proof</span>.
+  <span class="nb">apply</span> Z.bits_inj&#39;; <span class="nb">intros</span> n hn.
+  <span class="nb">destruct</span> (to_Z_bounded (x lor y)) <span class="kr">as</span> [ hxy hxy&#39; ].
+  <span class="nb">destruct</span> (to_Z_bounded x) <span class="kr">as</span> [ hx hx&#39; ].
+  <span class="nb">destruct</span> (to_Z_bounded y) <span class="kr">as</span> [ hy hy&#39; ].
+  <span class="nb">case</span> (Z_lt_le_dec n (φ digits)); <span class="nb">intros</span> hd.
+  <span class="mi">2</span>: {
+    <span class="nb">rewrite</span> !Z.bits_above_log2; <span class="nb">auto</span>.
+    - <span class="nb">apply</span> Z.lor_nonneg; <span class="nb">auto</span>.
+    - <span class="nb">rewrite</span> Z.log2_lor <span class="bp">by</span> <span class="bp">assumption</span>.
+      <span class="nb">apply</span> Z.max_lub_lt; <span class="nb">apply</span> (lt_pow_lt_log φ digits); <span class="nb">split</span>; <span class="bp">assumption</span> || <span class="bp">reflexivity</span>.
+    - <span class="nb">apply</span> (lt_pow_lt_log φ digits); <span class="nb">split</span>; <span class="bp">assumption</span> || <span class="bp">reflexivity</span>.
+  }
+  <span class="nb">rewrite</span> (is_int n).
+    <span class="nb">rewrite</span> Z.lor_spec, &lt;- !bitE, lor_spec; <span class="bp">reflexivity</span>.
+  <span class="nb">apply</span> (conj hn).
+  <span class="nb">apply</span> (Z.lt_trans _ _ _ hd).
+  <span class="nb">apply</span> Zpower2_lt_lin. <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lxor_spec&#39;</span> <span class="nv">x</span> <span class="nv">y</span> : φ (x lxor y) = Z.lxor φ(x) φ(y).
+<span class="kn">Proof</span>.
+  <span class="nb">apply</span> Z.bits_inj&#39;; <span class="nb">intros</span> n hn.
+  <span class="nb">destruct</span> (to_Z_bounded (x lxor y)) <span class="kr">as</span> [ hxy hxy&#39; ].
+  <span class="nb">destruct</span> (to_Z_bounded x) <span class="kr">as</span> [ hx hx&#39; ].
+  <span class="nb">destruct</span> (to_Z_bounded y) <span class="kr">as</span> [ hy hy&#39; ].
+  <span class="nb">case</span> (Z_lt_le_dec n (φ digits)); <span class="nb">intros</span> hd.
+  <span class="mi">2</span>: {
+    <span class="nb">rewrite</span> !Z.bits_above_log2; <span class="nb">auto</span>.
+    - <span class="nb">apply</span> Z.lxor_nonneg; <span class="nb">split</span>; <span class="nb">auto</span>.
+    - <span class="nb">eapply</span> Z.le_lt_trans.
+        <span class="nb">apply</span> Z.log2_lxor; <span class="bp">assumption</span>.
+      <span class="nb">apply</span> Z.max_lub_lt; <span class="nb">apply</span> (lt_pow_lt_log φ digits); <span class="nb">split</span>; <span class="bp">assumption</span> || <span class="bp">reflexivity</span>.
+    - <span class="nb">apply</span> (lt_pow_lt_log φ digits); <span class="nb">split</span>; <span class="bp">assumption</span> || <span class="bp">reflexivity</span>.
+  }
+  <span class="nb">rewrite</span> (is_int n).
+    <span class="nb">rewrite</span> Z.lxor_spec, &lt;- !bitE, lxor_spec; <span class="bp">reflexivity</span>.
+  <span class="nb">apply</span> (conj hn).
+  <span class="nb">apply</span> (Z.lt_trans _ _ _ hd).
+  <span class="nb">apply</span> Zpower2_lt_lin. <span class="bp">lia</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">landC</span> <span class="nv">i</span> <span class="nv">j</span> : i land j = j land i.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> !land_spec, andb_comm; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">landA</span> <span class="nv">i</span> <span class="nv">j</span> <span class="nv">k</span> : i land (j land k) = i land j land k.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> !land_spec, andb_assoc; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">land0</span> <span class="nv">i</span> : <span class="mi">0</span> land i = <span class="mi">0</span>%int63.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> land_spec, bit_0; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">land0_r</span> <span class="nv">i</span> : i land <span class="mi">0</span> = <span class="mi">0</span>%int63.
+<span class="kn">Proof</span>. <span class="nb">rewrite</span> landC; <span class="bp">exact</span> (land0 i). <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lorC</span> <span class="nv">i</span> <span class="nv">j</span> : i lor j = j lor i.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> !lor_spec, orb_comm; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lorA</span> <span class="nv">i</span> <span class="nv">j</span> <span class="nv">k</span> : i lor (j lor k) = i lor j lor k.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> !lor_spec, orb_assoc; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lor0</span> <span class="nv">i</span> : <span class="mi">0</span> lor i = i.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> lor_spec, bit_0; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lor0_r</span> <span class="nv">i</span> : i lor <span class="mi">0</span> = i.
+<span class="kn">Proof</span>. <span class="nb">rewrite</span> lorC; <span class="bp">exact</span> (lor0 i). <span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lxorC</span> <span class="nv">i</span> <span class="nv">j</span> : i lxor j = j lxor i.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> !lxor_spec, xorb_comm; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lxorA</span> <span class="nv">i</span> <span class="nv">j</span> <span class="nv">k</span> : i lxor (j lxor k) = i lxor j lxor k.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> !lxor_spec, xorb_assoc; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lxor0</span> <span class="nv">i</span> : <span class="mi">0</span> lxor i = i.
+<span class="kn">Proof</span>.
+ <span class="nb">apply</span> bit_ext; <span class="nb">intros</span> n.
+ <span class="nb">rewrite</span> lxor_spec, bit_0, xorb_false_l; <span class="nb">auto</span>.
+<span class="kn">Qed</span>.
+
+<span class="kn">Lemma</span> <span class="nf">lxor0_r</span> <span class="nv">i</span> : i lxor <span class="mi">0</span> = i.
+<span class="kn">Proof</span>. <span class="nb">rewrite</span> lxorC; <span class="bp">exact</span> (lxor0 i). <span class="kn">Qed</span>.</span></span></pre></article></body></html>

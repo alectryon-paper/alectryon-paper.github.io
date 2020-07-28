@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# https://tex.stackexchange.com/questions/434404/remove-only-top-and-bottom-margins-using-pdfcrop
+input="$1"
+output="$2"
+pagesize=( $(pdfinfo "$input" | grep "Page size" | cut -d ":" -f2 |  awk '{ print $1,$3 }') )
+bounding=( $(pdfcrop --verbose "$input" "$(mktemp)" | grep "%%HiResBoundingBox" | cut -d":" -f2 ) )
+lmarg="$(python3 -c "print('{:.3f}'.format(${bounding[0]}))")"
+rmarg="$(python3 -c "print('{:.3f}'.format(${pagesize[0]} - ${bounding[2]}))")"
+pdfcrop --margins "$lmarg 0 $rmarg 0" "$input" "$output"

@@ -1,0 +1,12 @@
+[CoqSentence('Let inv b: negb (negb b) = b.',
+    goals=[CoqGoal('negb (negb b) = b',
+               hypotheses=[
+                   CoqHypothesis(names=['b'],
+                                 type='bool')])]), '\n  ',
+ CoqSentence('destruct b.',
+     goals=[CoqGoal('negb (negb true) = true'),
+            CoqGoal('negb (negb false) = false')]), ' ',
+ CoqSentence('all: reflexivity.'), '\n',
+ CoqSentence('Qed.'), '\n',
+ CoqSentence('Print Assumptions inv.',
+     responses=['Closed under the global context'])]

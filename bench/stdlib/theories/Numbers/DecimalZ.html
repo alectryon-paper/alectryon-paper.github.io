@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html><head><title>DecimalZ.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
+<a name="lab1"></a><h1 class="section">DecimalZ</h1>
+<div class="paragraph"> </div>
+
+    Proofs that conversions between decimal numbers and <span class="inlinecode"><span class="id" title="var">Z</span></span>
+    are bijections. 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Decimal DecimalFacts DecimalPos DecimalN ZArith.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">of_to</span> (<span class="nv">z</span>:Z) : Z.of_int (Z.to_int z) = z.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">z</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int (Z.to_int z) = z</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">z</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int (Z.to_int z) = z</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk2"><span class="highlight"><span class="nb">destruct</span> z; <span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_uint <span class="mi">0</span> = <span class="mi">0</span>%Z</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="DecimalZ-v-chk3" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="DecimalZ-v-chk3"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_uint (Pos.to_uint p) = Z.pos p</span></div></blockquote><input class="coq-extra-goal-toggle" id="DecimalZ-v-chk4" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="DecimalZ-v-chk4"><hr></label><div class="goal-conclusion"><span class="highlight">(- Z.of_uint (Pos.to_uint p))%Z = Z.neg p</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk5"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_uint <span class="mi">0</span> = <span class="mi">0</span>%Z</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">trivial</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk6"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_uint (Pos.to_uint p) = Z.pos p</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk7"><span class="highlight"><span class="nb">unfold</span> Z.of_uint.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_N (Pos.of_uint (Pos.to_uint p)) = Z.pos p</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk8"><span class="highlight"><span class="nb">rewrite</span> DecimalPos.Unsigned.of_to.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_N (N.pos p) = Z.pos p</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">destruct</span> p.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk9"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(- Z.of_uint (Pos.to_uint p))%Z = Z.neg p</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chka" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chka"><span class="highlight"><span class="nb">unfold</span> Z.of_uint.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(- Z.of_N (Pos.of_uint (Pos.to_uint p)))%Z = Z.neg p</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chkb" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chkb"><span class="highlight"><span class="nb">rewrite</span> DecimalPos.Unsigned.of_to.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(- Z.of_N (N.pos p))%Z = Z.neg p</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">destruct</span> p; <span class="nb">auto</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chkc" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chkc"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_of</span> (<span class="nv">d</span>:int) : Z.to_int (Z.of_int d) = norm d.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.to_int (Z.of_int d) = norm d</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chkd" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chkd"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.to_int (Z.of_int d) = norm d</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chke" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chke"><span class="highlight"><span class="nb">destruct</span> d; <span class="nb">simpl</span>; <span class="nb">unfold</span> Z.to_int, Z.of_uint.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> Z.of_N (Pos.of_uint d) <span class="kr">with</span>
+| <span class="mi">0</span>%Z =&gt; <span class="mi">0</span>%int
+| Z.pos p =&gt; Pos (Pos.to_uint p)
+| Z.neg p =&gt; Neg (Pos.to_uint p)
+<span class="kr">end</span> = Pos (unorm d)</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="DecimalZ-v-chkf" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="DecimalZ-v-chkf"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> (- Z.of_N (Pos.of_uint d))%Z <span class="kr">with</span>
+| <span class="mi">0</span>%Z =&gt; <span class="mi">0</span>%int
+| Z.pos p =&gt; Pos (Pos.to_uint p)
+| Z.neg p =&gt; Neg (Pos.to_uint p)
+<span class="kr">end</span> =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk10"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> Z.of_N (Pos.of_uint d) <span class="kr">with</span>
+| <span class="mi">0</span>%Z =&gt; <span class="mi">0</span>%int
+| Z.pos p =&gt; Pos (Pos.to_uint p)
+| Z.neg p =&gt; Neg (Pos.to_uint p)
+<span class="kr">end</span> = Pos (unorm d)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk11" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk11"><span class="highlight"><span class="nb">rewrite</span> &lt;- (DecimalN.Unsigned.to_of d).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> Z.of_N (Pos.of_uint d) <span class="kr">with</span>
+| <span class="mi">0</span>%Z =&gt; <span class="mi">0</span>%int
+| Z.pos p =&gt; Pos (Pos.to_uint p)
+| Z.neg p =&gt; Neg (Pos.to_uint p)
+<span class="kr">end</span> = Pos (N.to_uint (N.of_uint d))</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk12" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk12"><span class="highlight"><span class="nb">unfold</span> N.of_uint.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> Z.of_N (Pos.of_uint d) <span class="kr">with</span>
+| <span class="mi">0</span>%Z =&gt; <span class="mi">0</span>%int
+| Z.pos p =&gt; Pos (Pos.to_uint p)
+| Z.neg p =&gt; Neg (Pos.to_uint p)
+<span class="kr">end</span> = Pos (N.to_uint (Pos.of_uint d))</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">   </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">destruct</span> (Pos.of_uint d).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk13" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk13"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> (- Z.of_N (Pos.of_uint d))%Z <span class="kr">with</span>
+| <span class="mi">0</span>%Z =&gt; <span class="mi">0</span>%int
+| Z.pos p =&gt; Pos (Pos.to_uint p)
+| Z.neg p =&gt; Neg (Pos.to_uint p)
+<span class="kr">end</span> =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk14" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk14"><span class="highlight"><span class="nb">destruct</span> (Pos.of_uint d) <span class="nb">eqn</span>:Hd; <span class="nb">simpl</span>; <span class="nb">f_equal</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="DecimalZ-v-chk15" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="DecimalZ-v-chk15"><hr></label><div class="goal-conclusion"><span class="highlight">Neg (Pos.to_uint p) =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">   </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk16" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk16"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk17" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk17"><span class="highlight"><span class="nb">generalize</span> (DecimalPos.Unsigned.to_of d).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">N.to_uint (Pos.of_uint d) = unorm d -&gt;
+<span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk18" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk18"><span class="highlight"><span class="nb">rewrite</span> Hd.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">N.to_uint <span class="mi">0</span> = unorm d -&gt;
+<span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk19" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk19"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span>%uint = unorm d -&gt;
+<span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">     </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk1a" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk1a"><span class="highlight"><span class="nb">intros</span> H.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span>%uint = unorm d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk1b" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk1b"><span class="highlight"><span class="nb">symmetry in</span> H.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">unorm d = <span class="mi">0</span>%uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk1c" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk1c"><span class="highlight"><span class="nb">apply</span> unorm_0 <span class="kr">in</span> H.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = <span class="mi">0</span>%N</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nzhead d = Nil</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span>%int =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">rewrite</span> H.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">   </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk1d" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk1d"><span class="highlight">+</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Neg (Pos.to_uint p) =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk1e" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk1e"><span class="highlight"><span class="nb">assert</span> (Hp := DecimalPos.Unsigned.to_of d).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hp</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N.to_uint (Pos.of_uint d) = unorm d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Neg (Pos.to_uint p) =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk1f" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk1f"><span class="highlight"><span class="nb">rewrite</span> Hd <span class="kr">in</span> Hp.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hp</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N.to_uint (N.pos p) = unorm d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Neg (Pos.to_uint p) =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk20" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk20"><span class="highlight"><span class="nb">simpl</span> <span class="kr">in</span> *.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hp</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.to_uint p = unorm d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Neg (Pos.to_uint p) =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">     </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk21" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk21"><span class="highlight"><span class="nb">rewrite</span> Hp.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hp</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.to_uint p = unorm d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Neg (unorm d) =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk22" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk22"><span class="highlight"><span class="nb">unfold</span> unorm <span class="kr">in</span> *.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hp</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.to_uint p =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%uint
+| D0 u =&gt; D0 u
+| D1 u =&gt; D1 u
+| D2 u =&gt; D2 u
+| D3 u =&gt; D3 u
+| D4 u =&gt; D4 u
+| D5 u =&gt; D5 u
+| D6 u =&gt; D6 u
+| D7 u =&gt; D7 u
+| D8 u =&gt; D8 u
+| D9 u =&gt; D9 u
+<span class="kr">end</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Neg
+  <span class="kr">match</span> nzhead d <span class="kr">with</span>
+  | Nil =&gt; <span class="mi">0</span>
+  | D0 u =&gt; D0 u
+  | D1 u =&gt; D1 u
+  | D2 u =&gt; D2 u
+  | D3 u =&gt; D3 u
+  | D4 u =&gt; D4 u
+  | D5 u =&gt; D5 u
+  | D6 u =&gt; D6 u
+  | D7 u =&gt; D7 u
+  | D8 u =&gt; D8 u
+  | D9 u =&gt; D9 u
+  <span class="kr">end</span> =
+<span class="kr">match</span> nzhead d <span class="kr">with</span>
+| Nil =&gt; <span class="mi">0</span>%int
+| D0 u =&gt; Neg (D0 u)
+| D1 u =&gt; Neg (D1 u)
+| D2 u =&gt; Neg (D2 u)
+| D3 u =&gt; Neg (D3 u)
+| D4 u =&gt; Neg (D4 u)
+| D5 u =&gt; Neg (D5 u)
+| D6 u =&gt; Neg (D6 u)
+| D7 u =&gt; Neg (D7 u)
+| D8 u =&gt; Neg (D8 u)
+| D9 u =&gt; Neg (D9 u)
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">     </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk23" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk23"><span class="highlight"><span class="nb">destruct</span> (nzhead d); <span class="nb">trivial</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hp</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.to_uint p = <span class="mi">0</span>%uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(-<span class="mi">0</span>)%int = <span class="mi">0</span>%int</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">     </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk24" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk24"><span class="highlight"><span class="nb">generalize</span> (DecimalPos.Unsigned.of_to p).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hd</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.of_uint d = N.pos p</span></span></span></div><div class="goal-hyp"><span class="hyp-names">Hp</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Pos.to_uint p = <span class="mi">0</span>%uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Pos.of_uint (Pos.to_uint p) = N.pos p -&gt;
+(-<span class="mi">0</span>)%int = <span class="mi">0</span>%int</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">rewrite</span> Hp.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">
+Some consequences 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk25" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk25"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_int_inj</span> <span class="nv">n</span> <span class="nv">n&#39;</span> : Z.to_int n = Z.to_int n&#39; -&gt; n = n&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.to_int n = Z.to_int n&#39; -&gt; n = n&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk26" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk26"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.to_int n = Z.to_int n&#39; -&gt; n = n&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk27" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk27"><span class="highlight"><span class="nb">intro</span> EQ.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n, n'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div><div class="goal-hyp"><span class="hyp-names">EQ</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z.to_int n = Z.to_int n&#39;</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">n = n&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">rewrite</span> &lt;- (of_to n), &lt;- (of_to n&#39;), EQ.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk28" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk28"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_int_surj</span> <span class="nv">d</span> : <span class="kr">exists</span> <span class="nv">n</span>, Z.to_int n = norm d.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">exists</span> <span class="nv">n</span> : Z, Z.to_int n = norm d</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk29" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk29"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">exists</span> <span class="nv">n</span> : Z, Z.to_int n = norm d</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk2a" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk2a"><span class="highlight"><span class="kr">exists</span> (<span class="nv">Z</span>.of_int d).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.to_int (Z.of_int d) = norm d</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> to_of.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk2b" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk2b"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">of_int_norm</span> <span class="nv">d</span> : Z.of_int (norm d) = Z.of_int d.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int (norm d) = Z.of_int d</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk2c" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk2c"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int (norm d) = Z.of_int d</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk2d" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk2d"><span class="highlight"><span class="nb">unfold</span> Z.of_int, Z.of_uint.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> norm d <span class="kr">with</span>
+| Pos d0 =&gt; Z.of_N (Pos.of_uint d0)
+| Neg d0 =&gt; (- Z.of_N (Pos.of_uint d0))%Z
+<span class="kr">end</span> =
+<span class="kr">match</span> d <span class="kr">with</span>
+| Pos d0 =&gt; Z.of_N (Pos.of_uint d0)
+| Neg d0 =&gt; (- Z.of_N (Pos.of_uint d0))%Z
+<span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk2e" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk2e"><span class="highlight"><span class="nb">destruct</span> d.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> norm (Pos d) <span class="kr">with</span>
+| Pos d0 =&gt; Z.of_N (Pos.of_uint d0)
+| Neg d0 =&gt; (- Z.of_N (Pos.of_uint d0))%Z
+<span class="kr">end</span> = Z.of_N (Pos.of_uint d)</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="DecimalZ-v-chk2f" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="DecimalZ-v-chk2f"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> norm (Neg d) <span class="kr">with</span>
+| Pos d0 =&gt; Z.of_N (Pos.of_uint d0)
+| Neg d0 =&gt; (- Z.of_N (Pos.of_uint d0))%Z
+<span class="kr">end</span> = (- Z.of_N (Pos.of_uint d))%Z</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk30" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk30"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> norm (Pos d) <span class="kr">with</span>
+| Pos d0 =&gt; Z.of_N (Pos.of_uint d0)
+| Neg d0 =&gt; (- Z.of_N (Pos.of_uint d0))%Z
+<span class="kr">end</span> = Z.of_N (Pos.of_uint d)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk31" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk31"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_N (Pos.of_uint (unorm d)) =
+Z.of_N (Pos.of_uint d)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">rewrite</span> DecimalPos.Unsigned.of_uint_norm.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk32" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk32"><span class="highlight">-</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span> norm (Neg d) <span class="kr">with</span>
+| Pos d0 =&gt; Z.of_N (Pos.of_uint d0)
+| Neg d0 =&gt; (- Z.of_N (Pos.of_uint d0))%Z
+<span class="kr">end</span> = (- Z.of_N (Pos.of_uint d))%Z</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk33" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk33"><span class="highlight"><span class="nb">simpl</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">match</span>
+  <span class="kr">match</span> nzhead d <span class="kr">with</span>
+  | Nil =&gt; <span class="mi">0</span>%int
+  | D0 u =&gt; Neg (D0 u)
+  | D1 u =&gt; Neg (D1 u)
+  | D2 u =&gt; Neg (D2 u)
+  | D3 u =&gt; Neg (D3 u)
+  | D4 u =&gt; Neg (D4 u)
+  | D5 u =&gt; Neg (D5 u)
+  | D6 u =&gt; Neg (D6 u)
+  | D7 u =&gt; Neg (D7 u)
+  | D8 u =&gt; Neg (D8 u)
+  | D9 u =&gt; Neg (D9 u)
+  <span class="kr">end</span>
+<span class="kr">with</span>
+| Pos d0 =&gt; Z.of_N (Pos.of_uint d0)
+| Neg d0 =&gt; (- Z.of_N (Pos.of_uint d0))%Z
+<span class="kr">end</span> = (- Z.of_N (Pos.of_uint d))%Z</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">destruct</span> (nzhead d) <span class="nb">eqn</span>:H;
+   [ <span class="nb">induction</span> d; <span class="nb">simpl</span>; <span class="nb">auto</span>; <span class="bp">discriminate</span> |
+     <span class="nb">destruct</span> (nzhead_nonzero _ _ H) | .. ];
+   <span class="nb">f_equal</span>; <span class="nb">f_equal</span>; <span class="nb">apply</span> DecimalPos.Unsigned.of_iff;
+   <span class="nb">unfold</span> unorm; <span class="bp">now</span> <span class="nb">rewrite</span> H.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk34" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk34"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">of_inj</span> <span class="nv">d</span> <span class="nv">d&#39;</span> :
+ Z.of_int d = Z.of_int d&#39; -&gt; norm d = norm d&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int d = Z.of_int d&#39; -&gt; norm d = norm d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk35" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk35"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int d = Z.of_int d&#39; -&gt; norm d = norm d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk36" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk36"><span class="highlight"><span class="nb">intros</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z.of_int d = Z.of_int d&#39;</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">norm d = norm d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk37" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk37"><span class="highlight"><span class="nb">rewrite</span> &lt;- !to_of.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z.of_int d = Z.of_int d&#39;</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.to_int (Z.of_int d) = Z.to_int (Z.of_int d&#39;)</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">now</span> <span class="nb">f_equal</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk38" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk38"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">of_iff</span> <span class="nv">d</span> <span class="nv">d&#39;</span> : Z.of_int d = Z.of_int d&#39; &lt;-&gt; norm d = norm d&#39;.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int d = Z.of_int d&#39; &lt;-&gt; norm d = norm d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk39" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk39"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int d = Z.of_int d&#39; &lt;-&gt; norm d = norm d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk3a" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk3a"><span class="highlight"><span class="nb">split</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int d = Z.of_int d&#39; -&gt; norm d = norm d&#39;</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="DecimalZ-v-chk3b" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="DecimalZ-v-chk3b"><hr></label><div class="goal-conclusion"><span class="highlight">norm d = norm d&#39; -&gt; Z.of_int d = Z.of_int d&#39;</span></div></blockquote></div></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk3c" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk3c"><span class="highlight"><span class="nb">apply</span> of_inj.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">norm d = norm d&#39; -&gt; Z.of_int d = Z.of_int d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk3d" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk3d"><span class="highlight"><span class="nb">intros</span> E.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div><div class="goal-hyp"><span class="hyp-names">E</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">norm d = norm d&#39;</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int d = Z.of_int d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalZ-v-chk3e" style="display: none" type="checkbox"><label class="coq-input" for="DecimalZ-v-chk3e"><span class="highlight"><span class="nb">rewrite</span> &lt;- of_int_norm, E.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d, d'</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">int</span></span></span></div><div class="goal-hyp"><span class="hyp-names">E</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">norm d = norm d&#39;</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">Z.of_int (norm d&#39;) = Z.of_int d&#39;</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">apply</span> of_int_norm.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre></article></body></html>

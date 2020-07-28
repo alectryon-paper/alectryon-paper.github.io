@@ -1,0 +1,11 @@
+*.pdf
+*.cache
+*.vo
+*.glob
+*.aux
+.coq-native/
+/github.key
+/github.pub
+/node_modules/
+/api.py.out
+/bench/stdlib/plugins/

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html><head><title>Ranalysis_reg.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Rbase.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Rfunctions.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Rtrigo1.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> SeqSeries.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Ranalysis1.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Ranalysis2.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Ranalysis3.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Rtopology.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> MVT.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> PSeries_reg.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Exp_prop.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Rtrigo_reg.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Rsqrt_def.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> R_sqrt.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Rtrigo_calc.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Rgeom.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> RList.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Sqrt_reg.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Ranalysis4.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Rpower.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> R_scope.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Ranalysis-reg-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="Ranalysis-reg-v-chk0"><span class="highlight"><span class="kn">Definition</span> <span class="nf">AppVar</span> : R.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">R</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="Ranalysis-reg-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="Ranalysis-reg-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">R</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">exact</span> R0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">intro_hyp_glob</span> trm :=
+  <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
+    | (?X1 + ?X2)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (?X1 - ?X2)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (?X1 * ?X2)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (?X1 / ?X2)%F =&gt;
+      <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X2) <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | _:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derivable _) =&gt;
+            intro_hyp_glob X1; intro_hyp_glob X2
+          | _:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (continuity _) =&gt;
+            intro_hyp_glob X1; intro_hyp_glob X2
+          |  |- (derivable _) =&gt;
+            <span class="nb">cut</span> (<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>);
+              [ <span class="nb">intro</span>; intro_hyp_glob X1; intro_hyp_glob X2 | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          |  |- (continuity _) =&gt;
+            <span class="nb">cut</span> (<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>);
+              [ <span class="nb">intro</span>; intro_hyp_glob X1; intro_hyp_glob X2 | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          | _ =&gt; <span class="kp">idtac</span>
+        <span class="kr">end</span>
+    | (comp ?X1 ?X2) =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (- ?X1)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable _) =&gt; intro_hyp_glob X1
+        |  |- (continuity _) =&gt; intro_hyp_glob X1
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (/ ?X1)%F =&gt;
+      <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | _:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derivable _) =&gt;
+            intro_hyp_glob X1
+          | _:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (continuity _) =&gt;
+            intro_hyp_glob X1
+          |  |- (derivable _) =&gt;
+            <span class="nb">cut</span> (<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>);
+              [ <span class="nb">intro</span>; intro_hyp_glob X1 | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          |  |- (continuity _) =&gt;
+            <span class="nb">cut</span> (<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>);
+              [ <span class="nb">intro</span>; intro_hyp_glob X1 | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          | _ =&gt; <span class="kp">idtac</span>
+        <span class="kr">end</span>
+    | cos =&gt; <span class="kp">idtac</span>
+    | sin =&gt; <span class="kp">idtac</span>
+    | cosh =&gt; <span class="kp">idtac</span>
+    | sinh =&gt; <span class="kp">idtac</span>
+    | exp =&gt; <span class="kp">idtac</span>
+    | Rsqr =&gt; <span class="kp">idtac</span>
+    | sqrt =&gt; <span class="kp">idtac</span>
+    | id =&gt; <span class="kp">idtac</span>
+    | (fct_cte _) =&gt; <span class="kp">idtac</span>
+    | (pow_fct _) =&gt; <span class="kp">idtac</span>
+    | Rabs =&gt; <span class="kp">idtac</span>
+    | ?X1 =&gt;
+      <span class="kr">let</span> <span class="nv">p</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
+      <span class="kr">let</span> <span class="nv">HYPPD</span> := <span class="kp">fresh</span> <span class="s2">&quot;HYPPD&quot;</span> <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | _:(derivable p) |- _ =&gt; <span class="kp">idtac</span>
+          |  |- (derivable p) =&gt; <span class="kp">idtac</span>
+          |  |- (derivable _) =&gt;
+            <span class="nb">cut</span> (<span class="kt">True</span> -&gt; derivable p);
+              [ <span class="nb">intro</span> HYPPD; <span class="nb">cut</span> (derivable p);
+                [ <span class="nb">intro</span>; <span class="nb">clear</span> HYPPD | <span class="nb">apply</span> HYPPD; <span class="nb">clear</span> HYPPD; <span class="nb">trivial</span> ]
+                | <span class="kp">idtac</span> ]
+          | _:(continuity p) |- _ =&gt; <span class="kp">idtac</span>
+          |  |- (continuity p) =&gt; <span class="kp">idtac</span>
+          |  |- (continuity _) =&gt;
+            <span class="nb">cut</span> (<span class="kt">True</span> -&gt; continuity p);
+              [ <span class="nb">intro</span> HYPPD; <span class="nb">cut</span> (continuity p);
+                [ <span class="nb">intro</span>; <span class="nb">clear</span> HYPPD | <span class="nb">apply</span> HYPPD; <span class="nb">clear</span> HYPPD; <span class="nb">trivial</span> ]
+                | <span class="kp">idtac</span> ]
+          | _ =&gt; <span class="kp">idtac</span>
+        <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">intro_hyp_pt</span> trm pt :=
+  <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
+    | (?X1 + ?X2)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        |  |- (derive_pt _ _ _ = _) =&gt;
+          intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (?X1 - ?X2)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        |  |- (derive_pt _ _ _ = _) =&gt;
+          intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (?X1 * ?X2)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        |  |- (derive_pt _ _ _ = _) =&gt;
+          intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (?X1 / ?X2)%F =&gt;
+      <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X2) <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (derivable_pt _ _) =&gt;
+            intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+          | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (continuity_pt _ _) =&gt;
+            intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+          | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (derive_pt _ _ _ = _) =&gt;
+            intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+          | id:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derivable_pt _ _) =&gt;
+            <span class="nb">generalize</span> (id pt); <span class="nb">intro</span>; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+          | id:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (continuity_pt _ _) =&gt;
+            <span class="nb">generalize</span> (id pt); <span class="nb">intro</span>; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+          | id:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derive_pt _ _ _ = _) =&gt;
+            <span class="nb">generalize</span> (id pt); <span class="nb">intro</span>; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
+          |  |- (derivable_pt _ _) =&gt;
+            <span class="nb">cut</span> (aux pt &lt;&gt; <span class="mi">0</span>);
+              [ <span class="nb">intro</span>; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          |  |- (continuity_pt _ _) =&gt;
+            <span class="nb">cut</span> (aux pt &lt;&gt; <span class="mi">0</span>);
+              [ <span class="nb">intro</span>; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          |  |- (derive_pt _ _ _ = _) =&gt;
+            <span class="nb">cut</span> (aux pt &lt;&gt; <span class="mi">0</span>);
+              [ <span class="nb">intro</span>; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          | _ =&gt; <span class="kp">idtac</span>
+        <span class="kr">end</span>
+    | (comp ?X1 ?X2) =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable_pt _ _) =&gt;
+          <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
+            (intro_hyp_pt X1 pt_f1; intro_hyp_pt X2 pt)
+        |  |- (continuity_pt _ _) =&gt;
+          <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
+            (intro_hyp_pt X1 pt_f1; intro_hyp_pt X2 pt)
+        |  |- (derive_pt _ _ _ = _) =&gt;
+          <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
+            (intro_hyp_pt X1 pt_f1; intro_hyp_pt X2 pt)
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (- ?X1)%F =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt
+        |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt
+        |  |- (derive_pt _ _ _ = _) =&gt; intro_hyp_pt X1 pt
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | (/ ?X1)%F =&gt;
+      <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (derivable_pt _ _) =&gt;
+            intro_hyp_pt X1 pt
+          | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (continuity_pt _ _) =&gt;
+            intro_hyp_pt X1 pt
+          | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (derive_pt _ _ _ = _) =&gt;
+            intro_hyp_pt X1 pt
+          | id:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derivable_pt _ _) =&gt;
+            <span class="nb">generalize</span> (id pt); <span class="nb">intro</span>; intro_hyp_pt X1 pt
+          | id:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (continuity_pt _ _) =&gt;
+            <span class="nb">generalize</span> (id pt); <span class="nb">intro</span>; intro_hyp_pt X1 pt
+          | id:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derive_pt _ _ _ = _) =&gt;
+            <span class="nb">generalize</span> (id pt); <span class="nb">intro</span>; intro_hyp_pt X1 pt
+          |  |- (derivable_pt _ _) =&gt;
+            <span class="nb">cut</span> (aux pt &lt;&gt; <span class="mi">0</span>); [ <span class="nb">intro</span>; intro_hyp_pt X1 pt | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          |  |- (continuity_pt _ _) =&gt;
+            <span class="nb">cut</span> (aux pt &lt;&gt; <span class="mi">0</span>); [ <span class="nb">intro</span>; intro_hyp_pt X1 pt | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          |  |- (derive_pt _ _ _ = _) =&gt;
+            <span class="nb">cut</span> (aux pt &lt;&gt; <span class="mi">0</span>); [ <span class="nb">intro</span>; intro_hyp_pt X1 pt | <span class="kp">try</span> <span class="bp">assumption</span> ]
+          | _ =&gt; <span class="kp">idtac</span>
+        <span class="kr">end</span>
+    | cos =&gt; <span class="kp">idtac</span>
+    | sin =&gt; <span class="kp">idtac</span>
+    | cosh =&gt; <span class="kp">idtac</span>
+    | sinh =&gt; <span class="kp">idtac</span>
+    | exp =&gt; <span class="kp">idtac</span>
+    | Rsqr =&gt; <span class="kp">idtac</span>
+    | id =&gt; <span class="kp">idtac</span>
+    | (fct_cte _) =&gt; <span class="kp">idtac</span>
+    | (pow_fct _) =&gt; <span class="kp">idtac</span>
+    | sqrt =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable_pt _ _) =&gt; <span class="nb">cut</span> (<span class="mi">0</span> &lt; pt); [ <span class="nb">intro</span> | <span class="kp">try</span> <span class="bp">assumption</span> ]
+        |  |- (continuity_pt _ _) =&gt;
+          <span class="nb">cut</span> (<span class="mi">0</span> &lt;= pt); [ <span class="nb">intro</span> | <span class="kp">try</span> <span class="bp">assumption</span> ]
+        |  |- (derive_pt _ _ _ = _) =&gt;
+          <span class="nb">cut</span> (<span class="mi">0</span> &lt; pt); [ <span class="nb">intro</span> | <span class="kp">try</span> <span class="bp">assumption</span> ]
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | Rabs =&gt;
+      <span class="kr">match goal with</span>
+        |  |- (derivable_pt _ _) =&gt;
+          <span class="nb">cut</span> (pt &lt;&gt; <span class="mi">0</span>); [ <span class="nb">intro</span> | <span class="kp">try</span> <span class="bp">assumption</span> ]
+        | _ =&gt; <span class="kp">idtac</span>
+      <span class="kr">end</span>
+    | ?X1 =&gt;
+      <span class="kr">let</span> <span class="nv">p</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
+      <span class="kr">let</span> <span class="nv">HYPPD</span> := <span class="kp">fresh</span> <span class="s2">&quot;HYPPD&quot;</span> <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | _:(derivable_pt p pt) |- _ =&gt; <span class="kp">idtac</span>
+          |  |- (derivable_pt p pt) =&gt; <span class="kp">idtac</span>
+          |  |- (derivable_pt _ _) =&gt;
+            <span class="nb">cut</span> (<span class="kt">True</span> -&gt; derivable_pt p pt);
+              [ <span class="nb">intro</span> HYPPD; <span class="nb">cut</span> (derivable_pt p pt);
+                [ <span class="nb">intro</span>; <span class="nb">clear</span> HYPPD | <span class="nb">apply</span> HYPPD; <span class="nb">clear</span> HYPPD; <span class="nb">trivial</span> ]
+                | <span class="kp">idtac</span> ]
+          | _:(continuity_pt p pt) |- _ =&gt; <span class="kp">idtac</span>
+          |  |- (continuity_pt p pt) =&gt; <span class="kp">idtac</span>
+          |  |- (continuity_pt _ _) =&gt;
+            <span class="nb">cut</span> (<span class="kt">True</span> -&gt; continuity_pt p pt);
+              [ <span class="nb">intro</span> HYPPD; <span class="nb">cut</span> (continuity_pt p pt);
+                [ <span class="nb">intro</span>; <span class="nb">clear</span> HYPPD | <span class="nb">apply</span> HYPPD; <span class="nb">clear</span> HYPPD; <span class="nb">trivial</span> ]
+                | <span class="kp">idtac</span> ]
+          |  |- (derive_pt _ _ _ = _) =&gt;
+            <span class="nb">cut</span> (<span class="kt">True</span> -&gt; derivable_pt p pt);
+              [ <span class="nb">intro</span> HYPPD; <span class="nb">cut</span> (derivable_pt p pt);
+                [ <span class="nb">intro</span>; <span class="nb">clear</span> HYPPD | <span class="nb">apply</span> HYPPD; <span class="nb">clear</span> HYPPD; <span class="nb">trivial</span> ]
+                | <span class="kp">idtac</span> ]
+          | _ =&gt; <span class="kp">idtac</span>
+        <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">is_diff_pt</span> :=
+  <span class="kr">match goal with</span>
+    |  |- (derivable_pt Rsqr _) =&gt;
+
+  <span class="c">(* fonctions de base *)</span>
+      <span class="nb">apply</span> derivable_pt_Rsqr
+    |  |- (derivable_pt id ?X1) =&gt; <span class="nb">apply</span> (derivable_pt_id X1)
+    |  |- (derivable_pt (fct_cte _) _) =&gt; <span class="nb">apply</span> derivable_pt_const
+    |  |- (derivable_pt sin _) =&gt; <span class="nb">apply</span> derivable_pt_sin
+    |  |- (derivable_pt cos _) =&gt; <span class="nb">apply</span> derivable_pt_cos
+    |  |- (derivable_pt sinh _) =&gt; <span class="nb">apply</span> derivable_pt_sinh
+    |  |- (derivable_pt cosh _) =&gt; <span class="nb">apply</span> derivable_pt_cosh
+    |  |- (derivable_pt exp _) =&gt; <span class="nb">apply</span> derivable_pt_exp
+    |  |- (derivable_pt (pow_fct _) _) =&gt;
+      <span class="nb">unfold</span> pow_fct <span class="kr">in</span> |- *; <span class="nb">apply</span> derivable_pt_pow
+    |  |- (derivable_pt sqrt ?X1) =&gt;
+      <span class="nb">apply</span> (derivable_pt_sqrt X1);
+        <span class="bp">assumption</span> ||
+          <span class="nb">unfold</span> plus_fct, minus_fct, opp_fct, mult_fct, div_fct, inv_fct,
+            comp, id, fct_cte, pow_fct <span class="kr">in</span> |- *
+    |  |- (derivable_pt Rabs ?X1) =&gt;
+      <span class="nb">apply</span> (Rderivable_pt_abs X1);
+        <span class="bp">assumption</span> ||
+          <span class="nb">unfold</span> plus_fct, minus_fct, opp_fct, mult_fct, div_fct, inv_fct,
+            comp, id, fct_cte, pow_fct <span class="kr">in</span> |- *
+        <span class="c">(* regles de differentiabilite *)</span>
+        <span class="c">(* PLUS *)</span>
+    |  |- (derivable_pt (?X1 + ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (derivable_pt_plus X1 X2 X3); is_diff_pt
+       <span class="c">(* MOINS *)</span>
+    |  |- (derivable_pt (?X1 - ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (derivable_pt_minus X1 X2 X3); is_diff_pt
+       <span class="c">(* OPPOSE *)</span>
+    |  |- (derivable_pt (- ?X1) ?X2) =&gt;
+      <span class="nb">apply</span> (derivable_pt_opp X1 X2);
+        is_diff_pt
+       <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
+    |  |- (derivable_pt (mult_real_fct ?X1 ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (derivable_pt_scal X2 X1 X3); is_diff_pt
+       <span class="c">(* MULTIPLICATION *)</span>
+    |  |- (derivable_pt (?X1 * ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (derivable_pt_mult X1 X2 X3); is_diff_pt
+       <span class="c">(* DIVISION *)</span>
+    |  |- (derivable_pt (?X1 / ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (derivable_pt_div X1 X2 X3);
+        [ is_diff_pt
+          | is_diff_pt
+          | <span class="kp">try</span>
+            <span class="bp">assumption</span> ||
+              <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
+                comp, pow_fct, id, fct_cte <span class="kr">in</span> |- * ]
+    |  |- (derivable_pt (/ ?X1) ?X2) =&gt;
+
+       <span class="c">(* INVERSION *)</span>
+      <span class="nb">apply</span> (derivable_pt_inv X1 X2);
+        [ <span class="bp">assumption</span> ||
+          <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
+            comp, pow_fct, id, fct_cte <span class="kr">in</span> |- *
+          | is_diff_pt ]
+    |  |- (derivable_pt (comp ?X1 ?X2) ?X3) =&gt;
+
+       <span class="c">(* COMPOSITION *)</span>
+      <span class="nb">apply</span> (derivable_pt_comp X2 X1 X3); is_diff_pt
+    | _:(derivable_pt ?X1 ?X2) |- (derivable_pt ?X1 ?X2) =&gt;
+      <span class="bp">assumption</span>
+    | _:(derivable ?X1) |- (derivable_pt ?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">HypDDPT</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypDDPT&quot;</span> <span class="kr">in</span>
+      <span class="nb">cut</span> (derivable X1); [ <span class="nb">intro</span> HypDDPT; <span class="nb">apply</span> HypDDPT | <span class="bp">assumption</span> ]
+    |  |- (<span class="kt">True</span> -&gt; derivable_pt _ _) =&gt;
+      <span class="kr">let</span> <span class="nv">HypTruE</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypTruE&quot;</span> <span class="kr">in</span>
+      <span class="nb">intro</span> HypTruE; <span class="nb">clear</span> HypTruE; is_diff_pt
+    | _ =&gt;
+      <span class="kp">try</span>
+        <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct, id,
+          fct_cte, comp, pow_fct <span class="kr">in</span> |- *
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">is_diff_glob</span> :=
+  <span class="kr">match goal with</span>
+    |  |- (derivable Rsqr) =&gt;
+  <span class="c">(* fonctions de base *)</span>
+      <span class="nb">apply</span> derivable_Rsqr
+    |  |- (derivable id) =&gt; <span class="nb">apply</span> derivable_id
+    |  |- (derivable (fct_cte _)) =&gt; <span class="nb">apply</span> derivable_const
+    |  |- (derivable sin) =&gt; <span class="nb">apply</span> derivable_sin
+    |  |- (derivable cos) =&gt; <span class="nb">apply</span> derivable_cos
+    |  |- (derivable cosh) =&gt; <span class="nb">apply</span> derivable_cosh
+    |  |- (derivable sinh) =&gt; <span class="nb">apply</span> derivable_sinh
+    |  |- (derivable exp) =&gt; <span class="nb">apply</span> derivable_exp
+    |  |- (derivable (pow_fct _)) =&gt;
+      <span class="nb">unfold</span> pow_fct <span class="kr">in</span> |- *;
+        <span class="nb">apply</span> derivable_pow
+        <span class="c">(* regles de differentiabilite *)</span>
+        <span class="c">(* PLUS *)</span>
+    |  |- (derivable (?X1 + ?X2)) =&gt;
+      <span class="nb">apply</span> (derivable_plus X1 X2); is_diff_glob
+       <span class="c">(* MOINS *)</span>
+    |  |- (derivable (?X1 - ?X2)) =&gt;
+      <span class="nb">apply</span> (derivable_minus X1 X2); is_diff_glob
+       <span class="c">(* OPPOSE *)</span>
+    |  |- (derivable (- ?X1)) =&gt;
+      <span class="nb">apply</span> (derivable_opp X1);
+        is_diff_glob
+       <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
+    |  |- (derivable (mult_real_fct ?X1 ?X2)) =&gt;
+      <span class="nb">apply</span> (derivable_scal X2 X1); is_diff_glob
+       <span class="c">(* MULTIPLICATION *)</span>
+    |  |- (derivable (?X1 * ?X2)) =&gt;
+      <span class="nb">apply</span> (derivable_mult X1 X2); is_diff_glob
+       <span class="c">(* DIVISION *)</span>
+    |  |- (derivable (?X1 / ?X2)) =&gt;
+      <span class="nb">apply</span> (derivable_div X1 X2);
+        [ is_diff_glob
+          | is_diff_glob
+          | <span class="kp">try</span>
+            <span class="bp">assumption</span> ||
+              <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
+                id, fct_cte, comp, pow_fct <span class="kr">in</span> |- * ]
+    |  |- (derivable (/ ?X1)) =&gt;
+
+       <span class="c">(* INVERSION *)</span>
+      <span class="nb">apply</span> (derivable_inv X1);
+        [ <span class="kp">try</span>
+          <span class="bp">assumption</span> ||
+            <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
+              id, fct_cte, comp, pow_fct <span class="kr">in</span> |- *
+          | is_diff_glob ]
+    |  |- (derivable (comp sqrt _)) =&gt;
+
+       <span class="c">(* COMPOSITION *)</span>
+      <span class="nb">unfold</span> derivable <span class="kr">in</span> |- *; <span class="nb">intro</span>; <span class="kp">try</span> is_diff_pt
+    |  |- (derivable (comp Rabs _)) =&gt;
+      <span class="nb">unfold</span> derivable <span class="kr">in</span> |- *; <span class="nb">intro</span>; <span class="kp">try</span> is_diff_pt
+    |  |- (derivable (comp ?X1 ?X2)) =&gt;
+      <span class="nb">apply</span> (derivable_comp X2 X1); is_diff_glob
+    | _:(derivable ?X1) |- (derivable ?X1) =&gt; <span class="bp">assumption</span>
+    |  |- (<span class="kt">True</span> -&gt; derivable _) =&gt;
+      <span class="kr">let</span> <span class="nv">HypTruE</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypTruE&quot;</span> <span class="kr">in</span>
+      <span class="nb">intro</span> HypTruE; <span class="nb">clear</span> HypTruE; is_diff_glob
+    | _ =&gt;
+      <span class="kp">try</span>
+        <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct, id,
+          fct_cte, comp, pow_fct <span class="kr">in</span> |- *
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">is_cont_pt</span> :=
+  <span class="kr">match goal with</span>
+    |  |- (continuity_pt Rsqr _) =&gt;
+
+       <span class="c">(* fonctions de base *)</span>
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_Rsqr
+    |  |- (continuity_pt id ?X1) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> (derivable_pt_id X1)
+    |  |- (continuity_pt (fct_cte _) _) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_const
+    |  |- (continuity_pt sin _) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_sin
+    |  |- (continuity_pt cos _) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_cos
+    |  |- (continuity_pt sinh _) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_sinh
+    |  |- (continuity_pt cosh _) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_cosh
+    |  |- (continuity_pt exp _) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_exp
+    |  |- (continuity_pt (pow_fct _) _) =&gt;
+      <span class="nb">unfold</span> pow_fct <span class="kr">in</span> |- *; <span class="nb">apply</span> derivable_continuous_pt;
+        <span class="nb">apply</span> derivable_pt_pow
+    |  |- (continuity_pt sqrt ?X1) =&gt;
+      <span class="nb">apply</span> continuity_pt_sqrt;
+        <span class="bp">assumption</span> ||
+          <span class="nb">unfold</span> plus_fct, minus_fct, opp_fct, mult_fct, div_fct, inv_fct,
+            comp, id, fct_cte, pow_fct <span class="kr">in</span> |- *
+    |  |- (continuity_pt Rabs ?X1) =&gt;
+      <span class="nb">apply</span> (Rcontinuity_abs X1)
+       <span class="c">(* regles de differentiabilite *)</span>
+       <span class="c">(* PLUS *)</span>
+    |  |- (continuity_pt (?X1 + ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (continuity_pt_plus X1 X2 X3); is_cont_pt
+       <span class="c">(* MOINS *)</span>
+    |  |- (continuity_pt (?X1 - ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (continuity_pt_minus X1 X2 X3); is_cont_pt
+       <span class="c">(* OPPOSE *)</span>
+    |  |- (continuity_pt (- ?X1) ?X2) =&gt;
+      <span class="nb">apply</span> (continuity_pt_opp X1 X2);
+        is_cont_pt
+       <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
+    |  |- (continuity_pt (mult_real_fct ?X1 ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (continuity_pt_scal X2 X1 X3); is_cont_pt
+       <span class="c">(* MULTIPLICATION *)</span>
+    |  |- (continuity_pt (?X1 * ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (continuity_pt_mult X1 X2 X3); is_cont_pt
+       <span class="c">(* DIVISION *)</span>
+    |  |- (continuity_pt (?X1 / ?X2) ?X3) =&gt;
+      <span class="nb">apply</span> (continuity_pt_div X1 X2 X3);
+        [ is_cont_pt
+          | is_cont_pt
+          | <span class="kp">try</span>
+            <span class="bp">assumption</span> ||
+              <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
+                comp, id, fct_cte, pow_fct <span class="kr">in</span> |- * ]
+    |  |- (continuity_pt (/ ?X1) ?X2) =&gt;
+
+       <span class="c">(* INVERSION *)</span>
+      <span class="nb">apply</span> (continuity_pt_inv X1 X2);
+        [ is_cont_pt
+          | <span class="bp">assumption</span> ||
+            <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
+              comp, id, fct_cte, pow_fct <span class="kr">in</span> |- * ]
+    |  |- (continuity_pt (comp ?X1 ?X2) ?X3) =&gt;
+
+       <span class="c">(* COMPOSITION *)</span>
+      <span class="nb">apply</span> (continuity_pt_comp X2 X1 X3); is_cont_pt
+    | _:(continuity_pt ?X1 ?X2) |- (continuity_pt ?X1 ?X2) =&gt;
+      <span class="bp">assumption</span>
+    | _:(continuity ?X1) |- (continuity_pt ?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">HypDDPT</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypDDPT&quot;</span> <span class="kr">in</span>
+      <span class="nb">cut</span> (continuity X1); [ <span class="nb">intro</span> HypDDPT; <span class="nb">apply</span> HypDDPT | <span class="bp">assumption</span> ]
+    | _:(derivable_pt ?X1 ?X2) |- (continuity_pt ?X1 ?X2) =&gt;
+      <span class="nb">apply</span> derivable_continuous_pt; <span class="bp">assumption</span>
+    | _:(derivable ?X1) |- (continuity_pt ?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">HypDDPT</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypDDPT&quot;</span> <span class="kr">in</span>
+      <span class="nb">cut</span> (continuity X1);
+        [ <span class="nb">intro</span> HypDDPT; <span class="nb">apply</span> HypDDPT
+          | <span class="nb">apply</span> derivable_continuous; <span class="bp">assumption</span> ]
+    |  |- (<span class="kt">True</span> -&gt; continuity_pt _ _) =&gt;
+      <span class="kr">let</span> <span class="nv">HypTruE</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypTruE&quot;</span> <span class="kr">in</span>
+      <span class="nb">intro</span> HypTruE; <span class="nb">clear</span> HypTruE; is_cont_pt
+    | _ =&gt;
+      <span class="kp">try</span>
+        <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct, id,
+          fct_cte, comp, pow_fct <span class="kr">in</span> |- *
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">is_cont_glob</span> :=
+  <span class="kr">match goal with</span>
+    |  |- (continuity Rsqr) =&gt;
+
+       <span class="c">(* fonctions de base *)</span>
+      <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_Rsqr
+    |  |- (continuity id) =&gt; <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_id
+    |  |- (continuity (fct_cte _)) =&gt;
+      <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_const
+    |  |- (continuity sin) =&gt; <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_sin
+    |  |- (continuity cos) =&gt; <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_cos
+    |  |- (continuity exp) =&gt; <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_exp
+    |  |- (continuity (pow_fct _)) =&gt;
+      <span class="nb">unfold</span> pow_fct <span class="kr">in</span> |- *; <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_pow
+    |  |- (continuity sinh) =&gt;
+      <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_sinh
+    |  |- (continuity cosh) =&gt;
+      <span class="nb">apply</span> derivable_continuous; <span class="nb">apply</span> derivable_cosh
+    |  |- (continuity Rabs) =&gt;
+      <span class="nb">apply</span> Rcontinuity_abs
+       <span class="c">(* regles de continuite *)</span>
+       <span class="c">(* PLUS *)</span>
+    |  |- (continuity (?X1 + ?X2)) =&gt;
+      <span class="nb">apply</span> (continuity_plus X1 X2);
+        <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+            <span class="c">(* MOINS *)</span>
+    |  |- (continuity (?X1 - ?X2)) =&gt;
+      <span class="nb">apply</span> (continuity_minus X1 X2);
+        <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+            <span class="c">(* OPPOSE *)</span>
+    |  |- (continuity (- ?X1)) =&gt;
+      <span class="nb">apply</span> (continuity_opp X1); <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+                                      <span class="c">(* INVERSE *)</span>
+    |  |- (continuity (/ ?X1)) =&gt;
+      <span class="nb">apply</span> (continuity_inv X1);
+        <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+            <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
+    |  |- (continuity (mult_real_fct ?X1 ?X2)) =&gt;
+      <span class="nb">apply</span> (continuity_scal X2 X1);
+        <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+            <span class="c">(* MULTIPLICATION *)</span>
+    |  |- (continuity (?X1 * ?X2)) =&gt;
+      <span class="nb">apply</span> (continuity_mult X1 X2);
+        <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+            <span class="c">(* DIVISION *)</span>
+    |  |- (continuity (?X1 / ?X2)) =&gt;
+      <span class="nb">apply</span> (continuity_div X1 X2);
+        [ <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+          | <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+          | <span class="kp">try</span>
+            <span class="bp">assumption</span> ||
+              <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
+                id, fct_cte, pow_fct <span class="kr">in</span> |- * ]
+    |  |- (continuity (comp sqrt _)) =&gt;
+
+       <span class="c">(* COMPOSITION *)</span>
+      <span class="nb">unfold</span> continuity_pt <span class="kr">in</span> |- *; <span class="nb">intro</span>; <span class="kp">try</span> is_cont_pt
+    |  |- (continuity (comp ?X1 ?X2)) =&gt;
+      <span class="nb">apply</span> (continuity_comp X2 X1); <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
+    | _:(continuity ?X1) |- (continuity ?X1) =&gt; <span class="bp">assumption</span>
+    |  |- (<span class="kt">True</span> -&gt; continuity _) =&gt;
+      <span class="kr">let</span> <span class="nv">HypTruE</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypTruE&quot;</span> <span class="kr">in</span>
+      <span class="nb">intro</span> HypTruE; <span class="nb">clear</span> HypTruE; is_cont_glob
+    | _:(derivable ?X1) |- (continuity ?X1) =&gt;
+      <span class="nb">apply</span> derivable_continuous; <span class="bp">assumption</span>
+    | _ =&gt;
+      <span class="kp">try</span>
+        <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct, id,
+          fct_cte, comp, pow_fct <span class="kr">in</span> |- *
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">rew_term</span> trm :=
+  <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
+    | (?X1 + ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
+          | (fct_cte ?X3) =&gt;
+            <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
+              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 + X4))
+              | _ =&gt; <span class="kp">constr</span>:((p1 + p2)%F)
+            <span class="kr">end</span>
+          | _ =&gt; <span class="kp">constr</span>:((p1 + p2)%F)
+        <span class="kr">end</span>
+    | (?X1 - ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
+          | (fct_cte ?X3) =&gt;
+            <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
+              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 - X4))
+              | _ =&gt; <span class="kp">constr</span>:((p1 - p2)%F)
+            <span class="kr">end</span>
+          | _ =&gt; <span class="kp">constr</span>:((p1 - p2)%F)
+        <span class="kr">end</span>
+    | (?X1 / ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
+          | (fct_cte ?X3) =&gt;
+            <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
+              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 / X4))
+              | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
+            <span class="kr">end</span>
+          | _ =&gt;
+            <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
+              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:((p1 * fct_cte (/ X4))%F)
+              | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
+            <span class="kr">end</span>
+        <span class="kr">end</span>
+    | (?X1 * / ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
+          | (fct_cte ?X3) =&gt;
+            <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
+              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 / X4))
+              | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
+            <span class="kr">end</span>
+          | _ =&gt;
+            <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
+              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:((p1 * fct_cte (/ X4))%F)
+              | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
+            <span class="kr">end</span>
+        <span class="kr">end</span>
+    | (?X1 * ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
+          | (fct_cte ?X3) =&gt;
+            <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
+              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 * X4))
+              | _ =&gt; <span class="kp">constr</span>:((p1 * p2)%F)
+            <span class="kr">end</span>
+          | _ =&gt; <span class="kp">constr</span>:((p1 * p2)%F)
+        <span class="kr">end</span>
+    | (- ?X1) =&gt;
+      <span class="kr">let</span> <span class="nv">p</span> := rew_term X1 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
+          | (fct_cte ?X2) =&gt; <span class="kp">constr</span>:(fct_cte (- X2))
+          | _ =&gt; <span class="kp">constr</span>:((- p)%F)
+        <span class="kr">end</span>
+    | (/ ?X1) =&gt;
+      <span class="kr">let</span> <span class="nv">p</span> := rew_term X1 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
+          | (fct_cte ?X2) =&gt; <span class="kp">constr</span>:(fct_cte (/ X2))
+          | _ =&gt; <span class="kp">constr</span>:((/ p)%F)
+        <span class="kr">end</span>
+    | (?X1 AppVar) =&gt; <span class="kp">constr</span>:(X1)
+    | (?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">p</span> := rew_term X2 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
+          | (fct_cte ?X3) =&gt; <span class="kp">constr</span>:(fct_cte (X1 X3))
+          | _ =&gt; <span class="kp">constr</span>:(comp X1 p)
+        <span class="kr">end</span>
+    | AppVar =&gt; <span class="kp">constr</span>:(id)
+    | (AppVar ^ ?X1) =&gt; <span class="kp">constr</span>:(pow_fct X1)
+    | (?X1 ^ ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">p</span> := rew_term X1 <span class="kr">in</span>
+        <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
+          | (fct_cte ?X3) =&gt; <span class="kp">constr</span>:(fct_cte (pow_fct X2 X3))
+          | _ =&gt; <span class="kp">constr</span>:(comp (pow_fct X2) p)
+        <span class="kr">end</span>
+    | ?X1 =&gt; <span class="kp">constr</span>:(fct_cte X1)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">deriv_proof</span> trm pt :=
+  <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
+    | (?X1 + ?X2)%F =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
+        <span class="kp">constr</span>:(derivable_pt_plus X1 X2 pt p1 p2)
+    | (?X1 - ?X2)%F =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
+        <span class="kp">constr</span>:(derivable_pt_minus X1 X2 pt p1 p2)
+    | (?X1 * ?X2)%F =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
+        <span class="kp">constr</span>:(derivable_pt_mult X1 X2 pt p1 p2)
+    | (?X1 / ?X2)%F =&gt;
+      <span class="kr">match goal with</span>
+        | id:(?X2 pt &lt;&gt; <span class="mi">0</span>) |- _ =&gt;
+          <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
+            <span class="kp">constr</span>:(derivable_pt_div X1 X2 pt p1 p2 id)
+        | _ =&gt; <span class="kp">constr</span>:(<span class="kt">False</span>)
+      <span class="kr">end</span>
+    | (/ ?X1)%F =&gt;
+      <span class="kr">match goal with</span>
+        | id:(?X1 pt &lt;&gt; <span class="mi">0</span>) |- _ =&gt;
+          <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">in</span>
+            <span class="kp">constr</span>:(derivable_pt_inv X1 pt p1 id)
+        | _ =&gt; <span class="kp">constr</span>:(<span class="kt">False</span>)
+      <span class="kr">end</span>
+    | (comp ?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
+        <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt_f1 <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
+          <span class="kp">constr</span>:(derivable_pt_comp X2 X1 pt p2 p1)
+    | (- ?X1)%F =&gt;
+      <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">in</span>
+        <span class="kp">constr</span>:(derivable_pt_opp X1 pt p1)
+    | sin =&gt; <span class="kp">constr</span>:(derivable_pt_sin pt)
+    | cos =&gt; <span class="kp">constr</span>:(derivable_pt_cos pt)
+    | sinh =&gt; <span class="kp">constr</span>:(derivable_pt_sinh pt)
+    | cosh =&gt; <span class="kp">constr</span>:(derivable_pt_cosh pt)
+    | exp =&gt; <span class="kp">constr</span>:(derivable_pt_exp pt)
+    | id =&gt; <span class="kp">constr</span>:(derivable_pt_id pt)
+    | Rsqr =&gt; <span class="kp">constr</span>:(derivable_pt_Rsqr pt)
+    | sqrt =&gt;
+      <span class="kr">match goal with</span>
+        | id:(<span class="mi">0</span> &lt; pt) |- _ =&gt; <span class="kp">constr</span>:(derivable_pt_sqrt pt id)
+        | _ =&gt; <span class="kp">constr</span>:(<span class="kt">False</span>)
+      <span class="kr">end</span>
+    | (fct_cte ?X1) =&gt; <span class="kp">constr</span>:(derivable_pt_const X1 pt)
+    | ?X1 =&gt;
+      <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | id:(derivable_pt aux pt) |- _ =&gt; <span class="kp">constr</span>:(id)
+          | id:(derivable aux) |- _ =&gt; <span class="kp">constr</span>:(id pt)
+          | _ =&gt; <span class="kp">constr</span>:(<span class="kt">False</span>)
+        <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">simplify_derive</span> trm pt :=
+  <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
+    | (?X1 + ?X2)%F =&gt;
+      <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_plus; simplify_derive X1 pt;
+        simplify_derive X2 pt
+    | (?X1 - ?X2)%F =&gt;
+      <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_minus; simplify_derive X1 pt;
+        simplify_derive X2 pt
+    | (?X1 * ?X2)%F =&gt;
+      <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_mult; simplify_derive X1 pt;
+        simplify_derive X2 pt
+    | (?X1 / ?X2)%F =&gt;
+      <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_div; simplify_derive X1 pt; simplify_derive X2 pt
+    | (comp ?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
+        (<span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_comp; simplify_derive X1 pt_f1;
+          simplify_derive X2 pt)
+    | (- ?X1)%F =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_opp; simplify_derive X1 pt
+    | (/ ?X1)%F =&gt;
+      <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_inv; simplify_derive X1 pt
+    | (fct_cte ?X1) =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_const
+    | id =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_id
+    | sin =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_sin
+    | cos =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_cos
+    | sinh =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_sinh
+    | cosh =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_cosh
+    | exp =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_exp
+    | Rsqr =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_Rsqr
+    | sqrt =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_sqrt
+    | ?X1 =&gt;
+      <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
+        <span class="kr">match goal with</span>
+          | id:(derive_pt aux pt ?X2 = _),H:(derivable aux) |- _ =&gt;
+            <span class="kp">try</span> <span class="nb">replace</span> (derive_pt aux pt (H pt)) <span class="kr">with</span> (derive_pt aux pt X2);
+              [ <span class="nb">rewrite</span> id | <span class="nb">apply</span> pr_nu ]
+          | id:(derive_pt aux pt ?X2 = _),H:(derivable_pt aux pt) |- _ =&gt;
+            <span class="kp">try</span> <span class="nb">replace</span> (derive_pt aux pt H) <span class="kr">with</span> (derive_pt aux pt X2);
+              [ <span class="nb">rewrite</span> id | <span class="nb">apply</span> pr_nu ]
+          | _ =&gt; <span class="kp">idtac</span>
+        <span class="kr">end</span>
+    | _ =&gt; <span class="kp">idtac</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-nc"><span class="highlight">
+<span class="sd">(**********)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">reg</span> :=
+  <span class="kr">match goal with</span>
+    |  |- (derivable_pt ?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
+        <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
+          (intro_hyp_pt aux X2;
+            <span class="kp">try</span> (<span class="nb">change</span> (derivable_pt aux X2) <span class="kr">in</span> |- *; is_diff_pt) || is_diff_pt)
+    |  |- (derivable ?X1) =&gt;
+      <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
+        <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
+          (intro_hyp_glob aux;
+            <span class="kp">try</span> (<span class="nb">change</span> (derivable aux) <span class="kr">in</span> |- *; is_diff_glob) || is_diff_glob)
+    |  |- (continuity ?X1) =&gt;
+      <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
+        <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
+          (intro_hyp_glob aux;
+            <span class="kp">try</span> (<span class="nb">change</span> (continuity aux) <span class="kr">in</span> |- *; is_cont_glob) || is_cont_glob)
+    |  |- (continuity_pt ?X1 ?X2) =&gt;
+      <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
+        <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
+          (intro_hyp_pt aux X2;
+            <span class="kp">try</span> (<span class="nb">change</span> (continuity_pt aux X2) <span class="kr">in</span> |- *; is_cont_pt) || is_cont_pt)
+    |  |- (derive_pt ?X1 ?X2 ?X3 = ?X4) =&gt;
+      <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
+      <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
+      intro_hyp_pt aux X2;
+      (<span class="kr">let</span> <span class="nv">aux2</span> := deriv_proof aux X2 <span class="kr">in</span>
+       <span class="kp">try</span>
+         (<span class="nb">replace</span> (derive_pt X1 X2 X3) <span class="kr">with</span> (derive_pt aux X2 aux2);
+           [ simplify_derive aux X2;
+             <span class="kp">try</span> <span class="nb">unfold</span> plus_fct, minus_fct, mult_fct, div_fct, id, fct_cte,
+                        inv_fct, opp_fct <span class="kr">in</span> |- *; <span class="bp">ring</span> || <span class="nb">ring_simplify</span>
+           | <span class="kp">try</span> <span class="nb">apply</span> pr_nu ]) || is_diff_pt)
+  <span class="kr">end</span>.</span></span></span></pre></article></body></html>
