@@ -4,4 +4,6 @@ const { cli } = require('./screenshot-lib.js');
 //   document.querySelectorAll('input[type="checkbox"]').forEach(function(toggle) {
 //     toggle.checked = true; });
 // Shows empty boxes instead of MathJax.
-cli({});
+cli({}, {
+    width: '5in'
+});
