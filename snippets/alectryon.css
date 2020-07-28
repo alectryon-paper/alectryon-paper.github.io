@@ -21,6 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+@import "../bench/refman/_static/iosevka-slab/webfont.css";
+
 .docutils.literal,
 .alectryon-coqdoc .doc .code,
 .alectryon-coqdoc .doc .comment,
