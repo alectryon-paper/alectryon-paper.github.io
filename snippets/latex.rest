@@ -1,0 +1,70 @@
+.. coq:: none
+
+   Infix "\wedge" := and (at level 190, right associativity).
+   Notation "A \Rightarrow{} B" := (∀ (_ : A), B) (at level 200, right associativity).
+   Notation "'\ccForall{' x .. y '}{' P '}'" := (∀ x, .. (∀ y, P) ..) (at level 200, x binder, y binder, right associativity, format "'\ccForall{' x .. y '}{' P '}'").
+   Notation "'\ccNat{}'" := nat.
+   Notation "'\ccSucc{' n '}'" := (S n).
+   Infix "\times" := mult (at level 30).
+   Notation "\ccNot{ x }" := (not x) (at level 100).
+
+.. raw:: html
+
+   <style type="text/css">
+       mjx-container,
+       .MJXc-display,
+       .MJXp-display,
+       .MathJax_Display,
+       .MathJax_Preview,
+       .MathJax_SVG_Display,
+       .MathJax_SVG_Preview,
+       .MathJax_PHTML_Display,
+       .MathJax_PHTML_Preview,
+       .MathJax_MathML {
+           margin: 0 !important;
+       }
+   </style>
+
+   <div style="display: none">
+       \(\newcommand{\ccQ}{\mathbb{Q}}\)
+       \(\newcommand{\ccNat}{\mathbb{N}}\)
+       \(\newcommand{\ccSucc}[1]{\mathrm{S}\:#1}\)
+       \(\newcommand{\ccFrac}[2]{\frac{#1}{#2}}\)
+       \(\newcommand{\ccPow}[2]{{#1}^{#2}}\)
+       \(\newcommand{\ccNot}[1]{{\lnot #1}}\)
+       \(\newcommand{\ccEvar}[1]{\textit{\texttt{#1}}}\)
+       \(\newcommand{\ccForall}[2]{\forall \: #1. \; #2}\)
+       \(\newcommand{\ccNsum}[3]{\sum_{#1 = 0}^{#2} #3}\)
+   </div>
+
+   <script type="text/javascript">
+     function setup() {
+        var spans = document.querySelectorAll(".goal-conclusion .highlight, .goal-hyp .highlight");
+        spans.forEach(function (e) {
+            var text = e.innerText.replace(/ccForall\{(.*?)\}/g, function (_, quantified) {
+                return "ccForall{" + quantified.trim().replace(/ +/g, " \\: ") + "}";
+            });
+            var node = document.createTextNode('\\[' + text + '\\]');
+            e.parentNode.replaceChild(node, e);
+        });
+     }
+
+     MathJax = {
+         options: {
+             skipHtmlTags: [
+                 'script', 'noscript', 'style', 'textarea',
+                 'annotation', 'annotation-xml'
+             ]
+         },
+         startup: {
+             pageReady: function () {
+                 setup();
+                 return MathJax.startup.defaultPageReady();
+             }
+         }
+     };
+   </script>
+
+   <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+   </script>

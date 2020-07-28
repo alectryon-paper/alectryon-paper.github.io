@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>Qle-pairwise.rst</title>
+<link rel="stylesheet" href="alectryon.css" type="text/css" />
+<link rel="stylesheet" href="docutils_basic.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.min.css" type="text/css" />
+<script type="text/javascript" src="alectryon.js"></script>
+</head>
+<body>
+<div class="alectryon-root alectryon-standalone alectryon-centered"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="document">
+
+
+<style type="text/css">
+    mjx-container,
+    .MJXc-display,
+    .MJXp-display,
+    .MathJax_Display,
+    .MathJax_Preview,
+    .MathJax_SVG_Display,
+    .MathJax_SVG_Preview,
+    .MathJax_PHTML_Display,
+    .MathJax_PHTML_Preview,
+    .MathJax_MathML {
+        margin: 0 !important;
+    }
+</style>
+
+<div style="display: none">
+    \(\newcommand{\ccQ}{\mathbb{Q}}\)
+    \(\newcommand{\ccNat}{\mathbb{N}}\)
+    \(\newcommand{\ccSucc}[1]{\mathrm{S}\:#1}\)
+    \(\newcommand{\ccFrac}[2]{\frac{#1}{#2}}\)
+    \(\newcommand{\ccPow}[2]{{#1}^{#2}}\)
+    \(\newcommand{\ccNot}[1]{{\lnot #1}}\)
+    \(\newcommand{\ccEvar}[1]{\textit{\texttt{#1}}}\)
+    \(\newcommand{\ccForall}[2]{\forall \: #1. \; #2}\)
+    \(\newcommand{\ccNsum}[3]{\sum_{#1 = 0}^{#2} #3}\)
+</div>
+
+<script type="text/javascript">
+  function setup() {
+     var spans = document.querySelectorAll(".goal-conclusion .highlight, .goal-hyp .highlight");
+     spans.forEach(function (e) {
+         var text = e.innerText.replace(/ccForall\{(.*?)\}/g, function (_, quantified) {
+             return "ccForall{" + quantified.trim().replace(/ +/g, " \\: ") + "}";
+         });
+         var node = document.createTextNode('\\[' + text + '\\]');
+         e.parentNode.replaceChild(node, e);
+     });
+  }
+
+  MathJax = {
+      options: {
+          skipHtmlTags: [
+              'script', 'noscript', 'style', 'textarea',
+              'annotation', 'annotation-xml'
+          ]
+      },
+      startup: {
+          pageReady: function () {
+              setup();
+              return MathJax.startup.defaultPageReady();
+          }
+      }
+  };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk0" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">Qle_pairwise</span> :
+  <span class="kr">∀</span> <span class="nv">a</span> <span class="nv">b</span> <span class="nv">c</span> <span class="nv">d</span>,
+    <span class="mi">0</span> &lt; a ∧ <span class="mi">0</span> &lt; b ∧ <span class="mi">0</span> &lt; c ∧ <span class="mi">0</span> &lt; d →
+    (a + c)/(b + d) ≤ a/b + c/d.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">\ccForall{a b c d : \ccQ{}}{<span class="mi">0</span> &lt; a \wedge
+                            <span class="mi">0</span> &lt; b \wedge
+                            <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d \Rightarrow{}
+                            \ccFrac{ a + c
+                            }{ b + d} \le
+                            \ccFrac{ a }{ b} +
+                            \ccFrac{ c }{ d}}</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk1" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk1"><span class="highlight"><span class="kn">Proof with</span> Qeauto.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">\ccForall{a b c d : \ccQ{}}{<span class="mi">0</span> &lt; a \wedge
+                            <span class="mi">0</span> &lt; b \wedge
+                            <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d \Rightarrow{}
+                            \ccFrac{ a + c
+                            }{ b + d} \le
+                            \ccFrac{ a }{ b} +
+                            \ccFrac{ c }{ d}}</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk2" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk2"><span class="highlight"><span class="nb">intros</span> a b c d H.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">a, b, c, d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccQ{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span> &lt; a \wedge <span class="mi">0</span> &lt; b \wedge <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">\ccFrac{ a + c }{ b + d} \le
+\ccFrac{ a }{ b} + \ccFrac{ c }{ d}</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk3" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk3"><span class="highlight"><span class="nb">field_simplify</span>...</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">a, b, c, d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccQ{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span> &lt; a \wedge <span class="mi">0</span> &lt; b \wedge <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">\ccFrac{ a + c }{ b + d} \le
+\ccFrac{ a \times d + c \times b }{ b \times d}</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk4" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk4"><span class="highlight"><span class="nb">rewrite</span> &lt;- (Qmult_le_l (b + d)), Qmult_div_r, Qmult_Qdiv_fact...</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">a, b, c, d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccQ{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span> &lt; a \wedge <span class="mi">0</span> &lt; b \wedge <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">a + c \le
+\ccFrac{ (b + d) \times (a \times d + c \times b)
+}{ b \times d}</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk5" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk5"><span class="highlight"><span class="nb">rewrite</span> &lt;- (Qmult_le_l (b * d)), Qmult_div_r...</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">a, b, c, d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccQ{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span> &lt; a \wedge <span class="mi">0</span> &lt; b \wedge <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(b \times d) \times (a + c) \le
+(b + d) \times (a \times d + c \times b)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk6" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk6"><span class="highlight"><span class="nb">field_simplify</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">a, b, c, d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccQ{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span> &lt; a \wedge <span class="mi">0</span> &lt; b \wedge <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(b \times d) \times a + (b \times d) \times c \le
+\ccPow{ b }{ <span class="mi">2</span>} \times c + (b \times d) \times a +
+(b \times d) \times c + 
+\ccPow{ d }{ <span class="mi">2</span>} \times a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk7" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk7"><span class="highlight"><span class="nb">rewrite</span> &lt;- (Qminus_le_l (b * d * a)); <span class="nb">ring_simplify</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">a, b, c, d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccQ{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span> &lt; a \wedge <span class="mi">0</span> &lt; b \wedge <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">(b \times d) \times c \le
+\ccPow{ b }{ <span class="mi">2</span>} \times c + (b \times d) \times c +
+\ccPow{ d }{ <span class="mi">2</span>} \times a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="qle-pairwise-rst-chk8" style="display: none" type="checkbox"><label class="coq-input" for="qle-pairwise-rst-chk8"><span class="highlight"><span class="nb">rewrite</span> &lt;- (Qminus_le_l (b * d * c)); <span class="nb">ring_simplify</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">a, b, c, d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccQ{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">H</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">0</span> &lt; a \wedge <span class="mi">0</span> &lt; b \wedge <span class="mi">0</span> &lt; c \wedge <span class="mi">0</span> &lt; d</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">0</span> \le
+\ccPow{ b }{ <span class="mi">2</span>} \times c +
+\ccPow{ d }{ <span class="mi">2</span>} \times a</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight">Qeauto <span class="nb">using</span> Qsqr_0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre>
+</div>
+</div></body>
+</html>

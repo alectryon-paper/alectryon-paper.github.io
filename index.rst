@@ -41,6 +41,12 @@ Snippets
 
 These examples are all shown in the paper:
 
+- Appendices:
+
+  + ``Qle-pairwise.rst`` (MathJax): `source <snippets/Qle-pairwise.rst>`__, `webpage <snippets/Qle-pairwise.html>`__
+  + ``nsum-gauss.rst`` (MathJax): `source <snippets/nsum-gauss.rst>`__, `webpage <snippets/nsum-gauss.html>`__
+  + ``rss.v`` (Plain-HTML output): `source <snippets/rss.rst>`__, `webpage <snippets/rss.html>`__
+
 - Short Coq files:
 
   + ``induction.v``: `source <snippets/induction.v>`__, `webpage <snippets/induction.html>`__

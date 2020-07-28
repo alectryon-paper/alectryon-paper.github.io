@@ -2,46 +2,22 @@
 .. coq:: none
 |*)
 
-Require Import Coq.Unicode.Utf8. (* .none *)
-Require Import NArith ArithRing.
-
-Fixpoint nsum max f :=
-  match max with
-  | O => f 0
-  | S max' => f max + nsum max' f
-  end.
-
-Notation "'\ccNsum{' x '}{' max '}{' f '}'" := (nsum max (fun x => f)).
-
-Infix "\wedge" := and (at level 190, right associativity).
-Notation "A \Rightarrow{} B" := (∀ (_ : A), B) (at level 200, right associativity).
-Notation "'\ccForall{' x .. y '}{' P '}'" := (∀ x, .. (∀ y, P) ..) (at level 200, x binder, y binder, right associativity, format "'\ccForall{' x .. y '}{' P '}'").
-Notation "'\ccNat{}'" := nat.
-Notation "'\ccSucc{' n '}'" := (S n).
-Infix "\times" := mult (at level 30).
-
-Lemma Gauss: ∀ n, 2 * (nsum n (fun x => x)) = n * (n + 1).
-  intros.
-  induction n.
-  - cbv [nsum].
-    reflexivity.
-  - unfold nsum; fold nsum.
-    rewrite Mult.mult_plus_distr_l.
-    rewrite IHn.
-    ring.
-Qed.
-
+Require Import Coq.Unicode.Utf8.
 Require Import Coq.QArith.QArith Coq.QArith.Qring Coq.QArith.Qfield.
-
 Infix "≤" := Qle.
 
+(*|
+.. include:: latex.rest
+
+.. coq:: none
+|*)
+
 Notation "'\ccQ{}'" := Q.
-Notation "\ccPow{ x }{ y }" := (Qpower x y).
+Notation "\ccPow{  x }{ y }" := (Qpower x y).
 Notation "'\ccFrac{' x '}{' y '}'" := (Qdiv x y)  : Q_scope.
 Infix "\le" := Qle (at level 100).
 Infix "\equiv" := Qeq (at level 100).
 Infix "\times" := Qmult (at level 30).
-Notation "\ccNot{ x }" := (not x) (at level 100).
 
 Lemma Qmult_Qdiv_fact :
   ∀ a b c, not (c == 0) → a * (b / c) == (a * b) / c.
@@ -90,6 +66,12 @@ Proof.
   rewrite !Z.mul_1_r, Z.neg_pos_cases; intuition.
 Qed.
 
+Require Import Coq.micromega.Lra.
+Require Import Psatz.
+
+Lemma Qminus_le_l {x y: Q} (z: Q): x - z <= y - z <-> x <= y.
+Proof. lra. Qed.
+
 Hint Resolve Qplus_le_0 Qmult_le_0_compat Qmult_0
      Qgt_0_Qneq_0 Qlt_le_weak Qplus_lt_0 : Q.
 
@@ -98,32 +80,25 @@ Hint Extern 0 => repeat match goal with
                        end : Q.
 
 Ltac Qeauto := eauto 10 with Q.
-Tactic Notation "Qeauto" "using" constr(lemma) := eauto 10 using lemma with Q.
-
-Require Import Coq.micromega.Lra.
-Require Import Psatz.
+Tactic Notation "Qeauto" "using" constr(lemma) :=
+  eauto 10 using lemma with Q.
 
 Arguments Qmult_le_l {x y} z.
 Arguments Qplus_le_l {x y} z.
 
-(*|
-.. coq:: unfold
-|*)
+(*||*)
 
-Lemma Qfracs :
+Lemma Qle_pairwise :
   ∀ a b c d,
-    a > 0 ∧ b > 0 ∧ c > 0 ∧ d > 0 →
+    0 < a ∧ 0 < b ∧ 0 < c ∧ 0 < d →
     (a + c)/(b + d) ≤ a/b + c/d.
-Proof with Qeauto. (* fold *)
+Proof with Qeauto.
   intros a b c d H.
   field_simplify...
-  rewrite <- (Qmult_le_l (b + d)),
-    Qmult_div_r, Qmult_Qdiv_fact...
-  rewrite <- (Qmult_le_l (b * d)),
-    Qmult_div_r...
+  rewrite <- (Qmult_le_l (b + d)), Qmult_div_r, Qmult_Qdiv_fact...
+  rewrite <- (Qmult_le_l (b * d)), Qmult_div_r...
   field_simplify.
-  enough (0 ≤ b ^ 2 * c + d ^ 2 * a) by lra.
-  (* rewrite <- (Qplus_le_l (- (b * d * a + b * d * c))); *)
-  (*   ring_simplify. *)
+  rewrite <- (Qminus_le_l (b * d * a)); ring_simplify.
+  rewrite <- (Qminus_le_l (b * d * c)); ring_simplify.
   Qeauto using Qsqr_0.
 Qed.

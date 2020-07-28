@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>nsum-gauss.unfolded.rst</title>
+<link rel="stylesheet" href="alectryon.css" type="text/css" />
+<link rel="stylesheet" href="docutils_basic.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.min.css" type="text/css" />
+<script type="text/javascript" src="alectryon.js"></script>
+</head>
+<body>
+<div class="alectryon-root alectryon-standalone alectryon-centered"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="document">
+
+
+<style type="text/css">
+    mjx-container,
+    .MJXc-display,
+    .MJXp-display,
+    .MathJax_Display,
+    .MathJax_Preview,
+    .MathJax_SVG_Display,
+    .MathJax_SVG_Preview,
+    .MathJax_PHTML_Display,
+    .MathJax_PHTML_Preview,
+    .MathJax_MathML {
+        margin: 0 !important;
+    }
+</style>
+
+<div style="display: none">
+    \(\newcommand{\ccQ}{\mathbb{Q}}\)
+    \(\newcommand{\ccNat}{\mathbb{N}}\)
+    \(\newcommand{\ccSucc}[1]{\mathrm{S}\:#1}\)
+    \(\newcommand{\ccFrac}[2]{\frac{#1}{#2}}\)
+    \(\newcommand{\ccPow}[2]{{#1}^{#2}}\)
+    \(\newcommand{\ccNot}[1]{{\lnot #1}}\)
+    \(\newcommand{\ccEvar}[1]{\textit{\texttt{#1}}}\)
+    \(\newcommand{\ccForall}[2]{\forall \: #1. \; #2}\)
+    \(\newcommand{\ccNsum}[3]{\sum_{#1 = 0}^{#2} #3}\)
+</div>
+
+<script type="text/javascript">
+  function setup() {
+     var spans = document.querySelectorAll(".goal-conclusion .highlight, .goal-hyp .highlight");
+     spans.forEach(function (e) {
+         var text = e.innerText.replace(/ccForall\{(.*?)\}/g, function (_, quantified) {
+             return "ccForall{" + quantified.trim().replace(/ +/g, " \\: ") + "}";
+         });
+         var node = document.createTextNode('\\[' + text + '\\]');
+         e.parentNode.replaceChild(node, e);
+     });
+  }
+
+  MathJax = {
+      options: {
+          skipHtmlTags: [
+              'script', 'noscript', 'style', 'textarea',
+              'annotation', 'annotation-xml'
+          ]
+      },
+      startup: {
+          pageReady: function () {
+              setup();
+              return MathJax.startup.defaultPageReady();
+          }
+      }
+  };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="nsum-gauss-unfolded-rst-chk0" style="display: none" type="checkbox"><label class="coq-input" for="nsum-gauss-unfolded-rst-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">Gauss</span>: <span class="kr">∀</span> <span class="nv">n</span>,
+    <span class="mi">2</span> * (nsum n (<span class="kr">fun</span> <span class="nv">x</span> =&gt; x)) =
+    n * (n + <span class="mi">1</span>).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">\ccForall{n : \ccNat{}}{<span class="mi">2</span> \times \ccNsum{x}{n}{x} =
+                        n \times (n + <span class="mi">1</span>)}</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="nsum-gauss-unfolded-rst-chk1" style="display: none" type="checkbox"><label class="coq-input" for="nsum-gauss-unfolded-rst-chk1"><span class="highlight"><span class="nb">induction</span> n; <span class="nb">cbn</span> [nsum].</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> \times <span class="mi">0</span> = <span class="mi">0</span> \times (<span class="mi">0</span> + <span class="mi">1</span>)</span></div></blockquote><div class="coq-extra-goals"><input class="coq-extra-goal-toggle" id="nsum-gauss-unfolded-rst-chk2" style="display: none" type="checkbox"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccNat{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">2</span> \times \ccNsum{x}{n}{x} =
+n \times (n + <span class="mi">1</span>)</span></span></span></div></div><label class="goal-separator coq-extra-goal-label" for="nsum-gauss-unfolded-rst-chk2"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> \times (\ccSucc{ n} + \ccNsum{x}{n}{x}) =
+\ccSucc{ n} \times (\ccSucc{ n} + <span class="mi">1</span>)</span></div></blockquote></div></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="nsum-gauss-unfolded-rst-chk3" style="display: none" type="checkbox"><label class="coq-input" for="nsum-gauss-unfolded-rst-chk3"><span class="highlight">- <span class="c">(* n ← 0 *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> \times <span class="mi">0</span> = <span class="mi">0</span> \times (<span class="mi">0</span> + <span class="mi">1</span>)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="nsum-gauss-unfolded-rst-chk4" style="display: none" type="checkbox"><label class="coq-input" for="nsum-gauss-unfolded-rst-chk4"><span class="highlight">- <span class="c">(* n ← S _ *)</span></span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">\ccNat{}</span></span></span></div><div class="goal-hyp"><span class="hyp-names">IHn</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="mi">2</span> \times \ccNsum{x}{n}{x} =
+n \times (n + <span class="mi">1</span>)</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> \times (\ccSucc{ n} + \ccNsum{x}{n}{x}) =
+\ccSucc{ n} \times (\ccSucc{ n} + <span class="mi">1</span>)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="nsum-gauss-unfolded-rst-chk5" style="display: none" type="checkbox"><label class="coq-input" for="nsum-gauss-unfolded-rst-chk5"><span class="highlight"><span class="nb">rewrite</span> Mult.mult_plus_distr_l.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> \times \ccSucc{ n} + <span class="mi">2</span> \times \ccNsum{x}{n}{x} =
+\ccSucc{ n} \times (\ccSucc{ n} + <span class="mi">1</span>)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="nsum-gauss-unfolded-rst-chk6" style="display: none" type="checkbox"><label class="coq-input" for="nsum-gauss-unfolded-rst-chk6"><span class="highlight"><span class="nb">rewrite</span> IHn.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="mi">2</span> \times \ccSucc{ n} + n \times (n + <span class="mi">1</span>) =
+\ccSucc{ n} \times (\ccSucc{ n} + <span class="mi">1</span>)</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="bp">ring</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre>
+</div>
+</div></body>
+</html>

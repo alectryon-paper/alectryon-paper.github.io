@@ -22,7 +22,7 @@ async function screenshot(src, dst, options={}, pdfOptions={}, launchOptions={})
     page.emulateMediaType('screen');
 
     // console.log(src, dst);
-    await page.goto('file://' + src, { waitUntil: 'networkidle2'});
+    await page.goto('file://' + src, { waitUntil: 'networkidle2' });
 
     await page.evaluate(function() {
         const html = document.querySelector("html");
@@ -30,6 +30,7 @@ async function screenshot(src, dst, options={}, pdfOptions={}, launchOptions={})
         html.style.margin = 0;
         html.style.fontFamily = "unset";
 
+        // FIXME: Does this do anything?
         font_css = `
 .docutils.literal {
     font-family: 'Iosevka Slab Web', 'Iosevka Web', 'Iosevka Slab', 'Iosevka', 'Fira Code', monospace;

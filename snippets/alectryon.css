@@ -318,6 +318,7 @@ In any case, make an exception for comments:
     display: inline-flex;
     margin: 0.15rem 0.25rem;
     z-index: 1;
+    align-items: baseline;
 }
 
 .alectryon-io .hyp-names {
@@ -335,7 +336,7 @@ In any case, make an exception for comments:
 .alectryon-io .hyp-body,
 .alectryon-io .hyp-type {
     display: flex;
-    vertical-align: top;
+    align-items: baseline;
 }
 
 .alectryon-io .goal-separator {
