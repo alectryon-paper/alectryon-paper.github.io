@@ -82,6 +82,7 @@ In any case, make an exception for comments:
 .alectryon-io .coq-sentence.alectryon-target .coq-input {
     /* FIXME if keywords were ‘bolder’ we wouldn't need !important */
     font-weight: bold !important; /* Use !important to avoid a * selector */
+    text-decoration: underline;
 }
 
 .alectryon-bubble:before,
