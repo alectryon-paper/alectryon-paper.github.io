@@ -57,8 +57,17 @@ snippets/emacs.pdf: snippets/emacs.svg
 	svgo $<
 	svg2pdf $< $@
 
-update-css:
-	find . -name alectryon.css -exec echo cp alectryon_with_webfont.css {} \;
+# update-css:
+# 	find . -name alectryon.css -exec echo cp alectryon_with_webfont.css {} \;
+
+gen_html_indices:
+	find . -type d \
+		-not -path '*/_*' \
+		-not -path '*/.*' \
+		-not -path '.' \
+		-not -path './bench/lf*' \
+		-not -path './bench/refman*' \
+		-exec ./trees.sh {} \;
 
 clean:
 	echo $(objs)
