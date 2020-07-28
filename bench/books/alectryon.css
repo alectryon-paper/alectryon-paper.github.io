@@ -21,6 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+@import "https://unpkg.com/firacode/distr/fira_code.css";
+
 .alectryon-coqdoc .doc .code,
 .alectryon-coqdoc .doc .comment,
 .alectryon-coqdoc .doc .inlinecode,
