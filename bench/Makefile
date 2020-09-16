@@ -114,7 +114,8 @@ breakdown: $(breakdowns);
 # All #
 #######
 
-timings: breakdown stdlib/stdlib.alectryon.timings stdlib/stdlib.coqc.timings stdlib/full.alectryon-coqdoc.timings stdlib/full.coqc.timings $(flocq)/full.coqc.timings $(flocq)/full.alectryon-coqdoc.timings
+# $(flocq)/full.alectryon-coqdoc.timings $(flocq)/full.coqc.timings
+timings: breakdown stdlib/stdlib.alectryon.timings stdlib/stdlib.coqc.timings stdlib/full.alectryon-coqdoc.timings stdlib/full.coqc.timings
 
 all: stdlib
 

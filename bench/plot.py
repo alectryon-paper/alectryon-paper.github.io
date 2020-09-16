@@ -265,20 +265,21 @@ def read1(d, dir, compiler, kind):
 
 def main():
     rcParams(fontsize=8)
-    stdlib, breakdowns, full, flocq = {}, {}, {}, {}
+    stdlib, breakdowns, full = {}, {}, {}
+    # flocq = {}
     for compiler in COMPILERS:
         read1(stdlib, "stdlib", compiler, "stdlib")
         read1(breakdowns, "stdlib", compiler, "breakdown")
         read1(full, "stdlib", compiler, "full")
-        read1(flocq, "flocq-3.3.1", compiler, "full")
+        # read1(flocq, "flocq-3.3.1", compiler, "full")
     plot_stdlib(stdlib, STDLIB_FILES).savefig("stdlib/stdlib.pdf")
     plot_breakdowns(breakdowns, BREAKDOWN_FILES).savefig("stdlib/breakdowns.pdf")
     plot_overheads(full).savefig("stdlib/ratios.pdf")
-    plot_overheads(flocq).savefig("flocq-3.3.1/flocq-ratios.pdf")
+    # plot_overheads(flocq).savefig("flocq-3.3.1/flocq-ratios.pdf")
     print("Stdlib:")
     summarize_full(full)
-    print("Flocq:")
-    summarize_full(flocq)
+    # print("Flocq:")
+    # summarize_full(flocq)
 
 if __name__ == '__main__':
     main()
