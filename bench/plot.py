@@ -244,19 +244,25 @@ def plot_overheads(summaries_by_compiler):
     ax.yaxis.set_major_formatter(ticker.PercentFormatter(1.0))
     return fig
 
+def fmt_ratio(slow, fast, ratio):
+    return "{:.3f}s/{:.3f}s = {:.2f}".format(slow, fast, ratio)
+
+def summarize_one(ratio, slow, fast, fname):
+    return "{}: {}".format(fname, fmt_ratio(slow, fast, ratio))
+
 def summarize_full(summaries_by_compiler):
     print("# Ratios:")
     slow, fast, ratios = files_by_ratio(summaries_by_compiler, "alectryon-coqdoc", "coqc")
-    print("Median:", ratios[int(0.50 * len(ratios))])
-    print("90th percentile:", ratios[int(0.90 * len(ratios))])
-    print("95th percentile:", ratios[int(0.95 * len(ratios))])
+    print("Median:", summarize_one(*ratios[int(0.50 * len(ratios))]))
+    print("90th percentile:", summarize_one(*ratios[int(0.90 * len(ratios))]))
+    print("95th percentile:", summarize_one(*ratios[int(0.95 * len(ratios))]))
     print("Range:", f"{ratios[0][-1]} ({ratios[0][0]}) → {ratios[-1][-1]} ({ratios[-1][0]})")
     print("# Total runtimes:")
     summ = lambda by_file: sum(s.mean for s in by_file.values())
     for (compiler, by_file) in summaries_by_compiler.items():
         print(compiler, timedelta(seconds=summ(by_file)))
-    print("# Total:", summ(slow) / summ(fast))
-    print("# Files:", len(ratios))
+    print("# Total slowdown:", fmt_ratio(summ(slow), summ(fast), summ(slow) / summ(fast)))
+    print("# File count:", len(ratios))
 
 def read1(d, dir, compiler, kind):
     f = f"{dir}/{kind}.{compiler}.timings"
