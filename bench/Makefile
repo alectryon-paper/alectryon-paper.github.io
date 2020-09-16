@@ -88,7 +88,15 @@ stdlib/: Makefile
 	$(coq_rsync) "$(coqlib)/theories/" stdlib/theories/
 	$(coq_rsync) "$(coqlib)/plugins/" stdlib/plugins/
 
-stdlib_find := find stdlib/ -not -path 'stdlib/theories/Init/*' -name '*.v'
+stdlib_excluded := \
+	-not -path stdlib/theories/Numbers/Cyclic/Int63/Int63.v \
+	-not -path stdlib/theories/Classes/Morphisms.v \
+	-not -path stdlib/theories/Classes/CEquivalence.v \
+	-not -path stdlib/theories/Classes/CMorphisms.v \
+	-not -path stdlib/theories/Classes/Morphisms_Prop.v \
+	-not -path stdlib/theories/Logic/StrictProp.v
+
+stdlib_find := find stdlib/ -not -path 'stdlib/theories/Init/*' $(stdlib_excluded) -name '*.v'
 
 stdlib/full.%.timings:
 	 $(stdlib_find) -exec $(compiler) $* 1 {} \; | tee $@
