@@ -12,7 +12,7 @@ if [ "$compiler" = "sertop" ]; then
     $ALECTRYON --debug --frontend coq --backend null "$file" | grep "^>>" | sed 's/^>>//' > "$input"
 fi
 
-echo $(which coqc) $COQC_ARGS
+# echo $(which coqc) $COQC_ARGS
 function compile() {
     { time { case "$compiler" in
                  coqc) coqc $COQC_ARGS "$file";;
