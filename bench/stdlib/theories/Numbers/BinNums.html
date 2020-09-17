@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -94,13 +94,13 @@
   | xI : positive -&gt; positive
   | xO : positive -&gt; positive
   | xH : positive.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Scope</span> positive_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Delimit Scope</span> positive_scope <span class="kr">with</span> positive.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Bind Scope</span> positive_scope <span class="kr">with</span> positive.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> xO _%positive.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> xI _%positive.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> positive <span class="kr">as</span> num.pos.type.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> xI <span class="kr">as</span> num.pos.xI.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> xO <span class="kr">as</span> num.pos.xO.</span></span><span class="coq-wsp">
@@ -112,12 +112,12 @@
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">N</span> : <span class="kt">Set</span> :=
   | N0 : N
   | Npos : positive -&gt; N.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Scope</span> N_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Delimit Scope</span> N_scope <span class="kr">with</span> N.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Bind Scope</span> N_scope <span class="kr">with</span> N.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> Npos _%positive.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> N <span class="kr">as</span> num.N.type.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> N0 <span class="kr">as</span> num.N.N0.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> Npos <span class="kr">as</span> num.N.Npos.</span></span></span></pre><div class="doc">
@@ -131,13 +131,13 @@
   | Z0 : Z
   | Zpos : positive -&gt; Z
   | Zneg : positive -&gt; Z.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Scope</span> Z_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Delimit Scope</span> Z_scope <span class="kr">with</span> Z.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Bind Scope</span> Z_scope <span class="kr">with</span> Z.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> Zpos _%positive.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> Zneg _%positive.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> Z <span class="kr">as</span> num.Z.type.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> Z0 <span class="kr">as</span> num.Z.Z0.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> Zpos <span class="kr">as</span> num.Z.Zpos.</span></span><span class="coq-wsp">

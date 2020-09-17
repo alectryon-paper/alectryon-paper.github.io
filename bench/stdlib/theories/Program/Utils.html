@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -85,13 +85,13 @@
 <span class="sd">(************************************************************************)</span></span></span></pre><div class="doc">
 Various syntactic shorthands that are useful with <span class="inlinecode"><span class="id" title="var">Program</span></span>. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Coq.Program.Tactics.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Implicit Arguments</span>.</span></span></span></pre><div class="doc">
 A simpler notation for subsets defined on a cartesian product. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;{ ( x , y )  :  A  |  P }&quot;</span> :=
   (sig (<span class="kr">fun</span> <span class="nv">anonymous</span> : A =&gt; <span class="kr">let</span> (<span class="nv">x</span>,y) := anonymous <span class="kr">in</span> P))
   (x <span class="kn">ident</span>, y <span class="kn">ident</span>, <span class="kn">at level</span> <span class="mi">10</span>) : type_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Scope</span> program_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Delimit Scope</span> program_scope <span class="kr">with</span> prg.</span></span></span></pre><div class="doc">
 Generates an obligation to prove False. 
@@ -100,7 +100,7 @@ Abbreviation for first projection and hiding of proofs of subset objects.
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot; `  t &quot;</span> := (proj1_sig t) (<span class="kn">at level</span> <span class="mi">10</span>, t <span class="kn">at next level</span>) : program_scope.</span></span></span></pre><div class="doc">
 Coerces objects to their support before comparing them. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot; x &#39;`=&#39; y &quot;</span> := ((x :&gt;) = (y :&gt;)) (<span class="kn">at level</span> <span class="mi">70</span>) : program_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Bool.Sumbool.</span></span></span></pre><div class="doc">
 Construct a dependent disjunction from a boolean. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">dec</span> := sumbool_of_bool.</span></span></span></pre><div class="doc">
@@ -110,7 +110,7 @@ Hide proofs and generates obligations when put in a term.
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">in_left</span> := (@<span class="nb">left</span> _ _ _).</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">in_right</span> := (@<span class="nb">right</span> _ _ _).</span></span></span></pre><div class="doc">
 Extraction directives 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(*</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="c">(*</span>
 <span class="c">Extraction Inline proj1_sig.</span>
 <span class="c">Extract Inductive unit =&gt; &quot;unit&quot; [ &quot;()&quot; ].</span>
 <span class="c">Extract Inductive bool =&gt; &quot;bool&quot; [ &quot;true&quot; &quot;false&quot; ].</span>

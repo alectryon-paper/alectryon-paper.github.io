@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -104,15 +104,15 @@
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Ensembles</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">U</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Ensemble</span> := U -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">In</span> (<span class="nv">A</span>:Ensemble) (<span class="nv">x</span>:U) : <span class="kt">Prop</span> := A x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Included</span> (<span class="nv">B</span> <span class="nv">C</span>:Ensemble) : <span class="kt">Prop</span> := <span class="kr">forall</span> <span class="nv">x</span>:U, In B x -&gt; In C x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Empty_set</span> : Ensemble :=.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Full_set</span> : Ensemble :=
     Full_intro : <span class="kr">forall</span> <span class="nv">x</span>:U, In Full_set x.</span></span></span></pre><div class="doc">
 NB: The following definition builds-in equality of elements in <span class="inlinecode"><span class="id" title="var">U</span></span> as
@@ -123,51 +123,51 @@ NB: The following definition builds-in equality of elements in <span class="inli
      This may have to be changed if we replace <span class="inlinecode"><span class="id" title="var">U</span></span> by a Setoid on <span class="inlinecode"><span class="id" title="var">U</span></span>
      with its own equality <span class="inlinecode"><span class="id" title="var">eqs</span></span>, with
      <span class="inlinecode"><span class="id" title="var">In_singleton</span>:</span> <span class="inlinecode">(<span class="id" title="var">y</span>:</span> <span class="inlinecode"><span class="id" title="var">U</span>)(<span class="id" title="var">eqs</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">In</span></span> <span class="inlinecode">(<span class="id" title="var">Singleton</span></span> <span class="inlinecode"><span class="id" title="var">x</span>)</span> <span class="inlinecode"><span class="id" title="var">y</span>)</span>. 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Singleton</span> (<span class="nv">x</span>:U) : Ensemble :=
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Singleton</span> (<span class="nv">x</span>:U) : Ensemble :=
     In_singleton : In (Singleton x) x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Union</span> (<span class="nv">B</span> <span class="nv">C</span>:Ensemble) : Ensemble :=
     | Union_introl : <span class="kr">forall</span> <span class="nv">x</span>:U, In B x -&gt; In (Union B C) x
     | Union_intror : <span class="kr">forall</span> <span class="nv">x</span>:U, In C x -&gt; In (Union B C) x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Add</span> (<span class="nv">B</span>:Ensemble) (<span class="nv">x</span>:U) : Ensemble := Union B (Singleton x).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Intersection</span> (<span class="nv">B</span> <span class="nv">C</span>:Ensemble) : Ensemble :=
     Intersection_intro :
     <span class="kr">forall</span> <span class="nv">x</span>:U, In B x -&gt; In C x -&gt; In (Intersection B C) x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Couple</span> (<span class="nv">x</span> <span class="nv">y</span>:U) : Ensemble :=
     | Couple_l : In (Couple x y) x
     | Couple_r : In (Couple x y) y.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Triple</span> (<span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span>:U) : Ensemble :=
     | Triple_l : In (Triple x y z) x
     | Triple_m : In (Triple x y z) y
     | Triple_r : In (Triple x y z) z.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Complement</span> (<span class="nv">A</span>:Ensemble) : Ensemble := <span class="kr">fun</span> <span class="nv">x</span>:U =&gt; ~ In A x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Setminus</span> (<span class="nv">B</span> <span class="nv">C</span>:Ensemble) : Ensemble :=
     <span class="kr">fun</span> <span class="nv">x</span>:U =&gt; In B x /\ ~ In C x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Subtract</span> (<span class="nv">B</span>:Ensemble) (<span class="nv">x</span>:U) : Ensemble := Setminus B (Singleton x).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Disjoint</span> (<span class="nv">B</span> <span class="nv">C</span>:Ensemble) : <span class="kt">Prop</span> :=
     Disjoint_intro : (<span class="kr">forall</span> <span class="nv">x</span>:U, ~ In (Intersection B C) x) -&gt; Disjoint B C.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Inhabited</span> (<span class="nv">B</span>:Ensemble) : <span class="kt">Prop</span> :=
     Inhabited_intro : <span class="kr">forall</span> <span class="nv">x</span>:U, In B x -&gt; Inhabited B.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Strict_Included</span> (<span class="nv">B</span> <span class="nv">C</span>:Ensemble) : <span class="kt">Prop</span> := Included B C /\ B &lt;&gt; C.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Same_set</span> (<span class="nv">B</span> <span class="nv">C</span>:Ensemble) : <span class="kt">Prop</span> := Included B C /\ Included C B.</span></span></span></pre><div class="doc">
 Extensionality Axiom 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">Extensionality_Ensembles</span> : <span class="kr">forall</span> <span class="nv">A</span> <span class="nv">B</span>:Ensemble, Same_set A B -&gt; A = B.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">Extensionality_Ensembles</span> : <span class="kr">forall</span> <span class="nv">A</span> <span class="nv">B</span>:Ensemble, Same_set A B -&gt; A = B.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Ensembles</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Unfold</span> In Included Same_set Strict_Included <span class="kn">Add</span> Setminus Subtract: sets.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> Union_introl Union_intror Intersection_intro In_singleton
   Couple_l Couple_r Triple_l Triple_m Triple_r Disjoint_intro
   Extensionality_Ensembles: sets.</span></span></span></pre></article></body></html>

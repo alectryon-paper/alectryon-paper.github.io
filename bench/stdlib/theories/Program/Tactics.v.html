@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html><head><title>Tactics.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #555753; font-style: italic } /* Comment */
+.highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
+.highlight .g { color: #000000 } /* Generic */
+.highlight .k { color: #8f5902 } /* Keyword */
+.highlight .l { color: #2e3436 } /* Literal */
+.highlight .n { color: #000000 } /* Name */
+.highlight .o { color: #000000 } /* Operator */
+.highlight .x { color: #2e3436 } /* Other */
+.highlight .p { color: #000000 } /* Punctuation */
+.highlight .ch { color: #555753; font-weight: bold; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #555753; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #3465a4; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #555753; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #555753; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3465a4; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #a40000 } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #a40000 } /* Generic.Error */
+.highlight .gh { color: #a40000; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #4e9a06 } /* Generic.Inserted */
+.highlight .go { color: #000000; font-style: italic } /* Generic.Output */
+.highlight .gp { color: #8f5902 } /* Generic.Prompt */
+.highlight .gs { color: #000000; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #000000; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #000000; font-style: italic } /* Generic.Traceback */
+.highlight .kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #4e9a06; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #4e9a06; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #204a87 } /* Keyword.Pseudo */
+.highlight .kr { color: #8f5902 } /* Keyword.Reserved */
+.highlight .kt { color: #204a87 } /* Keyword.Type */
+.highlight .ld { color: #2e3436 } /* Literal.Date */
+.highlight .m { color: #2e3436 } /* Literal.Number */
+.highlight .s { color: #ad7fa8 } /* Literal.String */
+.highlight .na { color: #c4a000 } /* Name.Attribute */
+.highlight .nb { color: #75507b } /* Name.Builtin */
+.highlight .nc { color: #204a87 } /* Name.Class */
+.highlight .no { color: #ce5c00 } /* Name.Constant */
+.highlight .nd { color: #3465a4; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #c4a000; text-decoration: underline } /* Name.Entity */
+.highlight .ne { color: #cc0000 } /* Name.Exception */
+.highlight .nf { color: #a40000 } /* Name.Function */
+.highlight .nl { color: #3465a4; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #000000 } /* Name.Namespace */
+.highlight .nx { color: #000000 } /* Name.Other */
+.highlight .py { color: #000000 } /* Name.Property */
+.highlight .nt { color: #a40000 } /* Name.Tag */
+.highlight .nv { color: #ce5c00 } /* Name.Variable */
+.highlight .ow { color: #8f5902 } /* Operator.Word */
+.highlight .w { color: #d3d7cf; text-decoration: underline } /* Text.Whitespace */
+.highlight .mb { color: #2e3436 } /* Literal.Number.Bin */
+.highlight .mf { color: #2e3436 } /* Literal.Number.Float */
+.highlight .mh { color: #2e3436 } /* Literal.Number.Hex */
+.highlight .mi { color: #2e3436 } /* Literal.Number.Integer */
+.highlight .mo { color: #2e3436 } /* Literal.Number.Oct */
+.highlight .sa { color: #ad7fa8 } /* Literal.String.Affix */
+.highlight .sb { color: #ad7fa8 } /* Literal.String.Backtick */
+.highlight .sc { color: #ad7fa8; font-weight: bold } /* Literal.String.Char */
+.highlight .dl { color: #ad7fa8 } /* Literal.String.Delimiter */
+.highlight .sd { color: #ad7fa8 } /* Literal.String.Doc */
+.highlight .s2 { color: #ad7fa8 } /* Literal.String.Double */
+.highlight .se { color: #ad7fa8; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #ad7fa8; text-decoration: underline } /* Literal.String.Heredoc */
+.highlight .si { color: #ce5c00 } /* Literal.String.Interpol */
+.highlight .sx { color: #ad7fa8 } /* Literal.String.Other */
+.highlight .sr { color: #ad7fa8 } /* Literal.String.Regex */
+.highlight .s1 { color: #ad7fa8 } /* Literal.String.Single */
+.highlight .ss { color: #8f5902 } /* Literal.String.Symbol */
+.highlight .bp { color: #5c35cc } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a40000 } /* Name.Function.Magic */
+.highlight .vc { color: #ce5c00 } /* Name.Variable.Class */
+.highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
+.highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
+.highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
+<span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
+<span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
+<span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
+<span class="c">(*   \VV/  **************************************************************)</span>
+<span class="c">(*    //   *    This file is distributed under the terms of the         *)</span>
+<span class="c">(*         *     GNU Lesser General Public License Version 2.1          *)</span>
+<span class="c">(*         *     (see LICENSE file for the text of the license)         *)</span>
+<span class="sd">(************************************************************************)</span>
+
+<span class="sd">(** This module implements various tactics used to simplify the goals produced by Program,</span>
+<span class="sd">   which are also generally useful. *)</span>
+
+<span class="sd">(** Debugging tactics to show the goal during evaluation. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_goal</span> := <span class="kr">match goal with</span> [ |- ?T ] =&gt; <span class="kp">idtac</span> T <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_hyp</span> id :=
+  <span class="kr">match goal with</span>
+    | [ H := ?b : ?T |- _ ] =&gt;
+      <span class="kr">match</span> H <span class="kr">with</span>
+        | id =&gt; <span class="kp">idtac</span> id <span class="s2">&quot;:=&quot;</span> b <span class="s2">&quot;:&quot;</span> T
+      <span class="kr">end</span>
+    | [ H : ?T |- _ ] =&gt;
+      <span class="kr">match</span> H <span class="kr">with</span>
+        | id =&gt; <span class="kp">idtac</span> id  <span class="s2">&quot;:&quot;</span>  T
+      <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_hyps</span> :=
+  <span class="kp">try</span> <span class="kr">match reverse goal with</span>
+        | [ H : ?T |- _ ] =&gt; show_hyp H ; <span class="kp">fail</span>
+      <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** The [do] tactic but using a Coq-side nat. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">do_nat</span> n tac :=
+  <span class="kr">match</span> n <span class="kr">with</span>
+    | <span class="mi">0</span> =&gt; <span class="kp">idtac</span>
+    | S ?n&#39; =&gt; tac ; do_nat n&#39; tac
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Do something on the last hypothesis, or fail *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_last_hyp</span> tac :=
+  <span class="kr">lazymatch goal with</span> [ H : _ |- _ ] =&gt; tac H <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Destructs one pair, without care regarding naming. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_one_pair</span> :=
+ <span class="kr">match goal with</span>
+   | [H : (_ /\ _) |- _] =&gt; <span class="nb">destruct</span> H
+   | [H : prod _ _ |- _] =&gt; <span class="nb">destruct</span> H
+ <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Repeateadly destruct pairs. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_pairs</span> := <span class="kp">repeat</span> (destruct_one_pair).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Destruct one existential package, keeping the name of the hypothesis for the first component. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_one_ex</span> :=
+  <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">H</span> := <span class="kr">let</span> <span class="nv">ph</span> := <span class="kp">fresh</span> <span class="s2">&quot;H&quot;</span> <span class="kr">in</span> (<span class="nb">destruct</span> H <span class="kr">as</span> [H ph]) <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">tac2</span> <span class="nv">H</span> := <span class="kr">let</span> <span class="nv">ph</span> := <span class="kp">fresh</span> <span class="s2">&quot;H&quot;</span> <span class="kr">in</span> <span class="kr">let</span> <span class="nv">ph&#39;</span> := <span class="kp">fresh</span> <span class="s2">&quot;H&quot;</span> <span class="kr">in</span> 
+    (<span class="nb">destruct</span> H <span class="kr">as</span> [H ph ph&#39;]) 
+  <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">tacT</span> <span class="nv">H</span> := <span class="kr">let</span> <span class="nv">ph</span> := <span class="kp">fresh</span> <span class="s2">&quot;X&quot;</span> <span class="kr">in</span> (<span class="nb">destruct</span> H <span class="kr">as</span> [H ph]) <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">tacT2</span> <span class="nv">H</span> := <span class="kr">let</span> <span class="nv">ph</span> := <span class="kp">fresh</span> <span class="s2">&quot;X&quot;</span> <span class="kr">in</span> <span class="kr">let</span> <span class="nv">ph&#39;</span> := <span class="kp">fresh</span> <span class="s2">&quot;X&quot;</span> <span class="kr">in</span> 
+    (<span class="nb">destruct</span> H <span class="kr">as</span> [H ph ph&#39;]) 
+  <span class="kr">in</span>
+    <span class="kr">match goal with</span>
+      | [H : (ex _) |- _] =&gt; tac H
+      | [H : (sig ?P) |- _ ] =&gt; tac H
+      | [H : (sigT ?P) |- _ ] =&gt; tacT H
+      | [H : (ex2 _ _) |- _] =&gt; tac2 H
+      | [H : (sig2 ?P _) |- _ ] =&gt; tac2 H
+      | [H : (sigT2 ?P _) |- _ ] =&gt; tacT2 H
+    <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Repeateadly destruct existentials. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_exists</span> := <span class="kp">repeat</span> (destruct_one_ex).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Repeateadly destruct conjunctions and existentials. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_conjs</span> := <span class="kp">repeat</span> (destruct_one_pair || destruct_one_ex).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Destruct an existential hypothesis [t] keeping its name for the first component</span>
+<span class="sd">   and using [Ht] for the second *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct&quot;</span> <span class="s2">&quot;exist&quot;</span> <span class="kn">ident</span>(t) <span class="kn">ident</span>(Ht) := <span class="nb">destruct</span> t <span class="kr">as</span> [t Ht].</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Destruct a disjunction keeping its name in both subgoals. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct&quot;</span> <span class="s2">&quot;or&quot;</span> <span class="kn">ident</span>(H) := <span class="nb">destruct</span> H <span class="kr">as</span> [H|H].</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Discriminate that also work on a [x &lt;&gt; x] hypothesis. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">discriminates</span> :=
+  <span class="kr">match goal with</span>
+    | [ H : ?x &lt;&gt; ?x |- _ ] =&gt; <span class="nb">elim</span> H ; <span class="bp">reflexivity</span>
+    | _ =&gt; <span class="bp">discriminate</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Revert the last hypothesis. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">revert_last</span> :=
+  <span class="kr">match goal with</span>
+    [ H : _ |- _ ] =&gt; <span class="nb">revert</span> H
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Repeatedly reverse the last hypothesis, putting everything in the goal. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">reverse</span> := <span class="kp">repeat</span> revert_last.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Reverse everything up to hypothesis id (not included). *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">revert_until</span> id :=
+  on_last_hyp <span class="kp">ltac</span>:(<span class="kr">fun</span> <span class="nv">id&#39;</span> =&gt;
+    <span class="kr">match</span> id&#39; <span class="kr">with</span>
+      | id =&gt; <span class="kp">idtac</span>
+      | _ =&gt; <span class="nb">revert</span> id&#39; ; revert_until id
+    <span class="kr">end</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Clear duplicated hypotheses *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clear_dup</span> :=
+  <span class="kr">match goal with</span>
+    | [ H : ?X |- _ ] =&gt;
+      <span class="kr">match goal with</span>
+        | [ H&#39; : ?Y |- _ ] =&gt;
+          <span class="kr">match</span> H <span class="kr">with</span>
+            | H&#39; =&gt; <span class="kp">fail</span> <span class="mi">2</span>
+            | _ =&gt; <span class="nb">unify</span> X Y ; (<span class="nb">clear</span> H&#39; || <span class="nb">clear</span> H)
+          <span class="kr">end</span>
+      <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clear_dups</span> := <span class="kp">repeat</span> clear_dup.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Try to clear everything except some hyp *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clear_except</span> hyp := 
+  <span class="kp">repeat</span> <span class="kr">match goal with</span> [ H : _ |- _ ] =&gt;
+           <span class="kr">match</span> H <span class="kr">with</span>
+             | hyp =&gt; <span class="kp">fail</span> <span class="mi">1</span>
+             | _ =&gt; <span class="nb">clear</span> H
+           <span class="kr">end</span>
+         <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** A non-failing subst that substitutes as much as possible. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">subst_no_fail</span> :=
+  <span class="kp">repeat</span> (<span class="kr">match goal with</span>
+            [ H : ?X = ?Y |- _ ] =&gt; <span class="nb">subst</span> X || <span class="nb">subst</span> Y
+          <span class="kr">end</span>).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;subst&quot;</span> <span class="s2">&quot;*&quot;</span> := subst_no_fail.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_application</span> f tac T :=
+  <span class="kr">match</span> T <span class="kr">with</span>
+    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u ?a ?b ?c] =&gt; tac (f x y z w v u a b c)
+    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u ?a ?b] =&gt; tac (f x y z w v u a b)
+    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u ?a] =&gt; tac (f x y z w v u a)
+    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u] =&gt; tac (f x y z w v u)
+    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v] =&gt; tac (f x y z w v)
+    | <span class="kp">context</span> [f ?x ?y ?z ?w] =&gt; tac (f x y z w)
+    | <span class="kp">context</span> [f ?x ?y ?z] =&gt; tac (f x y z)
+    | <span class="kp">context</span> [f ?x ?y] =&gt; tac (f x y)
+    | <span class="kp">context</span> [f ?x] =&gt; tac (f x)
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** A variant of [apply] using [refine], doing as much conversion as necessary. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">rapply</span> p :=
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _ _) ||
+  <span class="nb">refine</span> (p _ _ _) ||
+  <span class="nb">refine</span> (p _ _) ||
+  <span class="nb">refine</span> (p _) ||
+  <span class="nb">refine</span> p.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Tactical [on_call f tac] applies [tac] on any application of [f] in the hypothesis or goal. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_call</span> f tac :=
+  <span class="kr">match goal with</span>
+    | |- ?T  =&gt; on_application f tac T
+    | H : ?T |- _  =&gt; on_application f tac T
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="c">(* Destructs calls to f in hypothesis or conclusion, useful if f creates a subset object. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call</span> f :=
+  <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t) <span class="kr">in</span> on_call f tac.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_calls</span> f := <span class="kp">repeat</span> destruct_call f.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call_in</span> f H :=
+  <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t) <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">T</span> := <span class="kp">type of</span> H <span class="kr">in</span>
+    on_application f tac T.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call_as</span> f l :=
+  <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t <span class="kr">as</span> l) <span class="kr">in</span> on_call f tac.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call_as_in</span> f l H :=
+  <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t <span class="kr">as</span> l) <span class="kr">in</span>
+  <span class="kr">let</span> <span class="nv">T</span> := <span class="kp">type of</span> H <span class="kr">in</span>
+    on_application f tac T.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) := destruct_call f.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Permit to name the results of destructing the call to [f]. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) <span class="s2">&quot;as&quot;</span> simple_intropattern(l) :=
+  destruct_call_as f l.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Specify the hypothesis in which the call occurs as well. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) <span class="s2">&quot;in&quot;</span> hyp(id) :=
+  destruct_call_in f id.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) <span class="s2">&quot;as&quot;</span> simple_intropattern(l) <span class="s2">&quot;in&quot;</span> hyp(id) :=
+  destruct_call_as_in f l id.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** A marker for prototypes to destruct. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">fix_proto</span> {<span class="nv">A</span> : <span class="kt">Type</span>} (<span class="nv">a</span> : A) := a.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> fix_proto <span class="kr">as</span> program.tactic.fix_proto.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_rec_calls</span> :=
+  <span class="kr">match goal with</span>
+    | [ H : fix_proto _ |- _ ] =&gt; destruct_calls H ; <span class="nb">clear</span> H
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_all_rec_calls</span> :=
+  <span class="kp">repeat</span> destruct_rec_calls ; <span class="nb">unfold</span> fix_proto <span class="kr">in</span> *.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Try to inject any potential constructor equality hypothesis. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">autoinjection</span> tac :=
+  <span class="kr">match goal with</span>
+    | [ H : ?f ?a = ?f&#39; ?a&#39; |- _ ] =&gt; tac H
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">inject</span> H := <span class="kp">progress</span> (<span class="nb">inversion</span> H ; <span class="nb">subst</span>*; clear_dups) ; <span class="nb">clear</span> H.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">autoinjections</span> := <span class="kp">repeat</span> (clear_dups ; autoinjection <span class="kp">ltac</span>:(inject)).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Destruct an hypothesis by first copying it to avoid dependencies. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_nondep</span> H := <span class="kr">let</span> <span class="nv">H0</span> := <span class="kp">fresh</span> <span class="s2">&quot;H&quot;</span> <span class="kr">in</span> <span class="nb">assert</span>(H0 := H); <span class="nb">destruct</span> H0.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** If bang appears in the goal, it means that we have a proof of False and the goal is solved. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">bang</span> :=
+  <span class="kr">match goal with</span>
+    | |- ?x =&gt;
+      <span class="kr">match</span> x <span class="kr">with</span>
+        | <span class="kp">context</span> [False_rect _ ?p] =&gt; <span class="nb">elim</span> p
+      <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** A tactic to show contradiction by first asserting an automatically provable hypothesis. *)</span>
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;contradiction&quot;</span> <span class="s2">&quot;by&quot;</span> <span class="kp">constr</span>(t) :=
+  <span class="kr">let</span> <span class="nv">H</span> := <span class="kp">fresh</span> <span class="kr">in</span> <span class="nb">assert</span> t <span class="kr">as</span> H <span class="bp">by</span> <span class="nb">auto with</span> * ; <span class="bp">contradiction</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** A tactic that adds [H:=p:typeof(p)] to the context if no hypothesis of the same type appears in the goal.</span>
+<span class="sd">   Useful to do saturation using tactics. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">add_hypothesis</span> H&#39; p :=
+  <span class="kr">match</span> <span class="kp">type of</span> p <span class="kr">with</span>
+    ?X =&gt;
+    <span class="kr">match goal with</span>
+      | [ H : X |- _ ] =&gt; <span class="kp">fail</span> <span class="mi">1</span>
+      | _ =&gt; <span class="nb">set</span> (H&#39;:=p) ; <span class="kp">try</span> (<span class="nb">change</span> p <span class="kr">with</span> H&#39;) ; <span class="nb">clearbody</span> H&#39;
+    <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** A tactic to replace an hypothesis by another term. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">replace_hyp</span> H c :=
+  <span class="kr">let</span> <span class="nv">H&#39;</span> := <span class="kp">fresh</span> <span class="s2">&quot;H&quot;</span> <span class="kr">in</span>
+    <span class="nb">assert</span>(H&#39; := c) ; <span class="nb">clear</span> H ; <span class="nb">rename</span> H&#39; <span class="nb">into</span> H.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** A tactic to refine an hypothesis by supplying some of its arguments. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">refine_hyp</span> c :=
+  <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">H</span> := replace_hyp H c <span class="kr">in</span>
+    <span class="kr">match</span> c <span class="kr">with</span>
+      | ?H _ =&gt; tac H
+      | ?H _ _ =&gt; tac H
+      | ?H _ _ _ =&gt; tac H
+      | ?H _ _ _ _ =&gt; tac H
+      | ?H _ _ _ _ _ =&gt; tac H
+      | ?H _ _ _ _ _ _ =&gt; tac H
+      | ?H _ _ _ _ _ _ _ =&gt; tac H
+      | ?H _ _ _ _ _ _ _ _ =&gt; tac H
+    <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** The default simplification tactic used by Program is defined by [program_simpl], sometimes [auto]</span>
+<span class="sd">   is not enough, better rebind using [Obligation Tactic := tac] in this case,</span>
+<span class="sd">   possibly using [program_simplify] to use standard goal-cleaning tactics. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">program_simplify</span> :=
+<span class="nb">simpl</span>; <span class="nb">intros</span> ; destruct_all_rec_calls ; <span class="kp">repeat</span> (destruct_conjs; <span class="nb">simpl</span> proj1_sig <span class="kr">in</span> * );
+  <span class="nb">subst</span>*; autoinjections ; <span class="kp">try</span> discriminates ;
+    <span class="kp">try</span> (<span class="kp">solve</span> [ <span class="nb">red</span> ; <span class="nb">intros</span> ; destruct_conjs ; autoinjections ; discriminates ]).</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+<span class="sd">(** Restrict automation to propositional obligations. *)</span>
+
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">program_solve_wf</span> :=
+  <span class="kr">match goal with</span>
+    | |- well_founded _ =&gt; <span class="nb">auto with</span> *
+    | |- ?T =&gt; <span class="kr">match</span> <span class="kp">type of</span> T <span class="kr">with</span> <span class="kt">Prop</span> =&gt; <span class="nb">auto</span> <span class="kr">end</span>
+  <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Create HintDb</span> program <span class="kn">discriminated</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">program_simpl</span> := program_simplify ; <span class="kp">try</span> <span class="nb">typeclasses eauto</span> <span class="mi">10</span> <span class="kr">with</span> program ; <span class="kp">try</span> program_solve_wf.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Obligation Tactic</span> := program_simpl.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">obligation</span> (<span class="nv">A</span> : <span class="kt">Type</span>) {<span class="nv">a</span> : A} := a.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> obligation <span class="kr">as</span> program.tactics.obligation.</span></span><span class="coq-wsp">
+</span></span></pre></article></body></html>

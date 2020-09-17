@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -85,69 +85,69 @@
 <span class="sd">(************************************************************************)</span>
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Relation_Definition</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">A</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">relation</span> := A -&gt; A -&gt; <span class="kt">Prop</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">R</span> : relation.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">General_Properties_of_Relations</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">reflexive</span> : <span class="kt">Prop</span> := <span class="kr">forall</span> <span class="nv">x</span>:A, R x x.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">transitive</span> : <span class="kt">Prop</span> := <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span>:A, R x y -&gt; R y z -&gt; R x z.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">symmetric</span> : <span class="kt">Prop</span> := <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>:A, R x y -&gt; R y x.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">antisymmetric</span> : <span class="kt">Prop</span> := <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>:A, R x y -&gt; R y x -&gt; x = y.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
     <span class="c">(* for compatibility with Equivalence in  ../PROGRAMS/ALG/  *)</span>
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">equiv</span> := reflexive /\ transitive /\ symmetric.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">General_Properties_of_Relations</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 
 
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Sets_of_Relations</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Record</span> <span class="nf">preorder</span> : <span class="kt">Prop</span> :=
       { preord_refl : reflexive; preord_trans : transitive}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Record</span> <span class="nf">order</span> : <span class="kt">Prop</span> :=
       { ord_refl : reflexive;
 	ord_trans : transitive;
 	ord_antisym : antisymmetric}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Record</span> <span class="nf">equivalence</span> : <span class="kt">Prop</span> :=
       { equiv_refl : reflexive;
 	equiv_trans : transitive;
 	equiv_sym : symmetric}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Record</span> <span class="nf">PER</span> : <span class="kt">Prop</span> :=  {per_sym : symmetric; per_trans : transitive}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Sets_of_Relations</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Relations_of_Relations</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">inclusion</span> (<span class="nv">R1</span> <span class="nv">R2</span>:relation) : <span class="kt">Prop</span> :=
       <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>:A, R1 x y -&gt; R2 x y.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">same_relation</span> (<span class="nv">R1</span> <span class="nv">R2</span>:relation) : <span class="kt">Prop</span> :=
       inclusion R1 R2 /\ inclusion R2 R1.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">commut</span> (<span class="nv">R1</span> <span class="nv">R2</span>:relation) : <span class="kt">Prop</span> :=
       <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>:A,
 	R1 y x -&gt; <span class="kr">forall</span> <span class="nv">z</span>:A, R2 z y -&gt;  <span class="kr">exists2</span> y&#39; : A, R2 y&#39; x &amp; R1 z y&#39;.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Relations_of_Relations</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Relation_Definition</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Unfold</span> reflexive transitive antisymmetric symmetric: sets.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> Build_preorder Build_order Build_equivalence Build_PER
   preord_refl preord_trans ord_refl ord_trans ord_antisym equiv_refl
   equiv_trans equiv_sym per_sym per_trans: sets.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Unfold</span> inclusion same_relation commut: sets.</span></span></span></pre></article></body></html>

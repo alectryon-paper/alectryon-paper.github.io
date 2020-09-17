@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -88,33 +88,33 @@
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Export</span> VectorNotations.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Open Scope</span> program_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Open Scope</span> string_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ByteVector</span> := Vector.t ascii.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ByteNil</span> : ByteVector <span class="mi">0</span> := Vector.nil ascii.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">little_endian_to_string</span> {<span class="nv">n</span> : nat} (<span class="nv">v</span> : ByteVector n) : string :=
   fold_right String v <span class="s2">&quot;&quot;</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_string</span> {<span class="nv">n</span> : nat} : ByteVector n -&gt; string :=
   little_endian_to_string ∘ rev.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">little_endian_of_string</span> (<span class="nv">s</span> : string) : ByteVector (length s) :=
   <span class="kr">match</span> s <span class="kr">with</span>
   | <span class="s2">&quot;&quot;</span> =&gt; ByteNil
   | String b s&#39; =&gt; b :: little_endian_of_string s&#39;
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_string</span> (<span class="nv">s</span> : string) : ByteVector (length s) :=
   rev (little_endian_of_string s).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">to_Bvector</span> {<span class="nv">n</span> : nat} (<span class="nv">v</span> : ByteVector n) : Bvector (n * <span class="mi">8</span>) :=
   <span class="kr">match</span> v <span class="kr">with</span>
   | [] =&gt; []
   | Ascii b0 b1 b2 b3 b4 b5 b6 b7::v&#39; =&gt;
     b0::b1::b2::b3::b4::b5::b6::b7::to_Bvector v&#39;
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">of_Bvector</span> {<span class="nv">n</span> : nat} : Bvector (n * <span class="mi">8</span>) -&gt; ByteVector n :=
   <span class="kr">match</span> n <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; <span class="kr">fun</span> <span class="nv">_</span> =&gt; []

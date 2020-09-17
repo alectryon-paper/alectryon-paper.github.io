@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -105,46 +105,46 @@
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Ensembles.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Relations_1.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Partial_Order.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Bounds</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">U</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">D</span> : PO U.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Let</span> <span class="nf">C</span> := @Carrier_of U D.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Let</span> <span class="nf">R</span> := @Rel_of U D.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Upper_Bound</span> (<span class="nv">B</span>:Ensemble U) (<span class="nv">x</span>:U) : <span class="kt">Prop</span> :=
     Upper_Bound_definition :
     In U C x -&gt; (<span class="kr">forall</span> <span class="nv">y</span>:U, In U B y -&gt; R y x) -&gt; Upper_Bound B x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Lower_Bound</span> (<span class="nv">B</span>:Ensemble U) (<span class="nv">x</span>:U) : <span class="kt">Prop</span> :=
     Lower_Bound_definition :
     In U C x -&gt; (<span class="kr">forall</span> <span class="nv">y</span>:U, In U B y -&gt; R x y) -&gt; Lower_Bound B x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Lub</span> (<span class="nv">B</span>:Ensemble U) (<span class="nv">x</span>:U) : <span class="kt">Prop</span> :=
     Lub_definition :
     Upper_Bound B x -&gt; (<span class="kr">forall</span> <span class="nv">y</span>:U, Upper_Bound B y -&gt; R x y) -&gt; Lub B x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Glb</span> (<span class="nv">B</span>:Ensemble U) (<span class="nv">x</span>:U) : <span class="kt">Prop</span> :=
     Glb_definition :
     Lower_Bound B x -&gt; (<span class="kr">forall</span> <span class="nv">y</span>:U, Lower_Bound B y -&gt; R y x) -&gt; Glb B x.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Bottom</span> (<span class="nv">bot</span>:U) : <span class="kt">Prop</span> :=
     Bottom_definition :
     In U C bot -&gt; (<span class="kr">forall</span> <span class="nv">y</span>:U, In U C y -&gt; R bot y) -&gt; Bottom bot.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Totally_ordered</span> (<span class="nv">B</span>:Ensemble U) : <span class="kt">Prop</span> :=
     Totally_ordered_definition :
     (Included U B C -&gt;
       <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span>:U, Included U (Couple U x y) B -&gt; R x y \/ R y x) -&gt;
     Totally_ordered B.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Compatible</span> : Relation U :=
     <span class="kr">fun</span> <span class="nv">x</span> <span class="nv">y</span>:U =&gt;
       In U C x -&gt;
       In U C y -&gt;  <span class="kr">exists</span> <span class="nv">z</span> : _, In U C z /\ Upper_Bound (Couple U x y) z.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Directed</span> (<span class="nv">X</span>:Ensemble U) : <span class="kt">Prop</span> :=
     Definition_of_Directed :
     Included U X C -&gt;
@@ -153,13 +153,13 @@
       Included U (Couple U x1 x2) X -&gt;
       <span class="kr">exists</span> <span class="nv">x3</span> : _, In U X x3 /\ Upper_Bound (Couple U x1 x2) x3) -&gt;
     Directed X.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Complete</span> : <span class="kt">Prop</span> :=
     Definition_of_Complete :
     (<span class="kr">exists</span> <span class="nv">bot</span> : _, Bottom bot) -&gt;
     (<span class="kr">forall</span> <span class="nv">X</span>:Ensemble U, Directed X -&gt;  <span class="kr">exists</span> <span class="nv">bsup</span> : _, Lub X bsup) -&gt;
     Complete.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Conditionally_complete</span> : <span class="kt">Prop</span> :=
     Definition_of_Conditionally_complete :
     (<span class="kr">forall</span> <span class="nv">X</span>:Ensemble U,
@@ -167,20 +167,20 @@
       (<span class="kr">exists</span> <span class="nv">maj</span> : _, Upper_Bound X maj) -&gt;
       <span class="kr">exists</span> <span class="nv">bsup</span> : _, Lub X bsup) -&gt; Conditionally_complete.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Bounds</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> Totally_ordered_definition Upper_Bound_definition
   Lower_Bound_definition Lub_definition Glb_definition Bottom_definition
   Definition_of_Complete Definition_of_Complete
   Definition_of_Conditionally_complete : core.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Specific_orders</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">U</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Record</span> <span class="nf">Cpo</span> : <span class="kt">Type</span> := Definition_of_cpo
     {PO_of_cpo : PO U; Cpo_cond : Complete U PO_of_cpo}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Record</span> <span class="nf">Chain</span> : <span class="kt">Type</span> := Definition_of_chain
     {PO_of_chain : PO U;
     Chain_cond : Totally_ordered U PO_of_chain (@Carrier_of _ PO_of_chain)}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Specific_orders</span>.</span></span></span></pre></article></body></html>

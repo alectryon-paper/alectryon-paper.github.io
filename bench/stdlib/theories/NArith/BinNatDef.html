@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -86,19 +86,19 @@
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> BinNums.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> BinPos.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> N_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Notation</span> <span class="s2">&quot;0&quot;</span> := N0.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Notation</span> <span class="s2">&quot;1&quot;</span> := (Npos <span class="mi">1</span>).</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Notation</span> <span class="s2">&quot;2&quot;</span> := (Npos <span class="mi">2</span>).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 <span class="sd">(**********************************************************************)</span></span></span></pre><div class="doc">
 <a name="lab1"></a><h1 class="section">Binary natural numbers, definitions of operations</h1>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(**********************************************************************)</span>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(**********************************************************************)</span>
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">N</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">t</span> := N.</span></span></span></pre><div class="doc">
 <a name="lab2"></a><h2 class="section">Nicer name <span class="inlinecode"><span class="id" title="var">N.pos</span></span> for constructor <span class="inlinecode"><span class="id" title="var">Npos</span></span></h2>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Notation</span> <span class="nf">pos</span> := Npos.</span></span></span></pre><div class="doc">
@@ -143,7 +143,7 @@
   | _, <span class="mi">0</span> =&gt; n
   | pos p, pos q =&gt; pos (p + q)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;+&quot;</span> := add : N_scope.</span></span></span></pre><div class="doc">
 Subtraction 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sub</span> <span class="nv">n</span> <span class="nv">m</span> :=
@@ -156,7 +156,7 @@ Subtraction
   | _ =&gt; <span class="mi">0</span>
   <span class="kr">end</span>
 <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;-&quot;</span> := sub : N_scope.</span></span></span></pre><div class="doc">
 Multiplication 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">mul</span> <span class="nv">n</span> <span class="nv">m</span> :=
@@ -165,7 +165,7 @@ Multiplication
   | _, <span class="mi">0</span> =&gt; <span class="mi">0</span>
   | pos p, pos q =&gt; pos (p * q)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;*&quot;</span> := mul : N_scope.</span></span></span></pre><div class="doc">
 Order 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">compare</span> <span class="nv">n</span> <span class="nv">m</span> :=
@@ -175,7 +175,7 @@ Order
   | pos n&#39;, <span class="mi">0</span> =&gt; Gt
   | pos n&#39;, pos m&#39; =&gt; (n&#39; ?= m&#39;)%positive
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;?=&quot;</span> := <span class="nb">compare</span> (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : N_scope.</span></span></span></pre><div class="doc">
 Boolean equality and comparison 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">eqb</span> <span class="nv">n</span> <span class="nv">m</span> :=
@@ -184,13 +184,13 @@ Boolean equality and comparison
     | pos p, pos q =&gt; Pos.eqb p q
     | _, _ =&gt; false
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">leb</span> <span class="nv">x</span> <span class="nv">y</span> :=
  <span class="kr">match</span> x ?= y <span class="kr">with</span> Gt =&gt; false | _ =&gt; true <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ltb</span> <span class="nv">x</span> <span class="nv">y</span> :=
  <span class="kr">match</span> x ?= y <span class="kr">with</span> Lt =&gt; true | _ =&gt; false <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;=?&quot;</span> := eqb (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : N_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;&lt;=?&quot;</span> := leb (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : N_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;&lt;?&quot;</span> := ltb (<span class="kn">at level</span> <span class="mi">70</span>, <span class="kn">no associativity</span>) : N_scope.</span></span></span></pre><div class="doc">
@@ -199,7 +199,7 @@ Min and max
  | Lt | Eq =&gt; n
  | Gt =&gt; n&#39;
  <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">max</span> <span class="nv">n</span> <span class="nv">n&#39;</span> := <span class="kr">match</span> n ?= n&#39; <span class="kr">with</span>
  | Lt | Eq =&gt; n&#39;
  | Gt =&gt; n
@@ -219,7 +219,7 @@ Parity
     | pos (xO _) =&gt; true
     | _ =&gt; false
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">odd</span> <span class="nv">n</span> := negb (even n).</span></span></span></pre><div class="doc">
 Power 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">pow</span> <span class="nv">n</span> <span class="nv">p</span> :=
@@ -228,7 +228,7 @@ Power
     | _, <span class="mi">0</span> =&gt; <span class="mi">0</span>
     | pos p, pos q =&gt; pos (q^p)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;^&quot;</span> := pow : N_scope.</span></span></span></pre><div class="doc">
 Square 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">square</span> <span class="nv">n</span> :=
@@ -252,7 +252,7 @@ How many digits in a number ?
   | <span class="mi">0</span> =&gt; <span class="mi">0</span>
   | pos p =&gt; pos (Pos.size p)
  <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">size_nat</span> <span class="nv">n</span> :=
  <span class="kr">match</span> n <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; O
@@ -274,17 +274,17 @@ Euclidean division
        <span class="kr">if</span> b &lt;=? r&#39; <span class="kr">then</span> (succ_double q, r&#39; - b)
         <span class="kr">else</span>  (double q, r&#39;)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">div_eucl</span> (<span class="nv">a</span> <span class="nv">b</span>:N) : N * N :=
   <span class="kr">match</span> a, b <span class="kr">with</span>
    | <span class="mi">0</span>,  _ =&gt; (<span class="mi">0</span>, <span class="mi">0</span>)
    | _, <span class="mi">0</span>  =&gt; (<span class="mi">0</span>, a)
    | pos na, _ =&gt; pos_div_eucl na b
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">div</span> <span class="nv">a</span> <span class="nv">b</span> := fst (div_eucl a b).</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">modulo</span> <span class="nv">a</span> <span class="nv">b</span> := snd (div_eucl a b).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;/&quot;</span> := div : N_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Infix</span> <span class="s2">&quot;mod&quot;</span> := modulo (<span class="kn">at level</span> <span class="mi">40</span>, <span class="kn">no associativity</span>) : N_scope.</span></span></span></pre><div class="doc">
 Greatest common divisor 
@@ -314,7 +314,7 @@ Square root
      | (s, _) =&gt; (pos s, <span class="mi">0</span>)
     <span class="kr">end</span>
  <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">sqrt</span> <span class="nv">n</span> :=
  <span class="kr">match</span> n <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; <span class="mi">0</span>
@@ -353,13 +353,13 @@ Logical <span class="inlinecode"><span class="id" title="var">diff</span></span>
 Shifts 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftl_nat</span> (<span class="nv">a</span>:N) := nat_rect _ a (<span class="kr">fun</span> <span class="nv">_</span> =&gt; double).</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftr_nat</span> (<span class="nv">a</span>:N) := nat_rect _ a (<span class="kr">fun</span> <span class="nv">_</span> =&gt; div2).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftl</span> <span class="nv">a</span> <span class="nv">n</span> :=
   <span class="kr">match</span> a <span class="kr">with</span>
     | <span class="mi">0</span> =&gt; <span class="mi">0</span>
     | pos a =&gt; pos (Pos.shiftl a n)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">shiftr</span> <span class="nv">a</span> <span class="nv">n</span> :=
   <span class="kr">match</span> n <span class="kr">with</span>
     | <span class="mi">0</span> =&gt; a
@@ -383,7 +383,7 @@ Translation from <span class="inlinecode"><span class="id" title="var">N</span><
     | <span class="mi">0</span> =&gt; O
     | pos p =&gt; Pos.to_nat p
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_nat</span> (<span class="nv">n</span>:nat) :=
   <span class="kr">match</span> n <span class="kr">with</span>
     | O =&gt; <span class="mi">0</span>
@@ -397,23 +397,23 @@ Iteration of a function
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 Conversion with a decimal representation for printing/parsing 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_uint</span> (<span class="nv">d</span>:Decimal.uint) := Pos.of_uint d.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_int</span> (<span class="nv">d</span>:Decimal.int) :=
   <span class="kr">match</span> Decimal.norm d <span class="kr">with</span>
   | Decimal.Pos d =&gt; Some (Pos.of_uint d)
   | Decimal.Neg _ =&gt; None
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_uint</span> <span class="nv">n</span> :=
   <span class="kr">match</span> n <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; Decimal.zero
   | pos p =&gt; Pos.to_uint p
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_int</span> <span class="nv">n</span> := Decimal.Pos (to_uint n).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Numeral Notation</span> <span class="nf">N</span> of_uint to_uint : N_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">N</span>.</span></span></span></pre><div class="doc">
 Re-export the notation for those who just <span class="inlinecode"><span class="id" title="keyword">Import</span></span> <span class="inlinecode"><span class="id" title="var">NatIntDef</span></span>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Numeral Notation</span> <span class="nf">N</span> N.of_uint N.to_uint : N_scope.</span></span></span></pre></article></body></html>

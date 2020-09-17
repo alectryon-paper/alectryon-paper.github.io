@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*  v      *   The Coq Proof Assistant  /  The Coq Development Team     *)</span>
 <span class="c">(* &lt;O___,, *   INRIA - CNRS - LIX - LRI - PPS - Copyright 1999-2017     *)</span>
 <span class="c">(*   \VV/  **************************************************************)</span>
@@ -87,10 +87,10 @@
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> BinNatDef.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> BinIntDef.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Import</span> BinPosDef.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> positive_scope.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> string_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Notation</span> <span class="s2">&quot;a || b&quot;</span>
   := (<span class="kr">if</span> a <span class="kr">then</span> true <span class="kr">else</span> <span class="kr">if</span> b <span class="kr">then</span> true <span class="kr">else</span> false).</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">ascii_to_digit</span> (<span class="nv">ch</span> : ascii) : option N
@@ -111,7 +111,7 @@
       <span class="kr">else</span> <span class="kr">if</span> ascii_dec ch <span class="s2">&quot;e&quot;</span> || ascii_dec ch <span class="s2">&quot;E&quot;</span> <span class="kr">then</span> Some <span class="mi">14</span>
       <span class="kr">else</span> <span class="kr">if</span> ascii_dec ch <span class="s2">&quot;f&quot;</span> || ascii_dec ch <span class="s2">&quot;F&quot;</span> <span class="kr">then</span> Some <span class="mi">15</span>
       <span class="kr">else</span> None)%N.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">pos_hex_app</span> (<span class="nv">p</span> <span class="nv">q</span>:positive) : positive :=
   <span class="kr">match</span> q <span class="kr">with</span>
   | <span class="mi">1</span> =&gt; p~<span class="mi">0</span>~<span class="mi">0</span>~<span class="mi">0</span>~<span class="mi">1</span>
@@ -146,7 +146,7 @@
   | q~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">0</span> =&gt; (pos_hex_app p q)~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">0</span>
   | q~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span> =&gt; (pos_hex_app p q)~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module</span> <span class="nf">Raw</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">of_pos</span> (<span class="nv">p</span> : positive) (<span class="nv">rest</span> : string) : string
     := <span class="kr">match</span> p <span class="kr">with</span>
@@ -182,7 +182,7 @@
        | p&#39;~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">0</span> =&gt; of_pos p&#39; (String <span class="s2">&quot;e&quot;</span> rest)
        | p&#39;~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span>~<span class="mi">1</span> =&gt; of_pos p&#39; (String <span class="s2">&quot;f&quot;</span> rest)
        <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">to_N</span> (<span class="nv">s</span> : string) (<span class="nv">rest</span> : N)
     : N
     := <span class="kr">match</span> s <span class="kr">with</span>
@@ -195,7 +195,7 @@
               | None =&gt; N0
               <span class="kr">end</span>
        <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk0"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">to_N_of_pos</span> (<span class="nv">p</span> : positive) (<span class="nv">rest</span> : string) (<span class="nv">base</span> : N) {<span class="nv">struct</span> <span class="nv">p</span>}
     : to_N (of_pos p rest) base
       = to_N rest <span class="kr">match</span> base <span class="kr">with</span>
@@ -208,7 +208,7 @@ to_N rest0
   <span class="kr">match</span> base0 <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; N.pos p0
   | N.pos v =&gt; N.pos (pos_hex_app v p0)
-  <span class="kr">end</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">rest</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">string</span></span></span></div><div class="goal-hyp"><span class="hyp-names">base</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_N (of_pos p rest) base =
+  <span class="kr">end</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">rest</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">string</span></span></span></div><div class="goal-hyp"><span class="hyp-names">base</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_N (of_pos p rest) base =
 to_N rest
   <span class="kr">match</span> base <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; N.pos p
@@ -221,7 +221,7 @@ to_N rest0
   <span class="kr">match</span> base0 <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; N.pos p0
   | N.pos v =&gt; N.pos (pos_hex_app v p0)
-  <span class="kr">end</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">rest</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">string</span></span></span></div><div class="goal-hyp"><span class="hyp-names">base</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_N (of_pos p rest) base =
+  <span class="kr">end</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div><div class="goal-hyp"><span class="hyp-names">rest</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">string</span></span></span></div><div class="goal-hyp"><span class="hyp-names">base</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_N (of_pos p rest) base =
 to_N rest
   <span class="kr">match</span> base <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; N.pos p
@@ -231,7 +231,7 @@ to_N rest
       <span class="nb">cbn</span>; <span class="nb">rewrite</span> to_N_of_pos; <span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Raw</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_pos</span> (<span class="nv">p</span> : positive) : string
   := String <span class="s2">&quot;0&quot;</span> (String <span class="s2">&quot;x&quot;</span> (Raw.of_pos p <span class="s2">&quot;&quot;</span>)).</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_N</span> (<span class="nv">n</span> : N) : string
@@ -247,7 +247,7 @@ to_N rest
      <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">of_nat</span> (<span class="nv">n</span> : nat) : string
   := of_N (N.of_nat n).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_N</span> (<span class="nv">s</span> : string) : N
   := <span class="kr">match</span> s <span class="kr">with</span>
      | String s0 (String so s)
@@ -277,39 +277,39 @@ to_N rest
      <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">to_nat</span> (<span class="nv">s</span> : string) : nat
   := N.to_nat (to_N s).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk2"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_N_of_N</span> (<span class="nv">n</span> : N)
   : to_N (of_N n)
-    = n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_N (of_N n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk3"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_N (of_N n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
+    = n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_N (of_N n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk3"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_N (of_N n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">destruct</span> n; [ <span class="bp">reflexivity</span> | <span class="nb">apply</span> Raw.to_N_of_pos ].</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk4"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_Z_of_Z</span> (<span class="nv">z</span> : Z)
   : to_Z (of_Z z)
-    = z.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">z</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_Z (of_Z z) = z</span></div></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk5"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">z</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_Z (of_Z z) = z</span></div></blockquote></div></div></small><span class="coq-wsp">
+    = z.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">z</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_Z (of_Z z) = z</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk5" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk5"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">z</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">Z</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_Z (of_Z z) = z</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">cbv</span> [of_Z to_Z]; <span class="nb">destruct</span> z <span class="kr">as</span> [|z|z]; <span class="nb">cbn</span>;
     <span class="kp">try</span> <span class="bp">reflexivity</span>;
     <span class="nb">rewrite</span> Raw.to_N_of_pos; <span class="nb">cbn</span>; <span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk6" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk6"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_nat_of_nat</span> (<span class="nv">n</span> : nat)
   : to_nat (of_nat n)
-    = n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_nat (of_nat n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk7"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_nat (of_nat n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
+    = n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_nat (of_nat n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk7" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk7"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_nat (of_nat n) = n</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">cbv</span> [to_nat of_nat];
     <span class="nb">rewrite</span> to_N_of_N, Nnat.Nat2N.id; <span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk8" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk8"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">to_pos_of_pos</span> (<span class="nv">p</span> : positive)
   : to_pos (of_pos p)
-    = p.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_pos (of_pos p) = p</span></div></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk9"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight">to_pos (of_pos p) = p</span></div></blockquote></div></div></small><span class="coq-wsp">
+    = p.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_pos (of_pos p) = p</span></div></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input class="coq-toggle" id="HexString-v-chk9" style="display: none" type="checkbox"><label class="coq-input" for="HexString-v-chk9"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">p</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">positive</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_pos (of_pos p) = p</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">cbv</span> [of_pos to_pos to_N]; <span class="nb">cbn</span>;
     <span class="nb">rewrite</span> Raw.to_N_of_pos; <span class="nb">cbn</span>; <span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Example</span> <span class="nf">of_pos_1</span> : of_pos <span class="mi">1</span> = <span class="s2">&quot;0x1&quot;</span> := eq_refl.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Example</span> <span class="nf">of_pos_2</span> : of_pos <span class="mi">2</span> = <span class="s2">&quot;0x2&quot;</span> := eq_refl.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Example</span> <span class="nf">of_pos_3</span> : of_pos <span class="mi">3</span> = <span class="s2">&quot;0x3&quot;</span> := eq_refl.</span></span><span class="coq-wsp">

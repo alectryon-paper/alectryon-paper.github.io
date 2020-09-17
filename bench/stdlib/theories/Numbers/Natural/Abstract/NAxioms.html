@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -91,7 +91,7 @@ From <span class="inlinecode"><span class="id" title="var">NZ</span></span>, we 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiom</span> (<span class="kn">Import</span> NZ : NZDomainSig&#39;).</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">pred_0</span> : P <span class="mi">0</span> == <span class="mi">0</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">NAxiom</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsMiniSig</span> := NZOrdAxiomsSig &lt;+ NAxiom.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsMiniSig&#39;</span> := NZOrdAxiomsSig&#39; &lt;+ NAxiom.</span></span></span></pre><div class="doc">
 Let's now add some more functions and their specification 
@@ -107,30 +107,30 @@ We now group everything together.
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsSig</span> := NAxiomsMiniSig &lt;+ OrderFunctions
   &lt;+ NZParity.NZParity &lt;+ NZPow.NZPow &lt;+ NZSqrt.NZSqrt &lt;+ NZLog.NZLog2
   &lt;+ NZGcd.NZGcd &lt;+ NZDiv.NZDiv &lt;+ NZBits.NZBits &lt;+ NZSquare.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsSig&#39;</span> := NAxiomsMiniSig&#39; &lt;+ OrderFunctions&#39;
   &lt;+ NZParity.NZParity &lt;+ NZPow.NZPow&#39; &lt;+ NZSqrt.NZSqrt&#39; &lt;+ NZLog.NZLog2
   &lt;+ NZGcd.NZGcd&#39; &lt;+ NZDiv.NZDiv&#39; &lt;+ NZBits.NZBits&#39; &lt;+ NZSquare.</span></span></span></pre><div class="doc">
 It could also be interesting to have a constructive recursor function. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsRec</span> (<span class="kn">Import</span> NZ : NZDomainSig&#39;).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Parameter</span> <span class="nv">Inline</span> <span class="nv">recursion</span> : <span class="kr">forall</span> {<span class="nv">A</span> : <span class="kt">Type</span>}, A -&gt; (t -&gt; A -&gt; A) -&gt; t -&gt; A.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Declare Instance</span> recursion_wd {A : <span class="kt">Type</span>} (Aeq : relation A) :
  Proper (Aeq ==&gt; (eq==&gt;Aeq==&gt;Aeq) ==&gt; eq ==&gt; Aeq) recursion.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">recursion_0</span> :
   <span class="kr">forall</span> {<span class="nv">A</span>} (<span class="nv">a</span> : A) (<span class="nv">f</span> : t -&gt; A -&gt; A), recursion a f <span class="mi">0</span> = a.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Axiom</span> <span class="nv">recursion_succ</span> :
   <span class="kr">forall</span> {<span class="nv">A</span>} (<span class="nv">Aeq</span> : relation A) (<span class="nv">a</span> : A) (<span class="nv">f</span> : t -&gt; A -&gt; A),
     Aeq a a -&gt; Proper (eq==&gt;Aeq==&gt;Aeq) f -&gt;
       <span class="kr">forall</span> <span class="nv">n</span>, Aeq (recursion a f (S n)) (f n (recursion a f n)).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">NAxiomsRec</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsRecSig</span> := NAxiomsMiniSig &lt;+ NAxiomsRec.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsRecSig&#39;</span> := NAxiomsMiniSig&#39; &lt;+ NAxiomsRec.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsFullSig</span> := NAxiomsSig &lt;+ NAxiomsRec.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Module Type</span> <span class="nf">NAxiomsFullSig&#39;</span> := NAxiomsSig&#39; &lt;+ NAxiomsRec.</span></span></span></pre></article></body></html>

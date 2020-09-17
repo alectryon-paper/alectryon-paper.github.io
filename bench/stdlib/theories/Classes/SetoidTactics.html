@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -93,11 +93,11 @@
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Classes.Morphisms Coq.Classes.Morphisms_Prop.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Export</span> Coq.Classes.RelationClasses Coq.Relations.Relation_Definitions.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Classes.Equivalence Coq.Program.Basics.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Generalizable Variables</span> <span class="nf">A</span> R.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Export</span> ProperNotations.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Implicit Arguments</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Unset Strict Implicit</span>.</span></span></span></pre><div class="doc">
 Default relation on a given support. Can be used by tactics
@@ -116,92 +116,92 @@ The setoid_replace tactics in Ltac, defined in terms of default relations
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoidreplace</span> H t :=
   <span class="kr">let</span> <span class="nv">Heq</span> := <span class="kp">fresh</span> <span class="s2">&quot;Heq&quot;</span> <span class="kr">in</span>
     <span class="nb">cut</span>(H) ; <span class="nb">unfold</span> default_relation ; [ <span class="nb">intro</span> Heq ; <span class="nb">setoid_rewrite</span> Heq ; <span class="nb">clear</span> Heq | t ].</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoidreplacein</span> H H&#39; t :=
   <span class="kr">let</span> <span class="nv">Heq</span> := <span class="kp">fresh</span> <span class="s2">&quot;Heq&quot;</span> <span class="kr">in</span>
     <span class="nb">cut</span>(H) ; <span class="nb">unfold</span> default_relation ; [ <span class="nb">intro</span> Heq ; <span class="nb">setoid_rewrite</span> Heq <span class="kr">in</span> H&#39; ; <span class="nb">clear</span> Heq | t ].</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoidreplaceinat</span> H H&#39; t occs :=
   <span class="kr">let</span> <span class="nv">Heq</span> := <span class="kp">fresh</span> <span class="s2">&quot;Heq&quot;</span> <span class="kr">in</span>
     <span class="nb">cut</span>(H) ; <span class="nb">unfold</span> default_relation ; [ <span class="nb">intro</span> Heq ; <span class="nb">setoid_rewrite</span> Heq <span class="kr">in</span> H&#39; <span class="nb">at</span> occs ; <span class="nb">clear</span> Heq | t ].</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoidreplaceat</span> H t occs :=
   <span class="kr">let</span> <span class="nv">Heq</span> := <span class="kp">fresh</span> <span class="s2">&quot;Heq&quot;</span> <span class="kr">in</span>
     <span class="nb">cut</span>(H) ; <span class="nb">unfold</span> default_relation ; [ <span class="nb">intro</span> Heq ; <span class="nb">setoid_rewrite</span> Heq <span class="nb">at</span> occs ; <span class="nb">clear</span> Heq | t ].</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y) :=
   setoidreplace (default_relation x y) <span class="kp">idtac</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;at&quot;</span> int_or_var_list(o) :=
   setoidreplaceat (default_relation x y) <span class="kp">idtac</span> o.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;in&quot;</span> hyp(id) :=
   setoidreplacein (default_relation x y) id <span class="kp">idtac</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;in&quot;</span> hyp(id)
   <span class="s2">&quot;at&quot;</span> int_or_var_list(o) :=
   setoidreplaceinat (default_relation x y) id <span class="kp">idtac</span> o.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;by&quot;</span> tactic3(t) :=
   setoidreplace (default_relation x y) <span class="kp">ltac</span>:(t).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;at&quot;</span> int_or_var_list(o)
   <span class="s2">&quot;by&quot;</span> tactic3(t) :=
   setoidreplaceat (default_relation x y) <span class="kp">ltac</span>:(t) o.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;in&quot;</span> hyp(id)
   <span class="s2">&quot;by&quot;</span> tactic3(t) :=
   setoidreplacein (default_relation x y) id <span class="kp">ltac</span>:(t).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;in&quot;</span> hyp(id)
   <span class="s2">&quot;at&quot;</span> int_or_var_list(o)
   <span class="s2">&quot;by&quot;</span> tactic3(t) :=
   setoidreplaceinat (default_relation x y) id <span class="kp">ltac</span>:(t) o.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel) :=
   setoidreplace (rel x y) <span class="kp">idtac</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel)
   <span class="s2">&quot;at&quot;</span> int_or_var_list(o) :=
   setoidreplaceat (rel x y) <span class="kp">idtac</span> o.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel)
   <span class="s2">&quot;by&quot;</span> tactic3(t) :=
   setoidreplace (rel x y) <span class="kp">ltac</span>:(t).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel)
   <span class="s2">&quot;at&quot;</span> int_or_var_list(o)
   <span class="s2">&quot;by&quot;</span> tactic3(t) :=
   setoidreplaceat (rel x y) <span class="kp">ltac</span>:(t) o.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel)
   <span class="s2">&quot;in&quot;</span> hyp(id) :=
   setoidreplacein (rel x y) id <span class="kp">idtac</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel)
   <span class="s2">&quot;in&quot;</span> hyp(id)
   <span class="s2">&quot;at&quot;</span> int_or_var_list(o) :=
   setoidreplaceinat (rel x y) id <span class="kp">idtac</span> o.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel)
   <span class="s2">&quot;in&quot;</span> hyp(id)
   <span class="s2">&quot;by&quot;</span> tactic3(t) :=
   setoidreplacein (rel x y) id <span class="kp">ltac</span>:(t).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;setoid_replace&quot;</span> <span class="kp">constr</span>(x) <span class="s2">&quot;with&quot;</span> <span class="kp">constr</span>(y)
   <span class="s2">&quot;using&quot;</span> <span class="s2">&quot;relation&quot;</span> <span class="kp">constr</span>(rel)
   <span class="s2">&quot;in&quot;</span> hyp(id)
@@ -214,37 +214,37 @@ The <span class="inlinecode"><span class="id" title="var">add_morphism_tactic</s
    <span class="inlinecode"><span class="id" title="var">respectful</span></span> calls and substitute leibniz equalities. One can
    redefine it using <span class="inlinecode"><span class="id" title="keyword">Ltac</span></span> <span class="inlinecode"><span class="id" title="var">add_morphism_tactic</span></span> <span class="inlinecode">::=</span> <span class="inlinecode"><span class="id" title="var">t</span></span>. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Coq.Program.Tactics.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> signature_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">red_subst_eq_morphism</span> concl :=
   <span class="kr">match</span> concl <span class="kr">with</span>
     | @Logic.eq ?A ==&gt; ?R&#39; =&gt; <span class="nb">red</span> ; <span class="nb">intros</span> ; <span class="nb">subst</span> ; red_subst_eq_morphism R&#39;
     | ?R ==&gt; ?R&#39; =&gt; <span class="nb">red</span> ; <span class="nb">intros</span> ; red_subst_eq_morphism R&#39;
     | _ =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_proper</span> :=
   <span class="kr">match goal with</span>
     | [ |- @Proper ?A ?R ?m ] =&gt; <span class="nb">red</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">reverse_arrows</span> x :=
   <span class="kr">match</span> x <span class="kr">with</span>
     | @Logic.eq ?A ==&gt; ?R&#39; =&gt; revert_last ; reverse_arrows R&#39;
     | ?R ==&gt; ?R&#39; =&gt; <span class="kp">do</span> <span class="mi">3</span> revert_last ; reverse_arrows R&#39;
     | _ =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">default_add_morphism_tactic</span> :=
   <span class="nb">unfold</span> flip ; <span class="nb">intros</span> ;
   (<span class="kp">try</span> destruct_proper) ;
   <span class="kr">match goal with</span>
     | [ |- (?x ==&gt; ?y) _ _ ] =&gt; red_subst_eq_morphism (x ==&gt; y) ; reverse_arrows (x ==&gt; y)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">add_morphism_tactic</span> := default_add_morphism_tactic.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Obligation Tactic</span> := program_simpl.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 <span class="c">(* Notation &quot;&#39;Morphism&#39; s t &quot; := (@Proper _ (s%signature) t) (at level 10, s at next level, t at next level). *)</span></span></span></pre></article></body></html>

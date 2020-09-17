@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -87,18 +87,18 @@
 <span class="sd">(************************************************************************)</span>
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Set Implicit Arguments</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> BinInt.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Local Open Scope</span> Z_scope.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">base</span> <span class="nv">digits</span> := Z.pow <span class="mi">2</span> (Zpos digits).</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> base digits: <span class="nb">simpl</span> never.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight">#[universes(template)]
 <span class="kn">Variant</span> <span class="nf">carry</span> (<span class="nv">A</span> : <span class="kt">Type</span>) :=
 | C0 : A -&gt; carry A
 | C1 : A -&gt; carry A.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">interp_carry</span> {<span class="nv">A</span>} (<span class="nv">sign</span>:Z)(<span class="nv">B</span>:Z)(<span class="nv">interp</span>:A -&gt; Z) <span class="nv">c</span> :=
   <span class="kr">match</span> c <span class="kr">with</span>
   | C0 x =&gt; interp x
@@ -114,13 +114,13 @@ From a type <span class="inlinecode"><span class="id" title="var">znz</span></sp
 | W0 : zn2z
 | WW : znz -&gt; znz -&gt; zn2z.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> zn2z : <span class="kn">clear implicits</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">zn2z_to_Z</span> <span class="nv">znz</span> (<span class="nv">wB</span>:Z) (<span class="nv">w_to_Z</span>:znz-&gt;Z) (<span class="nv">x</span>:zn2z znz) :=
   <span class="kr">match</span> x <span class="kr">with</span>
   | W0 =&gt; <span class="mi">0</span>
   | WW xh xl =&gt; w_to_Z xh * wB + w_to_Z xl
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> W0 {znz}.</span></span></span></pre><div class="doc">
 From a cyclic representation <span class="inlinecode"><span class="id" title="var">w</span></span>, we iterate the <span class="inlinecode"><span class="id" title="var">zn2z</span></span> construct
     <span class="inlinecode"><span class="id" title="var">n</span></span> times, gaining the type of binary trees of depth at most <span class="inlinecode"><span class="id" title="var">n</span></span>,

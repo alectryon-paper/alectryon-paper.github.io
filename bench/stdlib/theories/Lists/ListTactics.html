@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -86,13 +86,13 @@
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> BinPos.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> List.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_fold_right</span> fcons fnil l :=
   <span class="kr">match</span> l <span class="kr">with</span>
   | ?x :: ?tl =&gt; fcons x <span class="kp">ltac</span>:(list_fold_right fcons fnil tl)
   | nil =&gt; fnil
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 <span class="c">(* A variant of list_fold_right, to prevent the match of list_fold_right</span>
 <span class="c">   from catching errors raised by fcons. *)</span>
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">lazy_list_fold_right</span> fcons fnil l :=
@@ -104,19 +104,19 @@
     | nil =&gt; <span class="kr">fun</span> <span class="nv">_</span> =&gt; fnil()
     <span class="kr">end</span> <span class="kr">in</span>
   f().</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_fold_left</span> fcons fnil l :=
   <span class="kr">match</span> l <span class="kr">with</span>
   | ?x :: ?tl =&gt; list_fold_left fcons <span class="kp">ltac</span>:(fcons x fnil) tl
   | nil =&gt; fnil
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_iter</span> f l :=
   <span class="kr">match</span> l <span class="kr">with</span>
   | ?x :: ?tl =&gt; f x; list_iter f tl
   | nil =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_iter_gen</span> seq f l :=
   <span class="kr">match</span> l <span class="kr">with</span>
   | ?x :: ?tl =&gt;
@@ -125,14 +125,14 @@
       seq t1 t2
   | nil =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">AddFvTail</span> a l :=
  <span class="kr">match</span> l <span class="kr">with</span>
  | nil      =&gt; <span class="kp">constr</span>:(a::nil)
  | a :: _   =&gt; l
  | ?x :: ?l =&gt; <span class="kr">let</span> <span class="nv">l&#39;</span> := AddFvTail a l <span class="kr">in</span> <span class="kp">constr</span>:(x::l&#39;)
  <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">Find_at</span> a l :=
  <span class="kr">let rec</span> <span class="nv">find</span> <span class="nv">n</span> <span class="nv">l</span> :=
    <span class="kr">match</span> l <span class="kr">with</span>
@@ -141,14 +141,14 @@
    | _ :: ?l =&gt; find (Pos.succ n) l
    <span class="kr">end</span>
  <span class="kr">in</span> find <span class="mi">1</span>%positive l.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">check_is_list</span> t :=
   <span class="kr">match</span> t <span class="kr">with</span>
   | _ :: ?l =&gt; check_is_list l
   | nil     =&gt; <span class="kp">idtac</span>
   | _       =&gt; <span class="kp">fail</span> <span class="mi">100</span> <span class="s2">&quot;anomaly: failed to build a canonical list&quot;</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">check_fv</span> l :=
   check_is_list l;
   <span class="kr">match</span> <span class="kp">type of</span> l <span class="kr">with</span>

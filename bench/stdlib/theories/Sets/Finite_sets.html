@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -103,32 +103,32 @@
 <span class="sd">(****************************************************************************)</span>
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Ensembles.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Ensembles_finis</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">U</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">Finite</span> : Ensemble U -&gt; <span class="kt">Prop</span> :=
     | Empty_is_finite : Finite (Empty_set U)
     | Union_is_finite :
       <span class="kr">forall</span> <span class="nv">A</span>:Ensemble U,
         Finite A -&gt; <span class="kr">forall</span> <span class="nv">x</span>:U, ~ In U A x -&gt; Finite (<span class="kn">Add</span> U A x).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">cardinal</span> : Ensemble U -&gt; nat -&gt; <span class="kt">Prop</span> :=
     | card_empty : cardinal (Empty_set U) <span class="mi">0</span>
     | card_add :
       <span class="kr">forall</span> (<span class="nv">A</span>:Ensemble U) (<span class="nv">n</span>:nat),
         cardinal A n -&gt; <span class="kr">forall</span> <span class="nv">x</span>:U, ~ In U A x -&gt; cardinal (<span class="kn">Add</span> U A x) (S n).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Ensembles_finis</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> Empty_is_finite Union_is_finite: sets.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Hint Resolve</span> card_empty card_add: sets.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Constructive_sets.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Ensembles_finis_facts</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">U</span> : <span class="kt">Type</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Finite-sets-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="Finite-sets-v-chk0"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">cardinal_invert</span> :
     <span class="kr">forall</span> (<span class="nv">X</span>:Ensemble U) (<span class="nv">p</span>:nat),
       cardinal U X p -&gt;
@@ -137,7 +137,7 @@
 	| S n =&gt;
           <span class="kr">exists</span> <span class="nv">A</span> : _,
             (<span class="kr">exists</span> <span class="nv">x</span> : _, X = <span class="kn">Add</span> U A x /\ ~ In U A x /\ cardinal U A n)
-      <span class="kr">end</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
+      <span class="kr">end</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
 cardinal U X p -&gt;
 <span class="kr">match</span> p <span class="kr">with</span>
 | <span class="mi">0</span> =&gt; X = Empty_set U
@@ -145,7 +145,7 @@ cardinal U X p -&gt;
     <span class="kr">exists</span> (<span class="nv">A</span> : Ensemble U) (<span class="nv">x</span> : U),
       X = <span class="kn">Add</span> U A x /\ ~ In U A x /\ cardinal U A n
 <span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Finite-sets-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="Finite-sets-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Finite-sets-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="Finite-sets-v-chk1"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
 cardinal U X p -&gt;
 <span class="kr">match</span> p <span class="kr">with</span>
 | <span class="mi">0</span> =&gt; X = Empty_set U
@@ -160,25 +160,25 @@ cardinal U X p -&gt;
     (<span class="nv">x0</span> : U),
       A = <span class="kn">Add</span> U A0 x0 /\
       ~ In U A0 x0 /\ cardinal U A0 n0
-<span class="kr">end</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">exists</span> (<span class="nv">A0</span> : Ensemble U) (<span class="nv">x0</span> : U),
+<span class="kr">end</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight"><span class="kr">exists</span> (<span class="nv">A0</span> : Ensemble U) (<span class="nv">x0</span> : U),
   <span class="kn">Add</span> U A x = <span class="kn">Add</span> U A0 x0 /\
   ~ In U A0 x0 /\ cardinal U A0 n</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kr">exists</span> <span class="nv">A</span>; <span class="kr">exists</span> <span class="nv">x</span>; <span class="nb">auto</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Finite-sets-v-chk3" style="display: none" type="checkbox"><label class="coq-input" for="Finite-sets-v-chk3"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">cardinal_elim</span> :
     <span class="kr">forall</span> (<span class="nv">X</span>:Ensemble U) (<span class="nv">p</span>:nat),
       cardinal U X p -&gt;
       <span class="kr">match</span> p <span class="kr">with</span>
 	| O =&gt; X = Empty_set U
 	| S n =&gt; Inhabited U X
-      <span class="kr">end</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
+      <span class="kr">end</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
 cardinal U X p -&gt;
 <span class="kr">match</span> p <span class="kr">with</span>
 | <span class="mi">0</span> =&gt; X = Empty_set U
 | S _ =&gt; Inhabited U X
 <span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Finite-sets-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="Finite-sets-v-chk4"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><label class="goal-separator"><hr></label><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
+</span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Finite-sets-v-chk4" style="display: none" type="checkbox"><label class="coq-input" for="Finite-sets-v-chk4"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">U</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight"><span class="kt">Type</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">X</span> : Ensemble U) (<span class="nv">p</span> : nat),
 cardinal U X p -&gt;
 <span class="kr">match</span> p <span class="kr">with</span>
 | <span class="mi">0</span> =&gt; X = Empty_set U
@@ -186,5 +186,5 @@ cardinal U X p -&gt;
 <span class="kr">end</span></span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">intros</span> X p C; <span class="nb">elim</span> C; <span class="nb">simpl</span>; <span class="nb">trivial with</span> sets.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Ensembles_finis_facts</span>.</span></span></span></pre></article></body></html>

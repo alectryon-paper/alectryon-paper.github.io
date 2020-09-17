@@ -74,7 +74,7 @@
 .highlight .vg { color: #ce5c00; text-decoration: underline } /* Name.Variable.Global */
 .highlight .vi { color: #ce5c00 } /* Name.Variable.Instance */
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
-.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="sd">(************************************************************************)</span>
+.highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="sd">(************************************************************************)</span>
 <span class="c">(*         *   The Coq Proof Assistant / The Coq Development Team       *)</span>
 <span class="c">(*  v      *   INRIA, CNRS and contributors - Copyright 1999-2018       *)</span>
 <span class="c">(* &lt;O___,, *       (see CREDITS file for the list of authors)           *)</span>
@@ -88,7 +88,7 @@ This module implements various tactics used to simplify the goals produced by Pr
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 Debugging tactics to show the goal during evaluation. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_goal</span> := <span class="kr">match goal with</span> [ |- ?T ] =&gt; <span class="kp">idtac</span> T <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_hyp</span> id :=
   <span class="kr">match goal with</span>
     | [ H := ?b : ?T |- _ ] =&gt;
@@ -100,7 +100,7 @@ Debugging tactics to show the goal during evaluation.
         | id =&gt; <span class="kp">idtac</span> id  <span class="s2">&quot;:&quot;</span>  T
       <span class="kr">end</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_hyps</span> :=
   <span class="kp">try</span> <span class="kr">match reverse goal with</span>
         | [ H : ?T |- _ ] =&gt; show_hyp H ; <span class="kp">fail</span>
@@ -181,7 +181,7 @@ Clear duplicated hypotheses
           <span class="kr">end</span>
       <span class="kr">end</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clear_dups</span> := <span class="kp">repeat</span> clear_dup.</span></span></span></pre><div class="doc">
 Try to clear everything except some hyp 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clear_except</span> hyp := 
@@ -196,9 +196,9 @@ A non-failing subst that substitutes as much as possible.
   <span class="kp">repeat</span> (<span class="kr">match goal with</span>
             [ H : ?X = ?Y |- _ ] =&gt; <span class="nb">subst</span> X || <span class="nb">subst</span> Y
           <span class="kr">end</span>).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;subst&quot;</span> <span class="s2">&quot;*&quot;</span> := subst_no_fail.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_application</span> f tac T :=
   <span class="kr">match</span> T <span class="kr">with</span>
     | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u ?a ?b ?c] =&gt; tac (f x y z w v u a b c)
@@ -235,27 +235,27 @@ Tactical <span class="inlinecode"><span class="id" title="var">on_call</span></s
     | |- ?T  =&gt; on_application f tac T
     | H : ?T |- _  =&gt; on_application f tac T
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 <span class="c">(* Destructs calls to f in hypothesis or conclusion, useful if f creates a subset object. *)</span>
 
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call</span> f :=
   <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t) <span class="kr">in</span> on_call f tac.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_calls</span> f := <span class="kp">repeat</span> destruct_call f.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call_in</span> f H :=
   <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t) <span class="kr">in</span>
   <span class="kr">let</span> <span class="nv">T</span> := <span class="kp">type of</span> H <span class="kr">in</span>
     on_application f tac T.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call_as</span> f l :=
   <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t <span class="kr">as</span> l) <span class="kr">in</span> on_call f tac.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_call_as_in</span> f l H :=
   <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">t</span> := (<span class="nb">destruct</span> t <span class="kr">as</span> l) <span class="kr">in</span>
   <span class="kr">let</span> <span class="nv">T</span> := <span class="kp">type of</span> H <span class="kr">in</span>
     on_application f tac T.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) := destruct_call f.</span></span></span></pre><div class="doc">
 Permit to name the results of destructing the call to <span class="inlinecode"><span class="id" title="var">f</span></span>. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) <span class="s2">&quot;as&quot;</span> simple_intropattern(l) :=
@@ -263,19 +263,19 @@ Permit to name the results of destructing the call to <span class="inlinecode"><
 Specify the hypothesis in which the call occurs as well. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) <span class="s2">&quot;in&quot;</span> hyp(id) :=
   destruct_call_in f id.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;destruct_call&quot;</span> <span class="kp">constr</span>(f) <span class="s2">&quot;as&quot;</span> simple_intropattern(l) <span class="s2">&quot;in&quot;</span> hyp(id) :=
   destruct_call_as_in f l id.</span></span></span></pre><div class="doc">
 A marker for prototypes to destruct. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">fix_proto</span> {<span class="nv">A</span> : <span class="kt">Type</span>} (<span class="nv">a</span> : A) := a.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> fix_proto <span class="kr">as</span> program.tactic.fix_proto.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_rec_calls</span> :=
   <span class="kr">match goal with</span>
     | [ H : fix_proto _ |- _ ] =&gt; destruct_calls H ; <span class="nb">clear</span> H
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_all_rec_calls</span> :=
   <span class="kp">repeat</span> destruct_rec_calls ; <span class="nb">unfold</span> fix_proto <span class="kr">in</span> *.</span></span></span></pre><div class="doc">
 Try to inject any potential constructor equality hypothesis. 
@@ -283,9 +283,9 @@ Try to inject any potential constructor equality hypothesis.
   <span class="kr">match goal with</span>
     | [ H : ?f ?a = ?f&#39; ?a&#39; |- _ ] =&gt; tac H
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">inject</span> H := <span class="kp">progress</span> (<span class="nb">inversion</span> H ; <span class="nb">subst</span>*; clear_dups) ; <span class="nb">clear</span> H.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">autoinjections</span> := <span class="kp">repeat</span> (clear_dups ; autoinjection <span class="kp">ltac</span>:(inject)).</span></span></span></pre><div class="doc">
 Destruct an hypothesis by first copying it to avoid dependencies. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_nondep</span> H := <span class="kr">let</span> <span class="nv">H0</span> := <span class="kp">fresh</span> <span class="s2">&quot;H&quot;</span> <span class="kr">in</span> <span class="nb">assert</span>(H0 := H); <span class="nb">destruct</span> H0.</span></span></span></pre><div class="doc">
@@ -340,13 +340,13 @@ Restrict automation to propositional obligations.
     | |- well_founded _ =&gt; <span class="nb">auto with</span> *
     | |- ?T =&gt; <span class="kr">match</span> <span class="kp">type of</span> T <span class="kr">with</span> <span class="kt">Prop</span> =&gt; <span class="nb">auto</span> <span class="kr">end</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Create HintDb</span> program <span class="kn">discriminated</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">program_simpl</span> := program_simplify ; <span class="kp">try</span> <span class="nb">typeclasses eauto</span> <span class="mi">10</span> <span class="kr">with</span> program ; <span class="kp">try</span> program_solve_wf.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Obligation Tactic</span> := program_simpl.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">obligation</span> (<span class="nv">A</span> : <span class="kt">Type</span>) {<span class="nv">a</span> : A} := a.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Register</span> obligation <span class="kr">as</span> program.tactics.obligation.</span></span></span></pre></article></body></html>
