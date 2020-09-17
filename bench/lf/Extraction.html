@@ -76,7 +76,7 @@
 .highlight .vm { color: #ce5c00 } /* Name.Variable.Magic */
 .highlight .il { color: #2e3436 } /* Literal.Number.Integer.Long */</style></head><body><article class="alectryon-root alectryon-standalone alectryon-centered alectryon-coqdoc"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="doc">
 <a name="lab1"></a><h1 class="section">Extraction: Extracting ML from Coq</h1>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
 <a name="lab2"></a><h1 class="section">Basic Extraction</h1>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 In its simplest form, extracting an efficient program from one
@@ -102,7 +102,7 @@ When Coq processes this command, it generates a file <span class="inlinecode"><s
     containing an extracted version of <span class="inlinecode"><span class="id" title="var">ceval_step</span></span>, together with
     everything that it recursively depends on.  Compile the present
     <span class="inlinecode">.<span class="id" title="var">v</span></span> file and have a look at <span class="inlinecode"><span class="id" title="var">imp1.ml</span></span> now. 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
 <a name="lab3"></a><h1 class="section">Controlling Extraction of Specific Types</h1>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 We can tell Coq to extract certain <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definitions to
@@ -142,7 +142,7 @@ Important: It is entirely <i>your responsibility</i> to make sure that
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Extraction</span> <span class="s2">&quot;imp2.ml&quot;</span> ceval_step.</span></span></span></pre><div class="doc">
 Have a look at the file <span class="inlinecode"><span class="id" title="var">imp2.ml</span></span>.  Notice how the fundamental
     definitions have changed from <span class="inlinecode"><span class="id" title="var">imp1.ml</span></span>. 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
 <a name="lab4"></a><h1 class="section">A Complete Example</h1>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 To use our extracted evaluator to run Imp programs, all we need to
@@ -167,7 +167,7 @@ We also need one more variant of booleans.
 The extraction is the same as always. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> LF <span class="kn">Require Import</span> Imp.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> LF <span class="kn">Require Import</span> ImpParser.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">From</span> LF <span class="kn">Require Import</span> Maps.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Extraction</span> <span class="s2">&quot;imp.ml&quot;</span> empty_st ceval_step parse.</span></span></span></pre><div class="doc">
 Now let's run our generated Imp evaluator.  First, have a look at
@@ -187,7 +187,7 @@ Now let's run our generated Imp evaluator.  First, have a look at
 
     (The <span class="inlinecode">-<span class="id" title="var">w</span></span> flags to <span class="inlinecode"><span class="id" title="var">ocamlc</span></span> are just there to suppress a few
     spurious warnings.) 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
 <a name="lab5"></a><h1 class="section">Discussion</h1>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 Since we've proved that the <span class="inlinecode"><span class="id" title="var">ceval_step</span></span> function behaves the same
@@ -195,10 +195,10 @@ Since we've proved that the <span class="inlinecode"><span class="id" title="var
     program can be viewed as a <i>certified</i> Imp interpreter.  Of
     course, the parser we're using is not certified, since we didn't
     prove anything about it! 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="c">(* ################################################################# *)</span></span></span></pre><div class="doc">
 <a name="lab6"></a><h1 class="section">Going Further</h1>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 Further details about extraction can be found in the Extract
     chapter in <i>Verified Functional Algorithms</i> (<i>Software
     Foundations</i> volume 3). 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-nc"><span class="highlight"><span class="c">(* Wed Jan 9 12:02:46 EST 2019 *)</span></span></span></pre></article></body></html>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight"><span class="c">(* Wed Jan 9 12:02:46 EST 2019 *)</span></span></span></pre></article></body></html>

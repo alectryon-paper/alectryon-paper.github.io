@@ -17,11 +17,11 @@
 
 <p>The built-in <a class="reference external" href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">Boolean</a>
 type has two constructors:</p>
-<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="doc-v-chk0" style="display: none" type="checkbox"><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">bool</span> : <span class="kt">Set</span> :=
+<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="doc-v-chk0" style="display: none" type="checkbox"><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">bool</span> : <span class="kt">Set</span> :=
     true : bool | false : bool</span></blockquote></div></div></small></span></pre><div class="topic">
 <p class="topic-title">Induction principles</p>
 <p>Coq automatically defines an induction principle:</p>
-<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="doc-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="doc-v-chk1"><span class="highlight"><span class="kn">Search</span> (<span class="kr">∀</span> <span class="nv">b</span>: bool, _ b) <span class="s2">&quot;_ind&quot;</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-responses"><blockquote class="coq-response"><span class="highlight">bool_ind:
+<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="doc-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="doc-v-chk1"><span class="highlight"><span class="kn">Search</span> (<span class="kr">∀</span> <span class="nv">b</span>: bool, _ b) <span class="s2">&quot;_ind&quot;</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">bool_ind:
   <span class="kr">∀</span> <span class="nv">P</span> : bool → <span class="kt">Prop</span>,
     P true → P false → <span class="kr">∀</span> <span class="nv">b</span> : bool, P b</span></blockquote></div></div></small></span></pre></div>
 </div>

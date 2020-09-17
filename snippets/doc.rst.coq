@@ -18,4 +18,5 @@ Print bool.
    .. coq:: unfold
 |*)
 
+Require Import Coq.Unicode.Utf8. (* .none *)
 Search (∀ b: bool, _ b) "_ind".

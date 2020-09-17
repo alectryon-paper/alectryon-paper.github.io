@@ -1,16 +1,41 @@
-[ { goals:
-     [ { conclusion: 'negb (negb b) = b',
-         hypotheses: [ { names: [ 'b' ], type: 'bool' } ] } ],
-    sentence: 'Let inv b: negb (negb b) = b.' },
+[
+  {
+    goals: [
+      {
+        conclusion: 'negb (negb b) = b',
+        hypotheses: [
+          {
+            names: [ 'b' ],
+            type: 'bool'
+          }
+        ]
+      }
+    ],
+    sentence: 'Let inv b: negb (negb b) = b.'
+  },
   '\n  ',
-  { goals:
-     [ { conclusion: 'negb (negb true) = true' },
-       { conclusion: 'negb (negb false) = false' } ],
-    sentence: 'destruct b.' },
+  {
+    goals: [
+      {
+        conclusion: 'negb (negb true) = true'
+      },
+      {
+        conclusion: 'negb (negb false) = false'
+      }
+    ],
+    sentence: 'destruct b.'
+  },
   ' ',
   { sentence: 'all: reflexivity.' },
   '\n',
   { sentence: 'Qed.' },
   '\n',
-  { responses: [ 'Closed under the global context' ],
-    sentence: 'Print Assumptions inv.' } ]
+  {
+    messages: [
+      {
+        message: 'Closed under the global context'
+      }
+    ],
+    sentence: 'Print Assumptions inv.'
+  }
+]

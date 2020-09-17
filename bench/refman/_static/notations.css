@@ -7,7 +7,7 @@
 /*         *     GNU Lesser General Public License Version 2.1          */
 /*         *     (see LICENSE file for the text of the license)         */
 /************************************************************************/
-@import "iosevka-slab/webfont.css";
+@import("iosevka-slab/webfont.css")
 
 .notation {
     /* font-family: "Ubuntu Mono", "Consolas", monospace; */
