@@ -282,6 +282,20 @@ coqrst scripts to call Alectryon instead; the code is at
 https://github.com/cpitclaudel/coq/tree/alectryon (a branch based on Coq
 8.10.2).
 
+#### RSS feeds
+
+You can get a preview of what a webpage might look like when viewed in an RSS
+reader by running the following snippet in your browser's JavaScript console:
+
+    document.querySelectorAll('link').forEach(function(link) {
+        link.parentNode.removeChild(link);
+    });
+
+(You can access the console by pressing <kdb>F12</kbd> in most browsers.)
+
+We have tried to preserve the readability of Alectryon's output even in that
+case, though of course all interactivity is lost.
+
 ### Real-world examples
 
 Lastly, you may be interested in a real-life example of Alectryon in the wild:
