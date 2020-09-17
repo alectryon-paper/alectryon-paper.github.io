@@ -28,11 +28,12 @@ This artifact is made of two parts:
 
 2. Then, a set of scripts, intended to replicate our experimental results.
 
+The following assumes that you have read through the paper and have had a look
+at the online examples at https://alectryon-paper.github.io/ to get a sense of
+how Alectryon works.
+
 Getting started: a simple walkthrough (§2)
 ------------------------------------------
-
-The following assumes that you have read through the Introduction and
-Tutorial sections of the paper.
 
 To begin, open a terminal and navigate to `~/alectryon-sle2020/ae/`:
 ``cd ~/alectryon-sle2020/ae/``
@@ -77,9 +78,10 @@ which is then fed to Docutils.
 * On the command line
 
   Use ``alectryon snippets/doc.rst -o snippets/doc.rst.v`` to tangle `doc.rst`
-  into a Coq file, `doc.rst.v`.  Use ``alectryon snippets/doc.v -o
-  snippets/doc.v.rst`` to weave `doc.v` into a reStructuredText file,
-  `doc.v.rst`.
+  into a Coq file, `doc.rst.v`.
+
+  Use ``alectryon snippets/doc.v -o snippets/doc.v.rst`` to weave `doc.v` into a
+  reStructuredText file, `doc.v.rst`.
 
 * Using Emacs (Appendix A)
 
@@ -246,20 +248,39 @@ For help with Alectryon's command-line interface, use `alectryon --help`.
 
 ### Applying Alectryon to larger projects
 
-To generate webpages for all files in a project using Alectryon, the
-best way to proceed is usually to compile the complete project using
-coq_makefile or Dune, and then to run Alectryon on all files of that
-project (the initial compilation allows Alectryon to load dependencies).
-This is how we generate HTML for *Logical Foundations*, *CPDT*,
-etc. (you can see examples in the `Makefile` of the `web/` directory).
+To generate webpages for all files in a project using Alectryon, the best way to
+proceed is usually to compile the complete project using coq_makefile or Dune,
+and then to run Alectryon on all files of that project (the initial compilation
+allows Alectryon to load dependencies).  This is how we generate HTML for
+*Logical Foundations*, *CPDT*, etc..
+
+#### FRAP
+
+### Larger examples
+
+As an example of caching, we included the cache files corresponding to the
+examples that we translated from *Functional Reasoning about Programs* in this
+VM.  You can use ``make books-clean`` and ``make books-all`` in the `ae/bench/`
+directory to regenerate the webpages corresponding to these examples using the
+cache files, which avoids having to rebuild the full FRAP library.
+
+#### Logical foundations
+
+To regenerate the *Logical Foundations* webpages, run ``make lf-clean`` followed
+by ``make lf-all`` in the `ae/bench/` directory.  Note that Alectryon's syntax
+highlighter will complain about `ImpParser.v`, because it includes a notation
+that the Pygments grammar that Alectryon uses isn't powerful enough.  In future
+work, we hope to delegate all syntax highlighting to Coq instead of using a
+Pygments grammar. (Pygments is a Python syntax highlighter.  We derived the
+grammar bundled in this VM by combining rules generated from Coq's reference
+manual for vernaculars and options with a handwritten grammar for Gallina).
+
+#### Reference manual
 
 To apply Alectryon to the reference manual, we patched the existing
 coqrst scripts to call Alectryon instead; the code is at
 https://github.com/cpitclaudel/coq/tree/alectryon (a branch based on Coq
 8.10.2).
-
-To apply Alectryon to book passages, use the `make book-clean` and `make
-book-all` targets of the `Makefile` in the `bench/` directory.
 
 ### Real-world examples
 
