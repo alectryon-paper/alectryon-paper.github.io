@@ -24,13 +24,15 @@ var Alectryon;
             /* We want to scroll the whole document, so start at root… */
             while (parent && !parent.classList.contains("alectryon-root"))
                 parent = parent.parentElement;
-            /* … and work up from there to find a scrollable element */
-            while (parent && parent.scrollHeight <= parent.clientHeight)
+            /* … and work up from there to find a scrollable element.
+               parent.scrollHeight can be greater than parent.clientHeight
+               without showing scrollbars, so we add a 10px buffer. */
+            while (parent && parent.scrollHeight <= parent.clientHeight + 10)
                 parent = parent.parentElement;
             /* <body> and <html> elements can have their client rect overflow
              * the window if their height is unset, so scroll the window
              * instead */
-            if (parent.nodeName == "BODY" || parent.nodeName == "HTML")
+            if (parent && (parent.nodeName == "BODY" || parent.nodeName == "HTML"))
                 parent = null;
 
             var rect = function(e) { return e.getBoundingClientRect(); };
@@ -100,7 +102,7 @@ var Alectryon;
         }
 
         function handleClick(evt) {
-            if (evt.ctrlKey) {
+            if (evt.ctrlKey || evt.metaKey) {
                 var sentence = evt.currentTarget;
 
                 // Ensure that the goal is shown on the side, not inline
@@ -125,6 +127,7 @@ var Alectryon;
 
         slideshow.start = start;
         slideshow.end = unhighlight;
+        slideshow.navigate = navigate;
         slideshow.next = function() { navigate(slideshow.pos + 1); };
         slideshow.previous = function() { navigate(slideshow.pos + -1); };
         window.addEventListener('DOMContentLoaded', init);
@@ -161,5 +164,7 @@ var Alectryon;
         }
 
         window.addEventListener('DOMContentLoaded', init);
+
+        styles.setStyle = setStyle;
     })(Alectryon.styles || (Alectryon.styles = {}));
 })(Alectryon || (Alectryon = {}));

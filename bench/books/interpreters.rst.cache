@@ -1,0 +1,6065 @@
+{
+  "metadata": {
+    "sertop_args": [
+      "-R",
+      "/build/coq/frap.8.10.2/,Frap"
+    ],
+    "cache_version": "1"
+  },
+  "chunks": [
+    "Require Import Frap.Frap.",
+    "Inductive arith : Set :=\n| Const (n : nat)\n| Var (x : var)\n| Plus (e1 e2 : arith)\n| Minus (e1 e2 : arith)\n| Times (e1 e2 : arith).",
+    "Example ex1 := Const 42.\nExample ex2 := Plus (Var \"y\") (Times (Var \"x\") (Const 3)).",
+    "Definition valuation := fmap var nat.",
+    "Fixpoint interp (e : arith) (v : valuation) : nat :=\n  match e with\n  | Const n => n\n  | Var x =>\n    (* Note use of infix operator to look up a key in a finite map. *)\n    match v $? x with\n    | None => 0 (* goofy default value! *)\n    | Some n => n\n    end\n  | Plus e1 e2 => interp e1 v + interp e2 v\n  | Minus e1 e2 => interp e1 v - interp e2 v\n                   (* For anyone who's wondering: this [-] sticks at 0,\n                    * if we would otherwise underflow. *)\n  | Times e1 e2 => interp e1 v * interp e2 v\n  end.",
+    "Definition valuation0 : valuation :=\n  $0 $+ (\"x\", 17) $+ (\"y\", 3).",
+    "Theorem interp_ex1 : interp ex1 valuation0 = 42.\n  simplify.\n  equality.\nQed.",
+    "Theorem interp_ex2 : interp ex2 valuation0 = 54.\n  unfold valuation0.\n  simplify.\n  equality.\nQed.",
+    "Fixpoint commuter (e : arith) : arith :=\n  match e with\n  | Const _ => e\n  | Var _ => e\n  | Plus e1 e2 => Plus (commuter e2) (commuter e1)\n  | Minus e1 e2 => Minus (commuter e1) (commuter e2)\n                   (* ^-- NB: didn't change the operand order here! *)\n  | Times e1 e2 => Times (commuter e2) (commuter e1)\n  end.",
+    "Theorem commuter_ok : forall v e, interp (commuter e) v = interp e v.\n  induct e; simplify.\n  - equality.\n  - equality.\n  - linear_arithmetic.\n  - equality.\n  - rewrite IHe1.\n    rewrite IHe2.\n    ring.\nQed.",
+    "Fixpoint substitute (inThis : arith)\n                    (replaceThis : var)\n                    (withThis : arith) : arith :=\n  match inThis with\n  | Const _ => inThis\n  | Var x => if x ==v replaceThis then withThis else inThis\n  | Plus e1 e2 => Plus (substitute e1 replaceThis withThis)\n                       (substitute e2 replaceThis withThis)\n  | Minus e1 e2 => Minus (substitute e1 replaceThis withThis)\n                         (substitute e2 replaceThis withThis)\n  | Times e1 e2 => Times (substitute e1 replaceThis withThis)\n                         (substitute e2 replaceThis withThis)\n  end.",
+    "Theorem substitute_ok : forall v replaceThis withThis inThis,\n  interp (substitute inThis replaceThis withThis) v\n  = interp inThis (v $+ (replaceThis, interp withThis v)).\n  induct inThis; simplify; try equality.",
+    "  cases (x ==v replaceThis); simplify; try equality.\nQed.",
+    "Fixpoint doSomeArithmetic (e : arith) : arith :=\n  match e with\n  | Const _ => e\n  | Var _ => e\n  | Plus (Const n1) (Const n2) => Const (n1 + n2)\n  | Plus e1 e2 => Plus (doSomeArithmetic e1) (doSomeArithmetic e2)\n  | Minus e1 e2 => Minus (doSomeArithmetic e1) (doSomeArithmetic e2)\n  | Times (Const n1) (Const n2) => Const (n1 * n2)\n  | Times e1 e2 => Times (doSomeArithmetic e1) (doSomeArithmetic e2)\n  end.",
+    "Theorem doSomeArithmetic_ok :\n    forall e v, interp (doSomeArithmetic e) v = interp e v.\n  induct e; simplify; try equality.\n\n  - cases e1; simplify; try equality.\n    cases e2; simplify; equality.\n\n  - cases e1; simplify; try equality.\n    cases e2; simplify; equality.\nQed.",
+    "Inductive instruction :=\n| PushConst (n : nat)\n| PushVar (x : var)\n| Add\n| Subtract\n| Multiply.",
+    "Definition run1 (i : instruction)\n                (v : valuation)\n                (stack : list nat) : list nat :=\n  match i with\n  | PushConst n => n :: stack\n  | PushVar x => (match v $? x with\n                  | None => 0\n                  | Some n => n\n                  end) :: stack\n  | Add =>\n    match stack with\n    | arg2 :: arg1 :: stack' => arg1 + arg2 :: stack'\n    | _ => stack (* arbitrary behavior in erroneous case\n                    (stack underflow) *)\n    end\n  | Subtract =>\n    match stack with\n    | arg2 :: arg1 :: stack' => arg1 - arg2 :: stack'\n    | _ => stack (* arbitrary behavior in erroneous case *)\n    end\n  | Multiply =>\n    match stack with\n    | arg2 :: arg1 :: stack' => arg1 * arg2 :: stack'\n    | _ => stack (* arbitrary behavior in erroneous case *)\n    end\n  end.",
+    "Fixpoint run (is : list instruction)\n             (v : valuation)\n             (stack : list nat) : list nat :=\n  match is with\n  | nil => stack\n  | i :: is' => run is' v (run1 i v stack)\n  end.",
+    "Fixpoint compile (e : arith) : list instruction :=\n  match e with\n  | Const n => PushConst n :: nil\n  | Var x => PushVar x :: nil\n  | Plus e1 e2 => compile e1 ++ compile e2 ++ Add :: nil\n  | Minus e1 e2 => compile e1 ++ compile e2 ++ Subtract :: nil\n  | Times e1 e2 => compile e1 ++ compile e2 ++ Multiply :: nil\n  end.",
+    "Lemma compile_ok' :\n    forall e v is stack,\n    run (compile e ++ is) v stack = run is v (interp e v :: stack).\n  induct e; simplify.\n\n  - equality.\n  - equality.\n  -",
+    "    SearchRewrite ((_ ++ _) ++ _).",
+    "    rewrite app_assoc_reverse.\n    rewrite IHe1.\n    rewrite app_assoc_reverse.\n    rewrite IHe2.\n    simplify.\n    equality.\n\n  - rewrite app_assoc_reverse.\n    rewrite IHe1.\n    rewrite app_assoc_reverse.\n    rewrite IHe2.\n    simplify.\n    equality.\n\n  - rewrite app_assoc_reverse.\n    rewrite IHe1.\n    rewrite app_assoc_reverse.\n    rewrite IHe2.\n    simplify.\n    equality.\nQed.",
+    "Theorem compile_ok :\n    forall e v, run (compile e) v nil = interp e v :: nil.\n  simplify.",
+    "  SearchRewrite (_ ++ nil).\n  rewrite (app_nil_end (compile e)).",
+    "  apply compile_ok'.\n  (* Direct appeal to a previously proved lemma *)\nQed.",
+    "Inductive cmd :=\n| Skip\n| Assign (x : var) (e : arith)\n| Sequence (c1 c2 : cmd)\n| Repeat (e : arith) (body : cmd).",
+    "Fixpoint selfCompose {A} (f : A -> A) (n : nat) : A -> A :=\n  match n with\n  | O => fun x => x\n  | S n' => fun x => selfCompose f n' (f x)\n  end.\n\nFixpoint exec (c : cmd) (v : valuation) : valuation :=\n  match c with\n  | Skip => v\n  | Assign x e => v $+ (x, interp e v)\n  | Sequence c1 c2 => exec c2 (exec c1 v)\n  | Repeat e body => selfCompose (exec body) (interp e v) v\n  end.",
+    "Example factorial_ugly :=\n  Sequence\n    (Assign \"output\" (Const 1))\n    (Repeat (Var \"input\")\n            (Sequence\n               (Assign \"output\" (Times (Var \"output\") (Var \"input\")))\n               (Assign \"input\" (Minus (Var \"input\") (Const 1))))).",
+    "Coercion Const : nat >-> arith.\nCoercion Var : var >-> arith.\nInfix \"+\" := Plus : arith_scope.\nInfix \"-\" := Minus : arith_scope.\nInfix \"*\" := Times : arith_scope.\nDelimit Scope arith_scope with arith.\nNotation \"x <- e\" := (Assign x e%arith) (at level 75).\nInfix \";\" := Sequence (at level 76).\nNotation \"'repeat' e 'doing' body 'done'\" :=\n  (Repeat e%arith body) (at level 75).",
+    "Example factorial :=\n  \"output\" <- 1;\n  repeat \"input\" doing\n    \"output\" <- \"output\" * \"input\";\n    \"input\" <- \"input\" - 1\n  done.",
+    "Fixpoint fact (n : nat) : nat :=\n  match n with\n  | O => 1\n  | S n' => n * fact n'\n  end.",
+    "Definition factorial_body :=\n  \"output\" <- \"output\" * \"input\";\n  \"input\" <- \"input\" - 1.",
+    "Lemma factorial_ok' : forall input output v,\n  v $? \"input\" = Some input\n  -> v $? \"output\" = Some output\n  -> selfCompose (exec factorial_body) input v\n     = v $+ (\"input\", 0) $+ (\"output\", output * fact input).\n  induct input; simplify.",
+    "  - maps_equal.\n\n    + rewrite H0.\n      f_equal.\n      linear_arithmetic.",
+    "    + trivial.\n\n  - rewrite H, H0.\n    (* Note the two arguments to one ``rewrite``! *)\n\n    rewrite (IHinput (output * S input)).\n    (* Note the careful choice of a quantifier instantiation for the IH! *)\n\n    maps_equal.\n    + f_equal; ring.\n    + simplify; f_equal; linear_arithmetic.\n    + simplify; equality.\nQed.",
+    "Theorem factorial_ok\n  : forall v input,\n    v $? \"input\" = Some input\n    -> exec factorial v $? \"output\" = Some (fact input).\n  simplify.\n  rewrite H.\n  rewrite (factorial_ok' input 1); simplify.\n  f_equal; linear_arithmetic.\n  trivial.\n  trivial.\nQed.\n",
+    "Fixpoint seqself (c : cmd) (n : nat) : cmd :=\n  match n with\n  | O => Skip\n  | S n' => Sequence c (seqself c n')\n  end.\n\nFixpoint unroll (c : cmd) : cmd :=\n  match c with\n  | Skip => c\n  | Assign _ _ => c\n  | Sequence c1 c2 => Sequence (unroll c1) (unroll c2)\n  | Repeat (Const n) c1 => seqself (unroll c1) n\n  (* ^-- the crucial case! *)\n  | Repeat e c1 => Repeat e (unroll c1)\n  end.",
+    "Lemma selfCompose_extensional : forall {A} (f g : A -> A) n x,\n    (forall y, f y = g y)\n    -> selfCompose f n x = selfCompose g n x.\n  induct n; simplify; try equality.\n\n  rewrite H.\n  apply IHn.\n  trivial.\nQed.",
+    "Lemma seqself_ok : forall c n v,\n    exec (seqself c n) v = selfCompose (exec c) n v.\n  induct n; simplify; equality.\nQed.",
+    "Theorem unroll_ok : forall c v, exec (unroll c) v = exec c v.\n  induct c; simplify; try equality.\n\n  cases e; simplify; try equality.\n\n  - rewrite seqself_ok.\n    apply selfCompose_extensional.\n    trivial.\n\n  - apply selfCompose_extensional.\n    trivial.\n\n  - apply selfCompose_extensional.\n    trivial.\n\n  - apply selfCompose_extensional.\n    trivial.\n\n  - apply selfCompose_extensional.\n    trivial.\nQed."
+  ],
+  "annotated": [
+    [
+      {
+        "_type": "sentence",
+        "contents": "Require Import Frap.Frap.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Inductive arith : Set :=\n| Const (n : nat)\n| Var (x : var)\n| Plus (e1 e2 : arith)\n| Minus (e1 e2 : arith)\n| Times (e1 e2 : arith).",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Example ex1 := Const 42.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Example ex2 := Plus (Var \"y\") (Times (Var \"x\") (Const 3)).",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Definition valuation := fmap var nat.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint interp (e : arith) (v : valuation) : nat :=\n  match e with\n  | Const n => n\n  | Var x =>\n    (* Note use of infix operator to look up a key in a finite map. *)\n    match v $? x with\n    | None => 0 (* goofy default value! *)\n    | Some n => n\n    end\n  | Plus e1 e2 => interp e1 v + interp e2 v\n  | Minus e1 e2 => interp e1 v - interp e2 v\n                   (* For anyone who's wondering: this [-] sticks at 0,\n                    * if we would otherwise underflow. *)\n  | Times e1 e2 => interp e1 v * interp e2 v\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Definition valuation0 : valuation :=\n  $0 $+ (\"x\", 17) $+ (\"y\", 3).",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem interp_ex1 : interp ex1 valuation0 = 42.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp ex1 valuation0 = 42",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "42 = 42",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem interp_ex2 : interp ex2 valuation0 = 54.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp ex2 valuation0 = 54",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "unfold valuation0.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp ex2 ($0 $+ (\"x\", 17) $+ (\"y\", 3)) = 54",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "54 = 54",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint commuter (e : arith) : arith :=\n  match e with\n  | Const _ => e\n  | Var _ => e\n  | Plus e1 e2 => Plus (commuter e2) (commuter e1)\n  | Minus e1 e2 => Minus (commuter e1) (commuter e2)\n                   (* ^-- NB: didn't change the operand order here! *)\n  | Times e1 e2 => Times (commuter e2) (commuter e1)\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem commuter_ok : forall v e, interp (commuter e) v = interp e v.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (v : valuation) (e : arith),\ninterp (commuter e) v = interp e v",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct e; simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "n = n",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "match v $? x with\n| Some n => n\n| None => 0\nend = match v $? x with\n      | Some n => n\n      | None => 0\n      end",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (commuter e2) v + interp (commuter e1) v =\ninterp e1 v + interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (commuter e1) v - interp (commuter e2) v =\ninterp e1 v - interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (commuter e2) v * interp (commuter e1) v =\ninterp e1 v * interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "n = n",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "match v $? x with\n| Some n => n\n| None => 0\nend = match v $? x with\n      | Some n => n\n      | None => 0\n      end",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (commuter e2) v + interp (commuter e1) v =\ninterp e1 v + interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "linear_arithmetic.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (commuter e1) v - interp (commuter e2) v =\ninterp e1 v - interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (commuter e2) v * interp (commuter e1) v =\ninterp e1 v * interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe1.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (commuter e2) v * interp e1 v =\ninterp e1 v * interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe2.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp e2 v * interp e1 v = interp e1 v * interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "interp (commuter e1) v = interp e1 v"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "interp (commuter e2) v = interp e2 v"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "ring.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint substitute (inThis : arith)\n                    (replaceThis : var)\n                    (withThis : arith) : arith :=\n  match inThis with\n  | Const _ => inThis\n  | Var x => if x ==v replaceThis then withThis else inThis\n  | Plus e1 e2 => Plus (substitute e1 replaceThis withThis)\n                       (substitute e2 replaceThis withThis)\n  | Minus e1 e2 => Minus (substitute e1 replaceThis withThis)\n                         (substitute e2 replaceThis withThis)\n  | Times e1 e2 => Times (substitute e1 replaceThis withThis)\n                         (substitute e2 replaceThis withThis)\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem substitute_ok : forall v replaceThis withThis inThis,\n  interp (substitute inThis replaceThis withThis) v\n  = interp inThis (v $+ (replaceThis, interp withThis v)).",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (v : valuation) (replaceThis : var)\n  (withThis inThis : arith),\ninterp (substitute inThis replaceThis withThis) v =\ninterp inThis (v $+ (replaceThis, interp withThis v))",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct inThis; simplify; try equality.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp (if x ==v replaceThis then withThis else Var x)\n  v =\nmatch\n  (v $+ (replaceThis, interp withThis v)) $? x\nwith\n| Some n => n\n| None => 0\nend",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "replaceThis"
+                ],
+                "body": null,
+                "type": "var"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "withThis"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "_type": "text",
+        "contents": "  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "cases (x ==v replaceThis); simplify; try equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint doSomeArithmetic (e : arith) : arith :=\n  match e with\n  | Const _ => e\n  | Var _ => e\n  | Plus (Const n1) (Const n2) => Const (n1 + n2)\n  | Plus e1 e2 => Plus (doSomeArithmetic e1) (doSomeArithmetic e2)\n  | Minus e1 e2 => Minus (doSomeArithmetic e1) (doSomeArithmetic e2)\n  | Times (Const n1) (Const n2) => Const (n1 * n2)\n  | Times e1 e2 => Times (doSomeArithmetic e1) (doSomeArithmetic e2)\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem doSomeArithmetic_ok :\n    forall e v, interp (doSomeArithmetic e) v = interp e v.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (e : arith) (v : valuation),\ninterp (doSomeArithmetic e) v = interp e v",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct e; simplify; try equality.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp\n  match e1 with\n  | Const n1 =>\n      match e2 with\n      | Const n2 => Const (n1 + n2)\n      | _ =>\n          Plus (doSomeArithmetic e1)\n            (doSomeArithmetic e2)\n      end\n  | _ =>\n      Plus (doSomeArithmetic e1) (doSomeArithmetic e2)\n  end v = interp e1 v + interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e1) v0 = interp e1 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e2) v0 = interp e2 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp\n  match e1 with\n  | Const n1 =>\n      match e2 with\n      | Const n2 => Const (n1 * n2)\n      | _ =>\n          Times (doSomeArithmetic e1)\n            (doSomeArithmetic e2)\n      end\n  | _ =>\n      Times (doSomeArithmetic e1)\n        (doSomeArithmetic e2)\n  end v = interp e1 v * interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e1) v0 = interp e1 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e2) v0 = interp e2 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp\n  match e1 with\n  | Const n1 =>\n      match e2 with\n      | Const n2 => Const (n1 + n2)\n      | _ =>\n          Plus (doSomeArithmetic e1)\n            (doSomeArithmetic e2)\n      end\n  | _ =>\n      Plus (doSomeArithmetic e1) (doSomeArithmetic e2)\n  end v = interp e1 v + interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e1) v0 = interp e1 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e2) v0 = interp e2 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "cases e1; simplify; try equality.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp\n  match e2 with\n  | Const n2 => Const (n + n2)\n  | _ => Plus (Const n) (doSomeArithmetic e2)\n  end v = n + interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "valuation -> n = n"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e2) v0 = interp e2 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "cases e2; simplify; equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp\n  match e1 with\n  | Const n1 =>\n      match e2 with\n      | Const n2 => Const (n1 * n2)\n      | _ =>\n          Times (doSomeArithmetic e1)\n            (doSomeArithmetic e2)\n      end\n  | _ =>\n      Times (doSomeArithmetic e1)\n        (doSomeArithmetic e2)\n  end v = interp e1 v * interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e1) v0 = interp e1 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e2) v0 = interp e2 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "cases e1; simplify; try equality.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "interp\n  match e2 with\n  | Const n2 => Const (n * n2)\n  | _ => Times (Const n) (doSomeArithmetic e2)\n  end v = n * interp e2 v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "valuation -> n = n"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation,\ninterp (doSomeArithmetic e2) v0 = interp e2 v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "cases e2; simplify; equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Inductive instruction :=\n| PushConst (n : nat)\n| PushVar (x : var)\n| Add\n| Subtract\n| Multiply.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Definition run1 (i : instruction)\n                (v : valuation)\n                (stack : list nat) : list nat :=\n  match i with\n  | PushConst n => n :: stack\n  | PushVar x => (match v $? x with\n                  | None => 0\n                  | Some n => n\n                  end) :: stack\n  | Add =>\n    match stack with\n    | arg2 :: arg1 :: stack' => arg1 + arg2 :: stack'\n    | _ => stack (* arbitrary behavior in erroneous case\n                    (stack underflow) *)\n    end\n  | Subtract =>\n    match stack with\n    | arg2 :: arg1 :: stack' => arg1 - arg2 :: stack'\n    | _ => stack (* arbitrary behavior in erroneous case *)\n    end\n  | Multiply =>\n    match stack with\n    | arg2 :: arg1 :: stack' => arg1 * arg2 :: stack'\n    | _ => stack (* arbitrary behavior in erroneous case *)\n    end\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint run (is : list instruction)\n             (v : valuation)\n             (stack : list nat) : list nat :=\n  match is with\n  | nil => stack\n  | i :: is' => run is' v (run1 i v stack)\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint compile (e : arith) : list instruction :=\n  match e with\n  | Const n => PushConst n :: nil\n  | Var x => PushVar x :: nil\n  | Plus e1 e2 => compile e1 ++ compile e2 ++ Add :: nil\n  | Minus e1 e2 => compile e1 ++ compile e2 ++ Subtract :: nil\n  | Times e1 e2 => compile e1 ++ compile e2 ++ Multiply :: nil\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Lemma compile_ok' :\n    forall e v is stack,\n    run (compile e ++ is) v stack = run is v (interp e v :: stack).",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (e : arith) (v : valuation)\n  (is : list instruction) (stack : list nat),\nrun (compile e ++ is) v stack =\nrun is v (interp e v :: stack)",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct e; simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run is v (n :: stack) = run is v (n :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run is v\n  (match v $? x with\n   | Some n => n\n   | None => 0\n   end :: stack) =\nrun is v\n  (match v $? x with\n   | Some n => n\n   | None => 0\n   end :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e1 ++ compile e2 ++ [Add]) ++ is) v\n  stack =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e1 ++ compile e2 ++ [Subtract]) ++ is) v\n  stack =\nrun is v (interp e1 v - interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e1 ++ compile e2 ++ [Multiply]) ++ is) v\n  stack =\nrun is v (interp e1 v * interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run is v (n :: stack) = run is v (n :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run is v\n  (match v $? x with\n   | Some n => n\n   | None => 0\n   end :: stack) =\nrun is v\n  (match v $? x with\n   | Some n => n\n   | None => 0\n   end :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e1 ++ compile e2 ++ [Add]) ++ is) v\n  stack =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "_type": "text",
+        "contents": "    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "SearchRewrite ((_ ++ _) ++ _).",
+        "messages": [
+          {
+            "_type": "message",
+            "contents": "app_assoc_reverse:\n  forall (A : Type) (l m n : list A),\n  (l ++ m) ++ n = l ++ m ++ n"
+          },
+          {
+            "_type": "message",
+            "contents": "app_assoc:\n  forall (A : Type) (l m n : list A),\n  l ++ m ++ n = (l ++ m) ++ n"
+          }
+        ],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e1 ++ compile e2 ++ [Add]) ++ is) v\n  stack =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "_type": "text",
+        "contents": "    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite app_assoc_reverse.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e1 ++ (compile e2 ++ [Add]) ++ is) v\n  stack =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe1.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e2 ++ [Add]) ++ is) v\n  (interp e1 v :: stack) =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite app_assoc_reverse.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e2 ++ [Add] ++ is) v\n  (interp e1 v :: stack) =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe2.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ([Add] ++ is) v\n  (interp e2 v :: interp e1 v :: stack) =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run is v (interp e1 v + interp e2 v :: stack) =\nrun is v (interp e1 v + interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e1 ++ compile e2 ++ [Subtract]) ++ is) v\n  stack =\nrun is v (interp e1 v - interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite app_assoc_reverse.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e1 ++ (compile e2 ++ [Subtract]) ++ is) v\n  stack =\nrun is v (interp e1 v - interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe1.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e2 ++ [Subtract]) ++ is) v\n  (interp e1 v :: stack) =\nrun is v (interp e1 v - interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite app_assoc_reverse.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e2 ++ [Subtract] ++ is) v\n  (interp e1 v :: stack) =\nrun is v (interp e1 v - interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe2.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ([Subtract] ++ is) v\n  (interp e2 v :: interp e1 v :: stack) =\nrun is v (interp e1 v - interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run is v (interp e1 v - interp e2 v :: stack) =\nrun is v (interp e1 v - interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e1 ++ compile e2 ++ [Multiply]) ++ is) v\n  stack =\nrun is v (interp e1 v * interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite app_assoc_reverse.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e1 ++ (compile e2 ++ [Multiply]) ++ is) v\n  stack =\nrun is v (interp e1 v * interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe1.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ((compile e2 ++ [Multiply]) ++ is) v\n  (interp e1 v :: stack) =\nrun is v (interp e1 v * interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite app_assoc_reverse.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e2 ++ [Multiply] ++ is) v\n  (interp e1 v :: stack) =\nrun is v (interp e1 v * interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite IHe2.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run ([Multiply] ++ is) v\n  (interp e2 v :: interp e1 v :: stack) =\nrun is v (interp e1 v * interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run is v (interp e1 v * interp e2 v :: stack) =\nrun is v (interp e1 v * interp e2 v :: stack)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe1"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e1 ++ is0) v0 stack0 =\nrun is0 v0 (interp e1 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHe2"
+                ],
+                "body": null,
+                "type": "forall (v0 : valuation)\n  (is0 : list instruction) \n  (stack0 : list nat),\nrun (compile e2 ++ is0) v0 stack0 =\nrun is0 v0 (interp e2 v0 :: stack0)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "is"
+                ],
+                "body": null,
+                "type": "list instruction"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "stack"
+                ],
+                "body": null,
+                "type": "list nat"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem compile_ok :\n    forall e v, run (compile e) v nil = interp e v :: nil.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (e : arith) (v : valuation),\nrun (compile e) v [] = [interp e v]",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e) v [] = [interp e v]",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "_type": "text",
+        "contents": "  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "SearchRewrite (_ ++ nil).",
+        "messages": [
+          {
+            "_type": "message",
+            "contents": "app_nil_end:\n  forall (A : Type) (l : list A), l = l ++ []"
+          },
+          {
+            "_type": "message",
+            "contents": "app_nil_r: forall (A : Type) (l : list A), l ++ [] = l"
+          }
+        ],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e) v [] = [interp e v]",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite (app_nil_end (compile e)).",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "run (compile e ++ []) v [] = [interp e v]",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "_type": "text",
+        "contents": "  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "apply compile_ok'.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n  (* Direct appeal to a previously proved lemma *)\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Inductive cmd :=\n| Skip\n| Assign (x : var) (e : arith)\n| Sequence (c1 c2 : cmd)\n| Repeat (e : arith) (body : cmd).",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint selfCompose {A} (f : A -> A) (n : nat) : A -> A :=\n  match n with\n  | O => fun x => x\n  | S n' => fun x => selfCompose f n' (f x)\n  end.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint exec (c : cmd) (v : valuation) : valuation :=\n  match c with\n  | Skip => v\n  | Assign x e => v $+ (x, interp e v)\n  | Sequence c1 c2 => exec c2 (exec c1 v)\n  | Repeat e body => selfCompose (exec body) (interp e v) v\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Example factorial_ugly :=\n  Sequence\n    (Assign \"output\" (Const 1))\n    (Repeat (Var \"input\")\n            (Sequence\n               (Assign \"output\" (Times (Var \"output\") (Var \"input\")))\n               (Assign \"input\" (Minus (Var \"input\") (Const 1))))).",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Coercion Const : nat >-> arith.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Coercion Var : var >-> arith.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Infix \"+\" := Plus : arith_scope.",
+        "messages": [
+          {
+            "_type": "message",
+            "contents": "Declaring a scope implicitly is deprecated; use in\nadvance an explicit \"Declare Scope arith_scope.\".\n[undeclared-scope,deprecated]"
+          }
+        ],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Infix \"-\" := Minus : arith_scope.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Infix \"*\" := Times : arith_scope.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Delimit Scope arith_scope with arith.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Notation \"x <- e\" := (Assign x e%arith) (at level 75).",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Infix \";\" := Sequence (at level 76).",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Notation \"'repeat' e 'doing' body 'done'\" :=\n  (Repeat e%arith body) (at level 75).",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Example factorial :=\n  \"output\" <- 1;\n  repeat \"input\" doing\n    \"output\" <- \"output\" * \"input\";\n    \"input\" <- \"input\" - 1\n  done.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint fact (n : nat) : nat :=\n  match n with\n  | O => 1\n  | S n' => n * fact n'\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Definition factorial_body :=\n  \"output\" <- \"output\" * \"input\";\n  \"input\" <- \"input\" - 1.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Lemma factorial_ok' : forall input output v,\n  v $? \"input\" = Some input\n  -> v $? \"output\" = Some output\n  -> selfCompose (exec factorial_body) input v\n     = v $+ (\"input\", 0) $+ (\"output\", output * fact input).",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (input output : nat) (v : fmap var nat),\nv $? \"input\" = Some input ->\nv $? \"output\" = Some output ->\nselfCompose (exec factorial_body) input v =\nv $+ (\"input\", 0) $+ (\"output\", output * fact input)",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct input; simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v = v $+ (\"input\", 0) $+ (\"output\", output * 1)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose\n  (fun v0 : valuation =>\n   v0 $+ (\"output\",\n   match v0 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v0 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v0 $+ (\"output\",\n      match v0 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v0 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input\n  (v $+ (\"output\",\n   match v $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match v $? \"input\" with\n   | Some n => n\n   | None => 0\n   end - 1)) =\nv $+ (\"input\", 0) $+ (\"output\",\noutput * (fact input + input * fact input))",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "_type": "text",
+        "contents": "  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v = v $+ (\"input\", 0) $+ (\"output\", output * 1)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "maps_equal.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v $? \"output\" = Some (output * 1)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v $? \"input\" = Some 0",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H1"
+                ],
+                "body": null,
+                "type": "\"output\" <> \"input\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "+",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v $? \"output\" = Some (output * 1)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite H0.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "Some output = Some (output * 1)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n      "
+      },
+      {
+        "_type": "sentence",
+        "contents": "f_equal.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "output = output * 1",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n      "
+      },
+      {
+        "_type": "sentence",
+        "contents": "linear_arithmetic.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "text",
+        "contents": "    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "+",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v $? \"input\" = Some 0",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some 0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H1"
+                ],
+                "body": null,
+                "type": "\"output\" <> \"input\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose\n  (fun v0 : valuation =>\n   v0 $+ (\"output\",\n   match v0 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v0 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v0 $+ (\"output\",\n      match v0 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v0 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input\n  (v $+ (\"output\",\n   match v $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match v $? \"input\" with\n   | Some n => n\n   | None => 0\n   end - 1)) =\nv $+ (\"input\", 0) $+ (\"output\",\noutput * (fact input + input * fact input))",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite H, H0.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose\n  (fun v0 : valuation =>\n   v0 $+ (\"output\",\n   match v0 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v0 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v0 $+ (\"output\",\n      match v0 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v0 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input\n  (v $+ (\"output\", output * S input) $+ (\"input\",\n   S input - 1)) =\nv $+ (\"input\", 0) $+ (\"output\",\noutput * (fact input + input * fact input))",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    (* Note the two arguments to one ``rewrite``! *)\n\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite (IHinput (output * S input)).",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v $+ (\"output\", output * S input) $+ (\"input\",\nS input - 1) $+ (\"input\", 0) $+ (\"output\",\noutput * S input * fact input) =\nv $+ (\"input\", 0) $+ (\"output\",\noutput * (fact input + input * fact input))",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "(v $+ (\"output\", output * S input) $+ (\"input\",\n S input - 1)) $? \"input\" = \nSome input",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "(v $+ (\"output\", output * S input) $+ (\"input\",\n S input - 1)) $? \"output\" = \nSome (output * S input)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    (* Note the careful choice of a quantifier instantiation for the IH! *)\n\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "maps_equal.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "Some (output * S input * fact input) =\nSome (output * (fact input + input * fact input))",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "(v $+ (\"output\", output * S input) $+ (\"input\",\n S input - 1)) $? \"input\" = \nSome input",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "(v $+ (\"output\", output * S input) $+ (\"input\",\n S input - 1)) $? \"output\" = \nSome (output * S input)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "+",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "Some (output * S input * fact input) =\nSome (output * (fact input + input * fact input))",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "f_equal; ring.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "+",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "(v $+ (\"output\", output * S input) $+ (\"input\",\n S input - 1)) $? \"input\" = \nSome input",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify; f_equal; linear_arithmetic.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "+",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "(v $+ (\"output\", output * S input) $+ (\"input\",\n S input - 1)) $? \"output\" = \nSome (output * S input)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHinput"
+                ],
+                "body": null,
+                "type": "forall (output0 : nat) (v0 : fmap var nat),\nv0 $? \"input\" = Some input ->\nv0 $? \"output\" = Some output0 ->\nselfCompose\n  (fun v1 : valuation =>\n   v1 $+ (\"output\",\n   match v1 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v1 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v1 $+ (\"output\",\n      match v1 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v1 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input v0 =\nv0 $+ (\"input\", 0) $+ (\"output\",\noutput0 * fact input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "output"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some (S input)"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H0"
+                ],
+                "body": null,
+                "type": "v $? \"output\" = Some output"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify; equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem factorial_ok\n  : forall v input,\n    v $? \"input\" = Some input\n    -> exec factorial v $? \"output\" = Some (fact input).",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (v : fmap var nat) (input : nat),\nv $? \"input\" = Some input ->\nexec factorial v $? \"output\" = Some (fact input)",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose\n  (fun v0 : valuation =>\n   v0 $+ (\"output\",\n   match v0 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v0 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v0 $+ (\"output\",\n      match v0 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v0 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1))\n  match v $? \"input\" with\n  | Some n => n\n  | None => 0\n  end (v $+ (\"output\", 1)) $? \"output\" =\nSome (fact input)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite H.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose\n  (fun v0 : valuation =>\n   v0 $+ (\"output\",\n   match v0 $? \"output\" with\n   | Some n => n\n   | None => 0\n   end *\n   match v0 $? \"input\" with\n   | Some n => n\n   | None => 0\n   end) $+ (\"input\",\n   match\n     (v0 $+ (\"output\",\n      match v0 $? \"output\" with\n      | Some n => n\n      | None => 0\n      end *\n      match v0 $? \"input\" with\n      | Some n => n\n      | None => 0\n      end)) $? \"input\"\n   with\n   | Some n => n\n   | None => 0\n   end - 1)) input (v $+ (\"output\", 1)) $? \"output\" =\nSome (fact input)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite (factorial_ok' input 1); simplify.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "Some (fact input + 0) = Some (fact input)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v $? \"input\" = Some input",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "Some 1 = Some 1",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "f_equal; linear_arithmetic.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "v $? \"input\" = Some input",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "Some 1 = Some 1",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "Some 1 = Some 1",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "fmap var nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "input"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "v $? \"input\" = Some input"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint seqself (c : cmd) (n : nat) : cmd :=\n  match n with\n  | O => Skip\n  | S n' => Sequence c (seqself c n')\n  end.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Fixpoint unroll (c : cmd) : cmd :=\n  match c with\n  | Skip => c\n  | Assign _ _ => c\n  | Sequence c1 c2 => Sequence (unroll c1) (unroll c2)\n  | Repeat (Const n) c1 => seqself (unroll c1) n\n  (* ^-- the crucial case! *)\n  | Repeat e c1 => Repeat e (unroll c1)\n  end.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Lemma selfCompose_extensional : forall {A} (f g : A -> A) n x,\n    (forall y, f y = g y)\n    -> selfCompose f n x = selfCompose g n x.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (A : Type) (f g : A -> A) (n : nat) (x : A),\n(forall y : A, f y = g y) ->\nselfCompose f n x = selfCompose g n x",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct n; simplify; try equality.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose f n (f x) = selfCompose g n (g x)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "A"
+                ],
+                "body": null,
+                "type": "Type"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "f",
+                  "g"
+                ],
+                "body": null,
+                "type": "A -> A"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHn"
+                ],
+                "body": null,
+                "type": "forall x0 : A,\n(forall y : A, f y = g y) -> selfCompose f n x0 = selfCompose g n x0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "A"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "forall y : A, f y = g y"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite H.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose f n (g x) = selfCompose g n (g x)",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "A"
+                ],
+                "body": null,
+                "type": "Type"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "f",
+                  "g"
+                ],
+                "body": null,
+                "type": "A -> A"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHn"
+                ],
+                "body": null,
+                "type": "forall x0 : A,\n(forall y : A, f y = g y) -> selfCompose f n x0 = selfCompose g n x0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "A"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "forall y : A, f y = g y"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "apply IHn.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall y : A, f y = g y",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "A"
+                ],
+                "body": null,
+                "type": "Type"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "f",
+                  "g"
+                ],
+                "body": null,
+                "type": "A -> A"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHn"
+                ],
+                "body": null,
+                "type": "forall x0 : A,\n(forall y : A, f y = g y) -> selfCompose f n x0 = selfCompose g n x0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "A"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "H"
+                ],
+                "body": null,
+                "type": "forall y : A, f y = g y"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Lemma seqself_ok : forall c n v,\n    exec (seqself c n) v = selfCompose (exec c) n v.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (c : cmd) (n : nat) (v : valuation),\nexec (seqself c n) v = selfCompose (exec c) n v",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct n; simplify; equality.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ],
+    [
+      {
+        "_type": "sentence",
+        "contents": "Theorem unroll_ok : forall c v, exec (unroll c) v = exec c v.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall (c : cmd) (v : valuation),\nexec (unroll c) v = exec c v",
+            "hypotheses": []
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "induct c; simplify; try equality.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "exec\n  match e with\n  | Const n => seqself (unroll c) n\n  | _ => repeat e doing unroll c done\n  end v = selfCompose (exec c) (interp e v) v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "cases e; simplify; try equality.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "exec (seqself (unroll c) n) v =\nselfCompose (exec c) n v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  match v $? x with\n  | Some n => n\n  | None => 0\n  end v =\nselfCompose (exec c)\n  match v $? x with\n  | Some n => n\n  | None => 0\n  end v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  (interp e1 v + interp e2 v) v =\nselfCompose (exec c) (interp e1 v + interp e2 v) v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  (interp e1 v - interp e2 v) v =\nselfCompose (exec c) (interp e1 v - interp e2 v) v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          },
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  (interp e1 v * interp e2 v) v =\nselfCompose (exec c) (interp e1 v * interp e2 v) v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "exec (seqself (unroll c) n) v =\nselfCompose (exec c) n v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "rewrite seqself_ok.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c)) n v =\nselfCompose (exec c) n v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "apply selfCompose_extensional.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall y : valuation, exec (unroll c) y = exec c y",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "n"
+                ],
+                "body": null,
+                "type": "nat"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  match v $? x with\n  | Some n => n\n  | None => 0\n  end v =\nselfCompose (exec c)\n  match v $? x with\n  | Some n => n\n  | None => 0\n  end v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "apply selfCompose_extensional.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall y : valuation, exec (unroll c) y = exec c y",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "x"
+                ],
+                "body": null,
+                "type": "var"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  (interp e1 v + interp e2 v) v =\nselfCompose (exec c) (interp e1 v + interp e2 v) v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "apply selfCompose_extensional.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall y : valuation, exec (unroll c) y = exec c y",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  (interp e1 v - interp e2 v) v =\nselfCompose (exec c) (interp e1 v - interp e2 v) v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "apply selfCompose_extensional.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall y : valuation, exec (unroll c) y = exec c y",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n\n  "
+      },
+      {
+        "_type": "sentence",
+        "contents": "-",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "selfCompose (exec (unroll c))\n  (interp e1 v * interp e2 v) v =\nselfCompose (exec c) (interp e1 v * interp e2 v) v",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": " "
+      },
+      {
+        "_type": "sentence",
+        "contents": "apply selfCompose_extensional.",
+        "messages": [],
+        "goals": [
+          {
+            "_type": "goal",
+            "name": null,
+            "conclusion": "forall y : valuation, exec (unroll c) y = exec c y",
+            "hypotheses": [
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "e1",
+                  "e2"
+                ],
+                "body": null,
+                "type": "arith"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "c"
+                ],
+                "body": null,
+                "type": "cmd"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "IHc"
+                ],
+                "body": null,
+                "type": "forall v0 : valuation, exec (unroll c) v0 = exec c v0"
+              },
+              {
+                "_type": "hypothesis",
+                "names": [
+                  "v"
+                ],
+                "body": null,
+                "type": "valuation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "text",
+        "contents": "\n    "
+      },
+      {
+        "_type": "sentence",
+        "contents": "trivial.",
+        "messages": [],
+        "goals": []
+      },
+      {
+        "_type": "text",
+        "contents": "\n"
+      },
+      {
+        "_type": "sentence",
+        "contents": "Qed.",
+        "messages": [],
+        "goals": []
+      }
+    ]
+  ]
+}

@@ -1,10 +1,10 @@
 (*|
-=================================================
- Supplementary Coq material: proof by reflection
-=================================================
+=====================
+ Proof by Reflection
+=====================
 
 :authors: Adam Chlipala
-:summary: A chapter from FRAP (CC-BY), used to demo Alectryon
+:summary: A chapter from CPDT (CC-BY), used to demo Alectryon
 :alectryon/pygments/tacn:
    excluded_middle dep_cases
    fancy_neq removeDups doSubtract simpl_maps simplify
@@ -31,14 +31,13 @@ Set Asymmetric Patterns.
 Set Printing Depth 1.
 
 (*|
-Our last "aside" on effective Coq use (in ``IntroToProofScripting.v``)
-highlighted a very heuristic approach to proving.  As an alternative, we will
-study a technique called proof by reflection.  We will write, in Gallina (the
-logical functional-programming language of Coq), decision procedures with
-proofs of correctness, and we will appeal to these procedures in writing very
-short proofs.  Such a proof is checked by running the decision procedure.
-The term *reflection* applies because we will need to translate Gallina
-propositions into values of inductive types representing syntax, so that
+The last chapter highlighted a very heuristic approach to proving. As an
+alternative, we will study a technique called proof by reflection.  We will
+write, in Gallina (the logical functional-programming language of Coq), decision
+procedures with proofs of correctness, and we will appeal to these procedures in
+writing very short proofs.  Such a proof is checked by running the decision
+procedure.  The term *reflection* applies because we will need to translate
+Gallina propositions into values of inductive types representing syntax, so that
 Gallina programs may analyze them, and translating such a term back to the
 original form is called *reflecting* it.
 

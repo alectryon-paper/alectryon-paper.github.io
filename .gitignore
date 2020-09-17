@@ -1,5 +1,5 @@
 *.pdf
-*.cache
+.*.cache
 *.vo
 *.glob
 *.aux
