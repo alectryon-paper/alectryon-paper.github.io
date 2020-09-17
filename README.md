@@ -34,7 +34,8 @@ Getting started: a simple walkthrough (§2)
 The following assumes that you have read through the Introduction and
 Tutorial sections of the paper.
 
-To begin, open a terminal and navigate to `~/alectryon-sle2020/ae/`: ``cd ~/alectryon-sle2020/ae/``
+To begin, open a terminal and navigate to `~/alectryon-sle2020/ae/`:
+``cd ~/alectryon-sle2020/ae/``
 
 This directory contains all examples used in the tutorial (in the
 `snippets/` directory) as well as all larger examples that the paper
