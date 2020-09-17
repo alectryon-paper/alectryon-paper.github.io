@@ -3,7 +3,7 @@ root := $(PWD)
 # Make sure to run this in the right OPAM environment
 
 # Needs Coq 8.10.2 for compatibility with Software Foundations
-alectryon = $(shell realpath ../../../alectryon.py)
+alectryon = $(shell realpath $(shell which alectryon))
 export ALECTRYON:=$(alectryon)
 
 ##########
@@ -32,31 +32,31 @@ lf-all: $(lf_htmls)
 lf-clean:
 	rm -f $(lf_htmls)
 
-########
-# Frap #
-########
+#########
+# Books #
+#########
 
-frap_rsts = $(wildcard frap/*.rst)
-frap_htmls = $(frap_rsts:.rst=.html)
-frap_vs = $(frap_rsts:.rst=.v)
+books_rsts = $(wildcard books/*.rst)
+books_htmls = $(books_rsts:.rst=.html)
+books_vs = $(books_rsts:.rst=.v)
 
-frap/%.html: frap/%.rst
-	$(alectryon) --frontend rst $< -o $@
+books/%.html: books/%.rst
+	$(alectryon) --cache-directory . --frontend rst $< -o $@
 
-frap/%.v: frap/%.rst
+books/%.v: books/%.rst
 	$(alectryon) --frontend rst --backend coq+rst $< -o $@
 
-frap-all: $(frap_htmls) $(frap_vs)
+books-all: $(books_htmls) $(books_vs)
 
-frap-clean:
-	rm -f $(frap_htmls) $(frap_vs)
+books-clean:
+	rm -f $(books_htmls) $(books_vs)
 
 ##########
 # Common #
 ##########
 
 compiler := ./compile.sh
-coq_rsync := rsync -av  --delete-during --include="*.vo" --include="*.v" --exclude="*.*"
+coq_rsync := rsync -a --delete-during --include="*.vo" --include="*.v" --exclude="*.*"
 
 #########
 # Flocq #
@@ -84,9 +84,13 @@ $(flocq)/full.%.timings:
 
 coqlib := $(shell opam config var coq:lib)
 
-stdlib/: Makefile
-	$(coq_rsync) "$(coqlib)/theories/" stdlib/theories/
-	$(coq_rsync) "$(coqlib)/plugins/" stdlib/plugins/
+stdlib/%/.sync: Makefile
+	$(coq_rsync) "$(coqlib)/$*/" stdlib/$*/
+	touch $@
+
+stdlib: stdlib/plugins/.sync stdlib/theories/.sync
+
+STDLIB_REPEAT ?= 5
 
 stdlib_excluded := \
 	-not -path stdlib/theories/Numbers/Cyclic/Int63/Int63.v \
@@ -98,18 +102,18 @@ stdlib_excluded := \
 
 stdlib_find := find stdlib/ -not -path 'stdlib/theories/Init/*' $(stdlib_excluded) -name '*.v'
 
-stdlib/full.%.timings:
+stdlib/full.%.timings: stdlib
 	 $(stdlib_find) -exec $(compiler) $* 1 {} \; | tee $@
 
 join-paths = \( -false $(patsubst %,-or -path 'stdlib/theories/%', $1) \)
 
 stdlib_files := Arith/Le.v FSets/FSetDecide.v FSets/FSetProperties.v Logic/ClassicalChoice.v Numbers/DecimalNat.v Numbers/NatInt/NZMul.v Program/Tactics.v ZArith/Zgcd_alt.v
-stdlib/stdlib.%.timings:
-	 $(stdlib_find) $(call join-paths,$(stdlib_files)) -exec $(compiler) $* 5 {} \; | tee $@
+stdlib/stdlib.%.timings: stdlib
+	 $(stdlib_find) $(call join-paths,$(stdlib_files)) -exec $(compiler) $*  $(STDLIB_REPEAT) {} \; | tee $@
 
 breakdown_files := Strings/Byte.v Lists/ListSet.v Reals/Ranalysis3.v
-stdlib/breakdown.%.timings:
-	 $(stdlib_find) $(call join-paths,$(breakdown_files)) -exec $(compiler) $* 5 {} \; | tee $@
+stdlib/breakdown.%.timings: stdlib
+	 $(stdlib_find) $(call join-paths,$(breakdown_files)) -exec $(compiler) $* $(STDLIB_REPEAT) {} \; | tee $@
 
 compilers := coqc coqtop sertop alectryon-api alectryon-json alectryon-coqdoc alectryon-html
 breakdowns := $(patsubst %,stdlib/breakdown.%.timings,$(compilers))
@@ -125,9 +129,7 @@ breakdown: $(breakdowns);
 # $(flocq)/full.alectryon-coqdoc.timings $(flocq)/full.coqc.timings
 timings: breakdown stdlib/stdlib.alectryon.timings stdlib/stdlib.coqc.timings stdlib/full.alectryon-coqdoc.timings stdlib/full.coqc.timings
 
-all: stdlib
-
 clean:
 	rm -rf $(lf_htmls) stdlib/theories stdlib/plugins stdlib/*.timings $(flocq)/*.timings
 
-.PHONY: timings stdlib all
+.PHONY: timings

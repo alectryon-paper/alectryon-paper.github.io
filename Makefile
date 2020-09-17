@@ -1,10 +1,5 @@
 alectryon := ./driver.py --copy-assets none
-export PYTHONPATH=$(shell realpath ../../):$$PYTHONPATH
-
-# 3.3in obtained with \usepackage{printlen} and \uselengthunit{in}\printlength\linewidth
-# html2pdf := wkhtmltopdf --margin-bottom 0 --margin-top 0 --margin-left 0 --margin-right 0 --page-width 3.2in --page-height 15in
-# ~96 pixels per inch → 320px
-# html2img := wkhtmltoimage --width 320 --disable-smart-width
+export PYTHONPATH=$(shell dirname $(shell realpath $(shell which alectryon))):$$PYTHONPATH
 
 vfiles := $(wildcard snippets/*.v)
 rstfiles := $(wildcard snippets/*.rst)
