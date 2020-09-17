@@ -135,6 +135,7 @@ breakdown: $(breakdowns);
 timings: breakdown stdlib/stdlib.alectryon.timings stdlib/stdlib.coqc.timings stdlib/full.alectryon-coqdoc.timings stdlib/full.coqc.timings
 
 clean:
-	rm -rf $(lf_htmls) stdlib/theories stdlib/plugins stdlib/*.timings $(flocq)/*.timings
+	find stdlib/theories -name '*.html' -not -name index.html -delete
+	rm -rf $(lf_htmls) stdlib/plugins stdlib/*.timings $(flocq)/*.timings
 
 .PHONY: timings
