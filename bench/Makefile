@@ -22,9 +22,14 @@ refman:
 ######
 
 lf_vs := $(shell find lf -name '*.v')
+lf_vos := $(lf_vs:.v=.vo)
 lf_htmls := $(lf_vs:.v=.html)
 
-lf/%.html: lf/%.v
+lf/.sync:
+	+$(MAKE) -C lf $(patsubst lf/%,%,$(lf_vos))
+	touch $@
+
+lf/%.html: lf/%.v lf/.sync
 	$(alectryon) --frontend coqdoc -Q lf LF $< -o $@
 
 lf-all: $(lf_htmls)
