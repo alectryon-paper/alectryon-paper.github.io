@@ -4,6 +4,7 @@
 *.glob
 *.aux
 *.sync
+*.o
 .coq-native/
 /github.key
 /github.pub

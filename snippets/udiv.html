@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>udiv.v</title>
+<link rel="stylesheet" href="alectryon.css" type="text/css" />
+<link rel="stylesheet" href="docutils_basic.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.min.css" type="text/css" />
+<script type="text/javascript" src="alectryon.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" />
+</head>
+<body>
+<div class="alectryon-root alectryon-standalone alectryon-centered"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="document">
+
+
+<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">udiv</span> := {|
+  c_source :=
+    <span class="s2">&quot;#include &quot;&quot;stdint.h&quot;&quot;</span>
+
+<span class="s2">     typedef struct {</span>
+<span class="s2">       uint32_t quot; …&quot;</span>;
+  riscv_elf :=
+    [x7f; x45; x4c; x46; x01; x01; x01; x00; x00; x00; x00; x00; x00; x00; x00; x00;
+     x02; x00; xf3; x00; x01; x00; x00; x00; x54; x00; x01; x00; x34; x00; x00; x00;
+     x0c; x02; x00; x00; x00; x00; x00; x00; x34; x00; x20; x00; x01; x00; x28; x00;
+     x06; x00; x05; x00; x01; x00; x00; x00; x00; x00; x00; x00; x00; x00; x01; … ] |}.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="udiv-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="udiv-v-chk0"><span class="highlight"><span class="kn">Compute</span> udiv.(c_source).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="udiv-listing">= <span class="highlight"><span class="cp">#include</span> <span class="cpf">&quot;stdint.h&quot;</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">uint32_t</span> quot<span class="p">;</span>
+  <span class="kt">uint32_t</span> rem<span class="p">;</span>
+<span class="p">}</span> udiv_t<span class="p">;</span>
+
+udiv_t <span class="nf">udiv</span><span class="p">(</span><span class="kt">uint32_t</span> num<span class="p">,</span> <span class="kt">uint32_t</span> denom<span class="p">)</span> <span class="p">{</span>
+  <span class="kt">uint32_t</span> q = <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span>num &gt;= denom<span class="p">)</span> <span class="p">{</span>
+    num -= denom<span class="p">;</span> ++q<span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span>udiv_t<span class="p">)</span> <span class="p">{</span> <span class="p">.</span>rem = num<span class="p">,</span> <span class="p">.</span>quot = q <span class="p">};</span>
+<span class="p">}</span></span>: string</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="udiv-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="udiv-v-chk1"><span class="highlight"><span class="kn">Compute</span> udiv.(riscv_elf).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="udiv-listing">= <span class="highlight"><span class="mh">00010054</span> <span class="p">&lt;</span><span class="nf">udiv</span><span class="p">&gt;:</span>
+   <span class="nl">10054:</span>	<span class="mh">00 05 07 93 </span>         	<span class="nf">mv</span>	<span class="no">a5</span><span class="p">,</span><span class="no">a0</span>
+   <span class="nl">10058:</span>	<span class="mh">ff 01 01 13 </span>         	<span class="nf">addi</span>	<span class="no">sp</span><span class="p">,</span><span class="no">sp</span><span class="p">,-</span><span class="mi">16</span>
+   <span class="nl">1005c:</span>	<span class="mh">00 00 05 13 </span>         	<span class="nf">li</span>	<span class="no">a0</span><span class="p">,</span><span class="mi">0</span>
+   <span class="nl">10060:</span>	<span class="mh">00 b7 f8 63 </span>         	<span class="nf">bgeu</span>	<span class="no">a5</span><span class="p">,</span><span class="no">a1</span><span class="p">,</span><span class="mh">10070</span> <span class="p">&lt;</span><span class="no">udiv</span><span class="p">+</span><span class="mi">0x1c</span><span class="p">&gt;</span>
+   <span class="nl">10064:</span>	<span class="mh">00 07 85 93 </span>         	<span class="nf">mv</span>	<span class="no">a1</span><span class="p">,</span><span class="no">a5</span>
+   <span class="nl">10068:</span>	<span class="mh">01 01 01 13 </span>         	<span class="nf">addi</span>	<span class="no">sp</span><span class="p">,</span><span class="no">sp</span><span class="p">,</span><span class="mi">16</span>
+   <span class="nl">1006c:</span>	<span class="mh">00 00 80 67 </span>         	<span class="nf">ret</span>
+   <span class="nl">10070:</span>	<span class="mh">40 b7 87 b3 </span>         	<span class="nf">sub</span>	<span class="no">a5</span><span class="p">,</span><span class="no">a5</span><span class="p">,</span><span class="no">a1</span>
+   <span class="nl">10074:</span>	<span class="mh">00 15 05 13 </span>         	<span class="nf">addi</span>	<span class="no">a0</span><span class="p">,</span><span class="no">a0</span><span class="p">,</span><span class="mi">1</span>
+   <span class="nl">10078:</span>	<span class="mh">fe 9f f0 6f </span>         	<span class="nf">j</span>	<span class="mh">10060</span> <span class="p">&lt;</span><span class="no">udiv</span><span class="p">+</span><span class="mi">0xc</span><span class="p">&gt;</span>
+</span>: list Byte.byte</span></blockquote></div></div></small></span></pre><link rel="stylesheet" href="udiv.css">
+</div>
+</div></body>
+</html>

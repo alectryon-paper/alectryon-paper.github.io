@@ -1,0 +1,9 @@
+.udiv-listing .highlight {
+    display: block;
+    border: thick #babdb6;
+    border-style: groove;
+    background: #eeeeec;
+    margin: 0.25rem 0 0.25rem 1rem;
+    padding: 0.25rem;
+    /* vertical-align: top; */
+}
