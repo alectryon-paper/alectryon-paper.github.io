@@ -1,0 +1,32 @@
+html {
+    font-size: 10px;
+    margin: 0;
+}
+
+.alectryon-standalone {
+    font-family: 'DejaVu Sans';
+}
+
+body {
+    margin: 0;
+}
+
+pre {
+    line-height: 1.15 !important;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+.alectryon-header {
+    display: none;
+}
+
+.coq-message::before {
+   transform: scale(0.6) translateX(50%) translateY(-40%);
+}
+
+.alectryon-standalone.alectryon-windowed {
+    border-bottom: 1px dashed #2e3436;
+}

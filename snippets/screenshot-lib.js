@@ -21,47 +21,36 @@ async function screenshot(src, dst, options={}, pdfOptions={}, launchOptions={})
     const page = await browser.newPage();
     page.emulateMediaType('screen');
 
+    await page.evaluateOnNewDocument(function() {
+        window.runDelayed = f =>
+            (window.delayed = window.delayed || []).push(f);
+    });
+
     // console.log(src, dst);
+    // https://github.com/puppeteer/puppeteer/issues/422, but this is not enough when a font isn't used until a later script (e.g. the bold font of hyp names)
     await page.goto('file://' + src, { waitUntil: 'networkidle2' });
 
     await page.evaluate(function() {
         const html = document.querySelector("html");
-        html.style.fontSize = "10px";
-        html.style.margin = 0;
-        html.style.fontFamily = "unset";
-
-        // FIXME: Does this do anything?
-        font_css = `
-.docutils.literal {
-    font-family: 'Iosevka Slab Web', 'Iosevka Web', 'Iosevka Slab', 'Iosevka', 'Fira Code', monospace;
-    font-feature-settings: "XV00" 1; /* Use Coq ligatures when Iosevka is available */
-    line-height: initial;
-}
-`;
-        const styleSheet = document.createElement("style");
-        styleSheet.type = "text/css";
-        styleSheet.innerText = font_css;
-        document.head.appendChild(styleSheet);
-
-        const body = document.querySelector("body");
-        body.style.margin = 0;
-
-        document.querySelectorAll("pre").forEach((pre) => {
-            pre.style.lineHeight = 1.15;
-        });
-
-        const root = document.querySelector(".alectryon-standalone");
-        // root.style.fontFamily = "'Linux Libertine', 'Linux Libertine O'";
-
-        document.querySelectorAll(".alectryon-header").forEach((header) => {
-            header.style.display = "none";
-        });
-
-        document.querySelectorAll("h1").forEach((h1) => {
-            h1.style.marginBottom = 0;
-        });
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = "./screenshot.css";
+        document.head.appendChild(link);
     });
+
     options.script && await page.evaluate(options.script);
+
+    // Run delayed functions.  Some complex layouts can be influenced by the CSS
+    // tweaks above (most notably the RBT example), so we need to delay the
+    // layout until these CSS tweaks have been applied.
+    await page.evaluate(function() {
+        window.delayed && window.delayed.map(f => f());
+    });
+
+    // Make sure that any fonts needed by text revealed by `options.script` are
+    // actually loaded.
+    await page.evaluateHandle('document.fonts.ready');
 
     await page.pdf({ path: dst, printBackground: true,
                      width: '3.3in', ...pdfOptions });

@@ -37,7 +37,7 @@ snippets/%.rst.coq: snippets/%.rst
 snippets/%.svg: snippets/%.html
 	$(html2img) $< $@
 
-snippets/%.pdf: snippets/%.html snippets/%.screenshot.js snippets/screenshot-lib.js snippets/docutils_basic.css pdfcrop Makefile
+snippets/%.pdf: snippets/%.html snippets/%.screenshot.js snippets/screenshot-lib.js snippets/screenshot.css snippets/docutils_basic.css pdfcrop Makefile
 	./snippets/$*.screenshot.js $< $@
 	./pdfcrop $@ $@
 
