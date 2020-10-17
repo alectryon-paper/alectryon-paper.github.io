@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# Invoke with (cd ..; ./stdlib/plot_stdlib.py)
 
 import re
 import random
@@ -123,7 +122,8 @@ def rcParams(fontsize=10, **extra):
         "text.usetex": False,
         "figure.titleweight": 400,
         "savefig.bbox": "tight",
-        "savefig.pad_inches": 0.05
+        "savefig.pad_inches": 0.05,
+        'pdf.fonttype': 42 # https://tex.stackexchange.com/questions/18687/how-to-generate-pdf-without-any-type3-fonts
     })
 
     matplotlib.rcParams.update(**extra)
@@ -202,7 +202,7 @@ def plot1(summaries_by_compiler, files, ax):
 XLABEL = "Compilation time (seconds, 95% CI)"
 
 def plot_stdlib(summaries_by_compiler, files):
-    fig, ax = plt.subplots(1, 1, figsize=(3.2, 1.5))
+    fig, ax = plt.subplots(1, 1, figsize=(3.2, 2.0))
     legend_patches = plot1(summaries_by_compiler, files, ax)
     ax.set_xlabel(XLABEL)
     ax.legend(handles=legend_patches, loc="upper right")
@@ -210,7 +210,7 @@ def plot_stdlib(summaries_by_compiler, files):
     return fig
 
 def plot_breakdowns(summaries_by_compiler, files):
-    fig, axs = plt.subplots(len(files), 1, figsize=(3.2, 2.5))
+    fig, axs = plt.subplots(len(files), 1, figsize=(3.2, 3.25))
     ax, legend_patches = None, None
     for ax, f in zip(axs, files):
         legend_patches = plot1(summaries_by_compiler, [f], ax)
@@ -224,7 +224,7 @@ def plot_breakdowns(summaries_by_compiler, files):
 
 def plot_overheads(summaries_by_compiler):
     ratios = [r[0] for r in files_by_ratio(summaries_by_compiler, "alectryon-coqdoc", "coqc")[-1]]
-    fig, ax = plt.subplots(1, 1, figsize=(3.2, 0.8))
+    fig, ax = plt.subplots(1, 1, figsize=(3.2, 1.0))
     y = np.arange(0, len(ratios)) / len(ratios)
     # ax.hist(ratios, bins="knuth",
     #         cumulative=True, density=True, histtype='stepfilled',
@@ -233,8 +233,8 @@ def plot_overheads(summaries_by_compiler):
     plt.step(ratios, y, where='post', marker=None,
              solid_joinstyle="miter", linewidth=0.5, color=medium)
     ax.fill_between(ratios, y, color=light, linewidth=0)
-    ax.set_ylabel("Number of files")
-    ax.set_xlabel("Slowdown (alectryon-coqdoc / coqc)")
+    ax.set_ylabel("Files (cumulative)")
+    ax.set_xlabel("Slowdown factor (alectryon-coqdoc / coqc)")
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     nth95 = ratios[95 * len(ratios) // 100]
@@ -270,7 +270,7 @@ def read1(d, dir, compiler, kind):
         d[compiler] = summarize(group_by_fname(read(f)))
 
 def main():
-    rcParams(fontsize=8)
+    rcParams(fontsize=9)
     stdlib, breakdowns, full = {}, {}, {}
     # flocq = {}
     for compiler in COMPILERS:
