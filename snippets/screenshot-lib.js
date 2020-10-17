@@ -51,6 +51,10 @@ async function screenshot(src, dst, options={}, pdfOptions={}, launchOptions={})
     // Make sure that any fonts needed by text revealed by `options.script` are
     // actually loaded.
     await page.evaluateHandle('document.fonts.ready');
+    // Make sure that MathJax has rendered
+    await page.evaluateHandle(async function() {
+        window.MathJax && await MathJax.typesetPromise()
+    });
 
     await page.pdf({ path: dst, printBackground: true,
                      width: '3.3in', ...pdfOptions });
