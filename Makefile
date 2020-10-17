@@ -1,4 +1,5 @@
-alectryon := ./driver.py --copy-assets none
+alectryon_args := --copy-assets none --traceback
+alectryon := ./driver.py $(alectryon_args)
 export PYTHONPATH=$(shell dirname $(shell realpath $(shell which alectryon))):$$PYTHONPATH
 
 vfiles := $(wildcard snippets/*.v)
@@ -24,6 +25,9 @@ snippets/%.coqdoc.html: snippets/%.coqdoc.v
 
 snippets/%.plain.html: snippets/%.plain.v
 	$(alectryon) --frontend coq $< -o $@
+
+snippets/%.html: snippets/%.v snippets/%.driver.py
+	snippets/$*.driver.py $(alectryon_args) $< -o $@
 
 snippets/%.html: snippets/%.v
 	$(alectryon) $< -o $@
