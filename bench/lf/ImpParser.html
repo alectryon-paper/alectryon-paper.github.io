@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>ImpParser.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>ImpParser.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -296,14 +296,14 @@ Parse arithmetic expressions
   <span class="kr">match</span> steps <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
   | S steps&#39; =&gt;
-      TRY <span class="err">&#39;</span> (i, rest) &lt;- parseIdentifier xs ;;
+      TRY &#39; (i, rest) &lt;- parseIdentifier xs ;;
           SomeE (AId i, rest)
       OR
-      TRY <span class="err">&#39;</span> (n, rest) &lt;- parseNumber xs ;;
+      TRY &#39; (n, rest) &lt;- parseNumber xs ;;
           SomeE (ANum n, rest)
       OR
-      <span class="err">&#39;</span> (e, rest) &lt;- firstExpect <span class="s2">&quot;(&quot;</span> (parseSumExp steps&#39;) xs ;;
-      <span class="err">&#39;</span> (u, rest&#39;) &lt;- expect <span class="s2">&quot;)&quot;</span> rest ;;
+      &#39; (e, rest) &lt;- firstExpect <span class="s2">&quot;(&quot;</span> (parseSumExp steps&#39;) xs ;;
+      &#39; (u, rest&#39;) &lt;- expect <span class="s2">&quot;)&quot;</span> rest ;;
       SomeE (e,rest&#39;)
   <span class="kr">end</span>
 
@@ -312,8 +312,8 @@ Parse arithmetic expressions
   <span class="kr">match</span> steps <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
   | S steps&#39; =&gt;
-    <span class="err">&#39;</span> (e, rest) &lt;- parsePrimaryExp steps&#39; xs ;;
-    <span class="err">&#39;</span> (es, rest&#39;) &lt;- many (firstExpect <span class="s2">&quot;*&quot;</span> (parsePrimaryExp steps&#39;))
+    &#39; (e, rest) &lt;- parsePrimaryExp steps&#39; xs ;;
+    &#39; (es, rest&#39;) &lt;- many (firstExpect <span class="s2">&quot;*&quot;</span> (parsePrimaryExp steps&#39;))
                           steps&#39; rest ;;
     SomeE (fold_left AMult es e, rest&#39;)
   <span class="kr">end</span>
@@ -322,15 +322,15 @@ Parse arithmetic expressions
   <span class="kr">match</span> steps <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
   | S steps&#39; =&gt;
-    <span class="err">&#39;</span> (e, rest) &lt;- parseProductExp steps&#39; xs ;;
-    <span class="err">&#39;</span> (es, rest&#39;) &lt;-
+    &#39; (e, rest) &lt;- parseProductExp steps&#39; xs ;;
+    &#39; (es, rest&#39;) &lt;-
         many (<span class="kr">fun</span> <span class="nv">xs</span> =&gt;
-                TRY <span class="err">&#39;</span> (e,rest&#39;) &lt;-
+                TRY &#39; (e,rest&#39;) &lt;-
                     firstExpect <span class="s2">&quot;+&quot;</span>
                                 (parseProductExp steps&#39;) xs ;;
                     SomeE ( (true, e), rest&#39;)
                 OR
-                <span class="err">&#39;</span> (e, rest&#39;) &lt;-
+                &#39; (e, rest&#39;) &lt;-
                     firstExpect <span class="s2">&quot;-&quot;</span>
                                 (parseProductExp steps&#39;) xs ;;
                 SomeE ( (false, e), rest&#39;))
@@ -351,29 +351,29 @@ Parsing boolean expressions:
 <span class="kr">match</span> steps <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
   | S steps&#39; =&gt;
-     TRY <span class="err">&#39;</span> (u,rest) &lt;- expect <span class="s2">&quot;true&quot;</span> xs ;;
+     TRY &#39; (u,rest) &lt;- expect <span class="s2">&quot;true&quot;</span> xs ;;
          SomeE (BTrue,rest)
      OR
-     TRY <span class="err">&#39;</span> (u,rest) &lt;- expect <span class="s2">&quot;false&quot;</span> xs ;;
+     TRY &#39; (u,rest) &lt;- expect <span class="s2">&quot;false&quot;</span> xs ;;
          SomeE (BFalse,rest)
      OR
-     TRY <span class="err">&#39;</span> (e,rest) &lt;- firstExpect <span class="s2">&quot;~&quot;</span>
+     TRY &#39; (e,rest) &lt;- firstExpect <span class="s2">&quot;~&quot;</span>
                                    (parseAtomicExp steps&#39;)
                                    xs ;;
          SomeE (BNot e, rest)
      OR
-     TRY <span class="err">&#39;</span> (e,rest) &lt;- firstExpect <span class="s2">&quot;(&quot;</span>
+     TRY &#39; (e,rest) &lt;- firstExpect <span class="s2">&quot;(&quot;</span>
                                    (parseConjunctionExp steps&#39;)
                                    xs ;;
-         <span class="err">&#39;</span> (u,rest&#39;) &lt;- expect <span class="s2">&quot;)&quot;</span> rest ;;
+         &#39; (u,rest&#39;) &lt;- expect <span class="s2">&quot;)&quot;</span> rest ;;
          SomeE (e, rest&#39;)
      OR
-     <span class="err">&#39;</span> (e, rest) &lt;- parseProductExp steps&#39; xs ;;
-     TRY <span class="err">&#39;</span> (e&#39;, rest&#39;) &lt;- firstExpect <span class="s2">&quot;=&quot;</span>
+     &#39; (e, rest) &lt;- parseProductExp steps&#39; xs ;;
+     TRY &#39; (e&#39;, rest&#39;) &lt;- firstExpect <span class="s2">&quot;=&quot;</span>
                                   (parseAExp steps&#39;) rest ;;
          SomeE (BEq e e&#39;, rest&#39;)
      OR
-     TRY <span class="err">&#39;</span> (e&#39;, rest&#39;) &lt;- firstExpect <span class="s2">&quot;&lt;=&quot;</span>
+     TRY &#39; (e&#39;, rest&#39;) &lt;- firstExpect <span class="s2">&quot;&lt;=&quot;</span>
                                       (parseAExp steps&#39;) rest ;;
          SomeE (BLe e e&#39;, rest&#39;)
      OR
@@ -385,8 +385,8 @@ Parsing boolean expressions:
   <span class="kr">match</span> steps <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
   | S steps&#39; =&gt;
-    <span class="err">&#39;</span> (e, rest) &lt;- parseAtomicExp steps&#39; xs ;;
-    <span class="err">&#39;</span> (es, rest&#39;) &lt;- many (firstExpect <span class="s2">&quot;&amp;&amp;&quot;</span>
+    &#39; (e, rest) &lt;- parseAtomicExp steps&#39; xs ;;
+    &#39; (es, rest&#39;) &lt;- many (firstExpect <span class="s2">&quot;&amp;&amp;&quot;</span>
                (parseAtomicExp steps&#39;))
             steps&#39; rest ;;
     SomeE (fold_left BAnd es e, rest&#39;)
@@ -426,34 +426,34 @@ Parsing commands:
   <span class="kr">match</span> steps <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
   | S steps&#39; =&gt;
-    TRY <span class="err">&#39;</span> (u, rest) &lt;- expect <span class="s2">&quot;SKIP&quot;</span> xs ;;
+    TRY &#39; (u, rest) &lt;- expect <span class="s2">&quot;SKIP&quot;</span> xs ;;
         SomeE (SKIP%imp, rest)
     OR
-    TRY <span class="err">&#39;</span> (e,rest) &lt;-
+    TRY &#39; (e,rest) &lt;-
             firstExpect <span class="s2">&quot;TEST&quot;</span>
                         (parseBExp steps&#39;) xs ;;
-        <span class="err">&#39;</span> (c,rest&#39;) &lt;-
+        &#39; (c,rest&#39;) &lt;-
             firstExpect <span class="s2">&quot;THEN&quot;</span>
                         (parseSequencedCommand steps&#39;) rest ;;
-        <span class="err">&#39;</span> (c&#39;,rest&#39;&#39;) &lt;-
+        &#39; (c&#39;,rest&#39;&#39;) &lt;-
             firstExpect <span class="s2">&quot;ELSE&quot;</span>
                         (parseSequencedCommand steps&#39;) rest&#39; ;;
-        <span class="err">&#39;</span> (tt,rest&#39;&#39;&#39;) &lt;-
+        &#39; (tt,rest&#39;&#39;&#39;) &lt;-
             expect <span class="s2">&quot;END&quot;</span> rest&#39;&#39; ;;
        SomeE(TEST e THEN c ELSE c&#39; FI%imp, rest&#39;&#39;&#39;)
     OR
-    TRY <span class="err">&#39;</span> (e,rest) &lt;-
+    TRY &#39; (e,rest) &lt;-
             firstExpect <span class="s2">&quot;WHILE&quot;</span>
                         (parseBExp steps&#39;) xs ;;
-        <span class="err">&#39;</span> (c,rest&#39;) &lt;-
+        &#39; (c,rest&#39;) &lt;-
             firstExpect <span class="s2">&quot;DO&quot;</span>
                         (parseSequencedCommand steps&#39;) rest ;;
-        <span class="err">&#39;</span> (u,rest&#39;&#39;) &lt;-
+        &#39; (u,rest&#39;&#39;) &lt;-
             expect <span class="s2">&quot;END&quot;</span> rest&#39; ;;
         SomeE(WHILE e DO c END%imp, rest&#39;&#39;)
     OR
-    TRY <span class="err">&#39;</span> (i, rest) &lt;- parseIdentifier xs ;;
-        <span class="err">&#39;</span> (e, rest&#39;) &lt;- firstExpect <span class="s2">&quot;::=&quot;</span> (parseAExp steps&#39;) rest ;;
+    TRY &#39; (i, rest) &lt;- parseIdentifier xs ;;
+        &#39; (e, rest&#39;) &lt;- firstExpect <span class="s2">&quot;::=&quot;</span> (parseAExp steps&#39;) rest ;;
         SomeE ((i ::= e)%imp, rest&#39;)
     OR
         NoneE <span class="s2">&quot;Expecting a command&quot;</span>
@@ -464,8 +464,8 @@ Parsing commands:
   <span class="kr">match</span> steps <span class="kr">with</span>
   | <span class="mi">0</span> =&gt; NoneE <span class="s2">&quot;Too many recursive calls&quot;</span>
   | S steps&#39; =&gt;
-    <span class="err">&#39;</span> (c, rest) &lt;- parseSimpleCommand steps&#39; xs ;;
-    TRY <span class="err">&#39;</span> (c&#39;, rest&#39;) &lt;-
+    &#39; (c, rest) &lt;- parseSimpleCommand steps&#39; xs ;;
+    TRY &#39; (c&#39;, rest&#39;) &lt;-
             firstExpect <span class="s2">&quot;;;&quot;</span>
                         (parseSequencedCommand steps&#39;) rest ;;
         SomeE ((c ;; c&#39;)%imp, rest&#39;)

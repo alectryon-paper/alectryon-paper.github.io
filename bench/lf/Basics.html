@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Basics.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Basics.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -187,11 +187,9 @@ Having defined a function, we should check that it works on
     compound expression involving <span class="inlinecode"><span class="id" title="var">next_weekday</span></span>. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="Basics-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="Basics-v-chk0"><span class="highlight"><span class="kn">Compute</span> (next_weekday friday).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">= monday
 : day</span></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-wsp"><span class="highlight"><span class="c">(* ==&gt; monday : day *)</span>
-
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="Basics-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="Basics-v-chk1"><span class="highlight"><span class="kn">Compute</span> (next_weekday (next_weekday saturday)).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">= tuesday
-: day</span></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-wsp"><span class="highlight"><span class="c">(* ==&gt; tuesday : day *)</span></span></span></pre><div class="doc">
+: day</span></blockquote></div></div></small></span></pre><div class="doc">
 (We show Coq's responses in comments, but, if you have a
     computer handy, this would be an excellent moment to fire up the
     Coq interpreter under your favorite IDE -- either CoqIde or Proof
@@ -524,8 +522,7 @@ A single constructor with multiple parameters can be used
   | bits (b0 b1 b2 b3 : bit).</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="Basics-v-chk21" style="display: none" type="checkbox"><label class="coq-input" for="Basics-v-chk21"><span class="highlight"><span class="kn">Check</span> (bits B1 B0 B1 B0).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">bits B1 B0 B1 B0
-     : nybble</span></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-wsp"><span class="highlight"><span class="c">(* ==&gt; bits B1 B0 B1 B0 : nybble *)</span></span></span></pre><div class="doc">
+     : nybble</span></blockquote></div></div></small></span></pre><div class="doc">
 The <span class="inlinecode"><span class="id" title="var">bits</span></span> constructor acts as a wrapper for its contents.
     Unwrapping can be done by pattern-matching, as in the <span class="inlinecode"><span class="id" title="var">all_zero</span></span>
     function which tests a nybble to see if all its bits are O.

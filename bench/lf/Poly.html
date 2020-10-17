@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Poly.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Poly.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -980,8 +980,7 @@ In fact, the multiple-argument functions we have already
     seen are also examples of passing functions as data.  To see why,
     recall the type of <span class="inlinecode"><span class="id" title="var">plus</span></span>. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="Poly-v-chk59" style="display: none" type="checkbox"><label class="coq-input" for="Poly-v-chk59"><span class="highlight"><span class="kn">Check</span> plus.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">Nat.add
-     : nat -&gt; nat -&gt; nat</span></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-wsp"><span class="highlight"><span class="c">(* ==&gt; nat -&gt; nat -&gt; nat *)</span></span></span></pre><div class="doc">
+     : nat -&gt; nat -&gt; nat</span></blockquote></div></div></small></span></pre><div class="doc">
 Each <span class="inlinecode">→</span> in this expression is actually a <i>binary</i> operator
     on types.  This operator is <i>right-associative</i>, so the type of
     <span class="inlinecode"><span class="id" title="var">plus</span></span> is really a shorthand for <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">nat</span>)</span> -- i.e., it

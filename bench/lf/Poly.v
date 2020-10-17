@@ -905,7 +905,6 @@ Proof. reflexivity. Qed.
     recall the type of [plus]. *)
 
 Check plus. (* .unfold *)
-(* ==> nat -> nat -> nat *)
 
 (** Each [->] in this expression is actually a _binary_ operator
     on types.  This operator is _right-associative_, so the type of

@@ -37,11 +37,6 @@ From LF Require Export IndProp.
 (** Look again at the formal definition of the [even] property.  *)
 
 Print even. (* .unfold *)
-(* ==>
-  Inductive even : nat -> Prop :=
-    | ev_0 : even 0
-    | ev_SS : forall n, even n -> even (S (S n)).
-*)
 
 (** Suppose we introduce an alternative pronunciation of "[:]".
     Instead of "has type," we can say "is a proof of."  For example,
@@ -277,13 +272,8 @@ Show Proof.
 apply n. Defined.
 
 Print add1. (* .unfold *)
-(* ==>
-    add1 = fun n : nat => S n
-         : nat -> nat
-*)
 
 Compute add1 2. (* .unfold *)
-(* ==> 3 : nat *)
 
 (** Notice that we terminate the [Definition] with a [.] rather than
     with [:=] followed by a term.  This tells Coq to enter _proof

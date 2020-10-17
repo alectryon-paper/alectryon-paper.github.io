@@ -107,10 +107,8 @@ Definition next_weekday (d:day) : day :=
     compound expression involving [next_weekday]. *)
 
 Compute (next_weekday friday). (* .unfold *)
-(* ==> monday : day *)
 
 Compute (next_weekday (next_weekday saturday)). (* .unfold *)
-(* ==> tuesday : day *)
 
 (** (We show Coq's responses in comments, but, if you have a
     computer handy, this would be an excellent moment to fire up the
@@ -426,7 +424,6 @@ Inductive nybble : Type :=
   | bits (b0 b1 b2 b3 : bit).
 
 Check (bits B1 B0 B1 B0). (* .unfold *)
-(* ==> bits B1 B0 B1 B0 : nybble *)
 
 (** The [bits] constructor acts as a wrapper for its contents.
     Unwrapping can be done by pattern-matching, as in the [all_zero]
