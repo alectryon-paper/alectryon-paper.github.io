@@ -48,8 +48,7 @@ snippets/%.pdf: snippets/%.html snippets/screenshot.js snippets/screenshot-lib.j
 index.html: index.rst Makefile
 	./driver.py $< -o $@
 
-snippets/emacs.pdf: snippets/emacs.svg
-	svgo $<
+snippets/emacs-screenshot.pdf: snippets/emacs-screenshot.svg
 	svg2pdf $< $@
 
 gen_html_indices:
@@ -62,5 +61,4 @@ gen_html_indices:
 		-exec ./trees.sh {} \;
 
 clean:
-	echo $(objs)
 	rm -f $(objs) api.py.out
