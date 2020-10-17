@@ -67,5 +67,8 @@ gen_html_indices:
 		-not -path './bench/refman*' \
 		-exec ./trees.sh {} \;
 
+serve:
+	python3 -m http.server
+
 clean:
 	rm -f $(objs) api.py.out

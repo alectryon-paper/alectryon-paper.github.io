@@ -43,8 +43,11 @@ These examples are all shown in the paper:
 
 - Appendices:
 
-  + ``Qle-pairwise.rst`` (MathJax): `source <snippets/Qle-pairwise.rst>`__, `webpage <snippets/Qle-pairwise.html>`__
+  + ``life.v`` (MathJax): `source <snippets/life.v>`__, `webpage <snippets/life.html>`__
+  + ``rbt.v`` (MathJax): `source <snippets/rbt.v>`__, `webpage <snippets/rbt.html>`__
   + ``nsum-gauss.rst`` (MathJax): `source <snippets/nsum-gauss.rst>`__, `webpage <snippets/nsum-gauss.html>`__
+  + ``Qle-pairwise.rst`` (MathJax): `source <snippets/Qle-pairwise.rst>`__, `webpage <snippets/Qle-pairwise.html>`__
+  + ``udiv.v`` (Pretty-printing): `source <snippets/udiv.v>`__, `webpage <snippets/udiv.html>`__
   + ``rss.v`` (Plain-HTML output): `source <snippets/rss.rst>`__, `webpage <snippets/rss.html>`__
 
 - Short Coq files:
