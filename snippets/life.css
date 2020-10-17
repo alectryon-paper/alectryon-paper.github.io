@@ -1,0 +1,34 @@
+.conway-snapshot {
+    display: inline-block;
+    margin: 0.35rem 0.25rem 0.35rem 0.75rem;
+}
+
+.conway-snapshot svg {
+    vertical-align: middle;
+}
+
+.conway-snapshot::after {
+    width: 0;
+    display: inline-block;
+}
+
+.conway-snapshot:not(:last-child)::after {
+    content: ';';
+}
+
+.conway-snapshot:last-child::after {
+    content: " ";
+}
+
+.conway-wrapper {
+    text-align: center;
+}
+
+.conway-sequence {
+    display: inline-block;
+    margin-left: -0.5rem;
+}
+
+.conway-annot {
+    white-space: nowrap;
+}

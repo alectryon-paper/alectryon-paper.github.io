@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>life.v</title>
+<link rel="stylesheet" href="alectryon.css" type="text/css" />
+<link rel="stylesheet" href="docutils_basic.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.css" type="text/css" />
+<link rel="stylesheet" href="tango_subtle.min.css" type="text/css" />
+<script type="text/javascript" src="alectryon.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" />
+</head>
+<body>
+<div class="alectryon-root alectryon-standalone alectryon-centered"><div class="alectryon-header">Built with <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>, running <a href="https://coq.inria.fr/">Coq</a>+<a href="https://github.com/ejgallego/coq-serapi">SerAPI</a> v8.10.0+0.7.0. Coq sources are in this panel; goals and messages will appear in the other. Bubbles (<span class="alectryon-bubble"></span>) indicate interactive fragments: hover for details, tap to reveal contents. Use <kbd>Ctrl+↑</kbd> <kbd>Ctrl+↓</kbd> to navigate, <kbd>Ctrl+🖱️</kbd> to focus.</div><div class="document">
+
+
+<pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">blinker</span> := [[<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                       [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                       [<span class="mi">0</span>;<span class="mi">1</span>;<span class="mi">1</span>;<span class="mi">1</span>;<span class="mi">0</span>];
+                       [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                       [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>]].</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="life-v-chk0" style="display: none" type="checkbox"><label class="coq-input" for="life-v-chk0"><span class="highlight"><span class="kn">Compute</span> take <span class="mi">3</span> (iter conway_life blinker).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">= [[[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+   [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+   [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]]]
+: list (list (list bool))</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">bipole</span> := [[<span class="mi">1</span>;<span class="mi">1</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                      [<span class="mi">1</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                      [<span class="mi">0</span>;<span class="mi">1</span>;<span class="mi">0</span>;<span class="mi">1</span>;<span class="mi">0</span>];
+                      [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">1</span>];
+                      [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">1</span>;<span class="mi">1</span>]].</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="life-v-chk1" style="display: none" type="checkbox"><label class="coq-input" for="life-v-chk1"><span class="highlight"><span class="kn">Compute</span> take <span class="mi">3</span> (iter conway_life bipole).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">= [[[<span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+   [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>];
+   [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>]];
+  [[<span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>]];
+  [[<span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>]]]
+: list (list (list bool))</span></blockquote></div></div></small><span class="coq-wsp">
+</span></span><span class="coq-wsp"><span class="highlight">
+</span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">glider</span> := [[<span class="mi">0</span>;<span class="mi">1</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                      [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">1</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                      [<span class="mi">1</span>;<span class="mi">1</span>;<span class="mi">1</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                      [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>];
+                      [<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>;<span class="mi">0</span>]].</span></span><span class="coq-wsp">
+</span></span><span class="coq-sentence"><input checked="checked" class="coq-toggle" id="life-v-chk2" style="display: none" type="checkbox"><label class="coq-input" for="life-v-chk2"><span class="highlight"><span class="kn">Compute</span> take <span class="mi">9</span> (iter conway_life glider).</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-messages"><blockquote class="coq-message"><span class="highlight">= [[[<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+   [<span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+   [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">0</span>]];
+  [[<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">0</span>]; [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>];
+  [<span class="mi">0</span>; <span class="mi">0</span>; <span class="mi">1</span>; <span class="mi">1</span>; <span class="mi">1</span>]]]
+: list (list (list bool))</span></blockquote></div></div></small></span></pre><script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
+<link rel="stylesheet" href="life.css">
+<script type="text/javascript" src="life.js"></script>
+</div>
+</div></body>
+</html>
