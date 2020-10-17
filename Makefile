@@ -49,6 +49,9 @@ snippets/%.pdf: snippets/%.html snippets/screenshot.js snippets/screenshot-lib.j
 	./snippets/screenshot.js $< $@
 	./pdfcrop $@ $@
 
+snippets/%.nofonts.pdf: snippets/%.pdf
+	 gs -o $@ -dNoOutputFonts -sDEVICE=pdfwrite $<
+
 index.html: index.rst Makefile
 	./driver.py $< -o $@
 
