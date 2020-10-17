@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Defs.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Defs.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -101,35 +101,35 @@ COPYING file for more details.
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 <a name="lab1"></a><h1 class="section">Basic definitions: float and rounding property</h1>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Require Import</span> Raux.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">Def</span>.</span></span></span></pre><div class="doc">
 Definition of a floating-point number 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Record</span> <span class="nf">float</span> (<span class="nv">beta</span> : radix) := Float { Fnum : Z ; Fexp : Z }.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> Fnum {beta}.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> Fexp {beta}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Variable</span> <span class="nv">beta</span> : radix.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">F2R</span> (<span class="nv">f</span> : float beta) :=
   (IZR (Fnum f) * bpow beta (Fexp f))%R.</span></span></span></pre><div class="doc">
 Requirements on a rounding mode 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">round_pred_total</span> (<span class="nv">P</span> : R -&gt; R -&gt; <span class="kt">Prop</span>) :=
   <span class="kr">forall</span> <span class="nv">x</span>, <span class="kr">exists</span> <span class="nv">f</span>, P x f.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">round_pred_monotone</span> (<span class="nv">P</span> : R -&gt; R -&gt; <span class="kt">Prop</span>) :=
   <span class="kr">forall</span> <span class="nv">x</span> <span class="nv">y</span> <span class="nv">f</span> <span class="nv">g</span>, P x f -&gt; P y g -&gt; (x &lt;= y)%R -&gt; (f &lt;= g)%R.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">round_pred</span> (<span class="nv">P</span> : R -&gt; R -&gt; <span class="kt">Prop</span>) :=
   round_pred_total P /\
   round_pred_monotone P.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">Def</span>.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> Fnum {beta}.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> Fexp {beta}.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Arguments</span> F2R {beta}.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Section</span> <span class="nf">RND</span>.</span></span></span></pre><div class="doc">
 property of being a round toward -inf 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Rnd_DN_pt</span> (<span class="nv">F</span> : R -&gt; <span class="kt">Prop</span>) (<span class="nv">x</span> <span class="nv">f</span> : R) :=
@@ -147,17 +147,17 @@ property of being a round to nearest
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Rnd_N_pt</span> (<span class="nv">F</span> : R -&gt; <span class="kt">Prop</span>) (<span class="nv">x</span> <span class="nv">f</span> : R) :=
   F f /\
   <span class="kr">forall</span> <span class="nv">g</span> : R, F g -&gt; (Rabs (f - x) &lt;= Rabs (g - x))%R.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Rnd_NG_pt</span> (<span class="nv">F</span> : R -&gt; <span class="kt">Prop</span>) (<span class="nv">P</span> : R -&gt; R -&gt; <span class="kt">Prop</span>) (<span class="nv">x</span> <span class="nv">f</span> : R) :=
   Rnd_N_pt F x f /\
   ( P x f \/ <span class="kr">forall</span> <span class="nv">f2</span> : R, Rnd_N_pt F x f2 -&gt; f2 = f ).</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Rnd_NA_pt</span> (<span class="nv">F</span> : R -&gt; <span class="kt">Prop</span>) (<span class="nv">x</span> <span class="nv">f</span> : R) :=
   Rnd_N_pt F x f /\
   <span class="kr">forall</span> <span class="nv">f2</span> : R, Rnd_N_pt F x f2 -&gt; (Rabs f2 &lt;= Rabs f)%R.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">Rnd_N0_pt</span> (<span class="nv">F</span> : R -&gt; <span class="kt">Prop</span>) (<span class="nv">x</span> <span class="nv">f</span> : R) :=
   Rnd_N_pt F x f /\
   <span class="kr">forall</span> <span class="nv">f2</span> : R, Rnd_N_pt F x f2 -&gt; (Rabs f &lt;= Rabs f2)%R.</span></span><span class="coq-wsp">
-</span></span><span class="coq-nc"><span class="highlight">
+</span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">End</span> <span class="nf">RND</span>.</span></span></span></pre></article></body></html>
