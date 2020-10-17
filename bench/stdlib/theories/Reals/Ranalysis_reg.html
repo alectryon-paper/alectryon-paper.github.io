@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Ranalysis_reg.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Ranalysis_reg.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -114,25 +114,25 @@
 <span class="sd">(**********)</span>
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">intro_hyp_glob</span> trm :=
   <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
-    | (?X1 + ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> + <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (?X1 - ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> - <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (?X1 * ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> * <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (?X1 / ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> / <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X2) <span class="kr">in</span>
         <span class="kr">match goal with</span>
           | _:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derivable _) =&gt;
@@ -147,19 +147,19 @@
               [ <span class="nb">intro</span>; intro_hyp_glob X1; intro_hyp_glob X2 | <span class="kp">try</span> <span class="bp">assumption</span> ]
           | _ =&gt; <span class="kp">idtac</span>
         <span class="kr">end</span>
-    | (comp ?X1 ?X2) =&gt;
+    | (comp <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         |  |- (continuity _) =&gt; intro_hyp_glob X1; intro_hyp_glob X2
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (- ?X1)%F =&gt;
+    | (- <span class="nl">?X1</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable _) =&gt; intro_hyp_glob X1
         |  |- (continuity _) =&gt; intro_hyp_glob X1
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (/ ?X1)%F =&gt;
+    | (/ <span class="nl">?X1</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
         <span class="kr">match goal with</span>
           | _:(<span class="kr">forall</span> <span class="nv">x0</span>:R, aux x0 &lt;&gt; <span class="mi">0</span>) |- (derivable _) =&gt;
@@ -185,7 +185,7 @@
     | (fct_cte _) =&gt; <span class="kp">idtac</span>
     | (pow_fct _) =&gt; <span class="kp">idtac</span>
     | Rabs =&gt; <span class="kp">idtac</span>
-    | ?X1 =&gt;
+    | <span class="nl">?X1</span> =&gt;
       <span class="kr">let</span> <span class="nv">p</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
       <span class="kr">let</span> <span class="nv">HYPPD</span> := <span class="kp">fresh</span> <span class="s2">&quot;HYPPD&quot;</span> <span class="kr">in</span>
         <span class="kr">match goal with</span>
@@ -210,7 +210,7 @@
 <span class="sd">(**********)</span>
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">intro_hyp_pt</span> trm pt :=
   <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
-    | (?X1 + ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> + <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
         |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
@@ -218,7 +218,7 @@
           intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (?X1 - ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> - <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
         |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
@@ -226,7 +226,7 @@
           intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (?X1 * ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> * <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
         |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
@@ -234,7 +234,7 @@
           intro_hyp_pt X1 pt; intro_hyp_pt X2 pt
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (?X1 / ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> / <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X2) <span class="kr">in</span>
         <span class="kr">match goal with</span>
           | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (derivable_pt _ _) =&gt;
@@ -260,7 +260,7 @@
               [ <span class="nb">intro</span>; intro_hyp_pt X1 pt; intro_hyp_pt X2 pt | <span class="kp">try</span> <span class="bp">assumption</span> ]
           | _ =&gt; <span class="kp">idtac</span>
         <span class="kr">end</span>
-    | (comp ?X1 ?X2) =&gt;
+    | (comp <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable_pt _ _) =&gt;
           <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
@@ -273,14 +273,14 @@
             (intro_hyp_pt X1 pt_f1; intro_hyp_pt X2 pt)
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (- ?X1)%F =&gt;
+    | (- <span class="nl">?X1</span>)%F =&gt;
       <span class="kr">match goal with</span>
         |  |- (derivable_pt _ _) =&gt; intro_hyp_pt X1 pt
         |  |- (continuity_pt _ _) =&gt; intro_hyp_pt X1 pt
         |  |- (derive_pt _ _ _ = _) =&gt; intro_hyp_pt X1 pt
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | (/ ?X1)%F =&gt;
+    | (/ <span class="nl">?X1</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
         <span class="kr">match goal with</span>
           | _:(aux pt &lt;&gt; <span class="mi">0</span>) |- (derivable_pt _ _) =&gt;
@@ -327,7 +327,7 @@
           <span class="nb">cut</span> (pt &lt;&gt; <span class="mi">0</span>); [ <span class="nb">intro</span> | <span class="kp">try</span> <span class="bp">assumption</span> ]
         | _ =&gt; <span class="kp">idtac</span>
       <span class="kr">end</span>
-    | ?X1 =&gt;
+    | <span class="nl">?X1</span> =&gt;
       <span class="kr">let</span> <span class="nv">p</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
       <span class="kr">let</span> <span class="nv">HYPPD</span> := <span class="kp">fresh</span> <span class="s2">&quot;HYPPD&quot;</span> <span class="kr">in</span>
         <span class="kr">match goal with</span>
@@ -361,7 +361,7 @@
 
   <span class="c">(* fonctions de base *)</span>
       <span class="nb">apply</span> derivable_pt_Rsqr
-    |  |- (derivable_pt id ?X1) =&gt; <span class="nb">apply</span> (derivable_pt_id X1)
+    |  |- (derivable_pt id <span class="nl">?X1</span>) =&gt; <span class="nb">apply</span> (derivable_pt_id X1)
     |  |- (derivable_pt (fct_cte _) _) =&gt; <span class="nb">apply</span> derivable_pt_const
     |  |- (derivable_pt sin _) =&gt; <span class="nb">apply</span> derivable_pt_sin
     |  |- (derivable_pt cos _) =&gt; <span class="nb">apply</span> derivable_pt_cos
@@ -370,35 +370,35 @@
     |  |- (derivable_pt exp _) =&gt; <span class="nb">apply</span> derivable_pt_exp
     |  |- (derivable_pt (pow_fct _) _) =&gt;
       <span class="nb">unfold</span> pow_fct <span class="kr">in</span> |- *; <span class="nb">apply</span> derivable_pt_pow
-    |  |- (derivable_pt sqrt ?X1) =&gt;
+    |  |- (derivable_pt sqrt <span class="nl">?X1</span>) =&gt;
       <span class="nb">apply</span> (derivable_pt_sqrt X1);
         <span class="bp">assumption</span> ||
           <span class="nb">unfold</span> plus_fct, minus_fct, opp_fct, mult_fct, div_fct, inv_fct,
             comp, id, fct_cte, pow_fct <span class="kr">in</span> |- *
-    |  |- (derivable_pt Rabs ?X1) =&gt;
+    |  |- (derivable_pt Rabs <span class="nl">?X1</span>) =&gt;
       <span class="nb">apply</span> (Rderivable_pt_abs X1);
         <span class="bp">assumption</span> ||
           <span class="nb">unfold</span> plus_fct, minus_fct, opp_fct, mult_fct, div_fct, inv_fct,
             comp, id, fct_cte, pow_fct <span class="kr">in</span> |- *
         <span class="c">(* regles de differentiabilite *)</span>
         <span class="c">(* PLUS *)</span>
-    |  |- (derivable_pt (?X1 + ?X2) ?X3) =&gt;
+    |  |- (derivable_pt (<span class="nl">?X1</span> + <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (derivable_pt_plus X1 X2 X3); is_diff_pt
        <span class="c">(* MOINS *)</span>
-    |  |- (derivable_pt (?X1 - ?X2) ?X3) =&gt;
+    |  |- (derivable_pt (<span class="nl">?X1</span> - <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (derivable_pt_minus X1 X2 X3); is_diff_pt
        <span class="c">(* OPPOSE *)</span>
-    |  |- (derivable_pt (- ?X1) ?X2) =&gt;
+    |  |- (derivable_pt (- <span class="nl">?X1</span>) <span class="nl">?X2</span>) =&gt;
       <span class="nb">apply</span> (derivable_pt_opp X1 X2);
         is_diff_pt
        <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
-    |  |- (derivable_pt (mult_real_fct ?X1 ?X2) ?X3) =&gt;
+    |  |- (derivable_pt (mult_real_fct <span class="nl">?X1</span> <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (derivable_pt_scal X2 X1 X3); is_diff_pt
        <span class="c">(* MULTIPLICATION *)</span>
-    |  |- (derivable_pt (?X1 * ?X2) ?X3) =&gt;
+    |  |- (derivable_pt (<span class="nl">?X1</span> * <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (derivable_pt_mult X1 X2 X3); is_diff_pt
        <span class="c">(* DIVISION *)</span>
-    |  |- (derivable_pt (?X1 / ?X2) ?X3) =&gt;
+    |  |- (derivable_pt (<span class="nl">?X1</span> / <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (derivable_pt_div X1 X2 X3);
         [ is_diff_pt
           | is_diff_pt
@@ -406,7 +406,7 @@
             <span class="bp">assumption</span> ||
               <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
                 comp, pow_fct, id, fct_cte <span class="kr">in</span> |- * ]
-    |  |- (derivable_pt (/ ?X1) ?X2) =&gt;
+    |  |- (derivable_pt (/ <span class="nl">?X1</span>) <span class="nl">?X2</span>) =&gt;
 
        <span class="c">(* INVERSION *)</span>
       <span class="nb">apply</span> (derivable_pt_inv X1 X2);
@@ -414,13 +414,13 @@
           <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
             comp, pow_fct, id, fct_cte <span class="kr">in</span> |- *
           | is_diff_pt ]
-    |  |- (derivable_pt (comp ?X1 ?X2) ?X3) =&gt;
+    |  |- (derivable_pt (comp <span class="nl">?X1</span> <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
 
        <span class="c">(* COMPOSITION *)</span>
       <span class="nb">apply</span> (derivable_pt_comp X2 X1 X3); is_diff_pt
-    | _:(derivable_pt ?X1 ?X2) |- (derivable_pt ?X1 ?X2) =&gt;
+    | _:(derivable_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) |- (derivable_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="bp">assumption</span>
-    | _:(derivable ?X1) |- (derivable_pt ?X1 ?X2) =&gt;
+    | _:(derivable <span class="nl">?X1</span>) |- (derivable_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">HypDDPT</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypDDPT&quot;</span> <span class="kr">in</span>
       <span class="nb">cut</span> (derivable X1); [ <span class="nb">intro</span> HypDDPT; <span class="nb">apply</span> HypDDPT | <span class="bp">assumption</span> ]
     |  |- (<span class="kt">True</span> -&gt; derivable_pt _ _) =&gt;
@@ -450,23 +450,23 @@
         <span class="nb">apply</span> derivable_pow
         <span class="c">(* regles de differentiabilite *)</span>
         <span class="c">(* PLUS *)</span>
-    |  |- (derivable (?X1 + ?X2)) =&gt;
+    |  |- (derivable (<span class="nl">?X1</span> + <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (derivable_plus X1 X2); is_diff_glob
        <span class="c">(* MOINS *)</span>
-    |  |- (derivable (?X1 - ?X2)) =&gt;
+    |  |- (derivable (<span class="nl">?X1</span> - <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (derivable_minus X1 X2); is_diff_glob
        <span class="c">(* OPPOSE *)</span>
-    |  |- (derivable (- ?X1)) =&gt;
+    |  |- (derivable (- <span class="nl">?X1</span>)) =&gt;
       <span class="nb">apply</span> (derivable_opp X1);
         is_diff_glob
        <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
-    |  |- (derivable (mult_real_fct ?X1 ?X2)) =&gt;
+    |  |- (derivable (mult_real_fct <span class="nl">?X1</span> <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (derivable_scal X2 X1); is_diff_glob
        <span class="c">(* MULTIPLICATION *)</span>
-    |  |- (derivable (?X1 * ?X2)) =&gt;
+    |  |- (derivable (<span class="nl">?X1</span> * <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (derivable_mult X1 X2); is_diff_glob
        <span class="c">(* DIVISION *)</span>
-    |  |- (derivable (?X1 / ?X2)) =&gt;
+    |  |- (derivable (<span class="nl">?X1</span> / <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (derivable_div X1 X2);
         [ is_diff_glob
           | is_diff_glob
@@ -474,7 +474,7 @@
             <span class="bp">assumption</span> ||
               <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
                 id, fct_cte, comp, pow_fct <span class="kr">in</span> |- * ]
-    |  |- (derivable (/ ?X1)) =&gt;
+    |  |- (derivable (/ <span class="nl">?X1</span>)) =&gt;
 
        <span class="c">(* INVERSION *)</span>
       <span class="nb">apply</span> (derivable_inv X1);
@@ -489,9 +489,9 @@
       <span class="nb">unfold</span> derivable <span class="kr">in</span> |- *; <span class="nb">intro</span>; <span class="kp">try</span> is_diff_pt
     |  |- (derivable (comp Rabs _)) =&gt;
       <span class="nb">unfold</span> derivable <span class="kr">in</span> |- *; <span class="nb">intro</span>; <span class="kp">try</span> is_diff_pt
-    |  |- (derivable (comp ?X1 ?X2)) =&gt;
+    |  |- (derivable (comp <span class="nl">?X1</span> <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (derivable_comp X2 X1); is_diff_glob
-    | _:(derivable ?X1) |- (derivable ?X1) =&gt; <span class="bp">assumption</span>
+    | _:(derivable <span class="nl">?X1</span>) |- (derivable <span class="nl">?X1</span>) =&gt; <span class="bp">assumption</span>
     |  |- (<span class="kt">True</span> -&gt; derivable _) =&gt;
       <span class="kr">let</span> <span class="nv">HypTruE</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypTruE&quot;</span> <span class="kr">in</span>
       <span class="nb">intro</span> HypTruE; <span class="nb">clear</span> HypTruE; is_diff_glob
@@ -508,7 +508,7 @@
 
        <span class="c">(* fonctions de base *)</span>
       <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_Rsqr
-    |  |- (continuity_pt id ?X1) =&gt;
+    |  |- (continuity_pt id <span class="nl">?X1</span>) =&gt;
       <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> (derivable_pt_id X1)
     |  |- (continuity_pt (fct_cte _) _) =&gt;
       <span class="nb">apply</span> derivable_continuous_pt; <span class="nb">apply</span> derivable_pt_const
@@ -525,32 +525,32 @@
     |  |- (continuity_pt (pow_fct _) _) =&gt;
       <span class="nb">unfold</span> pow_fct <span class="kr">in</span> |- *; <span class="nb">apply</span> derivable_continuous_pt;
         <span class="nb">apply</span> derivable_pt_pow
-    |  |- (continuity_pt sqrt ?X1) =&gt;
+    |  |- (continuity_pt sqrt <span class="nl">?X1</span>) =&gt;
       <span class="nb">apply</span> continuity_pt_sqrt;
         <span class="bp">assumption</span> ||
           <span class="nb">unfold</span> plus_fct, minus_fct, opp_fct, mult_fct, div_fct, inv_fct,
             comp, id, fct_cte, pow_fct <span class="kr">in</span> |- *
-    |  |- (continuity_pt Rabs ?X1) =&gt;
+    |  |- (continuity_pt Rabs <span class="nl">?X1</span>) =&gt;
       <span class="nb">apply</span> (Rcontinuity_abs X1)
        <span class="c">(* regles de differentiabilite *)</span>
        <span class="c">(* PLUS *)</span>
-    |  |- (continuity_pt (?X1 + ?X2) ?X3) =&gt;
+    |  |- (continuity_pt (<span class="nl">?X1</span> + <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (continuity_pt_plus X1 X2 X3); is_cont_pt
        <span class="c">(* MOINS *)</span>
-    |  |- (continuity_pt (?X1 - ?X2) ?X3) =&gt;
+    |  |- (continuity_pt (<span class="nl">?X1</span> - <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (continuity_pt_minus X1 X2 X3); is_cont_pt
        <span class="c">(* OPPOSE *)</span>
-    |  |- (continuity_pt (- ?X1) ?X2) =&gt;
+    |  |- (continuity_pt (- <span class="nl">?X1</span>) <span class="nl">?X2</span>) =&gt;
       <span class="nb">apply</span> (continuity_pt_opp X1 X2);
         is_cont_pt
        <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
-    |  |- (continuity_pt (mult_real_fct ?X1 ?X2) ?X3) =&gt;
+    |  |- (continuity_pt (mult_real_fct <span class="nl">?X1</span> <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (continuity_pt_scal X2 X1 X3); is_cont_pt
        <span class="c">(* MULTIPLICATION *)</span>
-    |  |- (continuity_pt (?X1 * ?X2) ?X3) =&gt;
+    |  |- (continuity_pt (<span class="nl">?X1</span> * <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (continuity_pt_mult X1 X2 X3); is_cont_pt
        <span class="c">(* DIVISION *)</span>
-    |  |- (continuity_pt (?X1 / ?X2) ?X3) =&gt;
+    |  |- (continuity_pt (<span class="nl">?X1</span> / <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
       <span class="nb">apply</span> (continuity_pt_div X1 X2 X3);
         [ is_cont_pt
           | is_cont_pt
@@ -558,7 +558,7 @@
             <span class="bp">assumption</span> ||
               <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
                 comp, id, fct_cte, pow_fct <span class="kr">in</span> |- * ]
-    |  |- (continuity_pt (/ ?X1) ?X2) =&gt;
+    |  |- (continuity_pt (/ <span class="nl">?X1</span>) <span class="nl">?X2</span>) =&gt;
 
        <span class="c">(* INVERSION *)</span>
       <span class="nb">apply</span> (continuity_pt_inv X1 X2);
@@ -566,18 +566,18 @@
           | <span class="bp">assumption</span> ||
             <span class="nb">unfold</span> plus_fct, mult_fct, div_fct, minus_fct, opp_fct, inv_fct,
               comp, id, fct_cte, pow_fct <span class="kr">in</span> |- * ]
-    |  |- (continuity_pt (comp ?X1 ?X2) ?X3) =&gt;
+    |  |- (continuity_pt (comp <span class="nl">?X1</span> <span class="nl">?X2</span>) <span class="nl">?X3</span>) =&gt;
 
        <span class="c">(* COMPOSITION *)</span>
       <span class="nb">apply</span> (continuity_pt_comp X2 X1 X3); is_cont_pt
-    | _:(continuity_pt ?X1 ?X2) |- (continuity_pt ?X1 ?X2) =&gt;
+    | _:(continuity_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) |- (continuity_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="bp">assumption</span>
-    | _:(continuity ?X1) |- (continuity_pt ?X1 ?X2) =&gt;
+    | _:(continuity <span class="nl">?X1</span>) |- (continuity_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">HypDDPT</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypDDPT&quot;</span> <span class="kr">in</span>
       <span class="nb">cut</span> (continuity X1); [ <span class="nb">intro</span> HypDDPT; <span class="nb">apply</span> HypDDPT | <span class="bp">assumption</span> ]
-    | _:(derivable_pt ?X1 ?X2) |- (continuity_pt ?X1 ?X2) =&gt;
+    | _:(derivable_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) |- (continuity_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="nb">apply</span> derivable_continuous_pt; <span class="bp">assumption</span>
-    | _:(derivable ?X1) |- (continuity_pt ?X1 ?X2) =&gt;
+    | _:(derivable <span class="nl">?X1</span>) |- (continuity_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">HypDDPT</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypDDPT&quot;</span> <span class="kr">in</span>
       <span class="nb">cut</span> (continuity X1);
         [ <span class="nb">intro</span> HypDDPT; <span class="nb">apply</span> HypDDPT
@@ -614,30 +614,30 @@
       <span class="nb">apply</span> Rcontinuity_abs
        <span class="c">(* regles de continuite *)</span>
        <span class="c">(* PLUS *)</span>
-    |  |- (continuity (?X1 + ?X2)) =&gt;
+    |  |- (continuity (<span class="nl">?X1</span> + <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (continuity_plus X1 X2);
         <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
             <span class="c">(* MOINS *)</span>
-    |  |- (continuity (?X1 - ?X2)) =&gt;
+    |  |- (continuity (<span class="nl">?X1</span> - <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (continuity_minus X1 X2);
         <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
             <span class="c">(* OPPOSE *)</span>
-    |  |- (continuity (- ?X1)) =&gt;
+    |  |- (continuity (- <span class="nl">?X1</span>)) =&gt;
       <span class="nb">apply</span> (continuity_opp X1); <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
                                       <span class="c">(* INVERSE *)</span>
-    |  |- (continuity (/ ?X1)) =&gt;
+    |  |- (continuity (/ <span class="nl">?X1</span>)) =&gt;
       <span class="nb">apply</span> (continuity_inv X1);
         <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
             <span class="c">(* MULTIPLICATION PAR UN SCALAIRE *)</span>
-    |  |- (continuity (mult_real_fct ?X1 ?X2)) =&gt;
+    |  |- (continuity (mult_real_fct <span class="nl">?X1</span> <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (continuity_scal X2 X1);
         <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
             <span class="c">(* MULTIPLICATION *)</span>
-    |  |- (continuity (?X1 * ?X2)) =&gt;
+    |  |- (continuity (<span class="nl">?X1</span> * <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (continuity_mult X1 X2);
         <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
             <span class="c">(* DIVISION *)</span>
-    |  |- (continuity (?X1 / ?X2)) =&gt;
+    |  |- (continuity (<span class="nl">?X1</span> / <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (continuity_div X1 X2);
         [ <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
           | <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
@@ -649,13 +649,13 @@
 
        <span class="c">(* COMPOSITION *)</span>
       <span class="nb">unfold</span> continuity_pt <span class="kr">in</span> |- *; <span class="nb">intro</span>; <span class="kp">try</span> is_cont_pt
-    |  |- (continuity (comp ?X1 ?X2)) =&gt;
+    |  |- (continuity (comp <span class="nl">?X1</span> <span class="nl">?X2</span>)) =&gt;
       <span class="nb">apply</span> (continuity_comp X2 X1); <span class="kp">try</span> is_cont_glob || <span class="bp">assumption</span>
-    | _:(continuity ?X1) |- (continuity ?X1) =&gt; <span class="bp">assumption</span>
+    | _:(continuity <span class="nl">?X1</span>) |- (continuity <span class="nl">?X1</span>) =&gt; <span class="bp">assumption</span>
     |  |- (<span class="kt">True</span> -&gt; continuity _) =&gt;
       <span class="kr">let</span> <span class="nv">HypTruE</span> := <span class="kp">fresh</span> <span class="s2">&quot;HypTruE&quot;</span> <span class="kr">in</span>
       <span class="nb">intro</span> HypTruE; <span class="nb">clear</span> HypTruE; is_cont_glob
-    | _:(derivable ?X1) |- (continuity ?X1) =&gt;
+    | _:(derivable <span class="nl">?X1</span>) |- (continuity <span class="nl">?X1</span>) =&gt;
       <span class="nb">apply</span> derivable_continuous; <span class="bp">assumption</span>
     | _ =&gt;
       <span class="kp">try</span>
@@ -666,125 +666,125 @@
 <span class="sd">(**********)</span>
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">rew_term</span> trm :=
   <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
-    | (?X1 + ?X2) =&gt;
+    | (<span class="nl">?X1</span> + <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
-          | (fct_cte ?X3) =&gt;
+          | (fct_cte <span class="nl">?X3</span>) =&gt;
             <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
-              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 + X4))
+              | (fct_cte <span class="nl">?X4</span>) =&gt; <span class="kp">constr</span>:(fct_cte (X3 + X4))
               | _ =&gt; <span class="kp">constr</span>:((p1 + p2)%F)
             <span class="kr">end</span>
           | _ =&gt; <span class="kp">constr</span>:((p1 + p2)%F)
         <span class="kr">end</span>
-    | (?X1 - ?X2) =&gt;
+    | (<span class="nl">?X1</span> - <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
-          | (fct_cte ?X3) =&gt;
+          | (fct_cte <span class="nl">?X3</span>) =&gt;
             <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
-              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 - X4))
+              | (fct_cte <span class="nl">?X4</span>) =&gt; <span class="kp">constr</span>:(fct_cte (X3 - X4))
               | _ =&gt; <span class="kp">constr</span>:((p1 - p2)%F)
             <span class="kr">end</span>
           | _ =&gt; <span class="kp">constr</span>:((p1 - p2)%F)
         <span class="kr">end</span>
-    | (?X1 / ?X2) =&gt;
+    | (<span class="nl">?X1</span> / <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
-          | (fct_cte ?X3) =&gt;
+          | (fct_cte <span class="nl">?X3</span>) =&gt;
             <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
-              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 / X4))
+              | (fct_cte <span class="nl">?X4</span>) =&gt; <span class="kp">constr</span>:(fct_cte (X3 / X4))
               | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
             <span class="kr">end</span>
           | _ =&gt;
             <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
-              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:((p1 * fct_cte (/ X4))%F)
+              | (fct_cte <span class="nl">?X4</span>) =&gt; <span class="kp">constr</span>:((p1 * fct_cte (/ X4))%F)
               | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
             <span class="kr">end</span>
         <span class="kr">end</span>
-    | (?X1 * / ?X2) =&gt;
+    | (<span class="nl">?X1</span> * / <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
-          | (fct_cte ?X3) =&gt;
+          | (fct_cte <span class="nl">?X3</span>) =&gt;
             <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
-              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 / X4))
+              | (fct_cte <span class="nl">?X4</span>) =&gt; <span class="kp">constr</span>:(fct_cte (X3 / X4))
               | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
             <span class="kr">end</span>
           | _ =&gt;
             <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
-              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:((p1 * fct_cte (/ X4))%F)
+              | (fct_cte <span class="nl">?X4</span>) =&gt; <span class="kp">constr</span>:((p1 * fct_cte (/ X4))%F)
               | _ =&gt; <span class="kp">constr</span>:((p1 / p2)%F)
             <span class="kr">end</span>
         <span class="kr">end</span>
-    | (?X1 * ?X2) =&gt;
+    | (<span class="nl">?X1</span> * <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := rew_term X1 <span class="kr">with</span> p2 := rew_term X2 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p1) <span class="kr">with</span>
-          | (fct_cte ?X3) =&gt;
+          | (fct_cte <span class="nl">?X3</span>) =&gt;
             <span class="kr">match</span> <span class="kp">constr</span>:(p2) <span class="kr">with</span>
-              | (fct_cte ?X4) =&gt; <span class="kp">constr</span>:(fct_cte (X3 * X4))
+              | (fct_cte <span class="nl">?X4</span>) =&gt; <span class="kp">constr</span>:(fct_cte (X3 * X4))
               | _ =&gt; <span class="kp">constr</span>:((p1 * p2)%F)
             <span class="kr">end</span>
           | _ =&gt; <span class="kp">constr</span>:((p1 * p2)%F)
         <span class="kr">end</span>
-    | (- ?X1) =&gt;
+    | (- <span class="nl">?X1</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p</span> := rew_term X1 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
-          | (fct_cte ?X2) =&gt; <span class="kp">constr</span>:(fct_cte (- X2))
+          | (fct_cte <span class="nl">?X2</span>) =&gt; <span class="kp">constr</span>:(fct_cte (- X2))
           | _ =&gt; <span class="kp">constr</span>:((- p)%F)
         <span class="kr">end</span>
-    | (/ ?X1) =&gt;
+    | (/ <span class="nl">?X1</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p</span> := rew_term X1 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
-          | (fct_cte ?X2) =&gt; <span class="kp">constr</span>:(fct_cte (/ X2))
+          | (fct_cte <span class="nl">?X2</span>) =&gt; <span class="kp">constr</span>:(fct_cte (/ X2))
           | _ =&gt; <span class="kp">constr</span>:((/ p)%F)
         <span class="kr">end</span>
-    | (?X1 AppVar) =&gt; <span class="kp">constr</span>:(X1)
-    | (?X1 ?X2) =&gt;
+    | (<span class="nl">?X1</span> AppVar) =&gt; <span class="kp">constr</span>:(X1)
+    | (<span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p</span> := rew_term X2 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
-          | (fct_cte ?X3) =&gt; <span class="kp">constr</span>:(fct_cte (X1 X3))
+          | (fct_cte <span class="nl">?X3</span>) =&gt; <span class="kp">constr</span>:(fct_cte (X1 X3))
           | _ =&gt; <span class="kp">constr</span>:(comp X1 p)
         <span class="kr">end</span>
     | AppVar =&gt; <span class="kp">constr</span>:(id)
-    | (AppVar ^ ?X1) =&gt; <span class="kp">constr</span>:(pow_fct X1)
-    | (?X1 ^ ?X2) =&gt;
+    | (AppVar ^ <span class="nl">?X1</span>) =&gt; <span class="kp">constr</span>:(pow_fct X1)
+    | (<span class="nl">?X1</span> ^ <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">p</span> := rew_term X1 <span class="kr">in</span>
         <span class="kr">match</span> <span class="kp">constr</span>:(p) <span class="kr">with</span>
-          | (fct_cte ?X3) =&gt; <span class="kp">constr</span>:(fct_cte (pow_fct X2 X3))
+          | (fct_cte <span class="nl">?X3</span>) =&gt; <span class="kp">constr</span>:(fct_cte (pow_fct X2 X3))
           | _ =&gt; <span class="kp">constr</span>:(comp (pow_fct X2) p)
         <span class="kr">end</span>
-    | ?X1 =&gt; <span class="kp">constr</span>:(fct_cte X1)
+    | <span class="nl">?X1</span> =&gt; <span class="kp">constr</span>:(fct_cte X1)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 <span class="sd">(**********)</span>
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">deriv_proof</span> trm pt :=
   <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
-    | (?X1 + ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> + <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
         <span class="kp">constr</span>:(derivable_pt_plus X1 X2 pt p1 p2)
-    | (?X1 - ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> - <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
         <span class="kp">constr</span>:(derivable_pt_minus X1 X2 pt p1 p2)
-    | (?X1 * ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> * <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
         <span class="kp">constr</span>:(derivable_pt_mult X1 X2 pt p1 p2)
-    | (?X1 / ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> / <span class="nl">?X2</span>)%F =&gt;
       <span class="kr">match goal with</span>
-        | id:(?X2 pt &lt;&gt; <span class="mi">0</span>) |- _ =&gt;
+        | id:(<span class="nl">?X2</span> pt &lt;&gt; <span class="mi">0</span>) |- _ =&gt;
           <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
             <span class="kp">constr</span>:(derivable_pt_div X1 X2 pt p1 p2 id)
         | _ =&gt; <span class="kp">constr</span>:(<span class="kt">False</span>)
       <span class="kr">end</span>
-    | (/ ?X1)%F =&gt;
+    | (/ <span class="nl">?X1</span>)%F =&gt;
       <span class="kr">match goal with</span>
-        | id:(?X1 pt &lt;&gt; <span class="mi">0</span>) |- _ =&gt;
+        | id:(<span class="nl">?X1</span> pt &lt;&gt; <span class="mi">0</span>) |- _ =&gt;
           <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">in</span>
             <span class="kp">constr</span>:(derivable_pt_inv X1 pt p1 id)
         | _ =&gt; <span class="kp">constr</span>:(<span class="kt">False</span>)
       <span class="kr">end</span>
-    | (comp ?X1 ?X2) =&gt;
+    | (comp <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
         <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt_f1 <span class="kr">with</span> p2 := deriv_proof X2 pt <span class="kr">in</span>
           <span class="kp">constr</span>:(derivable_pt_comp X2 X1 pt p2 p1)
-    | (- ?X1)%F =&gt;
+    | (- <span class="nl">?X1</span>)%F =&gt;
       <span class="kr">let</span> <span class="nv">p1</span> := deriv_proof X1 pt <span class="kr">in</span>
         <span class="kp">constr</span>:(derivable_pt_opp X1 pt p1)
     | sin =&gt; <span class="kp">constr</span>:(derivable_pt_sin pt)
@@ -799,8 +799,8 @@
         | id:(<span class="mi">0</span> &lt; pt) |- _ =&gt; <span class="kp">constr</span>:(derivable_pt_sqrt pt id)
         | _ =&gt; <span class="kp">constr</span>:(<span class="kt">False</span>)
       <span class="kr">end</span>
-    | (fct_cte ?X1) =&gt; <span class="kp">constr</span>:(derivable_pt_const X1 pt)
-    | ?X1 =&gt;
+    | (fct_cte <span class="nl">?X1</span>) =&gt; <span class="kp">constr</span>:(derivable_pt_const X1 pt)
+    | <span class="nl">?X1</span> =&gt;
       <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
         <span class="kr">match goal with</span>
           | id:(derivable_pt aux pt) |- _ =&gt; <span class="kp">constr</span>:(id)
@@ -812,25 +812,25 @@
 <span class="sd">(**********)</span>
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">simplify_derive</span> trm pt :=
   <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
-    | (?X1 + ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> + <span class="nl">?X2</span>)%F =&gt;
       <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_plus; simplify_derive X1 pt;
         simplify_derive X2 pt
-    | (?X1 - ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> - <span class="nl">?X2</span>)%F =&gt;
       <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_minus; simplify_derive X1 pt;
         simplify_derive X2 pt
-    | (?X1 * ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> * <span class="nl">?X2</span>)%F =&gt;
       <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_mult; simplify_derive X1 pt;
         simplify_derive X2 pt
-    | (?X1 / ?X2)%F =&gt;
+    | (<span class="nl">?X1</span> / <span class="nl">?X2</span>)%F =&gt;
       <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_div; simplify_derive X1 pt; simplify_derive X2 pt
-    | (comp ?X1 ?X2) =&gt;
+    | (comp <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">pt_f1</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X2 pt) <span class="kr">in</span>
         (<span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_comp; simplify_derive X1 pt_f1;
           simplify_derive X2 pt)
-    | (- ?X1)%F =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_opp; simplify_derive X1 pt
-    | (/ ?X1)%F =&gt;
+    | (- <span class="nl">?X1</span>)%F =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_opp; simplify_derive X1 pt
+    | (/ <span class="nl">?X1</span>)%F =&gt;
       <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_inv; simplify_derive X1 pt
-    | (fct_cte ?X1) =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_const
+    | (fct_cte <span class="nl">?X1</span>) =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_const
     | id =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_id
     | sin =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_sin
     | cos =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_cos
@@ -839,13 +839,13 @@
     | exp =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_exp
     | Rsqr =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_Rsqr
     | sqrt =&gt; <span class="kp">try</span> <span class="nb">rewrite</span> derive_pt_sqrt
-    | ?X1 =&gt;
+    | <span class="nl">?X1</span> =&gt;
       <span class="kr">let</span> <span class="nv">aux</span> := <span class="kp">constr</span>:(X1) <span class="kr">in</span>
         <span class="kr">match goal with</span>
-          | id:(derive_pt aux pt ?X2 = _),H:(derivable aux) |- _ =&gt;
+          | id:(derive_pt aux pt <span class="nl">?X2</span> = _),H:(derivable aux) |- _ =&gt;
             <span class="kp">try</span> <span class="nb">replace</span> (derive_pt aux pt (H pt)) <span class="kr">with</span> (derive_pt aux pt X2);
               [ <span class="nb">rewrite</span> id | <span class="nb">apply</span> pr_nu ]
-          | id:(derive_pt aux pt ?X2 = _),H:(derivable_pt aux pt) |- _ =&gt;
+          | id:(derive_pt aux pt <span class="nl">?X2</span> = _),H:(derivable_pt aux pt) |- _ =&gt;
             <span class="kp">try</span> <span class="nb">replace</span> (derive_pt aux pt H) <span class="kr">with</span> (derive_pt aux pt X2);
               [ <span class="nb">rewrite</span> id | <span class="nb">apply</span> pr_nu ]
           | _ =&gt; <span class="kp">idtac</span>
@@ -856,27 +856,27 @@
 <span class="sd">(**********)</span>
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">reg</span> :=
   <span class="kr">match goal with</span>
-    |  |- (derivable_pt ?X1 ?X2) =&gt;
+    |  |- (derivable_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
         <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
           (intro_hyp_pt aux X2;
             <span class="kp">try</span> (<span class="nb">change</span> (derivable_pt aux X2) <span class="kr">in</span> |- *; is_diff_pt) || is_diff_pt)
-    |  |- (derivable ?X1) =&gt;
+    |  |- (derivable <span class="nl">?X1</span>) =&gt;
       <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
         <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
           (intro_hyp_glob aux;
             <span class="kp">try</span> (<span class="nb">change</span> (derivable aux) <span class="kr">in</span> |- *; is_diff_glob) || is_diff_glob)
-    |  |- (continuity ?X1) =&gt;
+    |  |- (continuity <span class="nl">?X1</span>) =&gt;
       <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
         <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
           (intro_hyp_glob aux;
             <span class="kp">try</span> (<span class="nb">change</span> (continuity aux) <span class="kr">in</span> |- *; is_cont_glob) || is_cont_glob)
-    |  |- (continuity_pt ?X1 ?X2) =&gt;
+    |  |- (continuity_pt <span class="nl">?X1</span> <span class="nl">?X2</span>) =&gt;
       <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
         <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
           (intro_hyp_pt aux X2;
             <span class="kp">try</span> (<span class="nb">change</span> (continuity_pt aux X2) <span class="kr">in</span> |- *; is_cont_pt) || is_cont_pt)
-    |  |- (derive_pt ?X1 ?X2 ?X3 = ?X4) =&gt;
+    |  |- (derive_pt <span class="nl">?X1</span> <span class="nl">?X2</span> <span class="nl">?X3</span> = <span class="nl">?X4</span>) =&gt;
       <span class="kr">let</span> <span class="nv">trm</span> := <span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> (X1 AppVar) <span class="kr">in</span>
       <span class="kr">let</span> <span class="nv">aux</span> := rew_term trm <span class="kr">in</span>
       intro_hyp_pt aux X2;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Byte.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Byte.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -682,7 +682,7 @@ S
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kp">all</span>: <span class="kp">repeat</span> <span class="kr">match goal with</span>
                 | _ =&gt; <span class="bp">reflexivity</span>
                 | _ =&gt; <span class="kp">progress</span> <span class="nb">subst</span>
-                | [ H : Some ?a = Some ?b |- _ ] =&gt; <span class="nb">assert</span> (a = b) <span class="bp">by</span> <span class="nb">refine</span> <span class="kr">match</span> H <span class="kr">with</span> eq_refl =&gt; eq_refl <span class="kr">end</span>; <span class="nb">clear</span> H
+                | [ H : Some <span class="nl">?a</span> = Some <span class="nl">?b</span> |- _ ] =&gt; <span class="nb">assert</span> (a = b) <span class="bp">by</span> <span class="nb">refine</span> <span class="kr">match</span> H <span class="kr">with</span> eq_refl =&gt; eq_refl <span class="kr">end</span>; <span class="nb">clear</span> H
                 | [ H : None = Some _ |- _ ] =&gt; <span class="kp">solve</span> [ <span class="nb">inversion</span> H ]
                 <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
@@ -1254,11 +1254,11 @@ of_nat x = None &lt;-&gt; <span class="mi">255</span> &lt; x</span></div></block
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Byte-v-chk125" style="display: none" type="checkbox"><label class="coq-input" for="Byte-v-chk125"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">x</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">N</span></span></span></div><div class="goal-hyp"><span class="hyp-names">y</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">byte</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">of_N x = Some y -&gt; to_N y = x</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">cbv</span> [of_N];
       <span class="kp">repeat</span> <span class="kr">match goal with</span>
-             | [ |- <span class="kp">context</span>[<span class="kr">match</span> ?x <span class="kr">with</span> _ =&gt; _ <span class="kr">end</span>] ] =&gt; <span class="nb">is_var</span> x; <span class="nb">destruct</span> x
+             | [ |- <span class="kp">context</span>[<span class="kr">match</span> <span class="nl">?x</span> <span class="kr">with</span> _ =&gt; _ <span class="kr">end</span>] ] =&gt; <span class="nb">is_var</span> x; <span class="nb">destruct</span> x
              | _ =&gt; <span class="nb">intro</span>
              | _ =&gt; <span class="bp">reflexivity</span>
              | _ =&gt; <span class="kp">progress</span> <span class="nb">subst</span>
-             | [ H : Some ?a = Some ?b |- _ ] =&gt; <span class="nb">assert</span> (a = b) <span class="bp">by</span> <span class="nb">refine</span> <span class="kr">match</span> H <span class="kr">with</span> eq_refl =&gt; eq_refl <span class="kr">end</span>; <span class="nb">clear</span> H
+             | [ H : Some <span class="nl">?a</span> = Some <span class="nl">?b</span> |- _ ] =&gt; <span class="nb">assert</span> (a = b) <span class="bp">by</span> <span class="nb">refine</span> <span class="kr">match</span> H <span class="kr">with</span> eq_refl =&gt; eq_refl <span class="kr">end</span>; <span class="nb">clear</span> H
              | [ H : None = Some _ |- _ ] =&gt; <span class="kp">solve</span> [ <span class="nb">inversion</span> H ]
              <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
@@ -1272,7 +1272,7 @@ of_nat x = None &lt;-&gt; <span class="mi">255</span> &lt; x</span></div></block
 (<span class="kr">if</span> x &lt;=? <span class="mi">255</span> <span class="kr">then</span> Some x <span class="kr">else</span> None)</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">cbv</span> [of_N];
       <span class="kp">repeat</span> <span class="kr">match goal with</span>
-             | [ |- <span class="kp">context</span>[<span class="kr">match</span> ?x <span class="kr">with</span> _ =&gt; _ <span class="kr">end</span>] ] =&gt; <span class="nb">is_var</span> x; <span class="nb">destruct</span> x
+             | [ |- <span class="kp">context</span>[<span class="kr">match</span> <span class="nl">?x</span> <span class="kr">with</span> _ =&gt; _ <span class="kr">end</span>] ] =&gt; <span class="nb">is_var</span> x; <span class="nb">destruct</span> x
              <span class="kr">end</span>;
       <span class="bp">reflexivity</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">

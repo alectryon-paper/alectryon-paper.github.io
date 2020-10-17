@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>OrdersTac.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>OrdersTac.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -176,7 +176,7 @@ Transitivity rules : first, a generic formulation, then instances
 </span></span><span class="coq-sentence"><input class="coq-toggle" id="OrdersTac-v-chk10" style="display: none" type="checkbox"><label class="coq-input" for="OrdersTac-v-chk10"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> (<span class="nv">o</span> <span class="nv">o&#39;</span> : ord) (<span class="nv">x</span> <span class="nv">y</span> <span class="nv">z</span> : t),
 # o x y -&gt; # o&#39; y z -&gt; # (o + o&#39;) x z</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">destruct</span> o, o&#39;; <span class="nb">simpl</span>; <span class="nb">intros</span> x y z;
-<span class="nb">rewrite</span> ?P.le_lteq; <span class="nb">intuition</span> <span class="nb">auto</span>;
+<span class="nb">rewrite</span> <span class="nl">?P</span>.le_lteq; <span class="nb">intuition</span> <span class="nb">auto</span>;
 subst_eqns; <span class="nb">eauto using</span> (StrictOrder_Transitive x y z) <span class="kr">with</span> *.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
@@ -253,8 +253,8 @@ Goal preparation : We turn all negative hyps into positive ones
   for convenience (i.e. cope with the mess left by intuition). 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">order_prepare</span> :=
  <span class="kr">match goal with</span>
- | H : ?A -&gt; <span class="kt">False</span> |- _ =&gt; <span class="nb">change</span> (~A) <span class="kr">in</span> H; order_prepare
- | H : ~(?R ?x ?y) |- _ =&gt;
+ | H : <span class="nl">?A</span> -&gt; <span class="kt">False</span> |- _ =&gt; <span class="nb">change</span> (~A) <span class="kr">in</span> H; order_prepare
+ | H : ~(<span class="nl">?R</span> <span class="nl">?x</span> <span class="nl">?y</span>) |- _ =&gt;
    <span class="kr">match</span> R <span class="kr">with</span>
    | eq =&gt; <span class="kp">fail</span> <span class="mi">1</span> <span class="c">(* if already using [eq], we leave it this ways *)</span>
    | _ =&gt; (<span class="nb">change</span> (~x==y) <span class="kr">in</span> H ||
@@ -262,7 +262,7 @@ Goal preparation : We turn all negative hyps into positive ones
            <span class="nb">apply</span> not_ge_lt <span class="kr">in</span> H ||
            <span class="nb">clear</span> H || <span class="kp">fail</span> <span class="mi">1</span>); order_prepare
    <span class="kr">end</span>
- | H : ?R ?x ?y |- _ =&gt;
+ | H : <span class="nl">?R</span> <span class="nl">?x</span> <span class="nl">?y</span> |- _ =&gt;
    <span class="kr">match</span> R <span class="kr">with</span>
    | eq =&gt; <span class="kp">fail</span> <span class="mi">1</span>
    | lt =&gt; <span class="kp">fail</span> <span class="mi">1</span>
@@ -273,7 +273,7 @@ Goal preparation : We turn all negative hyps into positive ones
            <span class="nb">clear</span> H || <span class="kp">fail</span> <span class="mi">1</span>); order_prepare
    <span class="kr">end</span>
  | |- ~ _ =&gt; <span class="nb">intro</span>; order_prepare
- | |- _ ?x ?x =&gt;
+ | |- _ <span class="nl">?x</span> <span class="nl">?x</span> =&gt;
    <span class="bp">exact</span> (eq_refl x) || <span class="bp">exact</span> (le_refl x) || <span class="nb">exfalso</span>
  | _ =&gt;
    (<span class="nb">apply</span> not_neq_eq; <span class="nb">intro</span>) ||
@@ -284,37 +284,37 @@ We now try to prove False from the various <span class="inlinecode">&lt;</span> 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">order_loop</span> :=
  <span class="kr">match goal with</span>
  <span class="c">(* First, successful situations *)</span>
- | H : ?x &lt; ?x |- _ =&gt; <span class="bp">exact</span> (lt_irrefl H)
- | H : ~ ?x == ?x |- _ =&gt; <span class="bp">exact</span> (H (eq_refl x))
+ | H : <span class="nl">?x</span> &lt; <span class="nl">?x</span> |- _ =&gt; <span class="bp">exact</span> (lt_irrefl H)
+ | H : ~ <span class="nl">?x</span> == <span class="nl">?x</span> |- _ =&gt; <span class="bp">exact</span> (H (eq_refl x))
  <span class="c">(* Second, useless hyps *)</span>
- | H : ?x &lt;= ?x |- _ =&gt; <span class="nb">clear</span> H; order_loop
+ | H : <span class="nl">?x</span> &lt;= <span class="nl">?x</span> |- _ =&gt; <span class="nb">clear</span> H; order_loop
  <span class="c">(* Third, we eliminate equalities *)</span>
- | H : ?x == ?y |- _ =&gt; order_eq x y H; order_loop
+ | H : <span class="nl">?x</span> == <span class="nl">?y</span> |- _ =&gt; order_eq x y H; order_loop
  <span class="c">(* Simultaneous le and ge is eq *)</span>
- | H1 : ?x &lt;= ?y, H2 : ?y &lt;= ?x |- _ =&gt;
+ | H1 : <span class="nl">?x</span> &lt;= <span class="nl">?y</span>, H2 : <span class="nl">?y</span> &lt;= <span class="nl">?x</span> |- _ =&gt;
      <span class="nb">generalize</span> (le_antisym H1 H2); <span class="nb">clear</span> H1 H2; <span class="nb">intro</span>; order_loop
  <span class="c">(* Simultaneous le and ~eq is lt *)</span>
- | H1: ?x &lt;= ?y, H2: ~ ?x == ?y |- _ =&gt;
+ | H1: <span class="nl">?x</span> &lt;= <span class="nl">?y</span>, H2: ~ <span class="nl">?x</span> == <span class="nl">?y</span> |- _ =&gt;
      <span class="nb">generalize</span> (le_neq_lt H1 H2); <span class="nb">clear</span> H1 H2; <span class="nb">intro</span>; order_loop
- | H1: ?x &lt;= ?y, H2: ~ ?y == ?x |- _ =&gt;
+ | H1: <span class="nl">?x</span> &lt;= <span class="nl">?y</span>, H2: ~ <span class="nl">?y</span> == <span class="nl">?x</span> |- _ =&gt;
      <span class="nb">generalize</span> (le_neq_lt H1 (neq_sym H2)); <span class="nb">clear</span> H1 H2; <span class="nb">intro</span>; order_loop
  <span class="c">(* Transitivity of lt and le *)</span>
- | H1 : ?x &lt; ?y, H2 : ?y &lt; ?z |- _ =&gt;
+ | H1 : <span class="nl">?x</span> &lt; <span class="nl">?y</span>, H2 : <span class="nl">?y</span> &lt; <span class="nl">?z</span> |- _ =&gt;
     <span class="kr">match goal with</span>
       | H : x &lt; z |- _ =&gt; <span class="kp">fail</span> <span class="mi">1</span>
       | _ =&gt; <span class="nb">generalize</span> (lt_trans H1 H2); <span class="nb">intro</span>; order_loop
     <span class="kr">end</span>
- | H1 : ?x &lt;= ?y, H2 : ?y &lt; ?z |- _ =&gt;
+ | H1 : <span class="nl">?x</span> &lt;= <span class="nl">?y</span>, H2 : <span class="nl">?y</span> &lt; <span class="nl">?z</span> |- _ =&gt;
     <span class="kr">match goal with</span>
       | H : x &lt; z |- _ =&gt; <span class="kp">fail</span> <span class="mi">1</span>
       | _ =&gt; <span class="nb">generalize</span> (le_lt_trans H1 H2); <span class="nb">intro</span>; order_loop
     <span class="kr">end</span>
- | H1 : ?x &lt; ?y, H2 : ?y &lt;= ?z |- _ =&gt;
+ | H1 : <span class="nl">?x</span> &lt; <span class="nl">?y</span>, H2 : <span class="nl">?y</span> &lt;= <span class="nl">?z</span> |- _ =&gt;
     <span class="kr">match goal with</span>
       | H : x &lt; z |- _ =&gt; <span class="kp">fail</span> <span class="mi">1</span>
       | _ =&gt; <span class="nb">generalize</span> (lt_le_trans H1 H2); <span class="nb">intro</span>; order_loop
     <span class="kr">end</span>
- | H1 : ?x &lt;= ?y, H2 : ?y &lt;= ?z |- _ =&gt;
+ | H1 : <span class="nl">?x</span> &lt;= <span class="nl">?y</span>, H2 : <span class="nl">?y</span> &lt;= <span class="nl">?z</span> |- _ =&gt;
     <span class="kr">match goal with</span>
       | H : x &lt;= z |- _ =&gt; <span class="kp">fail</span> <span class="mi">1</span>
       | _ =&gt; <span class="nb">generalize</span> (le_trans H1 H2); <span class="nb">intro</span>; order_loop

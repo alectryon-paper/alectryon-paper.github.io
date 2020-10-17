@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>FMapFullAVL.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>FMapFullAVL.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -289,7 +289,7 @@ height (bal l x e r) == max (height l) (height r) + <span class="mi">1</span></s
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">omega_bal</span> := <span class="kr">match goal with</span>
-  | H:avl ?l, H&#39;:avl ?r |- <span class="kp">context</span> [ bal ?l ?x ?e ?r ] =&gt;
+  | H:avl <span class="nl">?l</span>, H&#39;:avl <span class="nl">?r</span> |- <span class="kp">context</span> [ bal <span class="nl">?l</span> <span class="nl">?x</span> <span class="nl">?e</span> <span class="nl">?r</span> ] =&gt;
      <span class="nb">generalize</span> (bal_height_1 x e H H&#39;) (bal_height_2 x e H H&#39;);
      omega_max
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">

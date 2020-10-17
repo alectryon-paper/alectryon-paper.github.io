@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>ListTactics.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>ListTactics.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -89,7 +89,7 @@
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_fold_right</span> fcons fnil l :=
   <span class="kr">match</span> l <span class="kr">with</span>
-  | ?x :: ?tl =&gt; fcons x <span class="kp">ltac</span>:(list_fold_right fcons fnil tl)
+  | <span class="nl">?x</span> :: <span class="nl">?tl</span> =&gt; fcons x <span class="kp">ltac</span>:(list_fold_right fcons fnil tl)
   | nil =&gt; fnil
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
@@ -98,7 +98,7 @@
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">lazy_list_fold_right</span> fcons fnil l :=
   <span class="kr">let</span> <span class="nv">f</span> :=
     <span class="kr">match</span> l <span class="kr">with</span>
-    | ?x :: ?tl =&gt;
+    | <span class="nl">?x</span> :: <span class="nl">?tl</span> =&gt;
          <span class="kr">fun</span> <span class="nv">_</span> =&gt;
          fcons x <span class="kp">ltac</span>:(<span class="kr">fun</span> <span class="nv">_</span> =&gt; lazy_list_fold_right fcons fnil tl)
     | nil =&gt; <span class="kr">fun</span> <span class="nv">_</span> =&gt; fnil()
@@ -107,19 +107,19 @@
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_fold_left</span> fcons fnil l :=
   <span class="kr">match</span> l <span class="kr">with</span>
-  | ?x :: ?tl =&gt; list_fold_left fcons <span class="kp">ltac</span>:(fcons x fnil) tl
+  | <span class="nl">?x</span> :: <span class="nl">?tl</span> =&gt; list_fold_left fcons <span class="kp">ltac</span>:(fcons x fnil) tl
   | nil =&gt; fnil
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_iter</span> f l :=
   <span class="kr">match</span> l <span class="kr">with</span>
-  | ?x :: ?tl =&gt; f x; list_iter f tl
+  | <span class="nl">?x</span> :: <span class="nl">?tl</span> =&gt; f x; list_iter f tl
   | nil =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">list_iter_gen</span> seq f l :=
   <span class="kr">match</span> l <span class="kr">with</span>
-  | ?x :: ?tl =&gt;
+  | <span class="nl">?x</span> :: <span class="nl">?tl</span> =&gt;
       <span class="kr">let</span> <span class="nv">t1</span> <span class="nv">_</span> := f x <span class="kr">in</span>
       <span class="kr">let</span> <span class="nv">t2</span> <span class="nv">_</span> := list_iter_gen seq f tl <span class="kr">in</span>
       seq t1 t2
@@ -130,7 +130,7 @@
  <span class="kr">match</span> l <span class="kr">with</span>
  | nil      =&gt; <span class="kp">constr</span>:(a::nil)
  | a :: _   =&gt; l
- | ?x :: ?l =&gt; <span class="kr">let</span> <span class="nv">l&#39;</span> := AddFvTail a l <span class="kr">in</span> <span class="kp">constr</span>:(x::l&#39;)
+ | <span class="nl">?x</span> :: <span class="nl">?l</span> =&gt; <span class="kr">let</span> <span class="nv">l&#39;</span> := AddFvTail a l <span class="kr">in</span> <span class="kp">constr</span>:(x::l&#39;)
  <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">Find_at</span> a l :=
@@ -138,13 +138,13 @@
    <span class="kr">match</span> l <span class="kr">with</span>
    | nil     =&gt; <span class="kp">fail</span> <span class="mi">100</span> <span class="s2">&quot;anomaly: Find_at&quot;</span>
    | a :: _  =&gt; <span class="kp">eval</span> <span class="nb">compute</span> <span class="kr">in</span> n
-   | _ :: ?l =&gt; find (Pos.succ n) l
+   | _ :: <span class="nl">?l</span> =&gt; find (Pos.succ n) l
    <span class="kr">end</span>
  <span class="kr">in</span> find <span class="mi">1</span>%positive l.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">check_is_list</span> t :=
   <span class="kr">match</span> t <span class="kr">with</span>
-  | _ :: ?l =&gt; check_is_list l
+  | _ :: <span class="nl">?l</span> =&gt; check_is_list l
   | nil     =&gt; <span class="kp">idtac</span>
   | _       =&gt; <span class="kp">fail</span> <span class="mi">100</span> <span class="s2">&quot;anomaly: failed to build a canonical list&quot;</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">

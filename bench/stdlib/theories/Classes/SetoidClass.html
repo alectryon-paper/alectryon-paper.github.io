@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>SetoidClass.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>SetoidClass.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -138,12 +138,12 @@ Subset objects should be first coerced to their underlying type, but that notati
 Use the <span class="inlinecode"><span class="id" title="var">clsubstitute</span></span> command which substitutes an equality in every hypothesis. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clsubst</span> H :=
   <span class="kr">lazymatch</span> <span class="kp">type of</span> H <span class="kr">with</span>
-    ?x == ?y =&gt; substitute H ; <span class="nb">clear</span> H x
+    <span class="nl">?x</span> == <span class="nl">?y</span> =&gt; substitute H ; <span class="nb">clear</span> H x
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clsubst_nofail</span> :=
   <span class="kr">match goal with</span>
-    | [ H : ?x == ?y |- _ ] =&gt; clsubst H ; clsubst_nofail
+    | [ H : <span class="nl">?x</span> == <span class="nl">?y</span> |- _ ] =&gt; clsubst H ; clsubst_nofail
     | _ =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 <span class="inlinecode"><span class="id" title="tactic">subst</span>×</span> will try its best at substituting every equality in the goal. 
@@ -171,17 +171,17 @@ x == y -&gt; y =/= z -&gt; x =/= z</span></div></blockquote></div></div></small>
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoid_simplify_one</span> :=
   <span class="kr">match goal with</span>
-    | [ H : (?x == ?x)%type |- _ ] =&gt; <span class="nb">clear</span> H
-    | [ H : (?x == ?y)%type |- _ ] =&gt; clsubst H
-    | [ |- (?x =/= ?y)%type ] =&gt; <span class="kr">let</span> <span class="nv">name</span>:=<span class="kp">fresh</span> <span class="s2">&quot;Hneq&quot;</span> <span class="kr">in</span> <span class="nb">intro</span> name
+    | [ H : (<span class="nl">?x</span> == <span class="nl">?x</span>)%type |- _ ] =&gt; <span class="nb">clear</span> H
+    | [ H : (<span class="nl">?x</span> == <span class="nl">?y</span>)%type |- _ ] =&gt; clsubst H
+    | [ |- (<span class="nl">?x</span> =/= <span class="nl">?y</span>)%type ] =&gt; <span class="kr">let</span> <span class="nv">name</span>:=<span class="kp">fresh</span> <span class="s2">&quot;Hneq&quot;</span> <span class="kr">in</span> <span class="nb">intro</span> name
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoid_simplify</span> := <span class="kp">repeat</span> setoid_simplify_one.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoidify_tac</span> :=
   <span class="kr">match goal with</span>
-    | [ s : Setoid ?A, H : ?R ?x ?y |- _ ] =&gt; <span class="nb">change</span> R <span class="kr">with</span> (@equiv A R s) <span class="kr">in</span> H
-    | [ s : Setoid ?A |- <span class="kp">context</span> C [ ?R ?x ?y ] ] =&gt; <span class="nb">change</span> (R x y) <span class="kr">with</span> (@equiv A R s x y)
+    | [ s : Setoid <span class="nl">?A</span>, H : <span class="nl">?R</span> <span class="nl">?x</span> <span class="nl">?y</span> |- _ ] =&gt; <span class="nb">change</span> R <span class="kr">with</span> (@equiv A R s) <span class="kr">in</span> H
+    | [ s : Setoid <span class="nl">?A</span> |- <span class="kp">context</span> C [ <span class="nl">?R</span> <span class="nl">?x</span> <span class="nl">?y</span> ] ] =&gt; <span class="nb">change</span> (R x y) <span class="kr">with</span> (@equiv A R s x y)
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">setoidify</span> := <span class="kp">repeat</span> setoidify_tac.</span></span></span></pre><div class="doc">

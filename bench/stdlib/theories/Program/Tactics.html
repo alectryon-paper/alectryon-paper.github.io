@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Tactics.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Tactics.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -87,15 +87,15 @@ This module implements various tactics used to simplify the goals produced by Pr
    which are also generally useful. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --></pre><div class="doc">
 Debugging tactics to show the goal during evaluation. 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_goal</span> := <span class="kr">match goal with</span> [ |- ?T ] =&gt; <span class="kp">idtac</span> T <span class="kr">end</span>.</span></span><span class="coq-wsp">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_goal</span> := <span class="kr">match goal with</span> [ |- <span class="nl">?T</span> ] =&gt; <span class="kp">idtac</span> T <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_hyp</span> id :=
   <span class="kr">match goal with</span>
-    | [ H := ?b : ?T |- _ ] =&gt;
+    | [ H := <span class="nl">?b</span> : <span class="nl">?T</span> |- _ ] =&gt;
       <span class="kr">match</span> H <span class="kr">with</span>
         | id =&gt; <span class="kp">idtac</span> id <span class="s2">&quot;:=&quot;</span> b <span class="s2">&quot;:&quot;</span> T
       <span class="kr">end</span>
-    | [ H : ?T |- _ ] =&gt;
+    | [ H : <span class="nl">?T</span> |- _ ] =&gt;
       <span class="kr">match</span> H <span class="kr">with</span>
         | id =&gt; <span class="kp">idtac</span> id  <span class="s2">&quot;:&quot;</span>  T
       <span class="kr">end</span>
@@ -103,13 +103,13 @@ Debugging tactics to show the goal during evaluation.
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">show_hyps</span> :=
   <span class="kp">try</span> <span class="kr">match reverse goal with</span>
-        | [ H : ?T |- _ ] =&gt; show_hyp H ; <span class="kp">fail</span>
+        | [ H : <span class="nl">?T</span> |- _ ] =&gt; show_hyp H ; <span class="kp">fail</span>
       <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 The <span class="inlinecode"><span class="id" title="tactic">do</span></span> tactic but using a Coq-side nat. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">do_nat</span> n tac :=
   <span class="kr">match</span> n <span class="kr">with</span>
     | <span class="mi">0</span> =&gt; <span class="kp">idtac</span>
-    | S ?n&#39; =&gt; tac ; do_nat n&#39; tac
+    | S <span class="nl">?n&#39;</span> =&gt; tac ; do_nat n&#39; tac
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 Do something on the last hypothesis, or fail 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_last_hyp</span> tac :=
@@ -134,11 +134,11 @@ Destruct one existential package, keeping the name of the hypothesis for the fir
   <span class="kr">in</span>
     <span class="kr">match goal with</span>
       | [H : (ex _) |- _] =&gt; tac H
-      | [H : (sig ?P) |- _ ] =&gt; tac H
-      | [H : (sigT ?P) |- _ ] =&gt; tacT H
+      | [H : (sig <span class="nl">?P</span>) |- _ ] =&gt; tac H
+      | [H : (sigT <span class="nl">?P</span>) |- _ ] =&gt; tacT H
       | [H : (ex2 _ _) |- _] =&gt; tac2 H
-      | [H : (sig2 ?P _) |- _ ] =&gt; tac2 H
-      | [H : (sigT2 ?P _) |- _ ] =&gt; tacT2 H
+      | [H : (sig2 <span class="nl">?P</span> _) |- _ ] =&gt; tac2 H
+      | [H : (sigT2 <span class="nl">?P</span> _) |- _ ] =&gt; tacT2 H
     <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 Repeateadly destruct existentials. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">destruct_exists</span> := <span class="kp">repeat</span> (destruct_one_ex).</span></span></span></pre><div class="doc">
@@ -152,7 +152,7 @@ Destruct a disjunction keeping its name in both subgoals.
 Discriminate that also work on a <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">≠</span> <span class="inlinecode"><span class="id" title="var">x</span></span> hypothesis. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">discriminates</span> :=
   <span class="kr">match goal with</span>
-    | [ H : ?x &lt;&gt; ?x |- _ ] =&gt; <span class="nb">elim</span> H ; <span class="bp">reflexivity</span>
+    | [ H : <span class="nl">?x</span> &lt;&gt; <span class="nl">?x</span> |- _ ] =&gt; <span class="nb">elim</span> H ; <span class="bp">reflexivity</span>
     | _ =&gt; <span class="bp">discriminate</span>
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 Revert the last hypothesis. 
@@ -172,9 +172,9 @@ Reverse everything up to hypothesis id (not included).
 Clear duplicated hypotheses 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">clear_dup</span> :=
   <span class="kr">match goal with</span>
-    | [ H : ?X |- _ ] =&gt;
+    | [ H : <span class="nl">?X</span> |- _ ] =&gt;
       <span class="kr">match goal with</span>
-        | [ H&#39; : ?Y |- _ ] =&gt;
+        | [ H&#39; : <span class="nl">?Y</span> |- _ ] =&gt;
           <span class="kr">match</span> H <span class="kr">with</span>
             | H&#39; =&gt; <span class="kp">fail</span> <span class="mi">2</span>
             | _ =&gt; <span class="nb">unify</span> X Y ; (<span class="nb">clear</span> H&#39; || <span class="nb">clear</span> H)
@@ -194,22 +194,22 @@ Try to clear everything except some hyp
 A non-failing subst that substitutes as much as possible. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">subst_no_fail</span> :=
   <span class="kp">repeat</span> (<span class="kr">match goal with</span>
-            [ H : ?X = ?Y |- _ ] =&gt; <span class="nb">subst</span> X || <span class="nb">subst</span> Y
+            [ H : <span class="nl">?X</span> = <span class="nl">?Y</span> |- _ ] =&gt; <span class="nb">subst</span> X || <span class="nb">subst</span> Y
           <span class="kr">end</span>).</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;subst&quot;</span> <span class="s2">&quot;*&quot;</span> := subst_no_fail.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_application</span> f tac T :=
   <span class="kr">match</span> T <span class="kr">with</span>
-    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u ?a ?b ?c] =&gt; tac (f x y z w v u a b c)
-    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u ?a ?b] =&gt; tac (f x y z w v u a b)
-    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u ?a] =&gt; tac (f x y z w v u a)
-    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v ?u] =&gt; tac (f x y z w v u)
-    | <span class="kp">context</span> [f ?x ?y ?z ?w ?v] =&gt; tac (f x y z w v)
-    | <span class="kp">context</span> [f ?x ?y ?z ?w] =&gt; tac (f x y z w)
-    | <span class="kp">context</span> [f ?x ?y ?z] =&gt; tac (f x y z)
-    | <span class="kp">context</span> [f ?x ?y] =&gt; tac (f x y)
-    | <span class="kp">context</span> [f ?x] =&gt; tac (f x)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span> <span class="nl">?z</span> <span class="nl">?w</span> <span class="nl">?v</span> <span class="nl">?u</span> <span class="nl">?a</span> <span class="nl">?b</span> <span class="nl">?c</span>] =&gt; tac (f x y z w v u a b c)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span> <span class="nl">?z</span> <span class="nl">?w</span> <span class="nl">?v</span> <span class="nl">?u</span> <span class="nl">?a</span> <span class="nl">?b</span>] =&gt; tac (f x y z w v u a b)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span> <span class="nl">?z</span> <span class="nl">?w</span> <span class="nl">?v</span> <span class="nl">?u</span> <span class="nl">?a</span>] =&gt; tac (f x y z w v u a)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span> <span class="nl">?z</span> <span class="nl">?w</span> <span class="nl">?v</span> <span class="nl">?u</span>] =&gt; tac (f x y z w v u)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span> <span class="nl">?z</span> <span class="nl">?w</span> <span class="nl">?v</span>] =&gt; tac (f x y z w v)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span> <span class="nl">?z</span> <span class="nl">?w</span>] =&gt; tac (f x y z w)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span> <span class="nl">?z</span>] =&gt; tac (f x y z)
+    | <span class="kp">context</span> [f <span class="nl">?x</span> <span class="nl">?y</span>] =&gt; tac (f x y)
+    | <span class="kp">context</span> [f <span class="nl">?x</span>] =&gt; tac (f x)
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 A variant of <span class="inlinecode"><span class="id" title="tactic">apply</span></span> using <span class="inlinecode"><span class="id" title="tactic">refine</span></span>, doing as much conversion as necessary. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">rapply</span> p :=
@@ -232,8 +232,8 @@ A variant of <span class="inlinecode"><span class="id" title="tactic">apply</spa
 Tactical <span class="inlinecode"><span class="id" title="var">on_call</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">tac</span></span> applies <span class="inlinecode"><span class="id" title="var">tac</span></span> on any application of <span class="inlinecode"><span class="id" title="var">f</span></span> in the hypothesis or goal. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_call</span> f tac :=
   <span class="kr">match goal with</span>
-    | |- ?T  =&gt; on_application f tac T
-    | H : ?T |- _  =&gt; on_application f tac T
+    | |- <span class="nl">?T</span>  =&gt; on_application f tac T
+    | H : <span class="nl">?T</span> |- _  =&gt; on_application f tac T
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 <span class="c">(* Destructs calls to f in hypothesis or conclusion, useful if f creates a subset object. *)</span>
@@ -281,7 +281,7 @@ A marker for prototypes to destruct.
 Try to inject any potential constructor equality hypothesis. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">autoinjection</span> tac :=
   <span class="kr">match goal with</span>
-    | [ H : ?f ?a = ?f&#39; ?a&#39; |- _ ] =&gt; tac H
+    | [ H : <span class="nl">?f</span> <span class="nl">?a</span> = <span class="nl">?f&#39;</span> <span class="nl">?a&#39;</span> |- _ ] =&gt; tac H
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">inject</span> H := <span class="kp">progress</span> (<span class="nb">inversion</span> H ; <span class="nb">subst</span>*; clear_dups) ; <span class="nb">clear</span> H.</span></span><span class="coq-wsp">
@@ -292,9 +292,9 @@ Destruct an hypothesis by first copying it to avoid dependencies.
 If bang appears in the goal, it means that we have a proof of False and the goal is solved. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">bang</span> :=
   <span class="kr">match goal with</span>
-    | |- ?x =&gt;
+    | |- <span class="nl">?x</span> =&gt;
       <span class="kr">match</span> x <span class="kr">with</span>
-        | <span class="kp">context</span> [False_rect _ ?p] =&gt; <span class="nb">elim</span> p
+        | <span class="kp">context</span> [False_rect _ <span class="nl">?p</span>] =&gt; <span class="nb">elim</span> p
       <span class="kr">end</span>
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 A tactic to show contradiction by first asserting an automatically provable hypothesis. 
@@ -304,7 +304,7 @@ A tactic that adds <span class="inlinecode"><span class="id" title="var">H</span
    Useful to do saturation using tactics. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">add_hypothesis</span> H&#39; p :=
   <span class="kr">match</span> <span class="kp">type of</span> p <span class="kr">with</span>
-    ?X =&gt;
+    <span class="nl">?X</span> =&gt;
     <span class="kr">match goal with</span>
       | [ H : X |- _ ] =&gt; <span class="kp">fail</span> <span class="mi">1</span>
       | _ =&gt; <span class="nb">set</span> (H&#39;:=p) ; <span class="kp">try</span> (<span class="nb">change</span> p <span class="kr">with</span> H&#39;) ; <span class="nb">clearbody</span> H&#39;
@@ -318,14 +318,14 @@ A tactic to refine an hypothesis by supplying some of its arguments.
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">refine_hyp</span> c :=
   <span class="kr">let</span> <span class="nv">tac</span> <span class="nv">H</span> := replace_hyp H c <span class="kr">in</span>
     <span class="kr">match</span> c <span class="kr">with</span>
-      | ?H _ =&gt; tac H
-      | ?H _ _ =&gt; tac H
-      | ?H _ _ _ =&gt; tac H
-      | ?H _ _ _ _ =&gt; tac H
-      | ?H _ _ _ _ _ =&gt; tac H
-      | ?H _ _ _ _ _ _ =&gt; tac H
-      | ?H _ _ _ _ _ _ _ =&gt; tac H
-      | ?H _ _ _ _ _ _ _ _ =&gt; tac H
+      | <span class="nl">?H</span> _ =&gt; tac H
+      | <span class="nl">?H</span> _ _ =&gt; tac H
+      | <span class="nl">?H</span> _ _ _ =&gt; tac H
+      | <span class="nl">?H</span> _ _ _ _ =&gt; tac H
+      | <span class="nl">?H</span> _ _ _ _ _ =&gt; tac H
+      | <span class="nl">?H</span> _ _ _ _ _ _ =&gt; tac H
+      | <span class="nl">?H</span> _ _ _ _ _ _ _ =&gt; tac H
+      | <span class="nl">?H</span> _ _ _ _ _ _ _ _ =&gt; tac H
     <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 The default simplification tactic used by Program is defined by <span class="inlinecode"><span class="id" title="tactic">program_simpl</span></span>, sometimes <span class="inlinecode"><span class="id" title="tactic">auto</span></span>
    is not enough, better rebind using <span class="inlinecode"><span class="id" title="keyword">Obligation</span></span> <span class="inlinecode"><span class="id" title="keyword">Tactic</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">tac</span></span> in this case,
@@ -338,7 +338,7 @@ Restrict automation to propositional obligations.
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">program_solve_wf</span> :=
   <span class="kr">match goal with</span>
     | |- well_founded _ =&gt; <span class="nb">auto with</span> *
-    | |- ?T =&gt; <span class="kr">match</span> <span class="kp">type of</span> T <span class="kr">with</span> <span class="kt">Prop</span> =&gt; <span class="nb">auto</span> <span class="kr">end</span>
+    | |- <span class="nl">?T</span> =&gt; <span class="kr">match</span> <span class="kp">type of</span> T <span class="kr">with</span> <span class="kt">Prop</span> =&gt; <span class="nb">auto</span> <span class="kr">end</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Create HintDb</span> program <span class="kn">discriminated</span>.</span></span><span class="coq-wsp">

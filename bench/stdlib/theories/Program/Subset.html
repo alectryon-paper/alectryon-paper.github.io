@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Subset.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Subset.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -93,17 +93,17 @@ The following tactics implement a poor-man's solution for proof-irrelevance: it 
    factorize every proof of the same proposition in a goal so that equality of such proofs becomes trivial. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_subset_proof_aux</span> tac T :=
   <span class="kr">match</span> T <span class="kr">with</span>
-    | <span class="kp">context</span> [ exist ?P _ ?p ] =&gt; <span class="kp">try</span> on_subset_proof_aux tac P ; tac p
+    | <span class="kp">context</span> [ exist <span class="nl">?P</span> _ <span class="nl">?p</span> ] =&gt; <span class="kp">try</span> on_subset_proof_aux tac P ; tac p
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">on_subset_proof</span> tac :=
   <span class="kr">match goal with</span>
-    [ |- ?T ] =&gt; on_subset_proof_aux tac T
+    [ |- <span class="nl">?T</span> ] =&gt; on_subset_proof_aux tac T
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">abstract_any_hyp</span> H&#39; p :=
   <span class="kr">match</span> <span class="kp">type of</span> p <span class="kr">with</span>
-    ?X =&gt;
+    <span class="nl">?X</span> =&gt;
     <span class="kr">match goal with</span>
       | [ H : X |- _ ] =&gt; <span class="kp">fail</span> <span class="mi">1</span>
       | _ =&gt; <span class="nb">set</span> (H&#39;:=p) ; <span class="kp">try</span> (<span class="nb">change</span> p <span class="kr">with</span> H&#39;) ; <span class="nb">clearbody</span> H&#39;
@@ -117,7 +117,7 @@ The following tactics implement a poor-man's solution for proof-irrelevance: it 
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">pi_subset_proof_hyp</span> p :=
   <span class="kr">match</span> <span class="kp">type of</span> p <span class="kr">with</span>
-    ?X =&gt;
+    <span class="nl">?X</span> =&gt;
     <span class="kr">match goal with</span>
       | [ H : X |- _ ] =&gt;
         <span class="kr">match</span> p <span class="kr">with</span>
@@ -186,9 +186,9 @@ Now we make a tactic to be able to rewrite a term <span class="inlinecode"><span
    equality <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">u</span></span>, and <span class="inlinecode"><span class="id" title="var">u</span></span> is now the subject of the <span class="inlinecode"><span class="id" title="keyword">match</span></span>. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">rewrite_match_eq</span> H :=
   <span class="kr">match goal with</span>
-    [ |- ?T ] =&gt;
+    [ |- <span class="nl">?T</span> ] =&gt;
     <span class="kr">match</span> T <span class="kr">with</span>
-      <span class="kp">context</span> [ match_eq ?A ?B ?t ?f ] =&gt;
+      <span class="kp">context</span> [ match_eq <span class="nl">?A</span> <span class="nl">?B</span> <span class="nl">?t</span> <span class="nl">?f</span> ] =&gt;
       <span class="nb">rewrite</span> (match_eq_rewrite A B t f (exist _ _ (eq_sym H)))
     <span class="kr">end</span>
   <span class="kr">end</span>.</span></span></span></pre><div class="doc">

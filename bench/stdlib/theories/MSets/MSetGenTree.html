@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>MSetGenTree.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>MSetGenTree.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -398,7 +398,7 @@ Automatic treatment of <span class="inlinecode"><span class="id" title="var">Ok<
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">inv_ok</span> := <span class="kr">match goal with</span>
  | H:Ok (Node _ _ _ _) |- _ =&gt; clear_inversion H; inv_ok
  | H:Ok Leaf |- _ =&gt; <span class="nb">clear</span> H; inv_ok
- | H:bst ?x |- _ =&gt; <span class="nb">change</span> (Ok x) <span class="kr">in</span> H; inv_ok
+ | H:bst <span class="nl">?x</span> |- _ =&gt; <span class="nb">change</span> (Ok x) <span class="kr">in</span> H; inv_ok
  | _ =&gt; <span class="kp">idtac</span>
 <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 A tactic to repeat <span class="inlinecode"><span class="id" title="tactic">inversion_clear</span></span> on all hyps of the
@@ -412,9 +412,9 @@ A tactic to repeat <span class="inlinecode"><span class="id" title="tactic">inve
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">invtree</span> f :=
   <span class="kr">match goal with</span>
-     | H:f ?s |- _ =&gt; is_tree_constr s; clear_inversion H; invtree f
-     | H:f _ ?s |- _ =&gt; is_tree_constr s; clear_inversion H; invtree f
-     | H:f _ _ ?s |- _ =&gt; is_tree_constr s; clear_inversion H; invtree f
+     | H:f <span class="nl">?s</span> |- _ =&gt; is_tree_constr s; clear_inversion H; invtree f
+     | H:f _ <span class="nl">?s</span> |- _ =&gt; is_tree_constr s; clear_inversion H; invtree f
+     | H:f _ _ <span class="nl">?s</span> |- _ =&gt; is_tree_constr s; clear_inversion H; invtree f
      | _ =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
@@ -423,8 +423,8 @@ A tactic to repeat <span class="inlinecode"><span class="id" title="tactic">inve
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">intuition_in</span> := <span class="kp">repeat</span> (<span class="nb">intuition</span>; inv).</span></span></span></pre><div class="doc">
 Helper tactic concerning order of elements. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">order</span> := <span class="kr">match goal with</span>
- | U: lt_tree _ ?s, V: InT _ ?s |- _ =&gt; <span class="nb">generalize</span> (U _ V); <span class="nb">clear</span> U; order
- | U: gt_tree _ ?s, V: InT _ ?s |- _ =&gt; <span class="nb">generalize</span> (U _ V); <span class="nb">clear</span> U; order
+ | U: lt_tree _ <span class="nl">?s</span>, V: InT _ <span class="nl">?s</span> |- _ =&gt; <span class="nb">generalize</span> (U _ V); <span class="nb">clear</span> U; order
+ | U: gt_tree _ <span class="nl">?s</span>, V: InT _ <span class="nl">?s</span> |- _ =&gt; <span class="nb">generalize</span> (U _ V); <span class="nb">clear</span> U; order
  | _ =&gt; MX.order
 <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 <span class="inlinecode"><span class="id" title="var">isok</span></span> is indeed a decision procedure for <span class="inlinecode"><span class="id" title="var">Ok</span></span>

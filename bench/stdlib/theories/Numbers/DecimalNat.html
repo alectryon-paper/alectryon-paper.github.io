@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>DecimalNat.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>DecimalNat.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -184,7 +184,7 @@ Properties of <span class="inlinecode"><span class="id" title="var">of_lu</span>
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">simpl_of_lu</span> :=
  <span class="kr">match goal with</span>
- | |- <span class="kp">context</span> [ of_lu (?f ?x) ] =&gt;
+ | |- <span class="kp">context</span> [ of_lu (<span class="nl">?f</span> <span class="nl">?x</span>) ] =&gt;
    <span class="nb">rewrite</span> (of_lu_eqn (f x)); <span class="nb">simpl</span> hd; <span class="nb">simpl</span> tl
  <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
@@ -223,8 +223,8 @@ of_lu (rev d) + of_lu d&#39; * <span class="mi">10</span> ^ usize d</span></div>
 </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalNat-v-chk1c" style="display: none" type="checkbox"><label class="coq-input" for="DecimalNat-v-chk1c"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">n</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">nat</span></span></span></div><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">Nat.of_uint_acc d n = of_lu (rev d) + n * <span class="mi">10</span> ^ usize d</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp"> </span><span class="coq-sentence"><input class="coq-toggle" id="DecimalNat-v-chk1d" style="display: none" type="checkbox"><label class="coq-input" for="DecimalNat-v-chk1d"><span class="highlight"><span class="nb">revert</span> n.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight"><span class="kr">forall</span> <span class="nv">n</span> : nat,
 Nat.of_uint_acc d n = of_lu (rev d) + n * <span class="mi">10</span> ^ usize d</span></div></blockquote></div></div></small><span class="coq-wsp"> </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">induction</span> d; <span class="nb">intros</span>;
- <span class="nb">simpl</span> Nat.of_uint_acc; <span class="nb">rewrite</span> ?Nat.tail_mul_spec, ?IHd;
- <span class="nb">simpl</span> rev; <span class="nb">simpl</span> usize; <span class="nb">rewrite</span> ?Nat.pow_succ_r&#39;;
+ <span class="nb">simpl</span> Nat.of_uint_acc; <span class="nb">rewrite</span> <span class="nl">?Nat</span>.tail_mul_spec, <span class="nl">?IHd</span>;
+ <span class="nb">simpl</span> rev; <span class="nb">simpl</span> usize; <span class="nb">rewrite</span> <span class="nl">?Nat</span>.pow_succ_r&#39;;
  [ <span class="nb">simpl</span>; <span class="bp">now</span> <span class="nb">rewrite</span> Nat.mul_1_r | .. ];
  <span class="nb">unfold</span> rev <span class="nb">at</span> <span class="mi">2</span>; <span class="nb">simpl</span> revapp; <span class="nb">rewrite</span> of_lu_revapp;
  <span class="nb">simpl</span> of_lu; <span class="bp">ring</span>.</span></span><span class="coq-wsp">
@@ -451,7 +451,7 @@ to_lu (<span class="mi">10</span> * of_lu d) = lnorm (D0 d)</span></div></blockq
 </span></span><span class="coq-sentence"><input class="coq-toggle" id="DecimalNat-v-chk4e" style="display: none" type="checkbox"><label class="coq-input" for="DecimalNat-v-chk4e"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">d</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">uint</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">to_lu (of_lu d) = lnorm d</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp"> </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">induction</span> d; [ <span class="bp">reflexivity</span> | .. ];
  simpl_of_lu;
- <span class="nb">rewrite</span> ?Nat.add_succ_l, Nat.add_0_l, ?to_lu_succ, to_of_lu_tenfold
+ <span class="nb">rewrite</span> <span class="nl">?Nat</span>.add_succ_l, Nat.add_0_l, <span class="nl">?to_lu_succ</span>, to_of_lu_tenfold
   <span class="bp">by</span> <span class="bp">assumption</span>;
  <span class="nb">unfold</span> lnorm; <span class="nb">simpl</span>; <span class="bp">now</span> <span class="nb">destruct</span> nztail.</span></span><span class="coq-wsp">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span></span></pre><div class="doc">

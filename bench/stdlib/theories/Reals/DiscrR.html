@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>DiscrR.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>DiscrR.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -103,7 +103,7 @@
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">discrR</span> :=
   <span class="kp">try</span>
    <span class="kr">match goal with</span>
-   |  |- (?X1 &lt;&gt; ?X2) =&gt;
+   |  |- (<span class="nl">?X1</span> &lt;&gt; <span class="nl">?X2</span>) =&gt;
        <span class="kp">repeat</span>
          <span class="nb">rewrite</span> &lt;- plus_IZR ||
            <span class="nb">rewrite</span> &lt;- mult_IZR ||
@@ -114,11 +114,11 @@
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">prove_sup0</span> :=
   <span class="kr">match goal with</span>
   |  |- (<span class="mi">0</span> &lt; <span class="mi">1</span>) =&gt; <span class="nb">apply</span> Rlt_0_1
-  |  |- (<span class="mi">0</span> &lt; ?X1) =&gt;
+  |  |- (<span class="mi">0</span> &lt; <span class="nl">?X1</span>) =&gt;
       <span class="kp">repeat</span>
        (<span class="nb">apply</span> Rmult_lt_0_compat || <span class="nb">apply</span> Rplus_lt_pos;
          <span class="kp">try</span> <span class="nb">apply</span> Rlt_0_1 || <span class="nb">apply</span> Rlt_R0_R2)
-  |  |- (?X1 &gt; <span class="mi">0</span>) =&gt; <span class="nb">change</span> (<span class="mi">0</span> &lt; X1); prove_sup0
+  |  |- (<span class="nl">?X1</span> &gt; <span class="mi">0</span>) =&gt; <span class="nb">change</span> (<span class="mi">0</span> &lt; X1); prove_sup0
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">omega_sup</span> :=
@@ -129,12 +129,12 @@
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">prove_sup</span> :=
   <span class="kr">match goal with</span>
-  |  |- (?X1 &gt; ?X2) =&gt; <span class="nb">change</span> (X2 &lt; X1); prove_sup
-  |  |- (<span class="mi">0</span> &lt; ?X1) =&gt; prove_sup0
-  |  |- (- ?X1 &lt; <span class="mi">0</span>) =&gt; <span class="nb">rewrite</span> &lt;- Ropp_0; prove_sup
-  |  |- (- ?X1 &lt; - ?X2) =&gt; <span class="nb">apply</span> Ropp_lt_gt_contravar; prove_sup
-  |  |- (- ?X1 &lt; ?X2) =&gt; <span class="nb">apply</span> Rlt_trans <span class="kr">with</span> <span class="mi">0</span>; prove_sup
-  |  |- (?X1 &lt; ?X2) =&gt; omega_sup
+  |  |- (<span class="nl">?X1</span> &gt; <span class="nl">?X2</span>) =&gt; <span class="nb">change</span> (X2 &lt; X1); prove_sup
+  |  |- (<span class="mi">0</span> &lt; <span class="nl">?X1</span>) =&gt; prove_sup0
+  |  |- (- <span class="nl">?X1</span> &lt; <span class="mi">0</span>) =&gt; <span class="nb">rewrite</span> &lt;- Ropp_0; prove_sup
+  |  |- (- <span class="nl">?X1</span> &lt; - <span class="nl">?X2</span>) =&gt; <span class="nb">apply</span> Ropp_lt_gt_contravar; prove_sup
+  |  |- (- <span class="nl">?X1</span> &lt; <span class="nl">?X2</span>) =&gt; <span class="nb">apply</span> Rlt_trans <span class="kr">with</span> <span class="mi">0</span>; prove_sup
+  |  |- (<span class="nl">?X1</span> &lt; <span class="nl">?X2</span>) =&gt; omega_sup
   | _ =&gt; <span class="kp">idtac</span>
   <span class="kr">end</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">

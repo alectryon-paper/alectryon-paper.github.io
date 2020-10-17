@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>FunctionalExtensionality.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>FunctionalExtensionality.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -379,7 +379,7 @@ exist (eq (f x)) (f x) eq_refl</span></div></blockquote></div></div></small><spa
 Apply <span class="inlinecode"><span class="id" title="var">functional_extensionality</span></span>, introducing variable x. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;extensionality&quot;</span> <span class="kn">ident</span>(x) :=
   <span class="kr">match goal with</span>
-    [ |- ?X = ?Y ] =&gt;
+    [ |- <span class="nl">?X</span> = <span class="nl">?Y</span> ] =&gt;
     (<span class="nb">apply</span> (@functional_extensionality _ _ X Y) ||
      <span class="nb">apply</span> (@functional_extensionality_dep _ _ X Y) ||
      <span class="nb">apply</span> forall_extensionalityP ||
@@ -395,7 +395,7 @@ Iteratively apply <span class="inlinecode"><span class="id" title="var">function
   <span class="kr">let rec</span> <span class="nv">check_is_extensional_equality</span> <span class="nv">H</span> :=
       <span class="kr">lazymatch</span> <span class="kp">type of</span> H <span class="kr">with</span>
       | _ = _ =&gt; <span class="kp">constr</span>:(<span class="kt">Prop</span>)
-      | <span class="kr">forall</span> <span class="nv">a</span> : ?A, ?T
+      | <span class="kr">forall</span> <span class="nv">a</span> : <span class="nl">?A</span>, <span class="nl">?T</span>
         =&gt; <span class="kr">let</span> <span class="nv">Ha</span> := <span class="kp">fresh</span> <span class="kr">in</span>
            <span class="kp">constr</span>:(<span class="kr">forall</span> <span class="nv">a</span> : A, <span class="kr">match</span> H a <span class="kr">with</span> Ha =&gt; <span class="kp">ltac</span>:(<span class="kr">let</span> <span class="nv">v</span> := check_is_extensional_equality Ha <span class="kr">in</span> <span class="bp">exact</span> v) <span class="kr">end</span>)
       <span class="kr">end</span> <span class="kr">in</span>
@@ -413,27 +413,27 @@ Iteratively apply <span class="inlinecode"><span class="id" title="var">function
         <span class="kr">else</span> <span class="kp">idtac</span>) <span class="kr">in</span>
   <span class="kr">let rec</span> <span class="nv">extensionality_step_make_type</span> <span class="nv">H</span> :=
       <span class="kr">lazymatch</span> <span class="kp">type of</span> H <span class="kr">with</span>
-      | <span class="kr">forall</span> <span class="nv">a</span> : ?A, ?f = ?g
+      | <span class="kr">forall</span> <span class="nv">a</span> : <span class="nl">?A</span>, <span class="nl">?f</span> = <span class="nl">?g</span>
         =&gt; <span class="kp">constr</span>:({ H&#39; | (<span class="kr">fun</span> <span class="nv">a</span> =&gt; <span class="nb">f_equal</span> (<span class="kr">fun</span> <span class="nv">h</span> =&gt; h a) H&#39;) = H })
-      | <span class="kr">forall</span> <span class="nv">a</span> : ?A, _
+      | <span class="kr">forall</span> <span class="nv">a</span> : <span class="nl">?A</span>, _
         =&gt; <span class="kr">let</span> <span class="nv">H&#39;</span> := <span class="kp">fresh</span> <span class="kr">in</span>
            <span class="kp">constr</span>:(<span class="kr">forall</span> <span class="nv">a</span> : A, <span class="kr">match</span> H a <span class="kr">with</span> H&#39; =&gt; <span class="kp">ltac</span>:(<span class="kr">let</span> <span class="nv">ret</span> := extensionality_step_make_type H&#39; <span class="kr">in</span> <span class="bp">exact</span> ret) <span class="kr">end</span>)
       <span class="kr">end</span> <span class="kr">in</span>
   <span class="kr">let rec</span> <span class="nv">eta_contract</span> <span class="nv">T</span> :=
       <span class="kr">lazymatch</span> (<span class="kp">eval</span> <span class="nb">cbv</span> beta <span class="kr">in</span> T) <span class="kr">with</span>
-      | <span class="kp">context</span> T&#39;[<span class="kr">fun</span> <span class="nv">a</span> : ?A =&gt; ?f a]
+      | <span class="kp">context</span> T&#39;[<span class="kr">fun</span> <span class="nv">a</span> : <span class="nl">?A</span> =&gt; <span class="nl">?f</span> a]
         =&gt; <span class="kr">let</span> <span class="nv">T&#39;&#39;</span> := <span class="kp">context</span> T&#39;[f] <span class="kr">in</span>
            eta_contract T&#39;&#39;
-      | ?T =&gt; T
+      | <span class="nl">?T</span> =&gt; T
       <span class="kr">end</span> <span class="kr">in</span>
   <span class="kr">let rec</span> <span class="nv">lift_sig_extensionality</span> <span class="nv">H</span> :=
       <span class="kr">lazymatch</span> <span class="kp">type of</span> H <span class="kr">with</span>
       | sig _ =&gt; H
-      | <span class="kr">forall</span> <span class="nv">a</span> : ?A, _
+      | <span class="kr">forall</span> <span class="nv">a</span> : <span class="nl">?A</span>, _
         =&gt; <span class="kr">let</span> <span class="nv">Ha</span> := <span class="kp">fresh</span> <span class="kr">in</span>
            <span class="kr">let</span> <span class="nv">ret</span> := <span class="kp">constr</span>:(<span class="kr">fun</span> <span class="nv">a</span> : A =&gt; <span class="kr">match</span> H a <span class="kr">with</span> Ha =&gt; <span class="kp">ltac</span>:(<span class="kr">let</span> <span class="nv">v</span> := lift_sig_extensionality Ha <span class="kr">in</span> <span class="bp">exact</span> v) <span class="kr">end</span>) <span class="kr">in</span>
            <span class="kr">lazymatch</span> <span class="kp">type of</span> ret <span class="kr">with</span>
-           | <span class="kr">forall</span> <span class="nv">a</span> : ?A, sig (<span class="kr">fun</span> <span class="nv">b</span> : ?B =&gt; @?f a b = @?g a b)
+           | <span class="kr">forall</span> <span class="nv">a</span> : <span class="nl">?A</span>, sig (<span class="kr">fun</span> <span class="nv">b</span> : <span class="nl">?B</span> =&gt; @<span class="nl">?f</span> a b = @<span class="nl">?g</span> a b)
              =&gt; eta_contract (exist (<span class="kr">fun</span> <span class="nv">b</span> : (<span class="kr">forall</span> <span class="nv">a</span> : A, B) =&gt; (<span class="kr">fun</span> <span class="nv">a</span> : A =&gt; f a (b a)) = (<span class="kr">fun</span> <span class="nv">a</span> : A =&gt; g a (b a)))
                                     (<span class="kr">fun</span> <span class="nv">a</span> : A =&gt; proj1_sig (ret a))
                                     (@functional_extensionality_dep_good _ _ _ _ (<span class="kr">fun</span> <span class="nv">a</span> : A =&gt; proj2_sig (ret a))))

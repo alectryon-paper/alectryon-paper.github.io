@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>MSetDecide.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>MSetDecide.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -217,9 +217,9 @@ the above form:
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Tactic Notation</span> <span class="s2">&quot;fold&quot;</span> <span class="s2">&quot;any&quot;</span> <span class="s2">&quot;not&quot;</span> :=
       <span class="kp">repeat</span> (
         <span class="kr">match goal with</span>
-        | H: <span class="kp">context</span> [?P -&gt; <span class="kt">False</span>] |- _ =&gt;
+        | H: <span class="kp">context</span> [<span class="nl">?P</span> -&gt; <span class="kt">False</span>] |- _ =&gt;
           <span class="nb">fold</span> (~ P) <span class="kr">in</span> H
-        | |- <span class="kp">context</span> [?P -&gt; <span class="kt">False</span>] =&gt;
+        | |- <span class="kp">context</span> [<span class="nl">?P</span> -&gt; <span class="kt">False</span>] =&gt;
           <span class="nb">fold</span> (~ P)
         <span class="kr">end</span>).</span></span></span></pre><div class="doc">
 <span class="inlinecode"><span class="id" title="var">push</span></span> <span class="inlinecode"><span class="id" title="var">not</span></span> <span class="inlinecode"><span class="id" title="keyword">using</span></span> <span class="inlinecode"><span class="id" title="var">db</span></span> will pushes all negations to the
@@ -260,15 +260,15 @@ the above form:
         <span class="kr">match goal with</span>
         | |- <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_true_iff
         | |- <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_false_iff
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_not_iff P) <span class="bp">by</span> dec
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] =&gt;
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_not_iff P) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] =&gt;
             <span class="nb">rewrite</span> (contrapositive P Q) <span class="bp">by</span> dec
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] =&gt; or_not_l_iff P Q dec
-        | |- <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] =&gt; or_not_r_iff P Q dec
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] =&gt; <span class="nb">rewrite</span> (imp_not_l P Q) <span class="bp">by</span> dec
-        | |- <span class="kp">context</span> [?P \/ ?Q -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_or_iff P Q)
-        | |- <span class="kp">context</span> [?P /\ ?Q -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_and_iff P Q)
-        | |- <span class="kp">context</span> [(?P -&gt; ?Q) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_imp_iff P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) \/ <span class="nl">?Q</span>] =&gt; or_not_l_iff P Q dec
+        | |- <span class="kp">context</span> [<span class="nl">?P</span> \/ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] =&gt; or_not_r_iff P Q dec
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="nl">?Q</span>] =&gt; <span class="nb">rewrite</span> (imp_not_l P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [<span class="nl">?P</span> \/ <span class="nl">?Q</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_or_iff P Q)
+        | |- <span class="kp">context</span> [<span class="nl">?P</span> /\ <span class="nl">?Q</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_and_iff P Q)
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="nl">?Q</span>) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_imp_iff P Q) <span class="bp">by</span> dec
         <span class="kr">end</span>);
       <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
@@ -283,17 +283,17 @@ the above form:
         <span class="kr">match goal with</span>
         | H: <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_true_iff <span class="kr">in</span> H
         | H: <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_false_iff <span class="kr">in</span> H
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] |- _ =&gt;
           <span class="nb">rewrite</span> (not_not_iff P) <span class="kr">in</span> H <span class="bp">by</span> dec
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] |- _ =&gt;
           <span class="nb">rewrite</span> (contrapositive P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] |- _ =&gt; or_not_l_iff_in P Q H dec
-        | H: <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt; or_not_r_iff_in P Q H dec
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) \/ <span class="nl">?Q</span>] |- _ =&gt; or_not_l_iff_in P Q H dec
+        | H: <span class="kp">context</span> [<span class="nl">?P</span> \/ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] |- _ =&gt; or_not_r_iff_in P Q H dec
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="nl">?Q</span>] |- _ =&gt;
           <span class="nb">rewrite</span> (imp_not_l P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
-        | H: <span class="kp">context</span> [?P \/ ?Q -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> (not_or_iff P Q) <span class="kr">in</span> H
-        | H: <span class="kp">context</span> [?P /\ ?Q -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> (not_and_iff P Q) <span class="kr">in</span> H
-        | H: <span class="kp">context</span> [(?P -&gt; ?Q) -&gt; <span class="kt">False</span>] |- _ =&gt;
+        | H: <span class="kp">context</span> [<span class="nl">?P</span> \/ <span class="nl">?Q</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> (not_or_iff P Q) <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [<span class="nl">?P</span> /\ <span class="nl">?Q</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> (not_and_iff P Q) <span class="kr">in</span> H
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="nl">?Q</span>) -&gt; <span class="kt">False</span>] |- _ =&gt;
           <span class="nb">rewrite</span> (not_imp_iff P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
         <span class="kr">end</span>);
       <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
@@ -367,17 +367,17 @@ R \/ ~ (P /\ Q) -&gt;
         <span class="kr">match goal with</span>
         | |- <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_true_iff
         | |- <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> not_false_iff
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_not_iff P) <span class="bp">by</span> dec
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] =&gt;
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> (not_not_iff P) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] =&gt;
           <span class="nb">rewrite</span> (contrapositive P Q) <span class="bp">by</span> dec
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] =&gt; or_not_l_iff P Q dec
-        | |- <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] =&gt; or_not_r_iff P Q dec
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] =&gt; <span class="nb">rewrite</span> (imp_not_l P Q) <span class="bp">by</span> dec
-        | |- <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) /\ (?Q -&gt; <span class="kt">False</span>)] =&gt;
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) \/ <span class="nl">?Q</span>] =&gt; or_not_l_iff P Q dec
+        | |- <span class="kp">context</span> [<span class="nl">?P</span> \/ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] =&gt; or_not_r_iff P Q dec
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="nl">?Q</span>] =&gt; <span class="nb">rewrite</span> (imp_not_l P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) /\ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] =&gt;
           <span class="nb">rewrite</span> &lt;- (not_or_iff P Q)
-        | |- <span class="kp">context</span> [?P -&gt; ?Q -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> &lt;- (not_and_iff P Q)
-        | |- <span class="kp">context</span> [?P /\ (?Q -&gt; <span class="kt">False</span>)] =&gt; <span class="nb">rewrite</span> &lt;- (not_imp_iff P Q) <span class="bp">by</span> dec
-        | |- <span class="kp">context</span> [(?Q -&gt; <span class="kt">False</span>) /\ ?P] =&gt;
+        | |- <span class="kp">context</span> [<span class="nl">?P</span> -&gt; <span class="nl">?Q</span> -&gt; <span class="kt">False</span>] =&gt; <span class="nb">rewrite</span> &lt;- (not_and_iff P Q)
+        | |- <span class="kp">context</span> [<span class="nl">?P</span> /\ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] =&gt; <span class="nb">rewrite</span> &lt;- (not_imp_iff P Q) <span class="bp">by</span> dec
+        | |- <span class="kp">context</span> [(<span class="nl">?Q</span> -&gt; <span class="kt">False</span>) /\ <span class="nl">?P</span>] =&gt;
           <span class="nb">rewrite</span> &lt;- (not_imp_rev_iff P Q) <span class="bp">by</span> dec
         <span class="kr">end</span>);
       <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
@@ -393,21 +393,21 @@ R \/ ~ (P /\ Q) -&gt;
         <span class="kr">match goal with</span>
         | H: <span class="kp">context</span> [<span class="kt">True</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_true_iff <span class="kr">in</span> H
         | H: <span class="kp">context</span> [<span class="kt">False</span> -&gt; <span class="kt">False</span>] |- _ =&gt; <span class="nb">rewrite</span> not_false_iff <span class="kr">in</span> H
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="kt">False</span>] |- _ =&gt;
           <span class="nb">rewrite</span> (not_not_iff P) <span class="kr">in</span> H <span class="bp">by</span> dec
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] |- _ =&gt;
           <span class="nb">rewrite</span> (contrapositive P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) \/ ?Q] |- _ =&gt; or_not_l_iff_in P Q H dec
-        | H: <span class="kp">context</span> [?P \/ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt; or_not_r_iff_in P Q H dec
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) -&gt; ?Q] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) \/ <span class="nl">?Q</span>] |- _ =&gt; or_not_l_iff_in P Q H dec
+        | H: <span class="kp">context</span> [<span class="nl">?P</span> \/ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] |- _ =&gt; or_not_r_iff_in P Q H dec
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) -&gt; <span class="nl">?Q</span>] |- _ =&gt;
           <span class="nb">rewrite</span> (imp_not_l P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
-        | H: <span class="kp">context</span> [(?P -&gt; <span class="kt">False</span>) /\ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?P</span> -&gt; <span class="kt">False</span>) /\ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] |- _ =&gt;
           <span class="nb">rewrite</span> &lt;- (not_or_iff P Q) <span class="kr">in</span> H
-        | H: <span class="kp">context</span> [?P -&gt; ?Q -&gt; <span class="kt">False</span>] |- _ =&gt;
+        | H: <span class="kp">context</span> [<span class="nl">?P</span> -&gt; <span class="nl">?Q</span> -&gt; <span class="kt">False</span>] |- _ =&gt;
           <span class="nb">rewrite</span> &lt;- (not_and_iff P Q) <span class="kr">in</span> H
-        | H: <span class="kp">context</span> [?P /\ (?Q -&gt; <span class="kt">False</span>)] |- _ =&gt;
+        | H: <span class="kp">context</span> [<span class="nl">?P</span> /\ (<span class="nl">?Q</span> -&gt; <span class="kt">False</span>)] |- _ =&gt;
           <span class="nb">rewrite</span> &lt;- (not_imp_iff P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
-        | H: <span class="kp">context</span> [(?Q -&gt; <span class="kt">False</span>) /\ ?P] |- _ =&gt;
+        | H: <span class="kp">context</span> [(<span class="nl">?Q</span> -&gt; <span class="kt">False</span>) /\ <span class="nl">?P</span>] |- _ =&gt;
           <span class="nb">rewrite</span> &lt;- (not_imp_rev_iff P Q) <span class="kr">in</span> H <span class="bp">by</span> dec
         <span class="kr">end</span>);
       <span class="nb">fold</span> any not.</span></span><span class="coq-wsp">
@@ -482,7 +482,7 @@ R \/ ~ (P /\ Q) -&gt;
 remove logical hypothesis inter-dependencies (fix 2136). 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">no_logical_interdep</span> :=
       <span class="kr">match goal with</span>
-        | H : ?P |- _ =&gt;
+        | H : <span class="nl">?P</span> |- _ =&gt;
           <span class="kr">match</span> <span class="kp">type of</span> P <span class="kr">with</span>
             | <span class="kt">Prop</span> =&gt;
               <span class="kr">match goal with</span> H&#39; : <span class="kp">context</span> [ H ] |- _ =&gt; <span class="nb">clear dependent</span> H&#39; <span class="kr">end</span>
@@ -498,14 +498,14 @@ remove logical hypothesis inter-dependencies (fix 2136).
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">abstract_elements</span> :=
       <span class="kp">repeat</span>
         (<span class="kr">match goal with</span>
-           | |- <span class="kp">context</span> [ singleton ?t ] =&gt; abstract_term t
-           | _ : <span class="kp">context</span> [ singleton ?t ] |- _ =&gt; abstract_term t
-           | |- <span class="kp">context</span> [ add ?t _ ] =&gt; abstract_term t
-           | _ : <span class="kp">context</span> [ add ?t _ ] |- _ =&gt; abstract_term t
-           | |- <span class="kp">context</span> [ remove ?t _ ] =&gt; abstract_term t
-           | _ : <span class="kp">context</span> [ remove ?t _ ] |- _ =&gt; abstract_term t
-           | |- <span class="kp">context</span> [ In ?t _ ] =&gt; abstract_term t
-           | _ : <span class="kp">context</span> [ In ?t _ ] |- _ =&gt; abstract_term t
+           | |- <span class="kp">context</span> [ singleton <span class="nl">?t</span> ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ singleton <span class="nl">?t</span> ] |- _ =&gt; abstract_term t
+           | |- <span class="kp">context</span> [ add <span class="nl">?t</span> _ ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ add <span class="nl">?t</span> _ ] |- _ =&gt; abstract_term t
+           | |- <span class="kp">context</span> [ remove <span class="nl">?t</span> _ ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ remove <span class="nl">?t</span> _ ] |- _ =&gt; abstract_term t
+           | |- <span class="kp">context</span> [ In <span class="nl">?t</span> _ ] =&gt; abstract_term t
+           | _ : <span class="kp">context</span> [ In <span class="nl">?t</span> _ ] |- _ =&gt; abstract_term t
          <span class="kr">end</span>).</span></span></span></pre><div class="doc">
 <span class="inlinecode"><span class="id" title="var">prop</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">holds</span></span> <span class="inlinecode"><span class="id" title="tactic">by</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> succeeds (but does not modify the
         goal or context) if the proposition <span class="inlinecode"><span class="id" title="var">P</span></span> can be proved by
@@ -603,11 +603,11 @@ Here is the tactic that will throw away hypotheses that
 </span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">discard_nonMSet</span> :=
       <span class="kp">repeat</span> (
         <span class="kr">match goal with</span>
-        | H : <span class="kp">context</span> [ @Logic.eq ?T ?x ?y ] |- _ =&gt;
+        | H : <span class="kp">context</span> [ @Logic.eq <span class="nl">?T</span> <span class="nl">?x</span> <span class="nl">?y</span> ] |- _ =&gt;
           <span class="kr">tryif</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> H) <span class="kr">then</span> <span class="kp">fail</span>
           <span class="kr">else</span> <span class="kr">tryif</span> (<span class="nb">change</span> T <span class="kr">with</span> t <span class="kr">in</span> H) <span class="kr">then</span> <span class="kp">fail</span>
           <span class="kr">else</span> <span class="nb">clear</span> H
-        | H : ?P |- _ =&gt;
+        | H : <span class="nl">?P</span> |- _ =&gt;
           <span class="kr">tryif</span> prop (MSet_Prop P) holds <span class="bp">by</span>
             (<span class="nb">auto</span> <span class="mi">100</span> <span class="kr">with</span> MSet_Prop)
           <span class="kr">then</span> <span class="kp">fail</span>
@@ -662,14 +662,14 @@ The next tactic, <span class="inlinecode"><span class="id" title="var">Logic_eq_
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">change_to_E_t</span> :=
       <span class="kp">repeat</span> (
         <span class="kr">match goal with</span>
-        | H : ?T |- _ =&gt;
+        | H : <span class="nl">?T</span> |- _ =&gt;
           <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> H);
           <span class="kp">repeat</span> (
             <span class="kr">match goal with</span>
             | J : _ |- _ =&gt; <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> J)
             | |- _ =&gt; <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t)
             <span class="kr">end</span> )
-        | H : <span class="kr">forall</span> <span class="nv">x</span> : ?T, _ |- _ =&gt;
+        | H : <span class="kr">forall</span> <span class="nv">x</span> : <span class="nl">?T</span>, _ |- _ =&gt;
           <span class="kp">progress</span> (<span class="nb">change</span> T <span class="kr">with</span> E.t <span class="kr">in</span> H);
           <span class="kp">repeat</span> (
             <span class="kr">match goal with</span>
@@ -702,8 +702,8 @@ This tactic works like the built-in tactic <span class="inlinecode"><span class=
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">    </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">substMSet</span> :=
       <span class="kp">repeat</span> (
         <span class="kr">match goal with</span>
-        | H: E.eq ?x ?x |- _ =&gt; <span class="nb">clear</span> H
-        | H: E.eq ?x ?y |- _ =&gt; <span class="nb">rewrite</span> H <span class="kr">in</span> *; <span class="nb">clear</span> H
+        | H: E.eq <span class="nl">?x</span> <span class="nl">?x</span> |- _ =&gt; <span class="nb">clear</span> H
+        | H: E.eq <span class="nl">?x</span> <span class="nl">?y</span> |- _ =&gt; <span class="nb">rewrite</span> H <span class="kr">in</span> *; <span class="nb">clear</span> H
         <span class="kr">end</span>);
       <span class="nb">autorewrite with</span> set_eq_simpl <span class="kr">in</span> *.</span></span></span></pre><div class="doc">
 <a name="lab12"></a><h2 class="section">Considering Decidability of Base Propositions</h2>
@@ -723,20 +723,20 @@ This tactic works like the built-in tactic <span class="inlinecode"><span class=
 <span class="sd">          afterward.  *)</span>
       <span class="kp">repeat</span> (
         <span class="kr">match goal with</span>
-        | H: <span class="kp">context</span> [~ E.eq ?x ?y] |- _ =&gt;
+        | H: <span class="kp">context</span> [~ E.eq <span class="nl">?x</span> <span class="nl">?y</span>] |- _ =&gt;
           <span class="nb">assert</span> new (E.eq x y \/ ~ E.eq x y) <span class="bp">by</span> (<span class="nb">apply</span> dec_eq)
-        | H: <span class="kp">context</span> [~ In ?x ?s] |- _ =&gt;
+        | H: <span class="kp">context</span> [~ In <span class="nl">?x</span> <span class="nl">?s</span>] |- _ =&gt;
           <span class="nb">assert</span> new (In x s \/ ~ In x s) <span class="bp">by</span> (<span class="nb">apply</span> dec_In)
-        | |- <span class="kp">context</span> [~ E.eq ?x ?y] =&gt;
+        | |- <span class="kp">context</span> [~ E.eq <span class="nl">?x</span> <span class="nl">?y</span>] =&gt;
           <span class="nb">assert</span> new (E.eq x y \/ ~ E.eq x y) <span class="bp">by</span> (<span class="nb">apply</span> dec_eq)
-        | |- <span class="kp">context</span> [~ In ?x ?s] =&gt;
+        | |- <span class="kp">context</span> [~ In <span class="nl">?x</span> <span class="nl">?s</span>] =&gt;
           <span class="nb">assert</span> new (In x s \/ ~ In x s) <span class="bp">by</span> (<span class="nb">apply</span> dec_In)
         <span class="kr">end</span>);
       <span class="sd">(** Now we eliminate the useless facts we added (because</span>
 <span class="sd">          they would likely be very harmful to performance). *)</span>
       <span class="kp">repeat</span> (
         <span class="kr">match goal with</span>
-        | _: ~ ?P, H : ?P \/ ~ ?P |- _ =&gt; <span class="nb">clear</span> H
+        | _: ~ <span class="nl">?P</span>, H : <span class="nl">?P</span> \/ ~ <span class="nl">?P</span> |- _ =&gt; <span class="nb">clear</span> H
         <span class="kr">end</span>).</span></span></span></pre><div class="doc">
 <a name="lab13"></a><h2 class="section">Handling <span class="inlinecode"><span class="id" title="var">Empty</span></span>, <span class="inlinecode"><span class="id" title="var">Subset</span></span>, and <span class="inlinecode"><span class="id" title="var">Equal</span></span></h2>
 
@@ -750,27 +750,27 @@ This tactic works like the built-in tactic <span class="inlinecode"><span class=
       <span class="kp">repeat</span> (
         <span class="kr">match goal with</span>
         | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _,
-          _ : <span class="kp">context</span> [ In ?x _ ] |- _ =&gt;
+          _ : <span class="kp">context</span> [ In <span class="nl">?x</span> _ ] |- _ =&gt;
           <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
           <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
         | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _
-          |- <span class="kp">context</span> [ In ?x _ ] =&gt;
+          |- <span class="kp">context</span> [ In <span class="nl">?x</span> _ ] =&gt;
           <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
           <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
         | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _,
-          _ : <span class="kp">context</span> [ E.eq ?x _ ] |- _ =&gt;
+          _ : <span class="kp">context</span> [ E.eq <span class="nl">?x</span> _ ] |- _ =&gt;
           <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
           <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
         | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _
-          |- <span class="kp">context</span> [ E.eq ?x _ ] =&gt;
+          |- <span class="kp">context</span> [ E.eq <span class="nl">?x</span> _ ] =&gt;
           <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
           <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
         | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _,
-          _ : <span class="kp">context</span> [ E.eq _ ?x ] |- _ =&gt;
+          _ : <span class="kp">context</span> [ E.eq _ <span class="nl">?x</span> ] |- _ =&gt;
           <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
           <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
         | H : <span class="kr">forall</span> <span class="nv">a</span> : E.t, _
-          |- <span class="kp">context</span> [ E.eq _ ?x ] =&gt;
+          |- <span class="kp">context</span> [ E.eq _ <span class="nl">?x</span> ] =&gt;
           <span class="kr">let</span> <span class="nv">P</span> := <span class="kp">type of</span> (H x) <span class="kr">in</span>
           <span class="nb">assert</span> new P <span class="bp">by</span> (<span class="bp">exact</span> (H x))
         <span class="kr">end</span>);
@@ -857,13 +857,13 @@ If we add <span class="inlinecode"><span class="id" title="tactic">unfold</span>
     pull not <span class="nb">using</span> MSet_decidability;
     <span class="nb">unfold</span> not <span class="kr">in</span> *;
     <span class="kr">match goal with</span>
-    | H: (In ?x ?r) -&gt; <span class="kt">False</span> |- (In ?x ?s) -&gt; <span class="kt">False</span> =&gt;
+    | H: (In <span class="nl">?x</span> <span class="nl">?r</span>) -&gt; <span class="kt">False</span> |- (In <span class="nl">?x</span> <span class="nl">?s</span>) -&gt; <span class="kt">False</span> =&gt;
       <span class="bp">contradict</span> H; fsetdec_body
-    | H: (In ?x ?r) -&gt; <span class="kt">False</span> |- (E.eq ?x ?y) -&gt; <span class="kt">False</span> =&gt;
+    | H: (In <span class="nl">?x</span> <span class="nl">?r</span>) -&gt; <span class="kt">False</span> |- (E.eq <span class="nl">?x</span> <span class="nl">?y</span>) -&gt; <span class="kt">False</span> =&gt;
       <span class="bp">contradict</span> H; fsetdec_body
-    | H: (In ?x ?r) -&gt; <span class="kt">False</span> |- (E.eq ?y ?x) -&gt; <span class="kt">False</span> =&gt;
+    | H: (In <span class="nl">?x</span> <span class="nl">?r</span>) -&gt; <span class="kt">False</span> |- (E.eq <span class="nl">?y</span> <span class="nl">?x</span>) -&gt; <span class="kt">False</span> =&gt;
       <span class="bp">contradict</span> H; fsetdec_body
-    | H: ?P -&gt; <span class="kt">False</span> |- ?Q -&gt; <span class="kt">False</span> =&gt;
+    | H: <span class="nl">?P</span> -&gt; <span class="kt">False</span> |- <span class="nl">?Q</span> -&gt; <span class="kt">False</span> =&gt;
       <span class="kr">tryif</span> prop (MSet_elt_Prop P) holds <span class="bp">by</span>
         (<span class="nb">auto</span> <span class="mi">100</span> <span class="kr">with</span> MSet_Prop)
       <span class="kr">then</span> (<span class="bp">contradict</span> H; fsetdec_body)

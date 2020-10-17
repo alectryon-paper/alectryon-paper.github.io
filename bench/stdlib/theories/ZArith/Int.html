@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Int.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"><link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet"><link href="alectryon.css" rel="stylesheet"><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
+<html><head><title>Int.v</title><meta charset="utf-8"><meta content="Alectryon v0.2" name="generator"><link href="alectryon.css" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/IBM-type/0.5.4/css/ibm-type.min.css" integrity="sha512-sky5cf9Ts6FY1kstGOBHSybfKqdHR41M0Ldb0BjNiv3ifltoQIsg0zIaQ+wwdwgQ0w9vKFW7Js50lxH9vqNSSw==" crossorigin="anonymous" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css" integrity="sha512-MbysAYimH1hH2xYzkkMHB6MqxBqfP0megxsCLknbYqHVwXTCg9IqHbk+ZP/vnhO8UEW6PaXAkKe2vQ+SWACxxA==" crossorigin="anonymous" /><script src="alectryon.js"></script><style type="text/css">.highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #555753; font-style: italic } /* Comment */
 .highlight .err { color: #a40000; border: 1px solid #cc0000 } /* Error */
 .highlight .g { color: #000000 } /* Generic */
@@ -208,10 +208,10 @@ A magic (but costly) tactic that goes from <span class="inlinecode"><span class=
     i2z_eqb i2z_ltb i2z_leb : i2z.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">i2z</span> := <span class="kr">match goal with</span>
-    | H : ?a = ?b |- _ =&gt;
+    | H : <span class="nl">?a</span> = <span class="nl">?b</span> |- _ =&gt;
       <span class="nb">generalize</span> (<span class="nb">f_equal</span> i2z H);
 	<span class="kp">try</span> <span class="nb">autorewrite with</span> i2z; <span class="nb">clear</span> H; <span class="nb">intro</span> H; i2z
-    | |- ?a = ?b =&gt;
+    | |- <span class="nl">?a</span> = <span class="nl">?b</span> =&gt;
       <span class="nb">apply</span> (i2z_eq a b); <span class="kp">try</span> <span class="nb">autorewrite with</span> i2z; i2z
     | H : _ |- _ =&gt; <span class="kp">progress</span> <span class="nb">autorewrite with</span> i2z <span class="kr">in</span> H; i2z
     | _ =&gt; <span class="kp">try</span> <span class="nb">autorewrite with</span> i2z
@@ -223,15 +223,15 @@ this <span class="inlinecode"><span class="id" title="var">i2z_refl</span></span
       See also the limitation about <span class="inlinecode"><span class="id" title="keyword">Set</span></span> or <span class="inlinecode"><span class="id" title="keyword">Type</span></span> part below.
       Anyhow, <span class="inlinecode"><span class="id" title="var">i2z_refl</span></span> is enough for applying <span class="inlinecode"><span class="id" title="var">romega</span></span>. 
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">i2z_gen</span> := <span class="kr">match goal with</span>
-    | |- ?a = ?b =&gt; <span class="nb">apply</span> (i2z_eq a b); i2z_gen
-    | H : ?a = ?b |- _ =&gt;
+    | |- <span class="nl">?a</span> = <span class="nl">?b</span> =&gt; <span class="nb">apply</span> (i2z_eq a b); i2z_gen
+    | H : <span class="nl">?a</span> = <span class="nl">?b</span> |- _ =&gt;
        <span class="nb">generalize</span> (<span class="nb">f_equal</span> i2z H); <span class="nb">clear</span> H; i2z_gen
-    | H : eq (A:=Z) ?a ?b |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
-    | H : Z.lt ?a ?b |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
-    | H : Z.le ?a ?b |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
-    | H : Z.gt ?a ?b |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
-    | H : Z.ge ?a ?b |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
-    | H : _ -&gt; ?X |- _ =&gt;
+    | H : eq (A:=Z) <span class="nl">?a</span> <span class="nl">?b</span> |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
+    | H : Z.lt <span class="nl">?a</span> <span class="nl">?b</span> |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
+    | H : Z.le <span class="nl">?a</span> <span class="nl">?b</span> |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
+    | H : Z.gt <span class="nl">?a</span> <span class="nl">?b</span> |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
+    | H : Z.ge <span class="nl">?a</span> <span class="nl">?b</span> |- _ =&gt; <span class="nb">revert</span> H; i2z_gen
+    | H : _ -&gt; <span class="nl">?X</span> |- _ =&gt;
       <span class="c">(* A [Set] or [Type] part cannot be dealt with easily</span>
 <span class="c">         using the [ExprP] datatype. So we forget it, leaving</span>
 <span class="c">         a goal that can be weaker than the original. *)</span>
@@ -286,40 +286,40 @@ this <span class="inlinecode"><span class="id" title="var">i2z_refl</span></span
       | <span class="mi">1</span> =&gt; <span class="kp">constr</span>:(EI1)
       | <span class="mi">2</span> =&gt; <span class="kp">constr</span>:(EI2)
       | <span class="mi">3</span> =&gt; <span class="kp">constr</span>:(EI3)
-      | ?x + ?y =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EIadd ex ey)
-      | ?x - ?y =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EIsub ex ey)
-      | ?x * ?y =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EImul ex ey)
-      | max ?x ?y =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EImax ex ey)
-      | - ?x =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">in</span> <span class="kp">constr</span>:(EIopp ex)
-      | ?x =&gt; <span class="kp">constr</span>:(EIraw x)
+      | <span class="nl">?x</span> + <span class="nl">?y</span> =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EIadd ex ey)
+      | <span class="nl">?x</span> - <span class="nl">?y</span> =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EIsub ex ey)
+      | <span class="nl">?x</span> * <span class="nl">?y</span> =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EImul ex ey)
+      | max <span class="nl">?x</span> <span class="nl">?y</span> =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">with</span> ey := i2ei y <span class="kr">in</span> <span class="kp">constr</span>:(EImax ex ey)
+      | - <span class="nl">?x</span> =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">in</span> <span class="kp">constr</span>:(EIopp ex)
+      | <span class="nl">?x</span> =&gt; <span class="kp">constr</span>:(EIraw x)
     <span class="kr">end</span>
 
   <span class="sd">(** [Z] to [ExprZ] *)</span>
 
     <span class="kr">with</span> z2ez trm :=
     <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
-      | (?x + ?y)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZadd ex ey)
-      | (?x - ?y)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZsub ex ey)
-      | (?x * ?y)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZmul ex ey)
-      | (Z.max ?x ?y) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZmax ex ey)
-      | (- ?x)%Z =&gt;  <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">in</span> <span class="kp">constr</span>:(EZopp ex)
-      | i2z ?x =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">in</span> <span class="kp">constr</span>:(EZofI ex)
-      | ?x =&gt; <span class="kp">constr</span>:(EZraw x)
+      | (<span class="nl">?x</span> + <span class="nl">?y</span>)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZadd ex ey)
+      | (<span class="nl">?x</span> - <span class="nl">?y</span>)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZsub ex ey)
+      | (<span class="nl">?x</span> * <span class="nl">?y</span>)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZmul ex ey)
+      | (Z.max <span class="nl">?x</span> <span class="nl">?y</span>) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EZmax ex ey)
+      | (- <span class="nl">?x</span>)%Z =&gt;  <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">in</span> <span class="kp">constr</span>:(EZopp ex)
+      | i2z <span class="nl">?x</span> =&gt; <span class="kr">let</span> <span class="nv">ex</span> := i2ei x <span class="kr">in</span> <span class="kp">constr</span>:(EZofI ex)
+      | <span class="nl">?x</span> =&gt; <span class="kp">constr</span>:(EZraw x)
     <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> to <span class="inlinecode"><span class="id" title="var">ExprP</span></span>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">p2ep</span> trm :=
     <span class="kr">match</span> <span class="kp">constr</span>:(trm) <span class="kr">with</span>
-      | (?x &lt;-&gt; ?y) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPequiv ex ey)
-      | (?x -&gt; ?y) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPimpl ex ey)
-      | (?x /\ ?y) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPand ex ey)
-      | (?x \/ ?y) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPor ex ey)
-      | (~ ?x) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">in</span> <span class="kp">constr</span>:(EPneg ex)
-      | (eq (A:=Z) ?x ?y) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPeq ex ey)
-      | (?x &lt; ?y)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPlt ex ey)
-      | (?x &lt;= ?y)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPle ex ey)
-      | (?x &gt; ?y)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPgt ex ey)
-      | (?x &gt;= ?y)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPge ex ey)
-      | ?x =&gt;  <span class="kp">constr</span>:(EPraw x)
+      | (<span class="nl">?x</span> &lt;-&gt; <span class="nl">?y</span>) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPequiv ex ey)
+      | (<span class="nl">?x</span> -&gt; <span class="nl">?y</span>) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPimpl ex ey)
+      | (<span class="nl">?x</span> /\ <span class="nl">?y</span>) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPand ex ey)
+      | (<span class="nl">?x</span> \/ <span class="nl">?y</span>) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">with</span> ey := p2ep y <span class="kr">in</span> <span class="kp">constr</span>:(EPor ex ey)
+      | (~ <span class="nl">?x</span>) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := p2ep x <span class="kr">in</span> <span class="kp">constr</span>:(EPneg ex)
+      | (eq (A:=Z) <span class="nl">?x</span> <span class="nl">?y</span>) =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPeq ex ey)
+      | (<span class="nl">?x</span> &lt; <span class="nl">?y</span>)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPlt ex ey)
+      | (<span class="nl">?x</span> &lt;= <span class="nl">?y</span>)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPle ex ey)
+      | (<span class="nl">?x</span> &gt; <span class="nl">?y</span>)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPgt ex ey)
+      | (<span class="nl">?x</span> &gt;= <span class="nl">?y</span>)%Z =&gt; <span class="kr">let</span> <span class="nv">ex</span> := z2ez x <span class="kr">with</span> ey := z2ez y <span class="kr">in</span> <span class="kp">constr</span>:(EPge ex ey)
+      | <span class="nl">?x</span> =&gt;  <span class="kp">constr</span>:(EPraw x)
     <span class="kr">end</span>.</span></span></span></pre><div class="doc">
 <span class="inlinecode"><span class="id" title="var">ExprI</span></span> to <span class="inlinecode"><span class="id" title="var">int</span></span>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon v0.2 --><span class="coq-wsp"><span class="highlight">  </span></span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Fixpoint</span> <span class="nf">ei2i</span> (<span class="nv">e</span>:ExprI) : int :=
@@ -414,7 +414,7 @@ this <span class="inlinecode"><span class="id" title="var">i2z_refl</span></span
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Int-v-chk13" style="display: none" type="checkbox"><label class="coq-input" for="Int-v-chk13"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">norm_ep_correct</span> (<span class="nv">e</span>:ExprP) : ep2p (norm_ep e) &lt;-&gt; ep2p e.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">e</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">ExprP</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">ep2p (norm_ep e) &lt;-&gt; ep2p e</span></div></blockquote></div></div></small><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Int-v-chk14" style="display: none" type="checkbox"><label class="coq-input" for="Int-v-chk14"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">e</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">ExprP</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">ep2p (norm_ep e) &lt;-&gt; ep2p e</span></div></blockquote></div></div></small><span class="coq-wsp">
-</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">induction</span> e; <span class="nb">simpl</span>; <span class="nb">rewrite</span> ?norm_ez_correct; <span class="nb">intuition</span>.</span></span><span class="coq-wsp">
+</span></span><span class="coq-wsp">    </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="nb">induction</span> e; <span class="nb">simpl</span>; <span class="nb">rewrite</span> <span class="nl">?norm_ez_correct</span>; <span class="nb">intuition</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="coq-wsp">
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><input class="coq-toggle" id="Int-v-chk15" style="display: none" type="checkbox"><label class="coq-input" for="Int-v-chk15"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">norm_ep_correct2</span> (<span class="nv">e</span>:ExprP) : ep2p (norm_ep e) -&gt; ep2p e.</span></label><small class="coq-output"><div class="coq-output-sticky-wrapper"><div class="coq-goals"><blockquote class="coq-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">e</span><span><span class="hyp-type"><span class="hyp-punct">:</span><span class="highlight">ExprP</span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">ep2p (norm_ep e) -&gt; ep2p e</span></div></blockquote></div></div></small><span class="coq-wsp">
@@ -424,7 +424,7 @@ this <span class="inlinecode"><span class="id" title="var">i2z_refl</span></span
 </span></span><span class="coq-wsp"><span class="highlight">
 </span></span><span class="coq-wsp">  </span><span class="coq-sentence"><span class="coq-input"><span class="highlight"><span class="kn">Ltac</span> <span class="nf">i2z_refl</span> :=
     i2z_gen;
-    <span class="kr">match goal with</span> |- ?t =&gt;
+    <span class="kr">match goal with</span> |- <span class="nl">?t</span> =&gt;
       <span class="kr">let</span> <span class="nv">e</span> := p2ep t <span class="kr">in</span>
       <span class="nb">change</span> (ep2p e); <span class="nb">apply</span> norm_ep_correct2; <span class="nb">simpl</span>
     <span class="kr">end</span>.</span></span><span class="coq-wsp">
