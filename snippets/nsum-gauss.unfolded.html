@@ -57,6 +57,12 @@
   }
 
   MathJax = {
+      // ACM doesn't like Type 3 fonts, but that's what MathJaX uses.  Moving
+      // to SVG ruins accessibility and makes things look a lot bolder, so
+      // for now a separate rule in the Makefile outlines all fonts after rendering.
+      // loader: {
+      //     load: ['output/svg']
+      // },
       options: {
           skipHtmlTags: [
               'script', 'noscript', 'style', 'textarea',

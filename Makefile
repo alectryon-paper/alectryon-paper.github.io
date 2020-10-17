@@ -5,7 +5,7 @@ export PYTHONPATH=$(shell dirname $(shell realpath $(shell which alectryon))):$$
 vfiles := $(wildcard snippets/*.v)
 rstfiles := $(wildcard snippets/*.rst)
 inputs := $(vfiles:.v=) $(rstfiles:.rst=)
-pdfs := $(inputs:=.pdf)
+pdfs := $(inputs:=.pdf) snippets/Qle-pairwise.unfolded.nofonts.pdf snippets/nsum-gauss.unfolded.nofonts.pdf
 htmls := $(inputs:=.html)
 literatevs := $(rstfiles:=.coq)
 apis := snippets/api.pp snippets/api.json
