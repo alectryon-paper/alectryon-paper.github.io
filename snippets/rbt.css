@@ -1,0 +1,36 @@
+.rbt-graph {
+    margin: 0.35rem 0.1rem 0.35rem 0.5rem;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.rbt-graph svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rbt-graph::after {
+    width: 0;
+    display: inline-block;
+}
+
+.rbt-graph:not(:last-child)::after {
+    content: ';';
+}
+
+.rbt-graph:last-child::after {
+    content: " ";
+}
+
+.rbt-wrapper {
+    text-align: center;
+}
+
+.rbt-sequence {
+    display: inline-block;
+    margin-left: -0.4rem;
+}
+
+.rbt-annot {
+    white-space: nowrap;
+}
