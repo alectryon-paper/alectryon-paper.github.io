@@ -24,8 +24,7 @@ Notation "'\ccNsum{' x '}{' max '}{' f '}'" :=
 (*||*)
 
 Lemma Gauss: ∀ n,
-    2 * (nsum n (fun x => x)) =
-    n * (n + 1).
+    2 * (nsum n (fun i => i)) = n * (n + 1).
   induction n; cbn [nsum].
   - (* n ← 0 *)
     reflexivity.

@@ -20,7 +20,7 @@
 .. coq:: no-hyps unfold
 
    Lemma Gauss: ∀ n,
-       2 * (nsum n (fun x => x)) =
+       2 * (nsum n (fun i => i)) =
        n * (n + 1).
      induction n; cbn [nsum]. (* .hyps *)
      - (* n ← 0 *) (* .hyps *)

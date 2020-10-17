@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 const { cli } = require('./screenshot-lib.js');
-// We have two copies of nsum-gauss and Qle-pairwise because this:
+// We used to have two copies of nsum-gauss and Qle-pairwise because this…
 //   document.querySelectorAll('input[type="checkbox"]').forEach(function(toggle) {
 //     toggle.checked = true; });
-// Shows empty boxes instead of MathJax.
+// …shows empty boxes instead of MathJax, but now we tweak visibility more carefully anyway.
 cli({}, {
-    width: '5in'
+    width: '2.625in'
 });

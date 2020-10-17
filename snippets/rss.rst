@@ -9,7 +9,8 @@
 
    Require Import List. (* .none *)
 
-   Lemma rev_rev {A} (l: list A) : List.rev (List.rev l) = l.
+   Lemma rev_rev {A} (l: list A) : List.rev (List.rev l) = l. (* .in *)
+   Proof. (* .in *)
      induction l; cbn.
      - (* l ← [] *)
        reflexivity.
