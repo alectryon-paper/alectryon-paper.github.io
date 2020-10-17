@@ -123,6 +123,9 @@ breakdown_files := Strings/Byte.v Lists/ListSet.v Reals/Ranalysis3.v
 stdlib/breakdown.%.timings: stdlib
 	 $(stdlib_find) $(call join-paths,$(breakdown_files)) -exec $(compiler) $* $(STDLIB_REPEAT) {} \; | tee $@
 
+stdlib-all: stdlib
+	$(stdlib_find) -print0 | xargs -t -0 -n1 -P8 $(alectryon) --frontend coqdoc
+
 compilers := coqc coqtop sertop alectryon-api alectryon-json alectryon-coqdoc alectryon-html
 breakdowns := $(patsubst %,stdlib/breakdown.%.timings,$(compilers))
 
