@@ -70,16 +70,19 @@ coq_rsync := rsync -a --delete-during --include="*.vo" --include="*.v" --exclude
 flocq := flocq-3.3.1
 
 # Save the dependency order into a file so that we don't have to plug into their build system
-$(flocq)/: Makefile
+flocq.inputs:
 	wget https://gforge.inria.fr/frs/download.php/file/38329/$(flocq).tar.gz
 	tar -xf $(flocq).tar.gz
 	cd $(flocq); ./configure
-	cd $(flocq); ./remake -j8 all check check-more 2>&1 | grep Finished | grep -v Pff | tee ../flocq.inputs
+	cd $(flocq); ./remake -j8 all check check-more 2>&1 | grep Finished | grep -v Pff | grep '.vo' | sed 's/^Finished //' | sed 's/[.]vo$/.v/' | tee ../flocq.inputs
 
 flocq_coqargs := -R src Flocq -R examples FlocqEx
 
 $(flocq)/full.%.timings:
 	cd $(flocq); cat ../flocq.inputs | COQC_ARGS="$(flocq_coqargs)" xargs -n1 ../$(compiler) $* 1 | tee ../$@
+
+flocq-all: flocq.inputs
+	cd $(flocq); cat ../flocq.inputs | xargs -t -P8 -n1 $(alectryon) --frontend coqdoc $(flocq_coqargs)
 
 .PHONY: $(flocq)
 
