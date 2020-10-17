@@ -120,13 +120,13 @@ Qed.
 
 Theorem ev_4'' : even 4.
 Proof.
-  Show Proof.
+  Show Proof. (* .unfold .no-goals *)
   apply ev_SS.
-  Show Proof.
+  Show Proof. (* .unfold .no-goals *)
   apply ev_SS.
-  Show Proof.
+  Show Proof. (* .unfold .no-goals *)
   apply ev_0.
-  Show Proof.
+  Show Proof. (* .unfold .no-goals *)
 Qed.
 
 (** At any given moment, Coq has constructed a term with a
@@ -266,9 +266,9 @@ Definition ev_plus2'' : Prop :=
 
 Definition add1 : nat -> nat.
 intro n.
-Show Proof.
+Show Proof. (* .unfold .no-goals *)
 apply S.
-Show Proof.
+Show Proof. (* .unfold .no-goals *)
 apply n. Defined.
 
 Print add1. (* .unfold *)
