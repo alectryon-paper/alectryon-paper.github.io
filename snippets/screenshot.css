@@ -1,5 +1,5 @@
-html {
-    font-size: 10px;
+html, body {
+    font-size: 10px !important; /* Override the 16px reset in the stylesheet of IBM Plex */
     margin: 0;
 }
 
