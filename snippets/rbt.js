@@ -71,7 +71,7 @@ function draw(container, data) {
 }
 
 function prettify_messages() {
-    document.querySelectorAll(".coq-message").forEach(msg=>{
+    document.querySelectorAll(".coq-message").forEach(msg => {
         try {
             const m = msg.innerText.match(/^(=\s*)([\s\S]*)(:[\s\S]*)$/);
             const data_str = m[2].replace(/;/g, ",").replace(/'/g, '"');
