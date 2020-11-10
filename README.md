@@ -4,9 +4,17 @@ Alectryon: SLE 2020 AEC
 Introduction
 ------------
 
-Thanks for reviewing this artifact! We hope that you'll find it easy to
-use and evaluate.  A copy of the submitted paper is in the current
-folder, under the name ‘alectryon.pdf’ (‘~/alectryon-sle2020/alectryon.pdf’).
+This website was built to accompany the [Alectryon
+paper](https://doi.org/10.1145/3426425.3426940) at SLE 2020.  The instructions
+below were given to the reviewers of [the
+artifact](https://zenodo.org/record/4033626).  Please check the [main Alectryon
+repo](https://github.com/cpitclaudel/alectryon) for up-to-date information.
+
+<hr>
+
+We hope that you'll find it easy to use and evaluate.  A copy of the submitted
+paper is in the current folder, under the name ‘alectryon.pdf’
+(‘~/alectryon-sle2020/alectryon.pdf’).
 
 This VM packages Alectryon and all scripts and data that we used to evaluate it.
 If you want to run Alectryon on your own machine instead, you can follow the
