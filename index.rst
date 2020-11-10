@@ -2,6 +2,11 @@
  Alectryon
 ===========
 
+This website was built to accompany the `Alectryon paper
+<https://doi.org/10.1145/3426425.3426940>`__ at SLE 2020.  Please check the
+`main Alectryon repo <https://github.com/cpitclaudel/alectryon>`__ for
+up-to-date information.
+
 Books
 =====
 

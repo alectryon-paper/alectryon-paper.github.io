@@ -53,7 +53,7 @@ snippets/%.nofonts.pdf: snippets/%.pdf
 	 gs -o $@ -dNoOutputFonts -sDEVICE=pdfwrite $<
 
 index.html: index.rst Makefile
-	./driver.py $< -o $@
+	./driver.py --no-header $< -o $@
 
 snippets/emacs-screenshot.pdf: snippets/emacs-screenshot.svg
 	svg2pdf $< $@
